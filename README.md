@@ -1,4 +1,4 @@
-#项目介绍
+# 项目介绍
 1.	本程序为基于 ***Kerboros*** 认证（***DES***加密）和 ***RSA***加密的 ***IM*** 分布式通讯工具。
 
 
@@ -35,11 +35,11 @@
 	
 	⑦拓展功能+++
 
-#程序流程图
+# 程序流程图
 
 
 ![image](./image/total_flow_chart.png)
 
-#数据库
+# 数据库
 	rm-uf6t4cbyfz681x569.mysql.rds.aliyuncs.com  
     端口：3306
