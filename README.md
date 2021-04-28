@@ -38,5 +38,10 @@
 #程序流程图
 <center>
 <img src="../image/total_flow_chart.png" widith="50%" />
-文件结构图
+程序流程图
 </center>
+
+
+#数据库
+	rm-uf6t4cbyfz681x569.mysql.rds.aliyuncs.com  
+    端口：3306
