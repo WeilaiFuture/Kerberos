@@ -36,7 +36,7 @@
 	⑦拓展功能+++
 
 #程序流程图
-![](https://github.com/WeilaiFuture/Kerberos/tree/main/image)
+![image](https://github.com/WeilaiFuture/Kerberos/tree/main/image)
 
 #数据库
 	rm-uf6t4cbyfz681x569.mysql.rds.aliyuncs.com  
