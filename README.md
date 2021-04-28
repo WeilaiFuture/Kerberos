@@ -36,7 +36,7 @@
 	⑦拓展功能+++
 
 #程序流程图
-![image](https://github.com/WeilaiFuture/Kerberos/tree/main/image/total_flow_chart.png)
+![Image text](https://github.com/WeilaiFuture/Kerberos/tree/main/image/total_flow_chart.png)
 
 #数据库
 	rm-uf6t4cbyfz681x569.mysql.rds.aliyuncs.com  
