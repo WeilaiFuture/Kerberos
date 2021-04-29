@@ -36,8 +36,9 @@
 	⑦拓展功能+++
 
 # 程序功能流程图
-<centre>
+<center>
 ![image](./image/total_flow_chart.png)
+</center>
 <center><b><font size ='3'>程序功能流程图</font></b></center></font>
 # 数据库
 	rm-uf6t4cbyfz681x569.mysql.rds.aliyuncs.com  
