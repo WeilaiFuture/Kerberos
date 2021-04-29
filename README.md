@@ -36,19 +36,10 @@
 	⑦拓展功能+++
 
 # 程序功能流程图
-
-<center>
-    <img src="./image/total_flow_chart.png" width = "80%" alt=""/>
-    <br>
-    <div style="color:blue; border-bottom: 1px solid #d9d9d9;
-    display: inline-block;
-    color: #389;
-    padding: 2px;">
-      程序功能流程图
-  	</div>
-</center>
-
-
+<centre>
+![image](./image/total_flow_chart.png)
+<center><b><font size ='3'>程序功能流程图
+</font></b></center></font>
 # 数据库
 	rm-uf6t4cbyfz681x569.mysql.rds.aliyuncs.com  
     端口：3306
