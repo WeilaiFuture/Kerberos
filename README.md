@@ -8,7 +8,7 @@
 
 	② DES 加密，通过约定秘钥加密信息
 
-	③ Kerboros 认证 ，ClientA与AS通讯，获取TGT；clientA凭TGT向TGS通讯，获取session key 以及 用ClintB与AS Master Key加密的报文；clientA与ClientB通信同步session key
+	③ Kerberos 认证 ，ClientA与AS通讯，获取TGT；clientA凭TGT向TGS通讯，获取session key 以及 用ClintB与AS Master Key加密的报文；clientA与ClientB通信同步session key
 
 	④ 数字签名，通过RSA加密实现
  
