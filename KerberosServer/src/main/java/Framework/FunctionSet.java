@@ -1,4 +1,4 @@
-package Kerberos;
+package Framework;
 
 public class FunctionSet {
     //其他AS、TGS、Server继承此类
