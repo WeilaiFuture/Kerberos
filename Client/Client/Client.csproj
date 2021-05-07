@@ -52,12 +52,21 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="WpfAnimatedGif, Version=2.0.0.0, Culture=neutral, PublicKeyToken=9e7cd3b544a090dc, processorArchitecture=MSIL">
+      <HintPath>..\packages\WpfAnimatedGif.2.0.0\lib\net40\WpfAnimatedGif.dll</HintPath>
+    </Reference>
+    <Reference Include="WpfGif, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\WpfGif.1.0.0.1\lib\net461\WpfGif.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="User_Window.xaml.cs">
+      <DependentUpon>User_Window.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -71,6 +80,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="User_Window.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MyJson.cs" />
@@ -103,7 +116,26 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="image\background.jpg" />
+    <Resource Include="image\1308531510.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="image\background.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="image\close.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="image\未登录头象.png" />
+    <Resource Include="image\登录-用户组.png" />
+    <Resource Include="image\登录密码修改.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="image\登录.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="image\back.jpg" />
+  </ItemGroup>
+  <ItemGroup>
     <Resource Include="image\test.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

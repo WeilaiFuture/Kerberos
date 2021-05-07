@@ -13,7 +13,12 @@ E:\Kerberos\Client\Client\obj\Debug\Client.csproj.GenerateResource.cache
 E:\Kerberos\Client\Client\obj\Debug\Client.csproj.CoreCompileInputs.cache
 E:\Kerberos\Client\Client\obj\Debug\Client.exe
 E:\Kerberos\Client\Client\obj\Debug\Client.pdb
-E:\Kerberos\Client\Client\obj\Debug\Client.csprojAssemblyReference.cache
 E:\Kerberos\Client\Client\bin\Debug\Newtonsoft.Json.dll
 E:\Kerberos\Client\Client\bin\Debug\Newtonsoft.Json.xml
 E:\Kerberos\Client\Client\obj\Debug\Client.csproj.CopyComplete
+E:\Kerberos\Client\Client\bin\Debug\WpfAnimatedGif.dll
+E:\Kerberos\Client\Client\bin\Debug\WpfGif.dll
+E:\Kerberos\Client\Client\bin\Debug\WpfAnimatedGif.pdb
+E:\Kerberos\Client\Client\bin\Debug\WpfAnimatedGif.xml
+E:\Kerberos\Client\Client\obj\Debug\User_Window.g.cs
+E:\Kerberos\Client\Client\obj\Debug\User_Window.baml

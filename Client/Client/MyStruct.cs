@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Client
 {
-    class MyStruct
+    public class MyStruct
     {
-        class Certificate
+        public class Certificate
         {
             string version;
             string serial;
@@ -17,19 +17,19 @@ namespace Client
             long pk;
         }
 
-        class My_k
+        public class My_k
         {
             string key;
         }
 
-        class Message1
+        public class Message1
         {
             string IDc;
             string IDt;
             string TS;
         }
 
-        class Message2
+        public class Message2
         {
             string key;
             string IDt;
@@ -38,7 +38,7 @@ namespace Client
             Ticket t;
         }
 
-        class Ticket
+        public class Ticket
         {
             string key;
             string IDc;
@@ -48,14 +48,14 @@ namespace Client
             string Lifetime;
         }
 
-        class Message3
+        public class Message3
         {
             string IDv;
             Ticket t;
             Authenticator Ac;
         }
 
-        class Message4
+        public class Message4
         {
             string Key;
             string IDv;
@@ -63,28 +63,27 @@ namespace Client
             Ticket t;
         }
 
-        class Authenticator
+        public class Authenticator
         {
             string IDc;
             string ADc;
             string TS;
         }
 
-        class Message5
+        public class Message5
         {
             Ticket t;
             Authenticator Ac;
         }
 
-        class Message6
+        public class Message6
         {
             string TS;
         }
 
-        class User
+        public class User
         {
             string uid;
-            string uname;
             string name;
             string psswd;
             string sign;
@@ -93,9 +92,10 @@ namespace Client
             int gender;
             int status;
             int startTime;
+            public string Uname { get; set;}
         }
 
-        class Friend
+        public class Friend
         {
             User u;
             string remark;
@@ -103,7 +103,7 @@ namespace Client
             string tid;
         }
 
-        class chat_Message
+        public class chat_Message
         {
             int head;
             string content;
@@ -111,7 +111,7 @@ namespace Client
             int time;
         }
 
-        class Group
+        public class Group
         {
             List<Dictionary<User, string>> list;
             string gid;
@@ -121,7 +121,7 @@ namespace Client
             int startTime;
         }
 
-        class record_Message
+        public class record_Message
         {
             List<chat_Message> messages_list;
         }
