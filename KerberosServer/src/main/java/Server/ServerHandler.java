@@ -1,9 +1,17 @@
 package Server;
 
 public class ServerHandler {
+    /*
+        包含所有收到的报文
+    */
+    public boolean Kv(String message){
         /*
-        包含所有收到的请求
+        head=0002;
+        Kv；
+        将信息存入数据库；
          */
+        return false;
+    }
     public boolean regeister(String message){
         /*
         head=1001;
