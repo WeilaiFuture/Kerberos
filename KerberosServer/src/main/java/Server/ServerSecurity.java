@@ -22,10 +22,11 @@ public class ServerSecurity {
          */
         return message;
     }
-    public String createCertif(String message,String key){
+    public String createCertif(){
         /*
         生成证书
          */
+        String message="";
         return message;
     }
 

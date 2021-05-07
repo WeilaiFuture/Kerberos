@@ -4,6 +4,14 @@ public class ServerHandler {
     /*
         包含所有收到的报文
     */
+    public boolean Certif(String message){
+        /*
+        head=0001;
+        证书信息；
+        存入数据库
+         */
+        return false;
+    }
     public boolean Kv(String message){
         /*
         head=0002;
@@ -42,6 +50,8 @@ public class ServerHandler {
         /*
         head=1005;
         问好信息；
+        修改数据库；
+        向好友转发；
          */
         return false;
     }
@@ -56,6 +66,7 @@ public class ServerHandler {
         /*
         head=1007;
         查找信息；
+        返回；
          */
         return false;
     }
@@ -63,6 +74,8 @@ public class ServerHandler {
         /*
         head=1008;
         登出信息；
+        修改数据库
+        向好友转发；
          */
         return false;
     }
@@ -77,6 +90,7 @@ public class ServerHandler {
         /*
         head=1010;
         修改个人信息；
+        返回ACK；
          */
         return false;
     }
@@ -94,4 +108,5 @@ public class ServerHandler {
          */
         return false;
     }
+
 }
