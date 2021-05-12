@@ -83,16 +83,30 @@ namespace Client
 
         public class User
         {
-            string uid;
-            string name;
-            string psswd;
-            string sign;
-            string photo;
-            string email;
-            int gender;
-            int status;
-            int startTime;
+            public string Photo { get; set; }
             public string Uname { get; set;}
+            public string Uid { get; set; }
+            public string Psswd { get; set; }
+            public string Name { get; set; }
+            public string Sign { get; set; }
+            public string Email { get; set; }
+            public int Gender { get; set; }
+            public int Status { get; set; }
+            public int StartTime { get; set; }
+            public User()
+            {
+                Uid = "123456789";
+                Uname = "test";
+                Name = "test";
+                Psswd = "0";
+                Sign = "0";
+                Photo = "image/test.jpg";
+                Email = Uid + "@123.com";
+                Gender = 0;
+                Status = 0;
+                StartTime = 0;
+            }
+
         }
 
         public class Friend

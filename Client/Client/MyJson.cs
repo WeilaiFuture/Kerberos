@@ -8,6 +8,19 @@ using System.Threading.Tasks;
 
 namespace Client
 {
+	public class Order
+	{
+		string msgId;
+		string Src;
+		string Dst;
+		string msgType;
+		string extend;
+		bool statusReport;
+		string sTS;
+		string rTS;
+		string ContentType;
+	}
+
     class MyJson
     {
 		public static class JsonHelper

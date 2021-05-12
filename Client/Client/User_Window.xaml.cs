@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -20,6 +21,7 @@ namespace Client
     /// </summary>
     public partial class User_Window : Window
     {
+        private List<User> f_List=new List<User>();
         private string name;
         public string Name
         {
@@ -36,36 +38,112 @@ namespace Client
                 }
             }
         }
-
         public event PropertyChangedEventHandler PropertyChanged = delegate { };
 
     public User_Window(User u,Image i)
         {
+
             InitializeComponent();
+            for (int j = 0; j < 10; j++)
+            {
+                User uu = new User();
+                uu.Uname ="test"+ j.ToString();
+                f_List.Add(uu);
+            }
+            //Expander expander = new Expander();
+            //expander.Content = "123";
+            //expander.HorizontalContentAlignment = HorizontalAlignment.Stretch;
+            //Grid.SetColumn(expander, 1);
+            //grid3.Children.Add(expander);
+            friend_List.ItemsSource = f_List;
             Name = u.Uname;
             head_Image = i;
         }
-        private void Move_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (Sign.IsFocused)
-                return;
-            if (e.LeftButton == MouseButtonState.Pressed)
-            {
-                this.DragMove();
-            }
-        }
+
         private void Close_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
 
-        private void Sign_LostFocus(object sender, RoutedEventArgs e)
+        private void Tb_LostFocus(object sender, RoutedEventArgs e)
         {
-            TextBox tb = Sign;
+            TextBox tb = sender as TextBox;
             tb.BorderThickness = new Thickness(0);
-            tb.Background = Brushes.Transparent;
+            if(tb.Name.Equals("sign_Tb"))
+              tb.Background = Brushes.Transparent;   
             tb.IsReadOnly = true;
         }
+        private void Tb_GotFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox tb = sender as TextBox;
+            tb.BorderThickness = new Thickness(1);
+            tb.Background = Brushes.White;
+            tb.IsReadOnly = false;
+        }
 
+        private void Window_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+          my_Grid.Focus().ToString();
+        }
+        private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            DragMove();
+        }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            B_1.BorderThickness = new Thickness(0, 0, 0, 4);
+            B_2.BorderThickness = new Thickness(0, 0, 0, 0);
+            my_Exp.Header = "我的信息";
+            my_Exp.IsExpanded = false;
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            B_1.BorderThickness = new Thickness(0, 0, 0, 0);
+            B_2.BorderThickness = new Thickness(0, 0, 0, 4);
+            my_Exp.Header = "我的好友  " + f_List.Count().ToString();
+            my_Exp.IsExpanded = false;
+        }
+
+        private void friend_List_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            Dispatcher.Invoke(new Action(delegate
+            {
+                ChatUI u = new ChatUI();
+                Thread newWindowThread = new Thread(() => ThreadStartingPoint(u));
+                newWindowThread.SetApartmentState(ApartmentState.STA);
+                newWindowThread.IsBackground = true;
+                newWindowThread.Start();
+            }));
+        }
+        private void ThreadStartingPoint(Window w)
+        {
+            Dispatcher.Invoke(new Action(delegate
+            {
+                w.Show();
+            }));
+            System.Windows.Threading.Dispatcher.Run();
+        }
+
+        private void head_Image_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left && e.ClickCount == 2)
+            {
+                Dispatcher.Invoke(new Action(delegate
+                {
+                    UserUI u = new UserUI();
+                    Thread newWindowThread = new Thread(() => ThreadStartingPoint(u));
+                    newWindowThread.SetApartmentState(ApartmentState.STA);
+                    newWindowThread.IsBackground = true;
+                    newWindowThread.Start();
+                }));
+            }
+        }
     }
 }

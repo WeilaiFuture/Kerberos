@@ -22,3 +22,7 @@ E:\Kerberos\Client\Client\bin\Debug\WpfAnimatedGif.pdb
 E:\Kerberos\Client\Client\bin\Debug\WpfAnimatedGif.xml
 E:\Kerberos\Client\Client\obj\Debug\User_Window.g.cs
 E:\Kerberos\Client\Client\obj\Debug\User_Window.baml
+E:\Kerberos\Client\Client\obj\Debug\ChatUI.g.cs
+E:\Kerberos\Client\Client\obj\Debug\ChatUI.baml
+E:\Kerberos\Client\Client\obj\Debug\UserUI.g.cs
+E:\Kerberos\Client\Client\obj\Debug\UserUI.baml
