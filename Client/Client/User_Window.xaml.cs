@@ -21,6 +21,7 @@ namespace Client
     /// </summary>
     public partial class User_Window : Window
     {
+        public User my_user;
         private List<User> f_List=new List<User>();
         private string name;
         public string Name
@@ -55,6 +56,7 @@ namespace Client
             //expander.HorizontalContentAlignment = HorizontalAlignment.Stretch;
             //Grid.SetColumn(expander, 1);
             //grid3.Children.Add(expander);
+            my_user = u;
             friend_List.ItemsSource = f_List;
             Name = u.Uname;
             head_Image = i;
@@ -115,7 +117,7 @@ namespace Client
         {
             Dispatcher.Invoke(new Action(delegate
             {
-                ChatUI u = new ChatUI();
+                ChatUI u = new ChatUI(my_user,head_Image);
                 Thread newWindowThread = new Thread(() => ThreadStartingPoint(u));
                 newWindowThread.SetApartmentState(ApartmentState.STA);
                 newWindowThread.IsBackground = true;
@@ -137,7 +139,7 @@ namespace Client
             {
                 Dispatcher.Invoke(new Action(delegate
                 {
-                    UserUI u = new UserUI();
+                    UserUI u = new UserUI(my_user, head_Image);
                     Thread newWindowThread = new Thread(() => ThreadStartingPoint(u));
                     newWindowThread.SetApartmentState(ApartmentState.STA);
                     newWindowThread.IsBackground = true;

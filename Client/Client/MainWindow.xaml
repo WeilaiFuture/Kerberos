@@ -109,9 +109,7 @@
                     <Image Grid.Column="1" Margin="18.2,10,97,21" Source="image/登录-用户组.png" Stretch="Fill" RenderTransformOrigin="-2.759,0.242"/>
                     <TextBlock  Grid.Column="3" HorizontalAlignment="Right" Margin="0,15,3.6,0" TextWrapping="Wrap" Text="" Width="122" Height="40" VerticalAlignment="Top" FontSize="18"><Hyperlink Click="Hyperlink_Click" NavigateUri="http://www.baidu.com"><Run Text="注册账号"/></Hyperlink></TextBlock>
                     <TextBlock HorizontalAlignment="Left" Margin="78,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="36" Width="122" Foreground="#FFB8D60D" FontSize="18" Grid.Column="3" Grid.Row="1">
-                        <Hyperlink NavigateUri="http://www.tianma3798.cn" Click="Hyperlink_Click"
-                         >www.tianma3798.cn</Hyperlink>
-                    </TextBlock>
+                        <Hyperlink Click="Hyperlink_Click" NavigateUri="http://www.baidu.com"><Run Text="忘记密码"/></Hyperlink></TextBlock>
 
                 </Grid>
             </StackPanel>

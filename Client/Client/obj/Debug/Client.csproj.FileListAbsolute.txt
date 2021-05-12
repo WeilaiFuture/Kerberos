@@ -26,3 +26,4 @@ E:\Kerberos\Client\Client\obj\Debug\ChatUI.g.cs
 E:\Kerberos\Client\Client\obj\Debug\ChatUI.baml
 E:\Kerberos\Client\Client\obj\Debug\UserUI.g.cs
 E:\Kerberos\Client\Client\obj\Debug\UserUI.baml
+E:\Kerberos\Client\Client\obj\Debug\Client.csprojAssemblyReference.cache
