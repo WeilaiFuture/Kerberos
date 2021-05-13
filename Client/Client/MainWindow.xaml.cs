@@ -30,7 +30,7 @@ namespace Client
         {
            // Hyperlink link = sender as Hyperlink;
             //Process.Start(new ProcessStartInfo(link.NavigateUri.AbsoluteUri));
-            Process.Start(new ProcessStartInfo("https://www.baidu.com"));
+            Process.Start(new ProcessStartInfo(@"E:\Kerberos\Web-Server\index.html"));
         }
         private void Close_Click(object sender, RoutedEventArgs e)
         {
