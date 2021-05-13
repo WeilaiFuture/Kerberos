@@ -1,0 +1,11 @@
+
+/*所有禁用的按钮的样式*/
+.btn_disabled{
+  background-color: #F3F3F3;
+  color: #333;
+}
+
+.btn_disabled:hover{;
+  background-color: #F3F3F3;
+  color: #333;
+}

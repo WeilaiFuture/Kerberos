@@ -1,0 +1,525 @@
+
+
+.topbar-wrapper{
+  width: 100%;
+  height: 80px;
+  margin: 0;
+  padding: 0 auto;
+  background: #F3F3F3;
+}
+
+.topbar{
+  height: 80px;/*【注意】这里设置成100%不行*/
+  margin: 0 auto;
+  padding: 0;
+  width: 1170px;
+  background: #F3F3F3;
+  font-size: 18px;
+}
+
+.logo{
+  float: left;
+  background-image: url(../img/gogo.jpg);
+  height: 100%;
+  width: 80px;
+  background-position: center;
+  background-size: contain;
+}
+
+.service{
+  float: left;
+  display: block;
+  height: 100%;
+  margin-left: 20px;
+  font-size: 18px;
+}
+
+.service > li{
+  float: left;
+  margin-left: 20px;
+  width: 60px;
+  color: #333;
+  height: 100%;
+  display: block;
+  padding-left: 25px;
+  transition: background-color 0.15s;
+}
+
+.service a{
+  color:inherit;
+  line-height: 80px;
+}
+
+.service>li:hover{
+  color: #F3F3F3;
+  background-color: #FC627A;
+}
+
+.account{
+  float: right;
+  display: block;
+  height: 100%;
+  margin-left: 10px;
+}
+
+.account li{
+  float: left;
+  margin-left: 15px;
+  width: 100px;
+  height: 100%;
+  display: block;
+  text-align: center;
+  font-size: 0.875em;
+  transition: background-color 0.15s;
+}
+
+.account>li:hover{
+  color: #F3F3F3;
+  background-color: #FC627A;
+}
+
+.account a{
+  color: inherit;
+  line-height: 80px;
+}
+
+.register{
+  float: right;
+  line-height: 75px;
+  display: block;
+  height: 100%;
+  text-align: center;
+  line-height: 80px;
+  width: 100px;
+  transition: background-color 0.15s;
+}
+
+.register:hover{
+  color: #F3F3F3;
+  background-color: #FC627A;
+}
+
+/*bodyer*/
+.bodyer{
+  width: 100%;
+  height: 1000px;
+  background-image: url(../img/chat.jpg);
+  background-position: center;
+  background-size: contain;
+  padding-top: 230px;
+  text-align: center;
+}
+
+.article-region{
+  display: inline-block;
+}
+
+.article{
+  float: left;
+}
+
+.title{
+  color: #F3F3F3;
+  font-size: 50px;
+}
+
+.intro{
+  color: #F3F3F3;
+  font-size: 25px;
+}
+
+.btn_download{
+  float: left;
+  width: 215px;
+  height: 50px;
+  margin-top: 35px;
+  margin-left: 25px;
+  border: 1px solid rgb(243, 243, 243, 0);
+  border-radius: 25px;
+  font-size: 18px;
+  background-color: #F3F3F3;
+  font-weight: 900;
+  transition: background-color 0.35s;
+}
+
+.btn_download:hover{
+  color: #F3F3F3;
+  background-color: #FC627A;
+}
+
+.btn_download:active{
+  background-color: #fa3755;
+}
+
+.register-modal, .login-modal, .reset-modal{
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+  transition: display 1s;
+}
+
+.register-region{
+  width: 400px;
+  height: 430px;
+  background-color: #FFF;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  box-sizing: border-box;
+  border-radius: 6px;
+  padding-top:35px;
+  font-size: 20px;
+  display: none;
+  text-align: center;
+}
+
+.register-region ul > li{
+  margin-top: 20px;
+}
+
+.register-region span{
+  display: inline-block;
+  text-align: center;
+  height: 35px;
+  width: 50px;
+}
+
+.register-region input{
+  background:none;
+  outline:none;
+  border: 0px;
+  border-bottom: 2px solid #dcdcdc;
+  border-bottom-left-radius: 1px;
+  border-bottom-right-radius: 1px;
+  font-size: 18px;
+  transition:  border-bottom 0.2s;
+  padding-left: 20px;
+}
+
+.register-region input:focus{
+  border-bottom: 2px solid #FC627A;
+  border-bottom-left-radius: 1px;
+  border-bottom-right-radius: 1px;
+}
+
+.input_nickname, .input_SR_uid{
+  height: 30px;
+  width: 200px;
+}
+
+.input_psswd, .input_SR_psswd0, .input_SR_psswd1{
+  height: 30px;
+  width: 200px;
+}
+
+.input_email{
+  height: 30px;
+  width: 200px;
+}
+
+.input_vcode, .input_SR_svcode{
+  height: 30px;
+  width: 115px;
+}
+
+.btn_getvcode, .btn_SR_getsvcode{
+  font-size: 16px;
+  height: 35px;
+  width: 80px;
+  background: #29AAD7;
+  color: #F3F3F3;
+  border: 1px solid rgb(243, 243, 243, 0);
+  border-radius: 5px;
+  transition:  background-color 0.2s;
+}
+
+.btn_getvcode:hover, .btn_SR_getsvcode:hover{
+  background-color: #2298c4;
+}
+
+.btn_confirm{
+  height: 42px;
+  width: 80px;
+  font-size: 16px;
+  background-color: #FC627A;
+  color: #F3F3F3;
+  border: 1px solid rgb(243, 243, 243, 0);
+  border-radius: 5px;
+  transition: background-color 0.2s;
+}
+
+.btn_confirm:hover{
+  background-color: #d84057;
+}
+
+.btn_cancel{
+  height: 42px;
+  width: 80px;
+  font-size: 16px;
+  background-color: #F3F3F3;
+  color: #333;
+  border: 1px solid #F3F3F3;
+  border-radius: 5px;
+  margin-left: 80px;
+  transition: background-color 0.2s;
+}
+
+.btn_cancel:hover{
+  background-color: rgb(224, 219, 219);
+}
+
+.res-region{
+  width: 400px;
+  height: 430px;
+  background-color: #FFF;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  box-sizing: border-box;
+  border-radius: 6px;
+  padding-top:35px;
+  font-size: 20px;
+  display: none;
+  text-align: center;
+}
+
+#success{
+  background-image: url(../img/success.png);
+  height: 80px;
+  width: 80px;
+  background-position: center;
+  background-size: contain;
+  display: inline-block;
+}
+
+#welcome{
+  font-size: 17px;
+}
+
+#res-info{
+  font-size: 15px;
+  margin-top: 55px;
+  padding-left: 50px;
+  padding-right: 50px;
+  text-align: left;
+}
+
+#office{
+  padding-left: 50px;
+  padding-right: 50px;
+  text-align: right;
+  font-size: 15px;
+}
+
+.btn_finish{
+  height: 42px;
+  width: 80px;
+  font-size: 16px;
+  background-color: #FC627A;
+  color: #F3F3F3;
+  border: 1px solid rgb(243, 243, 243, 0);
+  border-radius: 5px;
+  transition: background-color 0.2s;
+  margin-top: 45px;
+}
+
+.btn_finish:hover{
+  background-color: #d84057;
+}
+
+/*登录界面*/
+
+.login-region{
+  width: 400px;
+  height: 300px;
+  background-color: #FFF;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  box-sizing: border-box;
+  border-radius: 6px;
+  padding-top:25px;
+  font-size: 20px;
+  display: none;
+  text-align: center;
+}
+
+.login-region ul > li{
+  margin-top: 30px;
+}
+
+.login-region span{
+  display: inline-block;
+  text-align: center;
+  height: 35px;
+  width: 50px;
+}
+
+.login-region input{
+  background:none;
+  outline:none;
+  border: 0px;
+  border-bottom: 2px solid #dcdcdc;
+  border-bottom-left-radius: 1px;
+  border-bottom-right-radius: 1px;
+  font-size: 18px;
+  transition:  border-bottom 0.2s;
+  padding-left: 20px;
+}
+
+.login-region input:focus{
+  border-bottom: 2px solid #FC627A;
+  border-bottom-left-radius: 1px;
+  border-bottom-right-radius: 1px;
+}
+
+.input_LR_uid{
+  height: 30px;
+  width: 200px;
+}
+
+.input_LR_psswd{
+  height: 30px;
+  width: 200px;
+}
+
+.div_LR{
+  padding-right: 65px;
+  text-align: right;
+}
+
+.a_LR_toSR{
+  margin-right: 0px;
+  font-size: 14px;
+  color: #FC627A;
+  transition: color 0.2s;
+}
+
+.a_LR_toSR:hover{
+  color: #d84057;
+}
+
+.btn_LR_login{
+  height: 42px;
+  width: 80px;
+  font-size: 16px;
+  background-color: #FC627A;
+  color: #F3F3F3;
+  border: 1px solid rgb(243, 243, 243, 0);
+  border-radius: 5px;
+  transition: background-color 0.2s;
+}
+
+.btn_LR_login:hover{
+  background-color: #d84057;
+}
+
+.btn_LR_cancel{
+  height: 42px;
+  width: 80px;
+  font-size: 16px;
+  background-color: #F3F3F3;
+  color: #333;
+  border: 1px solid #F3F3F3;
+  border-radius: 5px;
+  margin-left: 80px;
+  transition: background-color 0.2s;
+}
+
+.btn_LR_cancel:hover{
+  background-color: rgb(224, 219, 219);
+}
+
+/*重置密码窗口*/
+.reset-region{
+  width: 450px;
+  height:430px;
+  background-color: #FFF;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  box-sizing: border-box;
+  border-radius: 6px;
+  padding-top:25px;
+  font-size: 20px;
+  display: none;
+  text-align: center;
+}
+
+.reset-region ul > li{
+  margin-top: 30px;
+}
+
+.reset-region span{
+  display: inline-block;
+  text-align: center;
+  height: 35px;
+  width: 80px;
+}
+
+.reset-region input{
+  background:none;
+  outline:none;
+  border: 0px;
+  border-bottom: 2px solid #dcdcdc;
+  border-bottom-left-radius: 1px;
+  border-bottom-right-radius: 1px;
+  font-size: 18px;
+  transition:  border-bottom 0.2s;
+  padding-left: 20px;
+}
+
+.reset-region input:focus{
+  border-bottom: 2px solid #FC627A;
+  border-bottom-left-radius: 1px;
+  border-bottom-right-radius: 1px;
+}
+
+.btn_SR_confirm{
+  height: 42px;
+  width: 80px;
+  font-size: 16px;
+  background-color: #FC627A;
+  color: #F3F3F3;
+  border: 1px solid rgb(243, 243, 243, 0);
+  border-radius: 5px;
+  transition: background-color 0.2s;
+  margin-top: 20px;
+}
+
+.btn_SR_confirm:hover{
+  background-color: #d84057;
+}
+
+.btn_SR_cancel{
+  height: 42px;
+  width: 80px;
+  font-size: 16px;
+  background-color: #F3F3F3;
+  color: #333;
+  border: 1px solid #F3F3F3;
+  border-radius: 5px;
+  margin-left: 80px;
+  transition: background-color 0.2s;
+  margin-top: 20px;
+}
+
+.btn_SR_cancel:hover{
+  background-color: rgb(224, 219, 219);
+}

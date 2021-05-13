@@ -1,0 +1,32 @@
+﻿<Window x:Class="Client.UserUI"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Client"
+        mc:Ignorable="d"
+        Title="UserUI" Height="450" Width="800">
+    <Grid>
+        <Border Opacity="0.6" Grid.ColumnSpan="2" Margin="0,0,0.2,0" >
+            <Image  Source="image/back.jpg" Stretch="Fill" Margin="0,-16,0.6,0" HorizontalAlignment="Right" Width="793"/>
+        </Border>
+        <Image Name="head_Image" Source="image/test.jpg" Margin="0,28,436.6,84" >
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform AngleX="-0.239"/>
+                    <RotateTransform/>
+                    <TranslateTransform X="-0.396"/>
+                </TransformGroup>
+            </Image.RenderTransform>
+            <Image.Clip>
+                <EllipseGeometry RadiusX="150" RadiusY="150" Center="150,150"/>
+            </Image.Clip>
+        </Image>
+        <TextBlock x:Name="Uname_TX" Height="41"  Opacity="0.6"  Text="{Binding Source=Uname,StringFormat={}昵称:{0}}" Margin="428,81,49.6,298" ></TextBlock>
+        <TextBlock x:Name="Uid_TX" Height="41"  Opacity="0.6"  Text="{Binding Source=Uid,StringFormat={}账号:{0}}" Margin="428,127,9.6,252" ></TextBlock>
+        <TextBlock x:Name="Email_TX" Height="41"  Opacity="0.6"  Text="{Binding Source=Email,StringFormat={}邮箱:{0}}" Margin="428,173,9.6,206" ></TextBlock>
+        <Button Content="更换头像" FontSize="30" Opacity="0.7" Margin="94,352,572.6,10" Click="Button_Click"></Button>
+        <Button Content="保存" FontSize="30" Opacity="0.7" Margin="541,352,125.6,10" Click="Button_Click_1"></Button>
+    </Grid>
+</Window>
