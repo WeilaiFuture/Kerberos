@@ -68,6 +68,7 @@
     <Compile Include="ChatUI.xaml.cs">
       <DependentUpon>ChatUI.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DESLibrary.cs" />
     <Compile Include="RSALibrary.cs" />
     <Compile Include="UserUI.xaml.cs">
       <DependentUpon>UserUI.xaml</DependentUpon>
