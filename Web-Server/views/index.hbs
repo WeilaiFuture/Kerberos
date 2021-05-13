@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>I'm GoGo - Let's chart!</title>
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="../JS/index.js">
+    <script>
+      window.onload = function(){
+        document.getElementById("register").onclick = showRegisterModal;
+        document.getElementById("cancel").onclick = hideRegisterModal;
+        //订阅登录窗口的事件：
+        document.getElementById("confirm").onclick = sendRegisterInfo;
+        console.log("[4]");
+        
+      }
+      function showRegisterModal(){//
+        document.getElementById('register-modal').style.display = 'block';
+        document.getElementById('register-region').style.display = 'block';
+      }
+      //注册窗口部分：
+      function hideRegisterModal(){//退出按键退出注册
+        document.getElementById('register-modal').style.display = 'none';
+        document.getElementById('register-region').style.display = 'none';
+      }
+      function sendRegisterInfo(){//确认按钮发送注册信息
+        //获取注册信息：
+        console.log("[3]");
+        let info = {
+          name: document.getElementById("input_nickname").value,
+          psswd: document.getElementById("input_psswd").value,
+          email: document.getElementById("input_email").value,
+          vcode: document.getElementById("input_vcode").value
+        };
+        const xhr = new XMLHttpRequest();
+        console.log("[2]");
+        xhr.open('POST', '/register', true);
+        xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+        console.log(xhr.status);
+        console.log("[1]");
+        xhr.onreadystatechange = function() {
+          console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+          console.log(xhr.readyState);
+          console.log(xhr.status);
+          if(xhr.readyState === 4){
+            if(xhr.status >= 200 && xhr.status < 300){
+              console.log(xhr.responseText);
+            }
+          }
+        }
+        console.log(xhr.status);
+        xhr.send(info);
+        console.log(xhr.status);
+      }
+    </script>
+  </head>
+  <body>
+    <!--顶部容器-->
+    <div id="topbar-wrapper">
+      <!--顶部导航条-->
+      <div id="topbar">
+        <!-- logo链接 -->
+        <a href="index.html" id="gogo"></a>
+        <ul id="service">
+          <li>
+            <a href="https://127.0.0.1:8085">首页</a>
+          </li>
+          <li>
+            <a href="#">动态</a>
+          </li>
+          <li>
+            <a href="#">视频</a>
+          </li>
+        </ul>
+        <ul id="account">
+          <li>
+            <a href="#">GoGo会员</a>
+          </li>
+          <li>
+            <a href="#">账号安全</a>
+          </li>
+          <li>
+            <a href="#">登录</a>
+          </li>
+        </ul>
+        <a id="register">注册</a>
+      </div>
+    </div>
+    <div id="bodyer" class=".clearfix">
+      <div id="region">
+        <div id="article">
+          <div id="title">
+            GoGo - PC版
+          </div>
+          <div id="intro">
+            全新改版，给你焕然一新的感觉
+          </div>
+        </div>
+        <button id="download" type="button" name="download">
+          Download
+        </button>
+      </div>
+    </div>
+    <div id="footer">
+
+    </div>
+    <!-- 注册窗口 -->
+    <div id="register-modal">
+      <div id="register-region">
+        <ul>
+          <li>
+            <span>昵 称 </span> <input type="text" name="nickname" id="input_nickname"><br>
+          </li>
+          <li>
+            <span>密 码 </span><input type="text" name="psswd" id="input_psswd">
+          </li>
+          <li>
+            <span>邮 箱 </span> <input type="text" name="email" id="input_email">
+          </li>
+          <li>
+            <span style="width: 65px;">验 证 </span><input type="text" name="vcode" id="input_vcode">
+            <button id="btn_getvcode">获 取</button>
+          </li>
+          <li>
+            <span id="result"></span>
+          </li>
+          <li>
+            <button id="confirm">确认</button>
+            <button id="cancel">取消</button>
+          </li>
+        </ul>
+      </div>
+  </div>
+  </body>
+</html>
