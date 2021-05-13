@@ -10,9 +10,6 @@ namespace Client
 {
     public class RSALibrary
     {
-        public string PrivateKey{ get; set; }
-        public string PublicKey { get; set; }
-
         #region RSA 加密解密
         #region RSA 的密钥产生
         /// <summary>
@@ -20,13 +17,13 @@ namespace Client
         /// </summary>
         /// <param name="xmlKeys">私钥</param>
         /// <param name="xmlPublicKey">公钥</param>
-        public void RSAKey(out string xmlKeys, out string xmlPublicKey)
+        public static void RSAKey(out string xmlKeys, out string xmlPublicKey)
         {
             try
             {
                 System.Security.Cryptography.RSACryptoServiceProvider rsa = new RSACryptoServiceProvider();
-                PrivateKey=xmlKeys = rsa.ToXmlString(true);
-                PublicKey=xmlPublicKey = rsa.ToXmlString(false);
+                xmlKeys = rsa.ToXmlString(true);
+                xmlPublicKey = rsa.ToXmlString(false);
             }
             catch (Exception ex)
             {
@@ -48,7 +45,7 @@ namespace Client
         /// <param name="xmlPublicKey">公钥</param>
         /// <param name="encryptString">待加密的字符串</param>
         /// <returns></returns>
-        public string RSAEncrypt(string xmlPublicKey, string encryptString)
+        public static string RSAEncrypt(string xmlPublicKey, string encryptString)
         {
             try
             {
@@ -66,7 +63,7 @@ namespace Client
             {
                 throw ex;
             }
-        }     
+        }
         #endregion
 
         #region RSA的解密函数        
@@ -76,7 +73,7 @@ namespace Client
         /// <param name="xmlPrivateKey">私钥</param>
         /// <param name="decryptString">待解密的字符串</param>
         /// <returns></returns>
-        public string RSADecrypt(string xmlPrivateKey, string decryptString)
+        public static string RSADecrypt(string xmlPrivateKey, string decryptString)
         {
             try
             {
@@ -106,7 +103,7 @@ namespace Client
         /// <param name="strSource">待签名的字符串</param>
         /// <param name="strHashData">Hash描述</param>
         /// <returns></returns>
-        public bool GetHash(string strSource, ref string strHashData)
+        public static bool GetHash(string strSource, ref string strHashData)
         {
             try
             {
@@ -134,7 +131,7 @@ namespace Client
         /// <param name="strHashbyteSignature">待签名Hash描述</param>
         /// <param name="strEncryptedSignatureData">签名后的结果</param>
         /// <returns></returns>
-        public bool SignatureFormatter(string strKeyPrivate, string strHashbyteSignature, ref string strEncryptedSignatureData)
+        public static bool SignatureFormatter(string strKeyPrivate, string strHashbyteSignature, ref string strEncryptedSignatureData)
         {
             try
             {
@@ -168,7 +165,7 @@ namespace Client
         /// <param name="strHashbyteDeformatter">Hash描述</param>
         /// <param name="strDeformatterData">签名后的结果</param>
         /// <returns></returns>
-        public bool SignatureDeformatter(string strKeyPublic, string strHashbyteDeformatter, string strDeformatterData)
+        public static bool SignatureDeformatter(string strKeyPublic, string strHashbyteDeformatter, string strDeformatterData)
         {
             try
             {
@@ -197,7 +194,7 @@ namespace Client
                 throw ex;
             }
         }
-    #endregion
-    #endregion 
+        #endregion
+        #endregion
     }
 }
