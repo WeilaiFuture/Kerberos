@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>I'm GoGo - Let's chart!</title>
+
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/base.css">
+    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="./css/public.css">
+    <link rel="stylesheet" href="./JS/index.js">
+    <style media="screen">
+    </style>
+    <script>
+      window.onload = function(){//【功能】文档加载完后执行。
+        //顶部导航条中按钮的事件：
+        document.getElementById("register").onclick = toRegisterRegion;//进入注册窗口
+        document.getElementById("login").onclick = toLoginRegion;//进入登录窗口
+        //订阅注册窗口的事件：
+        document.getElementById("btn_confirm").onclick = sendRegisterInfo;//确认注册按钮
+        document.getElementById("btn_cancel").onclick = hideRegister;//取消注册按钮
+        document.getElementById("btn_getvcode").onclick = getRVC;//获取注册验证码按钮
+        document.getElementById("btn_finish").onclick = hideRegister;//确认注册完成按钮
+        //订阅登录窗口事件：
+        document.getElementById("a_LR_toSR").onclick = toResetRegion;
+        document.getElementById("btn_LR_cancel").onclick = hideLogin;
+        //订阅重置密码窗口事件：
+        document.getElementById("btn_SR_cancel").onclick = hideReset;
+        document.getElementById("btn_SR_getsvcode").onclick = getSVC;
+        document.getElementById("btn_SR_confirm").onclick = senResetInfo;
+      }
+      //顶部导航条：
+      function toRegisterRegion(){//【功能】进入注册窗口
+        hideLogin();
+        hideReset();
+        document.getElementById('register-modal').style.display = 'block';
+        document.getElementById('register-region').style.display = 'block';
+        document.getElementById('res-region').style.display = 'none';
+      }
+      function toLoginRegion(){//【功能】进入登录窗口
+        hideRegister();
+        hideReset();
+        document.getElementById('login-modal').style.display = 'block';
+        document.getElementById('login-region').style.display = 'block';
+      }
+      //注册窗口：
+      function getRVC(situ){//【功能】获取邮箱验证码。
+        let info = {
+          email: document.getElementById('input_email').value
+        };
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', '/users/getrvc');
+        xhr.setRequestHeader('content-type', 'application/json;charset=utf-8')
+        xhr.send(JSON.stringify(info));
+        xhr.onreadystatechange = function(){
+          if(xhr.readyState === 4){
+            if(xhr.status >= 200 && xhr.status < 300){
+              alert("邮箱验证码已经发送，请查收！");
+            }
+            else{
+              alert("很抱歉，获取邮箱验证码失败，请重试！");
+              return;
+            }
+          }
+        }
+        //下面开始计时
+        let secs = 60;//60秒
+        let clock = '';
+        let btn = document.getElementById('btn_getvcode');
+        disableBtn(btn);
+        clock = setInterval(doLoop, 1000);
+        function doLoop(){
+          --secs;
+          if(secs > 0){
+            btn.textContent = secs + 's';
+          }
+          else{
+            clearInterval(clock);
+            btn.textContent = '获 取';
+            ableBtn(btn);
+          }
+        }
+      }//end getVcode
+      function sendRegisterInfo(){//【功能】确认按钮发送注册信息
+        //获取注册信息：
+        let info = {
+          name: document.getElementById("input_nickname").value,
+          psswd: document.getElementById("input_psswd").value,
+          email: document.getElementById("input_email").value,
+          rvc: document.getElementById("input_vcode").value
+        };
+        const xhr = new XMLHttpRequest();
+
+        xhr.open('POST', '/users/register');
+        xhr.setRequestHeader('content-type', 'application/json;charset=utf-8')
+        xhr.send(JSON.stringify(info));
+        xhr.onreadystatechange = function(){
+          if(xhr.readyState === 4){
+            if(xhr.status >= 200 && xhr.status < 300){
+              let result = JSON.parse(xhr.responseText);
+              if(result.res === 0){
+                let wel = document.getElementById("welcome");
+                wel.innerText = "账号：" + result.uid;
+                document.getElementById("register-region").style.display = "none";
+                document.getElementById("res-region").style.display = "block";
+              }
+              else if(result.res === 1){
+                alert("验证码错误，请重试！");
+              }
+              else{
+                alert("系统繁忙，稍后再试！");
+              }
+            }
+            else{
+              alert("操作失败，请重试！");
+              return;
+            }
+          }
+          //【ADD】添加收到消息后的逻辑。
+        }
+      }
+      function hideRegister(){//【功能】隐藏注册窗口
+        document.getElementById('res-region').style.display = 'none';
+        document.getElementById('register-region').style.display = 'none';
+        document.getElementById('register-modal').style.display = 'none';
+      }
+      //登录窗口：
+      function hideLogin(){//【功能】隐藏登录窗口
+        document.getElementById('login-region').style.display = 'none';
+        document.getElementById('login-modal').style.display = 'none';
+      }
+      function toResetRegion(){//【功能】进入重置密码窗口
+        hideRegister();
+        hideLogin();
+        document.getElementById("reset-modal").style.display = "block";
+        document.getElementById("reset-region").style.display = "block";
+      }
+      //重置密码窗口：
+      function hideReset(){
+        //document.getElementById("Sres-region").style.display = "none";
+        document.getElementById("reset-region").style.display = "none";
+        document.getElementById("reset-modal").style.display = "none";
+      }
+      function getSVC(situ){//获取邮箱验证码
+        let info = {
+          uid: document.getElementById('input_SR_uid').value
+        };
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', '/users/getsvc');
+        xhr.setRequestHeader('content-type', 'application/json;charset=utf-8')
+        xhr.send(JSON.stringify(info));
+        xhr.onreadystatechange = function(){
+          if(xhr.readyState === 4){
+            if(xhr.status >= 200 && xhr.status < 300){
+              let result = JSON.parse(xhr.responseText);
+              if(result.res === 0){
+                alert("验证码已经发往您的邮箱" + result.email + "，请查收！");
+              }
+              else if(result.res === 1){
+                alert("账号不存在！");
+              }
+              else{
+                alert("系统繁忙，稍后再试！");
+              }
+            }
+            else{
+              alert("操作失败，请重试！");
+            }
+          }
+        };
+        //下面开始计时
+        let secs = 60;//60秒
+        let clock = '';
+        let btn = document.getElementById('btn_SR_getsvcode');
+        disableBtn(btn);
+        clock = setInterval(doLoop, 1000);
+        function doLoop(){
+          --secs;
+          if(secs > 0){
+            btn.textContent = secs + 's';
+          }
+          else{
+            clearInterval(clock);
+            btn.textContent = '获 取';
+            ableBtn(btn);
+          }
+        }
+      }
+      function senResetInfo(){
+        //获取注册信息：
+        let info = {
+          uid: document.getElementById("input_SR_uid").value,
+          psswd: document.getElementById("input_SR_psswd0").value,
+          svc: document.getElementById("input_SR_svcode").value
+        };
+        const xhr = new XMLHttpRequest();
+
+        xhr.open('POST', '/users/reset');
+        xhr.setRequestHeader('content-type', 'application/json;charset=utf-8')
+        xhr.send(JSON.stringify(info));
+        xhr.onreadystatechange = function(){
+          if(xhr.readyState === 4){
+            if(xhr.status >= 200 && xhr.status < 300){
+              let result = JSON.parse(xhr.responseText);
+              if(result.res === 0){
+                alert("重置密码成功！");
+                hideReset();
+              }
+              else if(result.res === 1){
+                alert("验证码错误，请重试！");
+              }
+              else{
+                alert("系统繁忙，稍后再试！");
+              }
+            }
+            else{
+              alert("操作失败，请重试！");
+              return;
+            }
+          }
+        }
+      }
+      //常用工具函数：
+      function disableBtn(btn){//【功能】禁用某个按钮。
+        console.log("1321321");
+        btn.disabled = true;//禁用
+        btn.classList.add("btn_disabled");
+        console.log(btn.classList);
+      }
+      function ableBtn(btn){//【功能】恢复某个按钮的使用。
+        btn.classList.remove("btn_disabled");
+        btn.disabled = false;
+      }
+    </script>
+  </head>
+  <body>
+    <!--顶部容器-->
+    <div id="topbar-wrapper" class="topbar-wrapper">
+      <!--顶部导航条-->
+      <div id="topbar" class="topbar">
+        <!-- logo链接 -->
+        <a href="index.html" id="gogo" class="logo"></a>
+        <ul id="service" class="service">
+          <li>
+            <a href="https://127.0.0.1:8085">首页</a>
+          </li>
+          <li>
+            <a href="#">动态</a>
+          </li>
+          <li>
+            <a href="#">视频</a>
+          </li>
+        </ul>
+        <ul id="account" class="account">
+          <li>
+            <a href="#">EC会员</a>
+          </li>
+          <li>
+            <a href="#">账号安全</a>
+          </li>
+          <li id="login" class="login">
+            <a>登录</a>
+          </li>
+        </ul>
+        <a id="register" class="register">注册</a>
+      </div>
+    </div>
+    <div id="bodyer" class="bodyer .clearfix">
+      <div id="article-region" class="article-region">
+        <div id="article" class="article">
+          <div id="title" class="title">
+            EasyChat-PC版
+          </div>
+          <div id="intro" class="intro">
+            全新改版，给你焕然一新的感觉
+          </div>
+        </div>
+        <button id="btn_download" class="btn_download" type="button" name="download">
+          Download
+        </button>
+      </div>
+    </div>
+    <div id="footer" class="footer">
+
+    </div>
+    <!-- 注册窗口 -->
+    <div id="register-modal" class="register-modal">
+      <div id="register-region" class="register-region">
+        <ul>
+          <li>
+            <span>昵 称 </span> <input type="text" name="nickname"
+              id="input_nickname" class="input_nickname"><br>
+          </li>
+          <li>
+            <span>密 码 </span><input type="text" name="psswd"
+              id="input_psswd" class="input_psswd">
+          </li>
+          <li>
+            <span>邮 箱 </span> <input type="text" name="email"
+              id="input_email" class="input_email">
+          </li>
+          <li>
+            <span style="width: 65px;">验 证 </span>
+            <input type="text" name="vcode" id="input_vcode" class="input_vcode">
+            <button id="btn_getvcode" class="btn_getvcode">获 取</button>
+          </li>
+          <li>
+            <span id="result" class="result"></span>
+          </li>
+          <li>
+            <button id="btn_confirm" class="btn_confirm">确认</button>
+            <button id="btn_cancel" class="btn_cancel">取消</button>
+          </li>
+        </ul>
+      </div>
+      <div id="res-region" class="res-region">
+        <div>
+          <div id="success"></div>
+        </div>
+        <div id="res-notice">
+          您已成功注册！
+        </div>
+        <div id="welcome">
+          账号：
+        </div>
+        <div id="res-info">
+          &nbsp&nbsp&nbsp&nbsp
+          请返回至官网下载EasyChat - PC版安装包并完成安装，登录后进一步完善个人信息。
+        </div>
+        <div id="office">
+          ———EasyChat官方
+        </div>
+        <button id="btn_finish" class="btn_finish" type="button" name="button">
+          确 定
+        </button>
+      </div>
+    </div>
+    <!-- L -->
+    <div id="login-modal" class="login-modal">
+      <!-- LR -->
+      <div id="login-region" class="login-region">
+        <ul>
+          <li>
+            <span>账 号 </span> <input type="text" name="uid"
+              id="input_LR_uid" class="input_LR_uid">
+          </li>
+          <li>
+            <span>密 码 </span><input type="text" name="psswd"
+              id="input_LR_psswd" class="input_LR_psswd">
+              <div id="div_LR" class="div_LR">
+                <a id="a_LR_toSR" class="a_LR_toSR">找回密码</a>
+              </div>
+          </li>
+          <li>
+            <button id="btn_LR_login" class="btn_LR_login">确认</button>
+            <button id="btn_LR_cancel" class="btn_LR_cancel">取消</button>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <!-- S -->
+    <div id="reset-modal" class="reset-modal">
+      <!-- SR -->
+      <div id="reset-region" class="reset-region">
+        <ul>
+          <li>
+            <span>您的账号</span> <input type="text" name="email"
+              id="input_SR_uid" class="input_SR_uid">
+          </li>
+          <li>
+            <span>新密码 </span> <input type="text" name="nickname"
+              id="input_SR_psswd0" class="input_SR_psswd0"><br>
+          </li>
+          <li>
+            <span>再次输入</span><input type="text" name="psswd"
+              id="input_SR_psswd1" class="input_SR_psswd1">
+          </li>
+          <li>
+            <span style="width: 65px;">验 证 </span>
+            <input type="text" name="vcode" id="input_SR_svcode" class="input_SR_svcode">
+            <button id="btn_SR_getsvcode" class="btn_SR_getsvcode">获 取</button>
+          </li>
+          <li>
+            <button id="btn_SR_confirm" class="btn_SR_confirm">确认</button>
+            <button id="btn_SR_cancel" class="btn_SR_cancel">取消</button>
+          </li>
+      </div>
+    </div>
+  </body>
+</html>
