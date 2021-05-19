@@ -1,0 +1,164 @@
+﻿<Window x:Class="Client.User_Window"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Client"
+        mc:Ignorable="d"
+        Title="User" Height="600" Width="300"
+        WindowStyle="None"  ResizeMode="NoResize"
+        MouseLeftButtonUp="Window_MouseLeftButtonUp"
+        Focusable="True"
+        >
+    <Window.Resources>
+        <local:MyStruct x:Key="User"></local:MyStruct>
+        <Style x:Key="TabItemStyle">
+            <Style.Triggers>
+                <Trigger Property="TabItem.IsSelected" Value="True">
+                    <Setter Property="TabItem.BorderThickness" Value="0,0,0,4"></Setter>
+                </Trigger>
+                <!--<Trigger Property="TabItem.IsMouseOver" Value="True">
+                    <Setter Property="TabItem.Background" Value="Gray"/>
+                </Trigger>
+                <Trigger Property="TabItem.IsFocused" Value="True">
+                    <Setter Property="TabItem.Background" Value="Gray"/>
+                </Trigger>-->
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="4*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="400"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Border Grid.RowSpan="4" Opacity="0.6">
+            <Image  Source="../image/back.jpg" Stretch="Fill" Margin="-7,-6,-4.4,-9.4" HorizontalAlignment="Right" Width="305"/>
+        </Border>
+        <Grid x:Name="my_Grid" Grid.Row="0" Focusable="True">
+            <Image Name="head_Image" MouseDown="head_Image_MouseDown" Source="../image/test.jpg"  Width="Auto" Height="Auto" Margin="5,44,189.6,9.8"   RenderTransformOrigin="1,1" Opacity="0.9" >
+                <Image.Clip>
+                    <EllipseGeometry RadiusX="60" RadiusY="60" Center="30,30"/>
+                </Image.Clip>
+
+            </Image>
+            <Button  Width="26" Height="28" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,0,-0.4,0" Click="Close_Click">
+                <WrapPanel >
+                    <Image Source="../image/close.png" Stretch="Fill" Width="20" Height="19" RenderTransformOrigin="6.4,-1.677" ></Image>
+                </WrapPanel>
+                <Button.Template >
+                    <ControlTemplate TargetType="{x:Type Button}" >
+                        <Border Name="Close_Border"  BorderThickness="0" CornerRadius="1,1,1,1">
+                            <Border.Background >
+                                <SolidColorBrush x:Name="ColorQ"/>
+                            </Border.Background>
+                            <ContentPresenter Content="{TemplateBinding ContentControl.Content}" HorizontalAlignment="Center" VerticalAlignment="Center" ></ContentPresenter>
+                            <Border.Triggers>
+                                <EventTrigger RoutedEvent="MouseEnter">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <ColorAnimation Storyboard.TargetName="ColorQ"
+                                            Storyboard.TargetProperty="(SolidColorBrush.Color)"
+                                            From="Red" To="Red"
+                                            AutoReverse="True" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                                <EventTrigger RoutedEvent="MouseLeave">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <ColorAnimation Storyboard.TargetName="ColorQ"
+                                            Storyboard.TargetProperty="(SolidColorBrush.Color)"
+                                            From="#00000000" To="#00000000"
+                                            AutoReverse="True" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                            </Border.Triggers>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+            <TextBlock Name="name_Block" Text="姓名"  Margin="104,44,86.6,49.8"></TextBlock>
+            <TextBox IsReadOnly="True"  Name="sign_Tb" Text="个性签名未填写" Margin="104,84,69.6,9.8" BorderThickness="0" Background="Transparent" GotFocus="Tb_GotFocus" LostFocus="Tb_LostFocus">
+            </TextBox>
+        </Grid>
+        <Grid Grid.Row="1"  Focusable="True">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Border BorderThickness="0">
+            </Border>
+            <Image Grid.Column="0" Source="../image/搜索.png" RenderTransformOrigin="-2.759,0.242" Margin="0,0,121.2,-0.2"/>
+            <TextBox Name="search_Tb" Opacity="0.6" IsReadOnly="False" BorderThickness="0" TextChanged="TextBox_TextChanged" GotFocus="Tb_GotFocus" LostFocus="Tb_LostFocus" Margin="26,0,-0.4,-0.2" Grid.ColumnSpan="2"/>
+        </Grid>
+        <Grid Grid.Row="2" Grid.RowSpan="2" Opacity="0.8">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <TabControl Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"   TabStripPlacement="Top"  >
+                <TabItem Header="消息列表" Grid.Column="0" HorizontalAlignment="Stretch"  BorderThickness="0" Style="{StaticResource TabItemStyle}" Margin="-2,-6,-86,0.2" >
+                    <Expander x:Name="my_Exp" Header="我的信息"  IsExpanded="False" >
+                        <DataGrid HeadersVisibility="None" CanUserResizeColumns="False" CanUserReorderColumns="False" x:Name="friend_List" IsReadOnly="True" AutoGenerateColumns="False" DataContext="{StaticResource User}"
+                      HorizontalScrollBarVisibility="Hidden" GridLinesVisibility="Horizontal" Opacity="0.8"
+                      MouseDoubleClick="friend_List_MouseDoubleClick" SelectionMode="Single" SelectionUnit="FullRow" >
+                            <DataGrid.Columns>
+                                <DataGridTemplateColumn >
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Image x:Name="head_Image" Source="{Binding Photo}"  Width="40" Height="40" RenderTransformOrigin="1,1" >
+                                                <Image.Clip>
+                                                    <EllipseGeometry RadiusX="60" RadiusY="60" Center="30,30"/>
+                                                </Image.Clip>
+                                            </Image>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Width="*">
+                                    <DataGridTemplateColumn.CellTemplate >
+                                        <DataTemplate>
+                                            <TextBlock x:Name="name_Tx" Text="{Binding Uname}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Expander>
+
+                </TabItem>
+                <TabItem Header="好友列表" Grid.Column="1" BorderThickness="0" Margin="48,-7,-156.4,-1.8" Style="{StaticResource TabItemStyle}"  >
+                    <Expander x:Name="my_Exp1" Header="我的信息" HorizontalContentAlignment="Stretch" IsExpanded="False" >
+                        <DataGrid HeadersVisibility="None" CanUserResizeColumns="False" CanUserReorderColumns="False" x:Name="friend_List1" IsReadOnly="True" AutoGenerateColumns="False" DataContext="{StaticResource User}"
+                      HorizontalScrollBarVisibility="Hidden" GridLinesVisibility="Horizontal" Opacity="0.8"
+                      MouseDoubleClick="friend_List_MouseDoubleClick" SelectionMode="Single" SelectionUnit="FullRow" >
+                            <DataGrid.Columns>
+                                <DataGridTemplateColumn >
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Image x:Name="head_Image" Source="{Binding Photo}"  Width="40" Height="40" RenderTransformOrigin="1,1" >
+                                                <Image.Clip>
+                                                    <EllipseGeometry RadiusX="60" RadiusY="60" Center="30,30"/>
+                                                </Image.Clip>
+                                            </Image>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Width="*">
+                                    <DataGridTemplateColumn.CellTemplate >
+                                        <DataTemplate>
+                                            <TextBlock x:Name="name_Tx" Text="{Binding Uname}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Expander>
+
+                </TabItem>
+            </TabControl>
+        </Grid>
+    </Grid>
+</Window>

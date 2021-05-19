@@ -1,6 +1,8 @@
 ﻿using Client;
 using System;
 using System.IO;
+using System.Security.Cryptography;
+using System.Text;
 using static Client.DESLibrary;
 
 namespace Client_test
@@ -9,10 +11,11 @@ namespace Client_test
     {
         static void Main(string[] args)
         {
-            RSALibrary RSA = new RSALibrary();
-            //DESLibrary DES = new DESLibrary();
-
+            /// <summary>
+            /// 利用RSA生成的密钥来加密解密
+            /// </summary>
             DES_test();
+            RSA_test();
         }
         static void DES_test()
         {
@@ -24,8 +27,8 @@ namespace Client_test
             while ((line = sr_P.ReadLine()) != null)
             {
                 string kc = sr_K.ReadLine();
-                string Dec_str = DecryptDES(line, kc);
-                string Enc_str = EncryptDES(Dec_str, kc);
+                string Enc_str = EncryptDES(line, kc);
+                string Dec_str = DecryptDES(Enc_str, kc);
                 sw_EN.WriteLine(Dec_str);
                 sw_DE.WriteLine(Enc_str);
 
@@ -47,6 +50,53 @@ namespace Client_test
             }
             sw.Close();
             sr.Close();
+        }
+
+        static void RSA_test()
+        {
+            string line;
+            StreamReader sr_P = new StreamReader("Plaintext.txt");
+            StreamReader sr_K = new StreamReader("Kc.txt");
+            StreamWriter sw_EN = new StreamWriter("RSAENout.txt");
+            StreamWriter sw_DE = new StreamWriter("RSADEout.txt");
+            StreamWriter sw_dig = new StreamWriter("Digitial.txt");
+            StreamWriter sw_di = new StreamWriter("Dig.txt");
+            string PKB, PKI;
+            while ((line = sr_P.ReadLine()) != null)
+            {
+                RSALibrary.RSAKey(out PKI, out PKB);
+
+                RSACryptoServiceProvider oRSA = new RSACryptoServiceProvider();
+                //RSA对内容签名
+                byte[] messagebytes = Encoding.UTF8.GetBytes("签名测试内容");
+
+                //私钥签名  
+                oRSA.FromXmlString(PKI);
+                byte[] AOutput = oRSA.SignData(messagebytes, "MD5");
+                //公钥验证  
+                oRSA.FromXmlString(PKB);
+                bool bVerify = oRSA.VerifyData(messagebytes, "MD5", AOutput);
+
+
+                string Enc_str = RSALibrary.RSAEncrypt(PKB, line);
+                string Dec_str = RSALibrary.RSADecrypt(PKI, Enc_str) ;
+                string dig_str=string.Empty;
+                RSALibrary.SignatureFormatter(PKI, line, ref dig_str);
+                sw_EN.WriteLine(Dec_str);
+                sw_DE.WriteLine(Enc_str);
+                sw_dig.WriteLine(dig_str);
+                if (RSALibrary.SignatureDeformatter(PKB, dig_str, line))
+                    Console.WriteLine("1");
+                sw_di.WriteLine(dig_str);
+
+            }
+            sr_P.Close();
+            sr_K.Close();
+            sw_EN.Close();
+            sw_DE.Close();
+            sw_di.Close();
+            sw_dig.Close();
+
         }
         //生成字母和数字随机数
         public static string random_str(int length, bool sleep)

@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 E:\Kerberos\Client\Client\App.xaml
-41531713827
+4-100996626
 
-15731420604
+15175297201
 17-1016627794
-ChatUI.xaml;MainWindow.xaml;UserUI.xaml;User_Window.xaml;
+UI\ChatUI.xaml;MainWindow.xaml;UI\UserUI.xaml;UI\User_Window.xaml;
 
 False
 
