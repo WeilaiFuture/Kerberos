@@ -8,46 +8,68 @@ using System.Threading.Tasks;
 
 namespace Kerberos_Client
 {
+	//Json 数据结构字段
 	public class Order
 	{
-		string msgId;
-		string Src;
-		string Dst;
-		string msgType;
-		string extend;
-		bool statusReport;
-		string sTS;
-		string rTS;
-		string ContentType;
-	}
+        string msgId;   //报文唯一标识符
+        string src;		//发送者ID
+		string dst;		//接受者ID
+		string msgType;	//消息类型
+		string extend;	//拓展字段，报文字段
+		bool statusReport;//状态字段
+        string sTS;     //发送方时间戳
+        private string rTS;     //接收方时间戳
+        string contentType;//消息类型
 
-    class MyJson
-    {
-		public static class JsonHelper
+		public string MsgId
 		{
-			private static readonly JsonSerializerSettings MyJsonSerializerSettings;
-
-			static JsonHelper()
-			{
-				MyJsonSerializerSettings = new JsonSerializerSettings();
-				IsoDateTimeConverter dateTimeConverter = new IsoDateTimeConverter();
-				dateTimeConverter.DateTimeFormat = "yyyy-MM-dd HH:mm:ss";
-				MyJsonSerializerSettings.Converters.Add(dateTimeConverter);
-			}
-
-			public static T FromJson<T>(string json)
-			{
-				if (string.IsNullOrEmpty(json))
-				{
-					return default(T);
-				}
-				return JsonConvert.DeserializeObject<T>(json, MyJsonSerializerSettings);
-			}
-
-			public static string ToJson<T>(T data)
-			{
-				return JsonConvert.SerializeObject(data, MyJsonSerializerSettings);
-			}
+			get { return msgId; }
+			set { msgId = value; }
 		}
+
+		public string Src
+		{
+			get { return src; }
+			set { src = value; }
+		}
+		public string Dst
+		{
+			get { return dst; }
+			set { dst = value; }
+		}
+		public string MsgType
+		{
+			get { return msgType; }
+			set { msgType = value; }
+		}
+		public string Extend
+		{
+			get { return extend; }
+			set { extend = value; }
+		}
+		public bool StatusReport
+		{
+			get { return statusReport; }
+			set { statusReport = value; }
+		}
+		public string STS
+		{
+			get { return sTS; }
+			set { sTS = value; }
+		}
+
+		public string RTS
+		{
+			get { return rTS; }
+			set { rTS = value; }
+
+		}
+		public string ContentType
+		{
+			get { return contentType; }
+			set { contentType = value; }
+
+		}
+
 	}
 }

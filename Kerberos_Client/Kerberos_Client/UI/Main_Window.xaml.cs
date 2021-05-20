@@ -68,7 +68,12 @@ namespace Kerberos_Client.UI
         {
             this.Close();
         }
-
+        private void TransID_Click(object sender, RoutedEventArgs e)
+        {
+            Window w = new MainWindow(false);
+            w.Show();
+            this.Close();
+        }
         private void Tb_LostFocus(object sender, RoutedEventArgs e)
         {
             TextBox tb = sender as TextBox;

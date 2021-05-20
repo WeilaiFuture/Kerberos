@@ -17,6 +17,19 @@ namespace Client_test
             DES_test();
             RSA_test();
         }
+        public static void my_init()
+        {
+            string line = "";
+            StreamReader sr = new StreamReader("Plaintext.txt");
+            StreamWriter sw = new StreamWriter("Kc.txt");
+            while ((line = sr.ReadLine()) != null)
+            {
+                string StrRandom = random_str(8);
+                sw.WriteLine(StrRandom);
+            }
+            sw.Close();
+            sr.Close();
+        }
         static void DES_test()
         {
             string line;
@@ -38,19 +51,6 @@ namespace Client_test
             sw_EN.Close();
             sw_DE.Close();
         }
-        public static void my_init()
-        {
-            string line = "";
-            StreamReader sr = new StreamReader("Plaintext.txt");
-            StreamWriter sw = new StreamWriter("Kc.txt");
-            while ((line = sr.ReadLine()) != null)
-            {
-                string StrRandom = random_str(8);
-                sw.WriteLine(StrRandom);
-            }
-            sw.Close();
-            sr.Close();
-        }
 
         static void RSA_test()
         {
@@ -65,18 +65,6 @@ namespace Client_test
             while ((line = sr_P.ReadLine()) != null)
             {
                 RSALibrary.RSAKey(out PKI, out PKB);
-
-                RSACryptoServiceProvider oRSA = new RSACryptoServiceProvider();
-                //RSA对内容签名
-                byte[] messagebytes = Encoding.UTF8.GetBytes("签名测试内容");
-
-                //私钥签名  
-                oRSA.FromXmlString(PKI);
-                byte[] AOutput = oRSA.SignData(messagebytes, "MD5");
-                //公钥验证  
-                oRSA.FromXmlString(PKB);
-                bool bVerify = oRSA.VerifyData(messagebytes, "MD5", AOutput);
-
 
                 string Enc_str = RSALibrary.RSAEncrypt(PKB, line);
                 string Dec_str = RSALibrary.RSADecrypt(PKI, Enc_str) ;

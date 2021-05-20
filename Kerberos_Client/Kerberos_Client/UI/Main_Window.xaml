@@ -46,9 +46,7 @@
             </Image>
             <Button  Width="26" Height="28" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,0,-0.4,0" Click="Close_Click">
                 <WrapPanel >
-                    <Image Source="../Image_Source/close.png" Stretch="Fill" Width="20" Height="19" RenderTransformOrigin="6.4,-1.677" >
-                        
-                    </Image>
+                    <Image Source="../Image_Source/close.png" Stretch="Fill" Width="20" Height="19" RenderTransformOrigin="6.4,-1.677" ></Image>
                 </WrapPanel>
                 <Button.Template >
                     <ControlTemplate TargetType="{x:Type Button}" >
@@ -83,8 +81,9 @@
                     </ControlTemplate>
                 </Button.Template>
             </Button>
+            <Button Content="切换账号" Width="72" Height="28" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,106,0,-0.4" Click="TransID_Click" Opacity="0.3" Foreground="red"></Button>
             <TextBlock Name="name_Block" Text="姓名"  Margin="104,44,86.6,49.8"></TextBlock>
-            <TextBox IsReadOnly="True"  Name="sign_Tb" Text="个性签名未填写" Margin="104,84,69.6,9.8" BorderThickness="0" Background="Transparent" GotFocus="Tb_GotFocus" LostFocus="Tb_LostFocus">
+            <TextBox IsReadOnly="True"  Name="sign_Tb" Text="个性签名未填写" Margin="104,84,87,21.6" BorderThickness="0" Background="Transparent" GotFocus="Tb_GotFocus" LostFocus="Tb_LostFocus">
             </TextBox>
         </Grid>
         <Grid Grid.Row="1"  Focusable="True">

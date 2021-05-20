@@ -47,7 +47,7 @@ namespace Kerberos_Client
         public class My_k
         {
             string key; //对称钥
-            public string Key 
+            public string Key
             {
                 get { return key; }
                 set { key = value; }
@@ -266,7 +266,7 @@ namespace Kerberos_Client
         public class User
         {
             public string Photo { get; set; } //图片在本机的地址
-            public string Uname { get; set;}//用户昵称
+            public string Uname { get; set; }//用户昵称
             public string Uid { get; set; }//用户账号
             public string Psswd { get; set; }//用户密码
             public string Name { get; set; }//用户真实姓名
@@ -287,6 +287,55 @@ namespace Kerberos_Client
                 Gender = 0;
                 Status = 0;
                 StartTime = 0;
+            }
+            public User(User user)
+            {
+                Photo = user.Photo;
+                Uname = user.Uname;
+                Uid = user.Uid;
+                Psswd = user.Psswd;
+                Name = user.Name;
+                Sign = user.Sign;
+                Email = user.Email;
+                Gender = user.Gender;
+                Status = user.Status;
+                StartTime = user.StartTime;
+            }
+            public User(string id, string psw,string photo)
+            {
+                Uid = id;
+                Psswd = psw;
+                Photo = photo;
+            }
+        }
+
+        public class Login_User
+        {
+            public string Uid { get; set; }
+            public string Psswd { get; set; }
+            public string Photo { get; set; }
+            public bool? Remember { get; set; }
+            public bool? Automatic { get; set; }
+            public Login_User()
+            {
+
+            }
+            public Login_User(Login_User u)
+            {
+                Uid = u.Uid;
+                Psswd = u.Psswd;
+                Photo = u.Photo;
+                Remember = u.Remember;
+                Automatic = u.Automatic;
+            }
+
+            public Login_User(string id, string psw, string photo, bool? rem, bool? auto)
+            {
+                Uid = id;
+                Psswd = psw;
+                Photo = photo;
+                Remember = rem;
+                Automatic = auto;
             }
 
         }
@@ -390,7 +439,7 @@ namespace Kerberos_Client
         {
             List<chat_Message> messages_list;
             public List<chat_Message> Messages_list
-            { 
+            {
                 get { return messages_list; }
                 set { messages_list = new List<chat_Message>(value); }
             }
@@ -398,3 +447,4 @@ namespace Kerberos_Client
         #endregion
     }
 }
+
