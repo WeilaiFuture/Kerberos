@@ -20,7 +20,7 @@
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
-        <Image gif:ImageBehavior.AnimatedSource="image/background.gif" Margin="-22,-19,-34,-51" Grid.RowSpan="3" RenderTransformOrigin="0.5,0.5" >
+        <Image gif:ImageBehavior.AnimatedSource="../image/background.gif" Margin="-22,-19,-34,-51" Grid.RowSpan="3" RenderTransformOrigin="0.5,0.5" >
             <Image.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -33,7 +33,7 @@
         <Grid Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Top" >
             <Button  Width="50" Height="50" Margin="0,0,0,0" Click="Close_Click">
                 <WrapPanel >
-                    <Image Source="image/close.png" Stretch="Fill" Width="50" Height="50" ></Image>
+                    <Image Source="../image/close.png" Stretch="Fill" Width="50" Height="50" ></Image>
                 </WrapPanel>
                 <Button.Template >
                     <ControlTemplate TargetType="{x:Type Button}" >
@@ -74,7 +74,7 @@
                 <RowDefinition Height="400"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <Image Name="head_Image" Source="image/test.jpg" VerticalAlignment="Center" Width="Auto" Height="185" Margin="36,89,620,126" Grid.Row="0" Grid.RowSpan="1" RenderTransformOrigin="0.5,0.5" >
+            <Image Name="head_Image" Source="../image/test.jpg" VerticalAlignment="Center" Width="Auto" Height="185" Margin="36,89,620,126" Grid.Row="0" Grid.RowSpan="1" RenderTransformOrigin="0.5,0.5" >
                 <Image.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -105,8 +105,8 @@
                     <CheckBox Content="记住密码" HorizontalAlignment="Left" Margin="142.8,20.8,0,-0.4" Grid.Row="2" VerticalAlignment="Top" Height="30" Width="115" FontSize="16" FontStyle="Oblique" Foreground="#FFD7C73B" Grid.ColumnSpan="2" Grid.Column="1"/>
                     <CheckBox Content="自动登陆" Grid.Column="2" HorizontalAlignment="Left" Margin="127.4,20.8,0,-0.4" Grid.Row="2" VerticalAlignment="Top" Height="30" RenderTransformOrigin="0.438,1.063" FontSize="16" Foreground="#FF9174BF" Grid.ColumnSpan="2"/>
                     <PasswordBox Name="password"  Grid.Column="1" MaxLength="15" HorizontalAlignment="Left" Margin="66.8,0,0,0" Grid.Row="1" VerticalAlignment="Top" Height="38" Grid.ColumnSpan="3" Width="301" FontSize="18"/>
-                    <Image Margin="18.2,0,97,38" Source="image/登录密码修改.png" Stretch="Fill" Grid.Column="1" Grid.Row="1"/>
-                    <Image Grid.Column="1" Margin="18.2,10,97,21" Source="image/登录-用户组.png" Stretch="Fill" RenderTransformOrigin="-2.759,0.242"/>
+                    <Image Margin="18.2,0,97,38" Source="../image/登录密码修改.png" Stretch="Fill" Grid.Column="1" Grid.Row="1"/>
+                    <Image Grid.Column="1" Margin="18.2,10,97,21" Source="../image/登录-用户组.png" Stretch="Fill" RenderTransformOrigin="-2.759,0.242"/>
                     <TextBlock  Grid.Column="3" HorizontalAlignment="Right" Margin="0,15,3.6,0" TextWrapping="Wrap" Text="" Width="122" Height="40" VerticalAlignment="Top" FontSize="18"><Hyperlink Click="Hyperlink_Click" NavigateUri="http://www.baidu.com"><Run Text="注册账号"/></Hyperlink></TextBlock>
                     <TextBlock HorizontalAlignment="Left" Margin="78,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="36" Width="122" Foreground="#FFB8D60D" FontSize="18" Grid.Column="3" Grid.Row="1">
                         <Hyperlink Click="Hyperlink_Click" NavigateUri="http://www.baidu.com"><Run Text="忘记密码"/></Hyperlink></TextBlock>
@@ -116,7 +116,7 @@
         </Grid>
         <Button   HorizontalAlignment="Left" Margin="308,32,0,0" Grid.Row="2" VerticalAlignment="Top" Width="157" Height="61" Click="Login_Click">
             <WrapPanel>
-                <Image Source="image/登录.png" Stretch="Fill"  ></Image>
+                <Image Source="../image/登录.png" Stretch="Fill"  ></Image>
             </WrapPanel>
             <Button.Template>
                 <ControlTemplate TargetType="{x:Type Button}" >

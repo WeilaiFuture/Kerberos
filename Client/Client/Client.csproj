@@ -65,18 +65,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="ChatUI.xaml.cs">
+    <Compile Include="UI\ChatUI.xaml.cs">
       <DependentUpon>ChatUI.xaml</DependentUpon>
     </Compile>
     <Compile Include="DESLibrary.cs" />
     <Compile Include="RSALibrary.cs" />
-    <Compile Include="UserUI.xaml.cs">
+    <Compile Include="UI\UserUI.xaml.cs">
       <DependentUpon>UserUI.xaml</DependentUpon>
     </Compile>
-    <Compile Include="User_Window.xaml.cs">
+    <Compile Include="UI\User_Window.xaml.cs">
       <DependentUpon>User_Window.xaml</DependentUpon>
     </Compile>
-    <Page Include="ChatUI.xaml">
+    <Page Include="UI\ChatUI.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -93,11 +93,11 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="UserUI.xaml">
+    <Page Include="UI\UserUI.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="User_Window.xaml">
+    <Page Include="UI\User_Window.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
