@@ -22,66 +22,76 @@ namespace Kerberos_Client.UI
     /// </summary>
     public partial class Main_Window : Window
     {
-        public User my_user;
-        private List<User> f_List = new List<User>();
-        private string name;
-        public string Name
-        {
-            get
-            {
-                return name;
-            }
-            set
-            {
-                if (name_Block.Text != value)
-                {
-                    name_Block.Text = value;
-                    PropertyChanged(this, new PropertyChangedEventArgs("name_Block.Text"));
-                }
-            }
-        }
-        public event PropertyChangedEventHandler PropertyChanged = delegate { };
-
+        public User My_user;
+        private List<User> Friend_List = new List<User>();
+        private List<User> Message_List = new List<User>();
         public Main_Window(User u, Image i)
         {
             InitializeComponent();
+            init(u,i);
+        }
+        /// <summary>
+        /// 界面初始化
+        /// </summary>
+        /// <param name="u">用户信息</param>
+        /// <param name="i">用户头像</param>
+        /// <returns></returns>
+        private void init(User u,Image i)
+        {
             for (int j = 0; j < 10; j++)
             {
                 User uu = new User();
                 uu.Uname = "test" + j.ToString();
-                f_List.Add(uu);
+                Friend_List.Add(uu);
+                Message_List.Add(uu);
             }
-            //Expander expander = new Expander();
-            //expander.Content = "123";
-            //expander.HorizontalContentAlignment = HorizontalAlignment.Stretch;
-            //Grid.SetColumn(expander, 1);
-            //grid3.Children.Add(expander);
-            my_user = u;
-            friend_List.ItemsSource = f_List;
-            friend_List1.ItemsSource = f_List;
-            Name = u.Uname;
-            head_Image = i;
-            my_Exp1.Header += " " + f_List.Count();
-        }
 
+            My_user = u;
+            friend_List.ItemsSource = Friend_List;
+            message_List.ItemsSource = Message_List;
+            name_Block.Text = u.Name;
+            sign_TextBox.Text = u.Sign;
+            head_Image = i;
+            my_Exp1.Header += " " + Friend_List.Count();
+        }
+        /// <summary>
+        /// 关闭界面
+        /// </summary>
         private void Close_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
+        /// <summary>
+        /// 切换账号回到主界面
+        /// </summary>
+        /// <param name="sender">事件</param>
+        /// <param name="e">时间路由</param>
+        /// <returns></returns>
         private void TransID_Click(object sender, RoutedEventArgs e)
         {
             Window w = new MainWindow(false);
             w.Show();
             this.Close();
         }
+        /// <summary>
+        /// 个性签名失去焦点
+        /// </summary>
+        /// <param name="sender">事件</param>
+        /// <param name="e">时间路由</param>
+        /// <returns></returns>
         private void Tb_LostFocus(object sender, RoutedEventArgs e)
         {
             TextBox tb = sender as TextBox;
             tb.BorderThickness = new Thickness(0);
-            if (tb.Name.Equals("sign_Tb"))
-                tb.Background = Brushes.Transparent;
+            tb.Background = Brushes.Transparent;
             tb.IsReadOnly = true;
         }
+        /// <summary>
+        /// 个性签名获得焦点
+        /// </summary>
+        /// <param name="sender">事件</param>
+        /// <param name="e">时间路由</param>
+        /// <returns></returns>
         private void Tb_GotFocus(object sender, RoutedEventArgs e)
         {
             TextBox tb = sender as TextBox;
@@ -89,30 +99,38 @@ namespace Kerberos_Client.UI
             tb.Background = Brushes.White;
             tb.IsReadOnly = false;
         }
-
-        private void Window_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            if (sign_Tb.IsFocused)
-                my_Grid.Focus().ToString();
-        }
-
-
+        /// <summary>
+        /// 搜索框
+        /// </summary>
+        /// <param name="sender">事件</param>
+        /// <param name="e">时间路由</param>
+        /// <returns></returns>
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
 
         }
-
+        /// <summary>
+        /// 双击还有聊天
+        /// </summary>
+        /// <param name="sender">事件</param>
+        /// <param name="e">时间路由</param>
+        /// <returns></returns>
         private void friend_List_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             Dispatcher.Invoke(new Action(delegate
             {
-                Chat_Window u = new Chat_Window(my_user, head_Image);
+                Chat_Window u = new Chat_Window(My_user, head_Image);
                 Thread newWindowThread = new Thread(() => ThreadStartingPoint(u));
                 newWindowThread.SetApartmentState(ApartmentState.STA);
                 newWindowThread.IsBackground = true;
                 newWindowThread.Start();
             }));
         }
+        /// <summary>
+        /// 线程启动界面
+        /// </summary>
+        /// <param name="w">界面</param>
+        /// <returns></returns>
         private void ThreadStartingPoint(Window w)
         {
             Dispatcher.Invoke(new Action(delegate
@@ -121,14 +139,19 @@ namespace Kerberos_Client.UI
             }));
             System.Windows.Threading.Dispatcher.Run();
         }
-
+        /// <summary>
+        /// 双击头像查看个人界面
+        /// </summary>
+        /// <param name="sender">事件</param>
+        /// <param name="e">时间路由</param>
+        /// <returns></returns>
         private void head_Image_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ChangedButton == MouseButton.Left && e.ClickCount == 2)
             {
                 Dispatcher.Invoke(new Action(delegate
                 {
-                    User_Window u = new User_Window(my_user, head_Image);
+                    User_Window u = new User_Window(My_user, head_Image);
                     Thread newWindowThread = new Thread(() => ThreadStartingPoint(u));
                     newWindowThread.SetApartmentState(ApartmentState.STA);
                     newWindowThread.IsBackground = true;
@@ -136,9 +159,52 @@ namespace Kerberos_Client.UI
                 }));
             }
         }
-
+        /// <summary>
+        /// 切换到信息列表
+        /// </summary>
+        /// <param name="sender">事件</param>
+        /// <param name="e">时间路由</param>
+        /// <returns></returns>
+        private void message_Button_Click(object sender, RoutedEventArgs e)
+        {
+            Dispatcher.Invoke(new Action(delegate
+            {
+                message_Button.Background = Brushes.SkyBlue;
+                friend_Button.Background = Brushes.Transparent;
+                message_Button.BorderThickness = new Thickness(0, 0, 0, 4);
+                friend_Button.BorderThickness = new Thickness(0, 0, 0, 0);
+                Message_Tab.IsSelected = true;
+            }));
+        }
+        /// <summary>
+        /// 切换到好友列表
+        /// </summary>
+        /// <param name="sender">事件</param>
+        /// <param name="e">时间路由</param>
+        /// <returns></returns>
+        private void friend_Button_Click(object sender, RoutedEventArgs e)
+        {
+            Dispatcher.Invoke(new Action(delegate
+            {
+                friend_Button.Background = Brushes.SkyBlue;
+                message_Button.Background = Brushes.Transparent;
+                message_Button.BorderThickness = new Thickness(0, 0, 0, 0);
+                friend_Button.BorderThickness = new Thickness(0, 0, 0, 4);
+                Friend_Tab.IsSelected = true;
+            }));
+        }
+        /// <summary>
+        /// 鼠标按住拖动界面，以及单击时间
+        /// </summary>
+        /// <param name="sender">事件</param>
+        /// <param name="e">时间路由</param>
+        /// <returns></returns>
         private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+            if (sign_TextBox.IsFocused)
+            {
+                My_grid.Focus();
+            }
             DragMove();
         }
     }

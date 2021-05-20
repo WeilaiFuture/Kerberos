@@ -23,7 +23,7 @@
                 <EllipseGeometry RadiusX="150" RadiusY="150" Center="150,150"/>
             </Image.Clip>
         </Image>
-        <TextBlock x:Name="Uname_TX" Height="41"  Opacity="0.6"  Text="{Binding Source=Uname,StringFormat={}昵称:{0}}" Margin="428,81,49.6,298" ></TextBlock>
+        <TextBlock x:Name="Uname_TextBlock" Height="41"  Opacity="0.6"  Text="{Binding Source=Uname,StringFormat={}昵称:{0}}" Margin="428,81,49.6,298" ></TextBlock>
         <TextBlock x:Name="Uid_TX" Height="41"  Opacity="0.6"  Text="{Binding Source=Uid,StringFormat={}账号:{0}}" Margin="428,127,9.6,252" ></TextBlock>
         <TextBlock x:Name="Email_TX" Height="41"  Opacity="0.6"  Text="{Binding Source=Email,StringFormat={}邮箱:{0}}" Margin="428,173,9.6,206" ></TextBlock>
         <Button Content="更换头像" FontSize="30" Opacity="0.7" Margin="94,352,572.6,10" Click="Button_Click"></Button>

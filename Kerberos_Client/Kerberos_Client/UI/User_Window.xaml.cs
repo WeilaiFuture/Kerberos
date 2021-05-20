@@ -30,10 +30,10 @@ namespace Kerberos_Client.UI
             }
             set
             {
-                if (Uname_TX.Text != value)
+                if (Uname_TextBlock.Text != value)
                 {
                     Uid_TX.Text = string.Format("昵称: {0}", value);
-                    PropertyChanged(this, new PropertyChangedEventArgs("Uname_TX.Text"));
+                    PropertyChanged(this, new PropertyChangedEventArgs("Uname_TextBlock.Text"));
                 }
             }
         }
