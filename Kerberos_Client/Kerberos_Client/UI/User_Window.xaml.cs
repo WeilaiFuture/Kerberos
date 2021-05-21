@@ -1,18 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.IO;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using static Kerberos_Client.MyStruct;
+using WinForm = System.Windows.Forms;
 
 namespace Kerberos_Client.UI
 {
@@ -21,72 +12,59 @@ namespace Kerberos_Client.UI
     /// </summary>
     public partial class User_Window : Window
     {
-        private string uname;
-        public string Uname
-        {
-            get
-            {
-                return uname;
-            }
-            set
-            {
-                if (Uname_TX.Text != value)
-                {
-                    Uid_TX.Text = string.Format("昵称: {0}", value);
-                    PropertyChanged(this, new PropertyChangedEventArgs("Uname_TX.Text"));
-                }
-            }
-        }
-        private string uid;
-        public string Uid
-        {
-            get
-            {
-                return uid;
-            }
-            set
-            {
-                if (Uid_TX.Text != value)
-                {
-                    Uid_TX.Text = string.Format("账号: {0}", value);
-                    PropertyChanged(this, new PropertyChangedEventArgs("Uid_TX.Text"));
-                }
-            }
-        }
-        private string email;
-        public string Email
-        {
-            get
-            {
-                return email;
-            }
-            set
-            {
-                if (Email_TX.Text != value)
-                {
-                    Uid_TX.Text = string.Format("邮箱: {0}", value);
-                    PropertyChanged(this, new PropertyChangedEventArgs("Email_TX.Text"));
-                }
-            }
-        }
-        public event PropertyChangedEventHandler PropertyChanged = delegate { };
+        public User My_user;
         public User_Window(User u, Image i)
         {
             InitializeComponent();
-            Uname = u.Uname;
-            Uid = u.Uid;
-            Email = u.Email;
-            head_Image = i;
+            My_user = u;
+            head_Image.Source = i.Source;
+            Uname_TextBox.Text = My_user.Uname;
+            Uid_TextBlock.Text += My_user.Uid;
+            Email_TextBlock.Text += My_user.Email;
         }
-
+        /// <summary>
+        /// 更改头像
+        /// </summary>
+        /// <param name="sender">事件</param>
+        /// <param name="e">时间路由</param>
+        /// <returns></returns>
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
-        }
+            //对话框打开文件，获取文件名
+            WinForm.OpenFileDialog dlg = new WinForm.OpenFileDialog();
+            //dlg.InitialDirectory =;    //打开对话框后的初始目录
+            dlg.Filter = "jpg文件|*.jpg|png文件|*.png";
+            dlg.ShowDialog();
+            string path = dlg.FileName;
+            if (path == "")
+            {
+                return;
+            }
+            else
+            {
+                BitmapImage bi = new BitmapImage();
+                using (MemoryStream ms = new MemoryStream(File.ReadAllBytes(path)))
+                {
+                    bi = new BitmapImage();
+                    bi.BeginInit();
+                    bi.CacheOption = BitmapCacheOption.OnLoad;//设置缓存模式
+                    bi.StreamSource = ms;//通过StreamSource加载图片
+                    bi.EndInit();
+                    bi.Freeze();
 
+                }
+                head_Image.Source = bi;
+            }
+        }
+        /// <summary>
+        /// 保存修改信息
+        /// </summary>
+        /// <param name="sender">事件</param>
+        /// <param name="e">时间路由</param>
+        /// <returns></returns>
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-
+            this.Close();
         }
     }
 }
