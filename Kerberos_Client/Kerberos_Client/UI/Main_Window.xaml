@@ -13,7 +13,7 @@
     <Window.Resources>
         <local:MyStruct x:Key="User"></local:MyStruct>
     </Window.Resources>
-    <Grid x:Name="My_grid" Focusable="True">
+    <Grid x:Name="My_grid" >
         <!--按比例切割界面-->
         <Grid.RowDefinitions>
             <RowDefinition Height="4*"></RowDefinition>
@@ -29,7 +29,7 @@
         <!--用户信息块-->
         <Grid Grid.Row="0" Focusable="True">
             <!--头像，鼠标点击进入个人信息界面-->
-            <Image x:Name="head_Image" MouseDown="head_Image_MouseDown" Source="../Image_Source/test.jpg" 
+            <Image x:Name="head_Image" MouseDown="head_Image_MouseDown"  
                    VerticalAlignment="Center" Width="Auto" Height="124"  Grid.Row="0" Grid.RowSpan="1" RenderTransformOrigin="0.5,0.5" Margin="-53,12,117,-2.4" >
                 <Image.RenderTransform>
                     <TransformGroup>
@@ -107,8 +107,8 @@
         
         <!--好友、信息块-->
         <Grid Grid.Row="2" Grid.RowSpan="2">
-            <Button x:Name="message_Button" Grid.Column="0" BorderThickness="0,0,0,4" Background="SkyBlue" Content="消息" Opacity="0.6" Click="message_Button_Click" Margin="0,-9,150,413.6" ></Button>
-            <Button x:Name="friend_Button" Content="联系人" Opacity="0.6" Click="friend_Button_Click" BorderThickness="0" Margin="150,-9,0,413.6"/>
+            <Button x:Name="message_Button" Grid.Column="0" BorderThickness="0,0,0,4" Background="SkyBlue" Content="消息" Opacity="0.6" Click="message_Button_Click" HorizontalAlignment="Left" Width="150" Margin="0,-7,0,411.6" ></Button>
+            <Button x:Name="friend_Button" Content="联系人" Opacity="0.6" Click="friend_Button_Click" BorderThickness="0" HorizontalAlignment="Right" Width="150" Margin="0,-7,0,411.6"/>
             
             <!--选项卡-->
             <TabControl Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"   TabStripPlacement="Top"  Opacity="0.8" Margin="0,20,0,-0.4" RenderTransformOrigin="0.296,0.478" >

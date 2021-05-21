@@ -318,7 +318,7 @@ namespace Kerberos_Client
             public bool? Automatic { get; set; }
             public Login_User()
             {
-
+                Photo = "../../Image_Source/test.jpg";
             }
             public Login_User(Login_User u)
             {
@@ -333,7 +333,8 @@ namespace Kerberos_Client
             {
                 Uid = id;
                 Psswd = psw;
-                Photo = photo;
+                //Photo = photo;
+                Photo = "../../Image_Source/test.jpg";
                 Remember = rem;
                 Automatic = auto;
             }

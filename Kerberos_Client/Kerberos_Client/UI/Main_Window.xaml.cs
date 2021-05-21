@@ -51,7 +51,7 @@ namespace Kerberos_Client.UI
             message_List.ItemsSource = Message_List;
             name_Block.Text = u.Name;
             sign_TextBox.Text = u.Sign;
-            head_Image = i;
+            head_Image.Source = i.Source;
             my_Exp1.Header += " " + Friend_List.Count();
         }
         /// <summary>

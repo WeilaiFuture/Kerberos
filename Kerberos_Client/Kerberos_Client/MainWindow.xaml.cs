@@ -134,8 +134,16 @@ namespace Kerberos_Client
         {
             password.Password = string.Empty;
             Login_User u = ID.SelectedItem as Login_User;
-            key_Check.IsChecked = u.Remember;
-            login_Check.IsChecked = u.Automatic;
+            if (ID.SelectedItem == null)
+            {
+                key_Check.IsChecked = false;
+                login_Check.IsChecked = false;
+            }
+            else
+            {
+                key_Check.IsChecked = u.Remember;
+                login_Check.IsChecked = u.Automatic;
+            }
             if (key_Check.IsChecked == true)
                 password.Password = u.Psswd;
 
