@@ -10,7 +10,7 @@
         <Border Opacity="0.6" Grid.ColumnSpan="2" Margin="0,0,0.2,0" >
             <Image  Source="../Image_Source/back.jpg" Stretch="Fill" Margin="0,-16,0.6,0" HorizontalAlignment="Right" Width="793"/>
         </Border>
-        <Image Name="head_Image" Source="../Image_Source/test.jpg" Margin="0,28,436.6,84" >
+        <Image Name="head_Image"  Margin="0,28,436.6,84" >
             <Image.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -23,10 +23,11 @@
                 <EllipseGeometry RadiusX="150" RadiusY="150" Center="150,150"/>
             </Image.Clip>
         </Image>
-        <TextBlock x:Name="Uname_TX" Height="41"  Opacity="0.6"  Text="{Binding Source=Uname,StringFormat={}昵称:{0}}" Margin="428,81,49.6,298" ></TextBlock>
-        <TextBlock x:Name="Uid_TX" Height="41"  Opacity="0.6"  Text="{Binding Source=Uid,StringFormat={}账号:{0}}" Margin="428,127,9.6,252" ></TextBlock>
-        <TextBlock x:Name="Email_TX" Height="41"  Opacity="0.6"  Text="{Binding Source=Email,StringFormat={}邮箱:{0}}" Margin="428,173,9.6,206" ></TextBlock>
-        <Button Content="更换头像" FontSize="30" Opacity="0.7" Margin="94,352,572.6,10" Click="Button_Click"></Button>
+        <TextBlock x:Name="Uname_TextBlock" Height="41" FontSize="30" Opacity="0.6"  Text="昵称:" Margin="394,81,330.6,298" ></TextBlock>
+        <TextBox x:Name="Uname_TextBox" Height="41" FontSize="30" Opacity="0.6"  Margin="478,81,9.6,298" ></TextBox>
+        <TextBlock x:Name="Uid_TextBlock" Height="41" FontSize="30" Opacity="0.6"  Text="账号:" Margin="394,147,-0.4,232" ></TextBlock>
+        <TextBlock x:Name="Email_TextBlock"  Height="41" FontSize="30" Opacity="0.6"  Text="邮箱:" Margin="394,214,0.6,165" ></TextBlock>
+        <Button Content="更换头像" FontSize="30" Opacity="0.7" Margin="86,352,539.6,10" Click="Button_Click"></Button>
         <Button Content="保存" FontSize="30" Opacity="0.7" Margin="541,352,125.6,10" Click="Button_Click_1"></Button>
     </Grid>
 </Window>
