@@ -1,8 +1,8 @@
 package Json;
 
-import com.sun.tools.javac.util.List;
 
 import java.util.Dictionary;
+import java.util.List;
 
 public class MyStruct {
     //证书
@@ -12,16 +12,88 @@ public class MyStruct {
          String deadline;//有效日期
          String name;//主体名
          String pk;//公钥
-     }
+
+        public String getVersion() {
+            return version;
+        }
+
+        public String getSerial() {
+            return serial;
+        }
+
+        public String getDeadline() {
+            return deadline;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public String getPk() {
+            return pk;
+        }
+
+        public void setVersion(String version) {
+            this.version = version;
+        }
+
+        public void setSerial(String serial) {
+            this.serial = serial;
+        }
+
+        public void setDeadline(String deadline) {
+            this.deadline = deadline;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public void setPk(String pk) {
+            this.pk = pk;
+        }
+    }
      //对称钥
      public class My_k {
             String key; //对称钥
+
+         public String getKey() {
+             return key;
+         }
+
+         public void setKey(String key) {
+             this.key = key;
+         }
      }
      //认证数据报文
      public class Message1 {
          String idc; //用户号
          String idt; //tgs
          String ts;  //时间戳
+
+         public String getIdc() {
+             return idc;
+         }
+
+         public String getIdt() {
+             return idt;
+         }
+
+         public String getTs() {
+             return ts;
+         }
+
+         public void setIdc(String idc) {
+             this.idc = idc;
+         }
+
+         public void setIdt(String idt) {
+             this.idt = idt;
+         }
+
+         public void setTs(String ts) {
+             this.ts = ts;
+         }
      }
     public class Message2 {
         String key; //session key
@@ -29,6 +101,46 @@ public class MyStruct {
         String ts;  //签发时间
         String lifetime; //有效期
         Ticket t;   //票据
+
+        public String getKey() {
+            return key;
+        }
+
+        public String getIdt() {
+            return idt;
+        }
+
+        public String getTs() {
+            return ts;
+        }
+
+        public String getLifetime() {
+            return lifetime;
+        }
+
+        public Ticket getT() {
+            return t;
+        }
+
+        public void setKey(String key) {
+            this.key = key;
+        }
+
+        public void setIdt(String idt) {
+            this.idt = idt;
+        }
+
+        public void setTs(String ts) {
+            this.ts = ts;
+        }
+
+        public void setLifetime(String lifetime) {
+            this.lifetime = lifetime;
+        }
+
+        public void setT(Ticket t) {
+            this.t = t;
+        }
     }
     public class Ticket {
         String key;//Session key
@@ -37,54 +149,350 @@ public class MyStruct {
         String idt;//tgs
         String ts;//时间戳
         String lifetime;//有效期
+
+        public String getKey() {
+            return key;
+        }
+
+        public String getIdc() {
+            return idc;
+        }
+
+        public String getAdc() {
+            return adc;
+        }
+
+        public String getIdt() {
+            return idt;
+        }
+
+        public String getTs() {
+            return ts;
+        }
+
+        public String getLifetime() {
+            return lifetime;
+        }
+
+        public void setKey(String key) {
+            this.key = key;
+        }
+
+        public void setIdc(String idc) {
+            this.idc = idc;
+        }
+
+        public void setAdc(String adc) {
+            this.adc = adc;
+        }
+
+        public void setIdt(String idt) {
+            this.idt = idt;
+        }
+
+        public void setTs(String ts) {
+            this.ts = ts;
+        }
+
+        public void setLifetime(String lifetime) {
+            this.lifetime = lifetime;
+        }
     }
     public class Message3 {
         String idv;//v的id
         Ticket t;//票据
         Authenticator ac;//认证
+
+        public String getIdv() {
+            return idv;
+        }
+
+        public Ticket getT() {
+            return t;
+        }
+
+        public Authenticator getAc() {
+            return ac;
+        }
+
+        public void setIdv(String idv) {
+            this.idv = idv;
+        }
+
+        public void setT(Ticket t) {
+            this.t = t;
+        }
+
+        public void setAc(Authenticator ac) {
+            this.ac = ac;
+        }
     }
     public class Message4 {
         String key;//session key
         String idv;//v的id
         String ts;//时间戳
         Ticket t;//票据
+
+        public String getKey() {
+            return key;
+        }
+
+        public String getIdv() {
+            return idv;
+        }
+
+        public String getTs() {
+            return ts;
+        }
+
+        public Ticket getT() {
+            return t;
+        }
+
+        public void setKey(String key) {
+            this.key = key;
+        }
+
+        public void setIdv(String idv) {
+            this.idv = idv;
+        }
+
+        public void setTs(String ts) {
+            this.ts = ts;
+        }
+
+        public void setT(Ticket t) {
+            this.t = t;
+        }
     }
     public class Authenticator {
         String idc;//Ticket主人id
         String adc;//Ticket主人地址
         String ts;//签发时间
+
+        public String getIdc() {
+            return idc;
+        }
+
+        public String getAdc() {
+            return adc;
+        }
+
+        public String getTs() {
+            return ts;
+        }
+
+        public void setIdc(String idc) {
+            this.idc = idc;
+        }
+
+        public void setAdc(String adc) {
+            this.adc = adc;
+        }
+
+        public void setTs(String ts) {
+            this.ts = ts;
+        }
     }
     public class Message5 {
         Ticket t;//票据
         Authenticator ac;//认证
+
+        public Ticket getT() {
+            return t;
+        }
+
+        public Authenticator getAc() {
+            return ac;
+        }
+
+        public void setT(Ticket t) {
+            this.t = t;
+        }
+
+        public void setAc(Authenticator ac) {
+            this.ac = ac;
+        }
     }
     public class Message6 {
         String ts;//时间戳
+
+        public String getTs() {
+            return ts;
+        }
+
+        public void setTs(String ts) {
+            this.ts = ts;
+        }
     }
     public class User
     {
-        public String Photo ; //图片在本机的地址
-        public String Uname ;//用户昵称
-        public String Uid ;//用户账号
-        public String Psswd ;//用户密码
-        public String Name;//用户真实姓名
-        public String Sign ;//个性签名
-        public String Email;//邮箱
-        public int Gender ;//性别
-        public int Status ;//状态
-        public int StartTime;//注册时间
+        String Photo ; //图片在本机的地址
+        String Uname ;//用户昵称
+        String Uid ;//用户账号
+        String Psswd ;//用户密码
+        String Name;//用户真实姓名
+        String Sign ;//个性签名
+        String Email;//邮箱
+        int Gender ;//性别
+        int Status ;//状态
+        int StartTime;//注册时间
+
+        public String getPhoto() {
+            return Photo;
+        }
+
+        public String getUname() {
+            return Uname;
+        }
+
+        public String getUid() {
+            return Uid;
+        }
+
+        public String getPsswd() {
+            return Psswd;
+        }
+
+        public String getName() {
+            return Name;
+        }
+
+        public String getSign() {
+            return Sign;
+        }
+
+        public String getEmail() {
+            return Email;
+        }
+
+        public int getGender() {
+            return Gender;
+        }
+
+        public int getStatus() {
+            return Status;
+        }
+
+        public int getStartTime() {
+            return StartTime;
+        }
+
+        public void setPhoto(String photo) {
+            Photo = photo;
+        }
+
+        public void setUname(String uname) {
+            Uname = uname;
+        }
+
+        public void setUid(String uid) {
+            Uid = uid;
+        }
+
+        public void setPsswd(String psswd) {
+            Psswd = psswd;
+        }
+
+        public void setName(String name) {
+            Name = name;
+        }
+
+        public void setSign(String sign) {
+            Sign = sign;
+        }
+
+        public void setEmail(String email) {
+            Email = email;
+        }
+
+        public void setGender(int gender) {
+            Gender = gender;
+        }
+
+        public void setStatus(int status) {
+            Status = status;
+        }
+
+        public void setStartTime(int startTime) {
+            StartTime = startTime;
+        }
     }
     public class Friend {
         User u;//用户信息
         String remark;//备注
         int startTime;//添加好友时间
         String tid;//分组信息
+
+        public User getU() {
+            return u;
+        }
+
+        public void setU(User u) {
+            this.u = u;
+        }
+
+        public String getRemark() {
+            return remark;
+        }
+
+        public void setRemark(String remark) {
+            this.remark = remark;
+        }
+
+        public int getStartTime() {
+            return startTime;
+        }
+
+        public void setStartTime(int startTime) {
+            this.startTime = startTime;
+        }
+
+        public String getTid() {
+            return tid;
+        }
+
+        public void setTid(String tid) {
+            this.tid = tid;
+        }
     }
     public class chat_Message {
         int head;//信息种类
         String content;//信息内容
         User u;//发送方
         int time;//时间戳
+
+        public int getHead() {
+            return head;
+        }
+
+        public void setHead(int head) {
+            this.head = head;
+        }
+
+        public String getContent() {
+            return content;
+        }
+
+        public void setContent(String content) {
+            this.content = content;
+        }
+
+        public User getU() {
+            return u;
+        }
+
+        public void setU(User u) {
+            this.u = u;
+        }
+
+        public int getTime() {
+            return time;
+        }
+
+        public void setTime(int time) {
+            this.time = time;
+        }
     }
     public class Group {
         List<Dictionary<User, String>> list;//用户列表
@@ -93,8 +501,64 @@ public class MyStruct {
         String leader;//群主账号
         String sign;//群介绍
         int startTime;//创建时间
+
+        public List<Dictionary<User, String>> getList() {
+            return list;
+        }
+
+        public void setList(List<Dictionary<User, String>> list) {
+            this.list = list;
+        }
+
+        public String getGid() {
+            return gid;
+        }
+
+        public void setGid(String gid) {
+            this.gid = gid;
+        }
+
+        public String getPhoto() {
+            return photo;
+        }
+
+        public void setPhoto(String photo) {
+            this.photo = photo;
+        }
+
+        public String getLeader() {
+            return leader;
+        }
+
+        public void setLeader(String leader) {
+            this.leader = leader;
+        }
+
+        public String getSign() {
+            return sign;
+        }
+
+        public void setSign(String sign) {
+            this.sign = sign;
+        }
+
+        public int getStartTime() {
+            return startTime;
+        }
+
+        public void setStartTime(int startTime) {
+            this.startTime = startTime;
+        }
     }
     public class record_Message {
         List<chat_Message> messages_list;
+
+        public List<chat_Message> getMessages_list() {
+            return messages_list;
+        }
+
+        public void setMessages_list(List<chat_Message> messages_list) {
+            this.messages_list = messages_list;
+        }
     }
 }
