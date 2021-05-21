@@ -1,9 +1,19 @@
 package Json;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.annotation.JSONField;
 
 public class MyJson {
-    public class Order{
+
+    public static String OrderToString(Order order){
+        String jsonOutput= JSON.toJSONString(order);
+        return jsonOutput;
+    }
+    public static Order StringToOrder(String jsonObject){
+        Order order=JSON.parseObject(jsonObject, Order.class);
+        return order;
+    }
+    static public class Order{
         @JSONField(name="msgID")
         String msgId;
         @JSONField(name="Src")
