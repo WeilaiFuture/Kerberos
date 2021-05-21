@@ -1,12 +1,18 @@
 package StateMachine;
 
 import java.util.EnumSet;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.statemachine.config.EnableStateMachine;
 import org.springframework.statemachine.config.EnumStateMachineConfigurerAdapter;
+import org.springframework.statemachine.config.builders.StateMachineConfigurationConfigurer;
 import org.springframework.statemachine.config.builders.StateMachineStateConfigurer;
 import org.springframework.statemachine.config.builders.StateMachineTransitionConfigurer;
+import org.springframework.statemachine.listener.StateMachineListener;
+import org.springframework.statemachine.listener.StateMachineListenerAdapter;
+import org.springframework.statemachine.transition.Transition;
 
 import static StateMachine.RegEventEnum.*;
 import static StateMachine.RegStatusEnum.*;
@@ -18,6 +24,7 @@ public class StateMachineConfig extends EnumStateMachineConfigurerAdapter<RegSta
     /**
      * 配置状态机状态
      */
+
     @Override
     public void configure(StateMachineStateConfigurer<RegStatusEnum, RegEventEnum> states) throws Exception {
         states.withStates()
@@ -37,104 +44,106 @@ public class StateMachineConfig extends EnumStateMachineConfigurerAdapter<RegSta
                 .source(WAITINFO)
                 .target(HEADOVER)
                 .event(RECIVE)
-                // 2. beginToLogin CONNECTED -> LOGINING
+                // 2.
+                .and().withExternal()
                 .source(WAITINFO)
                 .target(EXIT)
                 .event(TIMEOUT)
-                // 2. beginToLogin CONNECTED -> LOGINING
+                // 3.
                 .and().withExternal()
                 .source(HEADOVER)
                 .target(HANDLER1001)
                 .event(HEAD1001)
-                // 3. login failure LOGINING -> UNCONNECTED
+                // 4.
                 .and().withExternal()
                 .source(HEADOVER)
                 .target(HANDLER1002)
                 .event(HEAD1002)
-                // 4. login success LOGINING -> LOGIN_INTO_SYSTEM
+                // 5.
                 .and().withExternal()
                 .source(HEADOVER)
                 .target(HANDLER1003)
                 .event(HEAD1003)
-                // 5. logout LOGIN_INTO_SYSTEM -> UNCONNECTED
+                // 6.
                 .and().withExternal()
                 .source(HEADOVER)
                 .target(HANDLER1006)
                 .event(HEAD1006)
-                // 5. logout LOGIN_INTO_SYSTEM -> UNCONNECTED
+                // 7.
                 .and().withExternal()
                 .source(HEADOVER)
                 .target(HANDLER1007)
                 .event(HEAD1007)
-                // 5. logout LOGIN_INTO_SYSTEM -> UNCONNECTED
+                // 8.
                 .and().withExternal()
                 .source(HEADOVER)
                 .target(EXIT)
                 .event(HEAD1008)
-                // 5. logout LOGIN_INTO_SYSTEM -> UNCONNECTED
+                // 9.
                 .and().withExternal()
                 .source(HEADOVER)
                 .target(HANDLER1009)
                 .event(HEAD1009)
-                // 5. logout LOGIN_INTO_SYSTEM -> UNCONNECTED
+                // 10.
                 .and().withExternal()
                 .source(HEADOVER)
                 .target(HANDLER1010)
                 .event(HEAD1010)
-                // 5. logout LOGIN_INTO_SYSTEM -> UNCONNECTED
+                // 11.
                 .and().withExternal()
                 .source(HEADOVER)
                 .target(HANDLER2001)
                 .event(HEAD2001)
-                // 5. logout LOGIN_INTO_SYSTEM -> UNCONNECTED
+                // 12.
                 .and().withExternal()
                 .source(HEADOVER)
                 .target(HANDLER2002)
                 .event(HEAD2002)
-                // 5. logout LOGIN_INTO_SYSTEM -> UNCONNECTED
+                // 13.
                 .and().withExternal()
                 .source(HANDLER1001)
                 .target(WAITINFO)
                 .event(HANDLEROVER)
-                // 5. logout LOGIN_INTO_SYSTEM -> UNCONNECTED
+                // 14.
                 .and().withExternal()
                 .source(HANDLER1002)
                 .target(WAITINFO)
                 .event(HANDLEROVER)
-                // 5. logout LOGIN_INTO_SYSTEM -> UNCONNECTED
+                // 15.
                 .and().withExternal()
                 .source(HANDLER1003)
                 .target(WAITINFO)
                 .event(HANDLEROVER)
-                // 5. logout LOGIN_INTO_SYSTEM -> UNCONNECTED
+                // 16.
                 .and().withExternal()
                 .source(HANDLER1006)
                 .target(WAITINFO)
                 .event(HANDLEROVER)
-                // 5. logout LOGIN_INTO_SYSTEM -> UNCONNECTED
+                // 17.
                 .and().withExternal()
                 .source(HANDLER1007)
                 .target(WAITINFO)
                 .event(HANDLEROVER)
-                // 5. logout LOGIN_INTO_SYSTEM -> UNCONNECTED
+                // 18.
                 .and().withExternal()
                 .source(HANDLER1009)
                 .target(WAITINFO)
                 .event(HANDLEROVER)
-                // 5. logout LOGIN_INTO_SYSTEM -> UNCONNECTED
+                // 19.
                 .and().withExternal()
                 .source(HANDLER1010)
                 .target(WAITINFO)
                 .event(HANDLEROVER)
-                // 5. logout LOGIN_INTO_SYSTEM -> UNCONNECTED
+                // 20.
                 .and().withExternal()
                 .source(HANDLER2001)
                 .target(WAITINFO)
                 .event(HANDLEROVER)
-                // 5. logout LOGIN_INTO_SYSTEM -> UNCONNECTED
+                // 21.
                 .and().withExternal()
                 .source(HANDLER2002)
                 .target(WAITINFO)
                 .event(HANDLEROVER);
     }
+
 }
