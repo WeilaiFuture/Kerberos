@@ -4,14 +4,25 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.annotation.JSONField;
 
 public class MyJson {
-
+    //序列化
     public static String OrderToString(Order order){
         String jsonOutput= JSON.toJSONString(order);
         return jsonOutput;
     }
+    //反序列化
     public static Order StringToOrder(String jsonObject){
         Order order=JSON.parseObject(jsonObject, Order.class);
         return order;
+    }
+    //序列化
+    public static String StructToString(MyStruct struct){
+        String jsonOutput= JSON.toJSONString(struct);
+        return jsonOutput;
+    }
+    //反序列化
+    public static MyStruct StringToStruct(String jsonObject){
+        MyStruct struct=JSON.parseObject(jsonObject, MyStruct.class);
+        return struct;
     }
     static public class Order{
         @JSONField(name="msgID")

@@ -5,8 +5,23 @@ import java.util.Dictionary;
 import java.util.List;
 
 public class MyStruct {
-    //证书
-     public class Certificate {
+
+    public Certificate certificate; //证书
+    public My_k my_k;
+    public Message1 message1;
+    public Message2 message2;
+    public Ticket ticket;
+    public Message3 message3;
+    public Message4 message4;
+    public Message5 message5;
+    public Message6 message6;
+    public User user;
+    public Friend friend;
+    public Chat_Message chat_message;
+    public Group group;
+    public Record_Message record_message;
+
+    static public class Certificate {
          String version;//版本号
          String serial;//序列号
          String deadline;//有效日期
@@ -53,20 +68,20 @@ public class MyStruct {
             this.pk = pk;
         }
     }
-     //对称钥
-     public class My_k {
+    //对称钥
+    static public class My_k {
             String key; //对称钥
 
          public String getKey() {
              return key;
          }
 
-         public void setKey(String key) {
+         public  void setKey(String key) {
              this.key = key;
          }
      }
-     //认证数据报文
-     public class Message1 {
+    //认证数据报文
+    static public class Message1 {
          String idc; //用户号
          String idt; //tgs
          String ts;  //时间戳
@@ -95,7 +110,7 @@ public class MyStruct {
              this.ts = ts;
          }
      }
-    public class Message2 {
+    static public class Message2 {
         String key; //session key
         String idt; //tgs
         String ts;  //签发时间
@@ -142,7 +157,7 @@ public class MyStruct {
             this.t = t;
         }
     }
-    public class Ticket {
+    static public class Ticket {
         String key;//Session key
         String idc;//用户标识符
         String adc;//client 地址
@@ -198,7 +213,7 @@ public class MyStruct {
             this.lifetime = lifetime;
         }
     }
-    public class Message3 {
+    static public class Message3 {
         String idv;//v的id
         Ticket t;//票据
         Authenticator ac;//认证
@@ -227,7 +242,7 @@ public class MyStruct {
             this.ac = ac;
         }
     }
-    public class Message4 {
+    static public class Message4 {
         String key;//session key
         String idv;//v的id
         String ts;//时间戳
@@ -265,7 +280,7 @@ public class MyStruct {
             this.t = t;
         }
     }
-    public class Authenticator {
+    static public class Authenticator {
         String idc;//Ticket主人id
         String adc;//Ticket主人地址
         String ts;//签发时间
@@ -294,7 +309,7 @@ public class MyStruct {
             this.ts = ts;
         }
     }
-    public class Message5 {
+    static public class Message5 {
         Ticket t;//票据
         Authenticator ac;//认证
 
@@ -314,7 +329,7 @@ public class MyStruct {
             this.ac = ac;
         }
     }
-    public class Message6 {
+    static public class Message6 {
         String ts;//时间戳
 
         public String getTs() {
@@ -325,7 +340,7 @@ public class MyStruct {
             this.ts = ts;
         }
     }
-    public class User
+    static public class User
     {
         String Photo ; //图片在本机的地址
         String Uname ;//用户昵称
@@ -418,7 +433,7 @@ public class MyStruct {
             StartTime = startTime;
         }
     }
-    public class Friend {
+    static public class Friend {
         User u;//用户信息
         String remark;//备注
         int startTime;//添加好友时间
@@ -456,7 +471,7 @@ public class MyStruct {
             this.tid = tid;
         }
     }
-    public class chat_Message {
+    static public class Chat_Message {
         int head;//信息种类
         String content;//信息内容
         User u;//发送方
@@ -494,7 +509,7 @@ public class MyStruct {
             this.time = time;
         }
     }
-    public class Group {
+    static public class Group {
         List<Dictionary<User, String>> list;//用户列表
         String gid;//群账号
         String photo;//群头像
@@ -550,14 +565,14 @@ public class MyStruct {
             this.startTime = startTime;
         }
     }
-    public class record_Message {
-        List<chat_Message> messages_list;
+    static public class Record_Message {
+        List<Chat_Message> messages_list;
 
-        public List<chat_Message> getMessages_list() {
+        public List<Chat_Message> getMessages_list() {
             return messages_list;
         }
 
-        public void setMessages_list(List<chat_Message> messages_list) {
+        public void setMessages_list(List<Chat_Message> messages_list) {
             this.messages_list = messages_list;
         }
     }
