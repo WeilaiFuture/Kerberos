@@ -19,30 +19,17 @@
         <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
       </path>
     </expand>
-    <select />
+    <select>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="BRANCH:liu" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </select>
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0fdb1c7d-8c0b-4df4-8d75-9a2f62abe1ad" name="Default Changelist" comment="添加状态机">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_codec_commons_codec_1_15.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__io_netty_netty_all_4_1_20_Final.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__log4j_log4j_1_2_17.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_logging_log4j_log4j_api_2_0_rc1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_logging_log4j_log4j_core_2_0_rc1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_slf4j_api_1_7_25.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_slf4j_log4j12_1_7_5.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Framework/Client/EchoClient.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Framework/Client/EchoClientHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Framework/Client/EchoClientHandler2.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Framework/EchoServer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Framework/Handlers/EchoServerHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Framework/Session/Session.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Framework/Session/SessionHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2021_5_6_21_49_[Default_Changelist]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2021_5_6_21_49__Default_Changelist_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KerberosServer.iml" beforeDir="false" afterPath="$PROJECT_DIR$/KerberosServer.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,6 +80,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="settings.editor.selected.configurable" value="vcs.Git" />
   </component>
   <component name="RunAnythingCache">
     <option name="myCommands">
@@ -207,7 +195,35 @@
       <option name="project" value="LOCAL" />
       <updated>1620892905037</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="完善了famework，添加了session和sessionhandler，现在可以开始写代码了。">
+      <created>1621782435987</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1621782435987</updated>
+    </task>
+    <task id="LOCAL-00010" summary="new">
+      <created>1621784544166</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1621784544166</updated>
+    </task>
+    <task id="LOCAL-00011" summary="new">
+      <created>1621788520373</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1621788520373</updated>
+    </task>
+    <task id="LOCAL-00012" summary="new">
+      <created>1621789055817</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1621789055817</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -221,7 +237,19 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="liu" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
@@ -237,33 +265,51 @@
     <MESSAGE value="添加ServerSecurity和部分函数" />
     <MESSAGE value="添加ServerData和部分函数" />
     <MESSAGE value="添加状态机" />
-    <option name="LAST_COMMIT_MESSAGE" value="添加状态机" />
+    <MESSAGE value="完善了famework，添加了session和sessionhandler，现在可以开始写代码了。" />
+    <MESSAGE value="new" />
+    <option name="LAST_COMMIT_MESSAGE" value="new" />
   </component>
   <component name="WindowStateProjectService">
     <state x="574" y="117" key="#com.intellij.ide.util.MemberChooser" timestamp="1621605338779">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="574" y="117" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1621605338779" />
-    <state width="1493" height="298" key="GridCell.Tab.0.bottom" timestamp="1621782236665">
+    <state x="549" y="166" key="FileChooserDialogImpl" timestamp="1621788596289">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="298" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1621782236665" />
-    <state width="1493" height="298" key="GridCell.Tab.0.center" timestamp="1621782236664">
+    <state x="549" y="166" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1621788596289" />
+    <state width="746" height="298" key="GridCell.Tab.0.bottom" timestamp="1621789097749">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="298" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1621782236664" />
-    <state width="1493" height="298" key="GridCell.Tab.0.left" timestamp="1621782236664">
+    <state width="746" height="298" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1621789097749" />
+    <state width="746" height="298" key="GridCell.Tab.0.center" timestamp="1621789097749">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="298" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1621782236664" />
-    <state width="1493" height="298" key="GridCell.Tab.0.right" timestamp="1621782236664">
+    <state width="746" height="298" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1621789097749" />
+    <state width="746" height="298" key="GridCell.Tab.0.left" timestamp="1621789097749">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="298" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1621782236664" />
-    <state x="574" y="325" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1621782227071">
+    <state width="746" height="298" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1621789097749" />
+    <state width="746" height="298" key="GridCell.Tab.0.right" timestamp="1621789097749">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="574" y="325" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824@0.0.1536.824" timestamp="1621782227071" />
+    <state width="746" height="298" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1621789097749" />
+    <state x="270" y="56" key="SettingsEditor" timestamp="1621789044498">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="270" y="56" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1621789044498" />
+    <state x="228" y="142" width="972" height="534" key="Vcs.Push.Dialog.v2" timestamp="1621789059415">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="228" y="142" width="972" height="534" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1621789059415" />
+    <state x="574" y="325" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1621783767703">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="574" y="325" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824@0.0.1536.824" timestamp="1621783767703" />
+    <state x="555" y="311" key="git4idea.remote.GitConfigureRemotesDialog" timestamp="1621782981128">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="555" y="311" key="git4idea.remote.GitConfigureRemotesDialog/0.0.1536.824@0.0.1536.824" timestamp="1621782981128" />
     <state x="425" y="187" width="672" height="677" key="run.anything.popup" timestamp="1621606723800">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
