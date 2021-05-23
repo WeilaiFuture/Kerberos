@@ -40,62 +40,62 @@ public class StateMachineConfig extends EnumStateMachineConfigurerAdapter<RegSta
                 // 指定状态机的所有状态
                 .states(EnumSet.allOf(RegStatusEnum.class));
     }
-    /* @Override
-  *  public void configure(StateMachineConfigurationConfigurer<RegStatusEnum,RegEventEnum> config) throws Exception {
+     @Override
+    public void configure(StateMachineConfigurationConfigurer<RegStatusEnum,RegEventEnum> config) throws Exception {
          config
                  .withConfiguration()
                  .machineId("mymachine");
      }
-  */   /**
+     /**
       * 配置状态机状态转换
       */
     @Override
     public void configure(StateMachineTransitionConfigurer<RegStatusEnum,RegEventEnum> transitions) throws Exception {
                 // 1.
         transitions
-                .withExternal().source(WAITINFO).target(HEADOVER).event(RECIVE).action(recive(Application.message))
+                .withExternal().source(WAITINFO).target(HEADOVER).event(RECIVE)//.action(recive(Application.message))
                 // 2.
-                .and().withExternal().source(WAITINFO).target(EXIT).event(TIMEOUT).action(timeout())
+                .and().withExternal().source(WAITINFO).target(EXIT).event(TIMEOUT)//.action(timeout())
                 // 3.
-                .and().withExternal().source(HEADOVER).target(HANDLER1001).event(HEAD1001).action(head1001())
+                .and().withExternal().source(HEADOVER).target(HANDLER1001).event(HEAD1001)//.action(head1001())
                 // 4.
-                .and().withExternal().source(HEADOVER).target(HANDLER1002).event(HEAD1002).action(head1002())
+                .and().withExternal().source(HEADOVER).target(HANDLER1002).event(HEAD1002)//.action(head1002())
                 // 5.
-                .and().withExternal().source(HEADOVER).target(HANDLER1003).event(HEAD1003).action(head1003())
+                .and().withExternal().source(HEADOVER).target(HANDLER1003).event(HEAD1003)//.action(head1003())
                 // 6.
-                .and().withExternal().source(HEADOVER).target(HANDLER1006).event(HEAD1006).action(head1006())
+                .and().withExternal().source(HEADOVER).target(HANDLER1006).event(HEAD1006)//.action(head1006())
                 // 7.
-                .and().withExternal().source(HEADOVER).target(HANDLER1007).event(HEAD1007).action(head1007())
+                .and().withExternal().source(HEADOVER).target(HANDLER1007).event(HEAD1007)//.action(head1007())
                 // 8.
-                .and().withExternal().source(HEADOVER).target(EXIT).event(HEAD1008).action(head1008())
+                .and().withExternal().source(HEADOVER).target(EXIT).event(HEAD1008)//.action(head1008())
                 // 9.
-                .and().withExternal().source(HEADOVER).target(HANDLER1009).event(HEAD1009).action(head1009())
+                .and().withExternal().source(HEADOVER).target(HANDLER1009).event(HEAD1009)//.action(head1009())
                 // 10.
-                .and().withExternal().source(HEADOVER).target(HANDLER1010).event(HEAD1010).action(head1010())
+                .and().withExternal().source(HEADOVER).target(HANDLER1010).event(HEAD1010)//.action(head1010())
                 // 11.
-                .and().withExternal().source(HEADOVER).target(HANDLER2001).event(HEAD2001).action(head2001())
+                .and().withExternal().source(HEADOVER).target(HANDLER2001).event(HEAD2001)//.action(head2001())
                 // 12.
-                .and().withExternal().source(HEADOVER).target(HANDLER2002).event(HEAD2002).action(head2002())
+                .and().withExternal().source(HEADOVER).target(HANDLER2002).event(HEAD2002)//.action(head2002())
                 // 13.
-                .and().withExternal().source(HANDLER1001).target(WAITINFO).event(HANDLEROVER).action(handlerover())
+                .and().withExternal().source(HANDLER1001).target(WAITINFO).event(HANDLEROVER)//.action(handlerover())
                 // 14.
-                .and().withExternal().source(HANDLER1002).target(WAITINFO).event(HANDLEROVER).action(handlerover())
+                .and().withExternal().source(HANDLER1002).target(WAITINFO).event(HANDLEROVER)//.action(handlerover())
                 // 15.
-                .and().withExternal().source(HANDLER1003).target(WAITINFO).event(HANDLEROVER).action(handlerover())
+                .and().withExternal().source(HANDLER1003).target(WAITINFO).event(HANDLEROVER)//.action(handlerover())
                 // 16.
-                .and().withExternal().source(HANDLER1006).target(WAITINFO).event(HANDLEROVER).action(handlerover())
+                .and().withExternal().source(HANDLER1006).target(WAITINFO).event(HANDLEROVER)//.action(handlerover())
                 // 17.
-                .and().withExternal().source(HANDLER1007).target(WAITINFO).event(HANDLEROVER).action(handlerover())
+                .and().withExternal().source(HANDLER1007).target(WAITINFO).event(HANDLEROVER)//.action(handlerover())
                 // 18.
-                .and().withExternal().source(HANDLER1009).target(WAITINFO).event(HANDLEROVER).action(handlerover())
+                .and().withExternal().source(HANDLER1009).target(WAITINFO).event(HANDLEROVER)//.action(handlerover())
                 // 19.
-                .and().withExternal().source(HANDLER1010).target(WAITINFO).event(HANDLEROVER).action(handlerover())
+                .and().withExternal().source(HANDLER1010).target(WAITINFO).event(HANDLEROVER)//.action(handlerover())
                 // 20.
-                .and().withExternal().source(HANDLER2001).target(WAITINFO).event(HANDLEROVER).action(handlerover())
+                .and().withExternal().source(HANDLER2001).target(WAITINFO).event(HANDLEROVER)//.action(handlerover())
                 // 21.
-                .and().withExternal().source(HANDLER2002).target(WAITINFO).event(HANDLEROVER).action(handlerover());
+                .and().withExternal().source(HANDLER2002).target(WAITINFO).event(HANDLEROVER);//.action(handlerover());
     }
-    
+ /*
     public Action<RegStatusEnum,RegEventEnum> recive(Message<RegEventEnum> message) {
         return new Action<RegStatusEnum,RegEventEnum>() {
             @Override
@@ -224,6 +224,6 @@ public class StateMachineConfig extends EnumStateMachineConfigurerAdapter<RegSta
             }
         };
     }
-
+*/
 
 }

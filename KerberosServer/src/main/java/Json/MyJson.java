@@ -4,6 +4,14 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.annotation.JSONField;
 
 public class MyJson {
+   //报文解析
+    public static MyStruct ToStruct(String message){
+        //获取报文
+        MyJson.Order order =MyJson.StringToOrder(message);
+        //获取消息
+        MyStruct mystruct=MyJson.StringToStruct(order.getExtend());
+        return mystruct;
+    }
     //序列化
     public static String OrderToString(Order order){
         String jsonOutput= JSON.toJSONString(order);
