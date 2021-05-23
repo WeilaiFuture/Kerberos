@@ -20,7 +20,6 @@ public class EchoClientHandler extends ChannelInboundHandlerAdapter{
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
-
         logger.info("client channel active");
         // Send the message to Server
         logger.info("client send req...");
