@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -120,25 +119,7 @@ namespace Kerberos_Client.UI
         {
             Dispatcher.Invoke(new Action(delegate
             {
-                User temp = (sender as DataGrid).SelectedItem as User;
-                Image image = new Image();
-                BitmapImage bi = new BitmapImage();
-                string path = temp.Photo;
-
-                if (!File.Exists(path))
-                    path = @"../../Image_Source\未登录头象.png";
-                using (MemoryStream ms = new MemoryStream(File.ReadAllBytes(path)))
-                {
-                    bi = new BitmapImage();
-                    bi.BeginInit();
-                    bi.CacheOption = BitmapCacheOption.OnLoad;//设置缓存模式
-                    bi.StreamSource = ms;//通过StreamSource加载图片
-                    bi.EndInit();
-                    bi.Freeze();
-
-                }
-                image.Source = bi;
-                Chat_Window u = new Chat_Window(temp, image);
+                Chat_Window u = new Chat_Window(My_user, head_Image);
                 Thread newWindowThread = new Thread(() => ThreadStartingPoint(u));
                 newWindowThread.SetApartmentState(ApartmentState.STA);
                 newWindowThread.IsBackground = true;
