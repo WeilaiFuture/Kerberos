@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0e939090-7ab6-4bc6-875c-d0daf79ad1c7" name="Default Changelist" comment="">
+    <list default="true" id="0e939090-7ab6-4bc6-875c-d0daf79ad1c7" name="Default Changelist" comment="状态机添加 状态工厂">
+      <change afterPath="$PROJECT_DIR$/src/main/java/StateMachine/MessageData.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/StateMachine/StateMachineService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Json/MyJson.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Json/MyJson.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Json/MyStruct.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Json/MyStruct.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KerberosServer.iml" beforeDir="false" afterPath="$PROJECT_DIR$/KerberosServer.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/StateMachine/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/StateMachine/Application.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/StateMachine/StateMachineConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/StateMachine/StateMachineConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/StateMachine/StateMachineEventConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/StateMachine/StateMachineEventConfig.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/classes/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -24,8 +29,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/StateMachine/Application.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="376">
-              <caret line="29" column="39" lean-forward="true" selection-start-line="29" selection-start-column="39" selection-end-line="29" selection-end-column="39" />
+            <state relative-caret-position="186">
+              <caret line="38" column="6" selection-start-line="38" selection-start-column="6" selection-end-line="38" selection-end-column="6" />
             </state>
           </provider>
         </entry>
@@ -33,8 +38,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/Json/MyJson.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-270">
-              <caret line="24" column="22" lean-forward="true" selection-start-line="24" selection-start-column="22" selection-end-line="24" selection-end-column="22" />
+            <state relative-caret-position="-612">
+              <caret line="24" column="22" selection-start-line="24" selection-start-column="22" selection-end-line="24" selection-end-column="22" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -42,11 +47,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/Json/MyStruct.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="171">
-              <caret line="15" column="29" lean-forward="true" selection-start-line="15" selection-start-column="29" selection-end-line="15" selection-end-column="29" />
+            <state relative-caret-position="580">
+              <caret line="446" column="23" lean-forward="true" selection-start-line="446" selection-start-column="23" selection-end-line="446" selection-end-column="23" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="class#Certificate#0;class#MyStruct#0" />
@@ -60,40 +65,21 @@
                 <element signature="class#Message5#0;class#MyStruct#0" />
                 <element signature="class#Message6#0;class#MyStruct#0" />
                 <element signature="class#User#0;class#MyStruct#0" />
-                <element signature="class#Friend#0;class#MyStruct#0" />
-                <element signature="class#chat_Message#0;class#MyStruct#0" />
+                <element signature="e#8873#8874#0" expanded="true" />
+                <element signature="e#8905#8906#0" expanded="true" />
+                <element signature="e#8941#8942#0" expanded="true" />
+                <element signature="e#8975#8976#0" expanded="true" />
                 <element signature="class#Group#0;class#MyStruct#0" />
-                <element signature="e#10638#10639#0" expanded="true" />
-                <element signature="e#10673#10674#0" expanded="true" />
-                <element signature="class#record_Message#0;class#MyStruct#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/StateMachine/StateMachineConfig.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/StateMachine/StateMachineService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="95">
-              <caret line="20" selection-start-line="20" selection-end-line="20" selection-end-column="14" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/StateMachine/StateMachineEventConfig.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="95">
-              <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/Server/ServerDataBase.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="247">
-              <caret line="14" column="5" selection-start-line="14" selection-start-column="5" selection-end-line="14" selection-end-column="5" />
+            <state relative-caret-position="186">
+              <caret line="33" column="86" lean-forward="true" selection-start-line="33" selection-start-column="86" selection-end-line="33" selection-end-column="86" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -102,37 +88,89 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/Server/ServerFunction.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="171">
-              <caret line="9" column="43" lean-forward="true" selection-start-line="9" selection-start-column="43" selection-end-line="9" selection-end-column="43" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/Framework/FunctionSet.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/StateMachine/RegEventEnum.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="38">
-              <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+              <caret line="2" selection-start-line="2" selection-end-line="2" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/Framework/Severframework.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/StateMachine/RegStatusEnum.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-80">
-              <caret line="31" column="29" selection-start-line="31" selection-start-column="29" selection-end-line="31" selection-end-column="29" />
+            <state relative-caret-position="266">
+              <caret line="14" column="4" selection-start-line="14" selection-start-column="4" selection-end-line="14" selection-end-column="4" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/StateMachine/StateMachineConfig.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1003">
+              <caret line="116" column="10" lean-forward="true" selection-start-line="116" selection-start-column="10" selection-end-line="116" selection-end-column="10" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/Server/ServerHandler.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/StateMachine/MessageData.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="209">
-              <caret line="11" column="11" lean-forward="true" selection-start-line="11" selection-start-column="11" selection-end-line="11" selection-end-column="11" />
+            <state relative-caret-position="76">
+              <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/StateMachine/StateMachineEventConfig.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="190">
+              <caret line="14" column="26" lean-forward="true" selection-start-line="14" selection-start-column="26" selection-end-line="14" selection-end-column="26" />
+              <folding>
+                <element signature="e#554#555#0" expanded="true" />
+                <element signature="e#639#640#0" expanded="true" />
+                <element signature="e#694#695#0" expanded="true" />
+                <element signature="e#787#788#0" expanded="true" />
+                <element signature="e#845#846#0" expanded="true" />
+                <element signature="e#938#939#0" expanded="true" />
+                <element signature="e#996#997#0" expanded="true" />
+                <element signature="e#1089#1090#0" expanded="true" />
+                <element signature="e#1144#1145#0" expanded="true" />
+                <element signature="e#1237#1238#0" expanded="true" />
+                <element signature="e#1292#1293#0" expanded="true" />
+                <element signature="e#1385#1386#0" expanded="true" />
+                <element signature="e#1440#1441#0" expanded="true" />
+                <element signature="e#1526#1527#0" expanded="true" />
+                <element signature="e#1581#1582#0" expanded="true" />
+                <element signature="e#1674#1675#0" expanded="true" />
+                <element signature="e#1729#1730#0" expanded="true" />
+                <element signature="e#1822#1823#0" expanded="true" />
+                <element signature="e#1878#1879#0" expanded="true" />
+                <element signature="e#1971#1972#0" expanded="true" />
+                <element signature="e#2027#2028#0" expanded="true" />
+                <element signature="e#2119#2120#0" expanded="true" />
+                <element signature="e#2175#2176#0" expanded="true" />
+                <element signature="e#2268#2269#0" expanded="true" />
+                <element signature="e#2326#2327#0" expanded="true" />
+                <element signature="e#2419#2420#0" expanded="true" />
+                <element signature="e#2474#2475#0" expanded="true" />
+                <element signature="e#2567#2568#0" expanded="true" />
+                <element signature="e#2622#2623#0" expanded="true" />
+                <element signature="e#2715#2716#0" expanded="true" />
+                <element signature="e#2770#2771#0" expanded="true" />
+                <element signature="e#2863#2864#0" expanded="true" />
+                <element signature="e#2918#2919#0" expanded="true" />
+                <element signature="e#3011#3012#0" expanded="true" />
+                <element signature="e#3066#3067#0" expanded="true" />
+                <element signature="e#3159#3160#0" expanded="true" />
+                <element signature="e#3215#3216#0" expanded="true" />
+                <element signature="e#3308#3309#0" expanded="true" />
+                <element signature="e#3364#3365#0" expanded="true" />
+                <element signature="e#3457#3458#0" expanded="true" />
+                <element signature="e#3513#3514#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -151,9 +189,19 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>string</find>
+      <find>HEADOVER&quot;&quot;</find>
+      <find>&quot;&quot;</find>
+      <find>TurnstileEvents</find>
+      <find>@Bean</find>
     </findStrings>
     <replaceStrings>
       <replace>String</replace>
+      <replace>&quot;HEADOVER&quot;</replace>
+      <replace>&quot;</replace>
+      <replace>&quot;,</replace>
+      <replace>&quot;,&quot;</replace>
+      <replace>RegEventEnum</replace>
+      <replace>.</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -180,13 +228,14 @@
         <option value="$PROJECT_DIR$/src/main/java/StateMachine/start.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/java/Json/JsonInterface.java" />
-        <option value="$PROJECT_DIR$/src/main/java/StateMachine/StateMachineEventConfig.java" />
-        <option value="$PROJECT_DIR$/src/main/java/StateMachine/StateMachineConfig.java" />
         <option value="$PROJECT_DIR$/src/main/java/StateMachine/RegEventEnum.java" />
-        <option value="$PROJECT_DIR$/src/main/java/StateMachine/RegStatusEnum.java" />
         <option value="$PROJECT_DIR$/src/main/java/Json/MyJson.java" />
-        <option value="$PROJECT_DIR$/src/main/java/StateMachine/Application.java" />
+        <option value="$PROJECT_DIR$/src/main/java/StateMachine/RegStatusEnum.java" />
+        <option value="$PROJECT_DIR$/src/main/java/StateMachine/StateMachineEventConfig.java" />
         <option value="$PROJECT_DIR$/src/main/java/Json/MyStruct.java" />
+        <option value="$PROJECT_DIR$/src/main/java/StateMachine/StateMachineService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/StateMachine/Application.java" />
+        <option value="$PROJECT_DIR$/src/main/java/StateMachine/StateMachineConfig.java" />
       </list>
     </option>
   </component>
@@ -380,7 +429,7 @@
       <workItem from="1621302802866" duration="1973000" />
       <workItem from="1621473111774" duration="7901000" />
       <workItem from="1621559713641" duration="6053000" />
-      <workItem from="1621646463380" duration="2126000" />
+      <workItem from="1621646463380" duration="23278000" />
     </task>
     <task id="LOCAL-00001" summary="创建IDEA项目">
       <created>1620305582799</created>
@@ -452,11 +501,18 @@
       <option name="project" value="LOCAL" />
       <updated>1621606306795</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="完善Json功能（更改MyStruct）。">
+      <created>1621648696997</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1621648696997</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="51296000" />
+    <option name="totallyTimeSpent" value="72448000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
@@ -472,8 +528,8 @@
       <window_info id="Web" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.329927" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49932525" weight="0.44671533" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.7620438" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49932525" weight="0.5649635" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.8029197" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -551,49 +607,11 @@
     <MESSAGE value="添加状态、事件enum" />
     <MESSAGE value="添加Json结构体，&#10;完善状态机框架。" />
     <MESSAGE value="添加Json结构体，&#10;完善状态机框架。&#10;2" />
-    <option name="LAST_COMMIT_MESSAGE" value="添加Json结构体，&#10;完善状态机框架。&#10;2" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/StateMachine/Application.java</url>
-          <line>35</line>
-          <properties />
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="完善Json功能（更改MyStruct）。" />
+    <MESSAGE value="状态机添加 状态工厂" />
+    <option name="LAST_COMMIT_MESSAGE" value="状态机添加 状态工厂" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/Kerberos/TCP.java" />
-    <entry file="file://$PROJECT_DIR$/KerberosServer.iml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Kerberos/AS.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Server/ServerSecurity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="532">
-          <caret line="28" column="24" selection-start-line="28" selection-start-column="24" selection-end-line="28" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Kerberos/TGS.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="38">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Communication/Communication.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="38">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Framework/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="38">
@@ -630,29 +648,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="182">
           <caret line="38" selection-start-line="38" selection-end-line="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-messaging/4.2.7.RELEASE/spring-messaging-4.2.7.RELEASE.jar!/org/springframework/messaging/support/MessageBuilder.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="93" selection-start-line="93" selection-end-line="93" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-messaging/4.2.7.RELEASE/spring-messaging-4.2.7.RELEASE.jar!/org/springframework/messaging/support/MessageHeaderAccessor.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="95" selection-start-line="95" selection-end-line="95" />
-          <folding>
-            <element signature="e#1450#1451#0" expanded="true" />
-            <element signature="e#1530#1531#0" expanded="true" />
-            <element signature="e#2968#2969#0" expanded="true" />
-            <element signature="e#12806#12807#0" expanded="true" />
-            <element signature="e#12845#12846#0" expanded="true" />
-            <element signature="e#12914#12915#0" expanded="true" />
-            <element signature="e#12987#12988#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -716,13 +711,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-core/4.2.7.RELEASE/spring-core-4.2.7.RELEASE-sources.jar!/org/springframework/util/StringUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="1157" selection-start-line="1157" selection-end-line="1157" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-beans/4.2.7.RELEASE/spring-beans-4.2.7.RELEASE.jar!/org/springframework/beans/factory/support/DefaultListableBeanFactory.class">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -737,28 +725,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="201">
           <caret line="69" selection-start-line="69" selection-end-line="69" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/statemachine/spring-statemachine-core/1.2.0.RELEASE/spring-statemachine-core-1.2.0.RELEASE-sources.jar!/org/springframework/statemachine/support/AbstractStateMachine.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="363" selection-start-line="363" selection-end-line="363" />
-          <folding>
-            <element signature="e#8806#8807#0" expanded="true" />
-            <element signature="e#8872#8873#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/statemachine/spring-statemachine-core/1.2.0.RELEASE/spring-statemachine-core-1.2.0.RELEASE-sources.jar!/org/springframework/statemachine/support/LifecycleObjectSupport.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="116">
-          <caret line="120" selection-start-line="120" selection-end-line="120" />
-          <folding>
-            <element signature="e#4841#4842#0" expanded="true" />
-            <element signature="e#4866#4867#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -798,13 +764,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Server/ServerData.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="9" column="11" selection-start-line="9" selection-start-column="11" selection-end-line="9" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Server/ServerResponse.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="114">
@@ -819,34 +778,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/StateMachine/RegEventEnum.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="38">
-          <caret line="2" column="12" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/StateMachine/RegStatusEnum.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="38">
-          <caret line="2" column="12" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/StateMachine/StateMachineConfig.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="20" selection-start-line="20" selection-end-line="20" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/StateMachine/StateMachineEventConfig.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Server/ServerDataBase.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="247">
@@ -854,13 +785,6 @@
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/StateMachine/Application.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="376">
-          <caret line="29" column="39" lean-forward="true" selection-start-line="29" selection-start-column="39" selection-end-line="29" selection-end-column="39" />
         </state>
       </provider>
     </entry>
@@ -878,34 +802,174 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Server/ServerFunction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="9" column="43" selection-start-line="9" selection-start-column="43" selection-end-line="9" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Server/ServerData.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="9" column="11" selection-start-line="9" selection-start-column="11" selection-end-line="9" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk-11.0.10/lib/src.zip!/java.base/java/util/function/Consumer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="48" column="9" selection-start-line="48" selection-start-column="9" selection-end-line="48" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/statemachine/spring-statemachine-core/1.2.0.RELEASE/spring-statemachine-core-1.2.0.RELEASE-sources.jar!/org/springframework/statemachine/support/LifecycleObjectSupport.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="33">
+          <caret line="115" selection-start-line="115" selection-end-line="115" />
+          <folding>
+            <element signature="e#4841#4842#0" expanded="true" />
+            <element signature="e#4866#4867#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-core/4.2.7.RELEASE/spring-core-4.2.7.RELEASE-sources.jar!/org/springframework/util/StringUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="138">
+          <caret line="115" selection-start-line="115" selection-end-line="115" />
+          <folding>
+            <element signature="e#3587#3588#0" expanded="true" />
+            <element signature="e#3634#3635#0" expanded="true" />
+            <element signature="e#4130#4131#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-core/4.2.7.RELEASE/spring-core-4.2.7.RELEASE-sources.jar!/org/springframework/util/Assert.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="141" selection-start-line="141" selection-end-line="141" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-core/4.2.7.RELEASE/spring-core-4.2.7.RELEASE-sources.jar!/org/springframework/util/MimeType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="138">
+          <caret line="122" selection-start-line="122" selection-end-line="122" />
+          <folding>
+            <element signature="e#3511#3512#0" expanded="true" />
+            <element signature="e#3547#3563#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-messaging/4.2.7.RELEASE/spring-messaging-4.2.7.RELEASE.jar!/org/springframework/messaging/support/MessageHeaderAccessor.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="128">
+          <caret line="359" selection-start-line="359" selection-end-line="359" />
+          <folding>
+            <element signature="e#2913#2914#0" expanded="true" />
+            <element signature="e#2968#2969#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-messaging/4.2.7.RELEASE/spring-messaging-4.2.7.RELEASE.jar!/org/springframework/messaging/support/MessageBuilder.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="99">
+          <caret line="103" selection-start-line="103" selection-end-line="103" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/statemachine/spring-statemachine-core/1.2.0.RELEASE/spring-statemachine-core-1.2.0.RELEASE-sources.jar!/org/springframework/statemachine/support/AbstractStateMachine.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="213">
+          <caret line="247" selection-start-line="247" selection-end-line="247" />
+          <folding>
+            <element signature="e#8872#8873#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="uml://SPRING/mappedClass=StateMachine.StateMachineEventConfig">
+      <provider selected="true" editor-type-id="UmlEditorProvider">
+        <state>
+          <ID>SPRING</ID>
+          <OriginalElement>mappedClass=StateMachine.StateMachineEventConfig</OriginalElement>
+          <nodes>
+            <node x="" y="">module=KerberosServer;bean_class=StateMachine.StateMachineConfig;bean_name=stateMachineConfig</node>
+            <node x="" y="">module=KerberosServer;bean_class=org.springframework.statemachine.config.configuration.StateMachineConfigurationImportSelector;bean_name=stateMachineConfigurationImportSelector</node>
+            <node x="" y="">module=KerberosServer;bean_class=org.springframework.statemachine.config.configuration.StateMachineCommonConfiguration;bean_name=stateMachineCommonConfiguration</node>
+            <node x="" y="">module=KerberosServer;bean_class=org.springframework.core.task.TaskExecutor;bean_name=stateMachineTaskExecutor</node>
+            <node x="" y="">module=KerberosServer;bean_class=org.springframework.scheduling.TaskScheduler;bean_name=taskScheduler</node>
+            <node x="" y="">module=KerberosServer;bean_class=org.springframework.statemachine.config.configuration.StateMachineHandlerApplicationListener;bean_name=stateMachineHandlerApplicationListener</node>
+            <node x="" y="">module=KerberosServer;bean_class=org.springframework.statemachine.config.configuration.StateMachineFactoryConfiguration;bean_name=stateMachineFactoryConfiguration</node>
+            <node x="" y="">module=KerberosServer;bean_class=org.springframework.statemachine.config.common.annotation.configuration.ObjectPostProcessorConfiguration;bean_name=objectPostProcessorConfiguration</node>
+            <node x="" y="">module=KerberosServer;bean_class=org.springframework.statemachine.config.common.annotation.ObjectPostProcessor;bean_name=org.springframework.statemachine.config.common.annotation.configuration.objectPostProcessor</node>
+            <node x="" y="">module=KerberosServer;bean_class=org.springframework.statemachine.config.configuration.StateMachineAnnotationPostProcessorConfiguration;bean_name=stateMachineAnnotationPostProcessorConfiguration</node>
+            <node x="" y="">module=KerberosServer;bean_class=org.springframework.statemachine.processor.StateMachineAnnotationPostProcessor;bean_name=org.springframework.statemachine.processor.stateMachineAnnotationPostProcessor</node>
+            <node x="" y="">module=KerberosServer;bean_class=StateMachine.StateMachineEventConfig;bean_name=stateMachineEventConfig</node>
+            <node x="" y="">module=KerberosServer;bean_class=org.springframework.core.env.Environment;bean_name=environment</node>
+            <node x="" y="">module=KerberosServer;bean_class=org.springframework.core.env.PropertyResolver;bean_name=propertyResolver</node>
+            <node x="" y="">module=KerberosServer;bean_class=org.springframework.core.convert.ConversionService;bean_name=conversionService</node>
+            <node x="" y="">module=KerberosServer;bean_class=org.springframework.boot.ApplicationArguments;bean_name=springApplicationArguments</node>
+            <node x="" y="">module=KerberosServer;bean_class=StateMachine.Application;bean_name=application</node>
+            <node x="" y="">module=KerberosServer;bean_class=org.springframework.boot.autoconfigure.dao.PersistenceExceptionTranslationAutoConfiguration;bean_name=persistenceExceptionTranslationAutoConfiguration</node>
+            <node x="" y="">module=KerberosServer;bean_class=org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;bean_name=persistenceExceptionTranslationPostProcessor</node>
+            <node x="" y="">module=KerberosServer;bean_class=org.springframework.boot.autoconfigure.transaction.TransactionAutoConfiguration;bean_name=transactionAutoConfiguration</node>
+            <node x="" y="">module=KerberosServer;bean_class=org.springframework.transaction.support.TransactionTemplate;bean_name=transactionTemplate</node>
+            <node x="" y="">module=KerberosServer;bean_class=org.springframework.boot.autoconfigure.cache.CacheAutoConfiguration;bean_name=cacheAutoConfiguration</node>
+            <node x="" y="">module=KerberosServer;bean_class=org.springframework.boot.autoconfigure.cache.CacheManagerCustomizers;bean_name=cacheManagerCustomizers</node>
+            <node x="" y="">module=KerberosServer;bean_class=org.springframework.boot.autoconfigure.cache.CacheAutoConfiguration.CacheConfigurationImportSelector;bean_name=cacheConfigurationImportSelector</node>
+            <node x="" y="">module=KerberosServer;bean_class=org.springframework.boot.autoconfigure.cache.CacheAutoConfiguration.CacheManagerValidatorPostProcessor;bean_name=cacheAutoConfigurationValidatorPostProcessor</node>
+            <node x="" y="">module=KerberosServer;bean_class=org.springframework.boot.autoconfigure.cache.CacheAutoConfiguration.CacheManagerValidator;bean_name=cacheAutoConfigurationValidator</node>
+            <node x="" y="">module=KerberosServer;bean_class=org.springframework.boot.autoconfigure.cache.CacheProperties;bean_name=spring.cache.CONFIGURATION_PROPERTIES</node>
+            <node x="" y="">module=KerberosServer;bean_class=org.springframework.cache.concurrent.ConcurrentMapCacheManager;bean_name=cacheManager</node>
+            <node x="" y="">module=KerberosServer;bean_class=org.springframework.boot.autoconfigure.cache.SimpleCacheConfiguration;bean_name=simpleCacheConfiguration</node>
+            <node x="" y="">module=KerberosServer;bean_class=org.springframework.boot.context.properties.EnableConfigurationPropertiesImportSelector;bean_name=enableConfigurationPropertiesImportSelector</node>
+            <node x="" y="">module=KerberosServer;bean_class=org.springframework.boot.autoconfigure.PropertyPlaceholderAutoConfiguration;bean_name=propertyPlaceholderAutoConfiguration</node>
+            <node x="" y="">module=KerberosServer;bean_class=org.springframework.context.support.PropertySourcesPlaceholderConfigurer;bean_name=propertySourcesPlaceholderConfigurer</node>
+            <node x="" y="">module=KerberosServer;bean_class=org.springframework.boot.autoconfigure.MessageSourceAutoConfiguration;bean_name=messageSourceAutoConfiguration</node>
+            <node x="" y="">module=KerberosServer;bean_class=org.springframework.context.MessageSource;bean_name=messageSource</node>
+            <node x="" y="">module=KerberosServer;bean_class=org.springframework.boot.autoconfigure.jmx.JmxAutoConfiguration;bean_name=jmxAutoConfiguration</node>
+            <node x="" y="">module=KerberosServer;bean_class=org.springframework.jmx.export.annotation.AnnotationMBeanExporter;bean_name=mbeanExporter</node>
+            <node x="" y="">module=KerberosServer;bean_class=org.springframework.boot.autoconfigure.jmx.ParentAwareNamingStrategy;bean_name=objectNamingStrategy</node>
+            <node x="" y="">module=KerberosServer;bean_class=javax.management.MBeanServer;bean_name=mbeanServer</node>
+            <node x="" y="">module=KerberosServer;bean_class=org.springframework.boot.autoconfigure.context.ConfigurationPropertiesAutoConfiguration;bean_name=configurationPropertiesAutoConfiguration</node>
+          </nodes>
+          <notes />
+          <edges />
+          <settings layout="Hierarchic Group" zoom="0.6634703196347032" x="790.1786854228685" y="454.97935306262906" />
+          <SelectedNodes />
+          <Categories>
+            <Category>Local context</Category>
+            <Category>Properties</Category>
+          </Categories>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Server/ServerHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="86" column="21" lean-forward="true" selection-start-line="86" selection-start-column="21" selection-end-line="86" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Json/MyJson.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-270">
-          <caret line="24" column="22" lean-forward="true" selection-start-line="24" selection-start-column="22" selection-end-line="24" selection-end-column="22" />
+        <state relative-caret-position="-612">
+          <caret line="24" column="22" selection-start-line="24" selection-start-column="22" selection-end-line="24" selection-end-column="22" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Server/ServerFunction.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="9" column="43" lean-forward="true" selection-start-line="9" selection-start-column="43" selection-end-line="9" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Server/ServerHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="11" column="11" lean-forward="true" selection-start-line="11" selection-start-column="11" selection-end-line="11" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Json/MyStruct.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="15" column="29" lean-forward="true" selection-start-line="15" selection-start-column="29" selection-end-line="15" selection-end-column="29" />
+        <state relative-caret-position="580">
+          <caret line="446" column="23" lean-forward="true" selection-start-line="446" selection-start-column="23" selection-end-line="446" selection-end-column="23" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="class#Certificate#0;class#MyStruct#0" />
@@ -919,13 +983,114 @@
             <element signature="class#Message5#0;class#MyStruct#0" />
             <element signature="class#Message6#0;class#MyStruct#0" />
             <element signature="class#User#0;class#MyStruct#0" />
-            <element signature="class#Friend#0;class#MyStruct#0" />
-            <element signature="class#chat_Message#0;class#MyStruct#0" />
+            <element signature="e#8873#8874#0" expanded="true" />
+            <element signature="e#8905#8906#0" expanded="true" />
+            <element signature="e#8941#8942#0" expanded="true" />
+            <element signature="e#8975#8976#0" expanded="true" />
             <element signature="class#Group#0;class#MyStruct#0" />
-            <element signature="e#10638#10639#0" expanded="true" />
-            <element signature="e#10673#10674#0" expanded="true" />
-            <element signature="class#record_Message#0;class#MyStruct#0" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/StateMachine/RegEventEnum.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="38">
+          <caret line="2" selection-start-line="2" selection-end-line="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/StateMachine/RegStatusEnum.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="266">
+          <caret line="14" column="4" selection-start-line="14" selection-start-column="4" selection-end-line="14" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/StateMachine/MessageData.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="76">
+          <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/StateMachine/StateMachineService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="186">
+          <caret line="33" column="86" lean-forward="true" selection-start-line="33" selection-start-column="86" selection-end-line="33" selection-end-column="86" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/StateMachine/StateMachineEventConfig.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="14" column="26" lean-forward="true" selection-start-line="14" selection-start-column="26" selection-end-line="14" selection-end-column="26" />
+          <folding>
+            <element signature="e#554#555#0" expanded="true" />
+            <element signature="e#639#640#0" expanded="true" />
+            <element signature="e#694#695#0" expanded="true" />
+            <element signature="e#787#788#0" expanded="true" />
+            <element signature="e#845#846#0" expanded="true" />
+            <element signature="e#938#939#0" expanded="true" />
+            <element signature="e#996#997#0" expanded="true" />
+            <element signature="e#1089#1090#0" expanded="true" />
+            <element signature="e#1144#1145#0" expanded="true" />
+            <element signature="e#1237#1238#0" expanded="true" />
+            <element signature="e#1292#1293#0" expanded="true" />
+            <element signature="e#1385#1386#0" expanded="true" />
+            <element signature="e#1440#1441#0" expanded="true" />
+            <element signature="e#1526#1527#0" expanded="true" />
+            <element signature="e#1581#1582#0" expanded="true" />
+            <element signature="e#1674#1675#0" expanded="true" />
+            <element signature="e#1729#1730#0" expanded="true" />
+            <element signature="e#1822#1823#0" expanded="true" />
+            <element signature="e#1878#1879#0" expanded="true" />
+            <element signature="e#1971#1972#0" expanded="true" />
+            <element signature="e#2027#2028#0" expanded="true" />
+            <element signature="e#2119#2120#0" expanded="true" />
+            <element signature="e#2175#2176#0" expanded="true" />
+            <element signature="e#2268#2269#0" expanded="true" />
+            <element signature="e#2326#2327#0" expanded="true" />
+            <element signature="e#2419#2420#0" expanded="true" />
+            <element signature="e#2474#2475#0" expanded="true" />
+            <element signature="e#2567#2568#0" expanded="true" />
+            <element signature="e#2622#2623#0" expanded="true" />
+            <element signature="e#2715#2716#0" expanded="true" />
+            <element signature="e#2770#2771#0" expanded="true" />
+            <element signature="e#2863#2864#0" expanded="true" />
+            <element signature="e#2918#2919#0" expanded="true" />
+            <element signature="e#3011#3012#0" expanded="true" />
+            <element signature="e#3066#3067#0" expanded="true" />
+            <element signature="e#3159#3160#0" expanded="true" />
+            <element signature="e#3215#3216#0" expanded="true" />
+            <element signature="e#3308#3309#0" expanded="true" />
+            <element signature="e#3364#3365#0" expanded="true" />
+            <element signature="e#3457#3458#0" expanded="true" />
+            <element signature="e#3513#3514#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-beans/4.2.7.RELEASE/spring-beans-4.2.7.RELEASE.jar!/org/springframework/beans/factory/support/AbstractAutowireCapableBeanFactory.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1115">
+          <caret line="1074" selection-start-line="1074" selection-end-line="1074" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/StateMachine/Application.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="186">
+          <caret line="38" column="6" selection-start-line="38" selection-start-column="6" selection-end-line="38" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/StateMachine/StateMachineConfig.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1003">
+          <caret line="116" column="10" lean-forward="true" selection-start-line="116" selection-start-column="10" selection-end-line="116" selection-end-column="10" />
         </state>
       </provider>
     </entry>
