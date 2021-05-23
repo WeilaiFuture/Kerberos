@@ -41,9 +41,9 @@
                     <EllipseGeometry RadiusX="100" RadiusY="100" Center="100,100"/>
                 </Image.Clip>
             </Image>
-            <TextBlock x:Name="Uname_TextBlock" Height="41"  Opacity="0.6"  Text="{Binding Source=Uname,StringFormat={}昵称:{0}}" Margin="48,249,49.6,180.4" ></TextBlock>
-            <TextBlock x:Name="Uid_TX" Height="41"  Opacity="0.6"  Text="{Binding Source=Uid,StringFormat={}账号:{0}}" Margin="48,312,9.6,117.4" ></TextBlock>
-            <TextBlock x:Name="Email_TX" Height="41"  Opacity="0.6"  Text="{Binding Source=Email,StringFormat={}邮箱:{0}}" Margin="48,379,49.6,50.4" ></TextBlock>
+            <TextBlock x:Name="Uname_TextBlock" Height="41"  Opacity="0.6"  Margin="10,244,87.6,185.4" ></TextBlock>
+            <TextBlock x:Name="Uid_TX" Height="41"  Opacity="0.6"   Margin="10,312,9.6,117.4" ></TextBlock>
+            <TextBlock x:Name="Email_TX" Height="41"  Opacity="0.6"   Margin="10,379,9.6,50.4" ></TextBlock>
         </Grid>
     </Grid>
 </Window>
