@@ -7,8 +7,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.LinkedList;
 
-import static Framework.SessionLayer.SessionLayer.bindChannelWithTempName;
-import static Framework.SessionLayer.SessionLayer.send;
+import static Framework.SessionLayer.SessionLayer.*;
 import static Server.ServerDataBase.*;
 
 public class ServerHandler {
@@ -16,7 +15,6 @@ public class ServerHandler {
         包含所有收到的报文
     */
 
-    private Logger logger = LoggerFactory.getLogger(getClass());
     public static boolean Certif(String message){
         /*
         head=0001;
@@ -69,6 +67,7 @@ public class ServerHandler {
          */
         //获取报文
         MyJson.Order order =MyJson.StringToOrder(message);
+        //解密操作
         //获取消息
         MyStruct mystruct=MyJson.StringToStruct(order.getExtend());
         //存入数据库
@@ -76,7 +75,12 @@ public class ServerHandler {
         //更改ACK
         order.setStatusReport(true);
         //发送
-
+        order.setDst(order.getSrc());
+        String sstruct=MyJson.StructToString(mystruct);
+        //加密操作
+        order.setExtend(sstruct);
+        String sorder=MyJson.OrderToString(order);
+        send(order.getDst(),sorder);
         return false;
     }
     static public boolean searchFriendList(String message){
@@ -91,8 +95,16 @@ public class ServerHandler {
         //获取消息
         MyStruct mystruct=MyJson.StringToStruct(order.getExtend());
         //查询数据库
-        LinkedList<MyStruct.Friend> friends=rFriendList(order.getSrc());
+        mystruct.friendlist.setFriends(rFriendList(order.getSrc()));
         //发送
+        order.setDst(order.getSrc());
+        order.setMsgType("1004");
+        order.setDst(order.getSrc());
+        String sstruct=MyJson.StructToString(mystruct);
+        //加密操作
+        order.setExtend(sstruct);
+        String sorder=MyJson.OrderToString(order);
+        send(order.getDst(),sorder);
         return false;
     }
     static public boolean hello(String message){
@@ -111,6 +123,12 @@ public class ServerHandler {
         //发送
         for(int i=0;i<onLineFriends.size();i++){
             onLineFriends.get(i);
+            order.setDst(onLineFriends.get(i));
+            String sstruct=MyJson.StructToString(mystruct);
+            //加密操作
+            order.setExtend(sstruct);
+            String sorder=MyJson.OrderToString(order);
+            send(order.getDst(),sorder);
         }
         return false;
     }
@@ -137,8 +155,14 @@ public class ServerHandler {
         //获取消息
         MyStruct mystruct=MyJson.StringToStruct(order.getExtend());
         //查询数据库，用户信息
-        MyStruct.User user=rSearchID(mystruct.user.getUid());
+        mystruct.user=rSearchID(mystruct.user.getUid());
         //发送
+        order.setDst(order.getSrc());
+        String sstruct=MyJson.StructToString(mystruct);
+        //加密操作
+        order.setExtend(sstruct);
+        String sorder=MyJson.OrderToString(order);
+        send(order.getDst(),sorder);
         return false;
     }
     static public boolean logout(String message){
@@ -153,11 +177,20 @@ public class ServerHandler {
         //获取消息
         MyStruct mystruct=MyJson.StringToStruct(order.getExtend());
         //查询数据库，所有上线好友ID
-        LinkedList<String>onLineFriends=rOnLineFriend(order.getSrc());
+        String ID=order.getSrc();
+        LinkedList<String>onLineFriends=rOnLineFriend(ID);
         //向好友发送下线提醒
         for(int i=0;i<onLineFriends.size();i++){
             onLineFriends.get(i);
+            order.setDst(onLineFriends.get(i));
+            String sstruct=MyJson.StructToString(mystruct);
+            //加密操作
+            order.setExtend(sstruct);
+            String sorder=MyJson.OrderToString(order);
+            send(order.getDst(),sorder);
         }
+        //向netty发送登出信息
+        logOut(order.getSrc());
         return false;
     }
     static public boolean information(String message){
@@ -170,8 +203,14 @@ public class ServerHandler {
         //获取消息
         MyStruct mystruct=MyJson.StringToStruct(order.getExtend());
         //查询数据库，用户信息
-        MyStruct.User user=rSearchID(mystruct.user.getUid());
+        mystruct.user=rSearchID(mystruct.user.getUid());
         //返回个人信息
+        order.setDst(order.getSrc());
+        String sstruct=MyJson.StructToString(mystruct);
+        //加密操作
+        order.setExtend(sstruct);
+        String sorder=MyJson.OrderToString(order);
+        send(order.getDst(),sorder);
         return false;
     }
     static public boolean changeInfo(String message){
@@ -185,8 +224,15 @@ public class ServerHandler {
         //获取消息
         MyStruct mystruct=MyJson.StringToStruct(order.getExtend());
         //更改数据库，个人信息
-        wInfo(mystruct.user);
         //返回是否修改成功
+        order.setStatusReport(wInfo(mystruct.user));
+        order.setDst(order.getSrc());
+        //发送
+        String sstruct=MyJson.StructToString(mystruct);
+        //加密操作
+        order.setExtend(sstruct);
+        String sorder=MyJson.OrderToString(order);
+        send(order.getDst(),sorder);
         return false;
     }
     static public boolean privateChat(String message){
@@ -209,6 +255,8 @@ public class ServerHandler {
         9007 拒绝加好友
          */
         //先转发后判断是否要进行数据库操作
+        String IDA=order.getSrc();
+        String IDB=order.getDst();
         switch (order.getContentType()){
             case "9001":
                 //添加好友，先加入好友列表，等待回复是否同意。
@@ -223,6 +271,12 @@ public class ServerHandler {
                 wDeleteF(order.getDst(),order.getSrc());
                 break;
         }
+        //发送
+        String sstruct=MyJson.StructToString(mystruct);
+        //加密操作
+        order.setExtend(sstruct);
+        String sorder=MyJson.OrderToString(order);
+        send(order.getDst(),sorder);
         return false;
     }
     static public boolean publicChat(String message){

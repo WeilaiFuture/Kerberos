@@ -29,17 +29,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0e939090-7ab6-4bc6-875c-d0daf79ad1c7" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/UI/log.form" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/UI/log.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Framework/SessionLayer/SessionLayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Framework/SessionLayer/SessionLayer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Server/ServerFunction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/ServerFunction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Json/MyStruct.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Json/MyStruct.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Server/ServerHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/ServerHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/StateMachine/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/StateMachine/Application.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/StateMachine/RegEventEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/StateMachine/RegEventEnum.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/StateMachine/RegStatusEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/StateMachine/RegStatusEnum.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/StateMachine/StateMachineConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/StateMachine/StateMachineConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/StateMachine/StateMachineEventConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/StateMachine/StateMachineEventConfig.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="SHOW_DIALOG" value="false" />
@@ -55,23 +47,24 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/Server/ServerDataBase.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2860">
-              <caret line="349" column="9" selection-start-line="349" selection-start-column="9" selection-end-line="349" selection-end-column="9" />
+            <state relative-caret-position="167">
+              <caret line="135" column="15" lean-forward="true" selection-start-line="135" selection-start-column="15" selection-end-line="135" selection-end-column="15" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#4168#4185#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/StateMachine/Application.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="452">
-              <caret line="57" column="58" lean-forward="true" selection-start-line="57" selection-start-column="58" selection-end-line="57" selection-end-column="58" />
+            <state relative-caret-position="-4">
+              <caret line="63" column="72" lean-forward="true" selection-start-line="63" selection-start-column="72" selection-end-line="63" selection-end-column="72" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#2716#2726#0" expanded="true" />
@@ -81,19 +74,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/StateMachine/StateMachineService.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="95">
-              <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/StateMachine/StateMachineEventConfig.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="342">
-              <caret line="27" column="8" selection-start-line="27" selection-start-column="8" selection-end-line="27" selection-end-column="8" />
+            <state relative-caret-position="570">
+              <caret line="30" column="23" lean-forward="true" selection-start-line="30" selection-start-column="23" selection-end-line="30" selection-end-column="23" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -113,8 +97,58 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/Server/ServerHandler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="380">
-              <caret line="44" column="19" lean-forward="true" selection-start-line="44" selection-start-column="19" selection-end-line="44" selection-end-column="19" />
+            <state relative-caret-position="490">
+              <caret line="287" column="58" lean-forward="true" selection-start-line="287" selection-start-column="58" selection-end-line="287" selection-end-column="58" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/Json/MyStruct.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="357">
+              <caret line="536" column="50" lean-forward="true" selection-start-line="536" selection-start-column="50" selection-end-line="536" selection-end-column="50" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#699#700#0" expanded="true" />
+                <element signature="e#737#738#0" expanded="true" />
+                <element signature="class#Certificate#0;class#MyStruct#0" />
+                <element signature="class#My_k#0;class#MyStruct#0" />
+                <element signature="class#Message1#0;class#MyStruct#0" />
+                <element signature="class#Message2#0;class#MyStruct#0" />
+                <element signature="class#Ticket#0;class#MyStruct#0" />
+                <element signature="class#Message3#0;class#MyStruct#0" />
+                <element signature="class#Message4#0;class#MyStruct#0" />
+                <element signature="class#Authenticator#0;class#MyStruct#0" />
+                <element signature="class#Message5#0;class#MyStruct#0" />
+                <element signature="class#Message6#0;class#MyStruct#0" />
+                <element signature="class#User#0;class#MyStruct#0" />
+                <element signature="e#8397#8398#0" expanded="true" />
+                <element signature="e#8434#8435#0" expanded="true" />
+                <element signature="class#Friend#0;class#MyStruct#0" />
+                <element signature="e#8873#8874#0" expanded="true" />
+                <element signature="e#8905#8906#0" expanded="true" />
+                <element signature="class#Chat_Message#0;class#MyStruct#0" />
+                <element signature="class#Record_Message#0;class#MyStruct#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/Json/MyJson.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="247">
+              <caret line="44" column="16" lean-forward="true" selection-start-line="44" selection-start-column="16" selection-end-line="44" selection-end-column="16" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/Framework/SessionLayer/SessionLayer.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1022">
+              <caret line="89" column="29" lean-forward="true" selection-start-line="89" selection-start-column="29" selection-end-line="89" selection-end-column="29" />
             </state>
           </provider>
         </entry>
@@ -136,15 +170,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="285">
               <caret line="15" column="12" lean-forward="true" selection-start-line="15" selection-start-column="12" selection-end-line="15" selection-end-column="12" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/StateMachine/RegStatusEnum.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="95">
-              <caret line="5" column="19" selection-start-line="5" selection-start-column="19" selection-end-line="5" selection-end-column="19" />
             </state>
           </provider>
         </entry>
@@ -193,18 +218,18 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/Json/MyStruct.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Server/ServerDataBase.java" />
         <option value="$PROJECT_DIR$/src/main/java/Framework/SessionLayer/SessionLayer.java" />
         <option value="$PROJECT_DIR$/src/main/java/Server/ServerFunction.java" />
         <option value="$PROJECT_DIR$/src/main/java/UI/log.form" />
         <option value="$PROJECT_DIR$/src/main/java/UI/log.java" />
         <option value="$PROJECT_DIR$/src/main/java/StateMachine/Application.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Server/ServerHandler.java" />
         <option value="$PROJECT_DIR$/src/main/java/StateMachine/RegStatusEnum.java" />
         <option value="$PROJECT_DIR$/src/main/java/StateMachine/RegEventEnum.java" />
         <option value="$PROJECT_DIR$/src/main/java/StateMachine/StateMachineConfig.java" />
         <option value="$PROJECT_DIR$/src/main/java/StateMachine/StateMachineEventConfig.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Json/MyStruct.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Server/ServerDataBase.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Server/ServerHandler.java" />
       </list>
     </option>
   </component>
@@ -263,6 +288,23 @@
               <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
               <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
               <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="KerberosServer" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="KerberosServer" type="2674bda8:ScopeViewTreeModel$GroupNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="Framework" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="KerberosServer" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="KerberosServer" type="2674bda8:ScopeViewTreeModel$GroupNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="Framework" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="SessionLayer" type="9f88c78c:ScopeViewTreeModel$FileNode" />
             </path>
             <path>
               <item name="KerberosServer" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
@@ -546,12 +588,12 @@
       <option name="project" value="LOCAL" />
       <updated>1622077999797</updated>
     </task>
-    <task id="LOCAL-00013" summary="更改了SeverFunction的父类。">
-      <created>1622077313842</created>
+    <task id="LOCAL-00013" summary="添加Log界面；状态机添加0002报文；状态机添加处理函数。">
+      <created>1622100050602</created>
       <option name="number" value="00013" />
       <option name="presentableId" value="LOCAL-00013" />
       <option name="project" value="LOCAL" />
-      <updated>1622077313842</updated>
+      <updated>1622100050602</updated>
     </task>
     <task id="LOCAL-00014" summary="Framework的文件结构。">
       <created>1622077465815</created>
@@ -560,17 +602,17 @@
       <option name="project" value="LOCAL" />
       <updated>1622077465815</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="96603000" />
+    <option name="totallyTimeSpent" value="101445000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49927008" visible="true" weight="0.23076923" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49927008" visible="true" weight="0.23076923" />
       <window_info id="Structure" order="1" sideWeight="0.5007299" side_tool="true" weight="0.24966262" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -669,7 +711,8 @@
     <MESSAGE value="完成了Famework。" />
     <MESSAGE value="更改了SeverFunction的父类。" />
     <MESSAGE value="Framework的文件结构。" />
-    <option name="LAST_COMMIT_MESSAGE" value="Framework的文件结构。" />
+    <MESSAGE value="添加Log界面；状态机添加0002报文；状态机添加处理函数。" />
+    <option name="LAST_COMMIT_MESSAGE" value="添加Log界面；状态机添加0002报文；状态机添加处理函数。" />
   </component>
   <component name="WindowStateProjectService">
     <state x="574" y="117" width="670" height="589" key="#com.intellij.ide.util.MemberChooser" timestamp="1622082394431">
@@ -752,42 +795,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Framework/SessionLayer/SessionLayer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="224">
-          <caret line="86" column="46" selection-start-line="86" selection-start-column="23" selection-end-line="86" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Json/MyStruct.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="452">
-          <caret line="520" column="30" selection-start-line="520" selection-start-column="30" selection-end-line="520" selection-end-column="30" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="class#Certificate#0;class#MyStruct#0" />
-            <element signature="class#My_k#0;class#MyStruct#0" />
-            <element signature="class#Message1#0;class#MyStruct#0" />
-            <element signature="class#Message2#0;class#MyStruct#0" />
-            <element signature="class#Ticket#0;class#MyStruct#0" />
-            <element signature="class#Message3#0;class#MyStruct#0" />
-            <element signature="class#Message4#0;class#MyStruct#0" />
-            <element signature="class#Authenticator#0;class#MyStruct#0" />
-            <element signature="class#Message5#0;class#MyStruct#0" />
-            <element signature="class#Message6#0;class#MyStruct#0" />
-            <element signature="class#User#0;class#MyStruct#0" />
-            <element signature="e#8397#8398#0" expanded="true" />
-            <element signature="e#8434#8435#0" expanded="true" />
-            <element signature="class#Friend#0;class#MyStruct#0" />
-            <element signature="e#8873#8874#0" expanded="true" />
-            <element signature="e#8905#8906#0" expanded="true" />
-            <element signature="class#Chat_Message#0;class#MyStruct#0" />
-            <element signature="class#Group#0;class#MyStruct#0" />
-            <element signature="class#Record_Message#0;class#MyStruct#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/UI/log.form">
       <provider selected="true" editor-type-id="ui-designer" />
     </entry>
@@ -808,17 +815,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/StateMachine/Application.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="452">
-          <caret line="57" column="58" lean-forward="true" selection-start-line="57" selection-start-column="58" selection-end-line="57" selection-end-column="58" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2716#2726#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/StateMachine/RegStatusEnum.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="95">
@@ -833,6 +829,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/StateMachine/StateMachineConfig.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="55" column="16" selection-start-line="55" selection-start-column="16" selection-end-line="55" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Server/ServerFunction.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="361">
@@ -843,17 +846,65 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/StateMachine/StateMachineConfig.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/Framework/SessionLayer/SessionLayer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="55" column="16" selection-start-line="55" selection-start-column="16" selection-end-line="55" selection-end-column="16" />
+        <state relative-caret-position="1022">
+          <caret line="89" column="29" lean-forward="true" selection-start-line="89" selection-start-column="29" selection-end-line="89" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Json/MyJson.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="247">
+          <caret line="44" column="16" lean-forward="true" selection-start-line="44" selection-start-column="16" selection-end-line="44" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Server/ServerDataBase.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="167">
+          <caret line="135" column="15" lean-forward="true" selection-start-line="135" selection-start-column="15" selection-end-line="135" selection-end-column="15" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#4168#4185#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Json/MyStruct.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="536" column="50" lean-forward="true" selection-start-line="536" selection-start-column="50" selection-end-line="536" selection-end-column="50" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#699#700#0" expanded="true" />
+            <element signature="e#737#738#0" expanded="true" />
+            <element signature="class#Certificate#0;class#MyStruct#0" />
+            <element signature="class#My_k#0;class#MyStruct#0" />
+            <element signature="class#Message1#0;class#MyStruct#0" />
+            <element signature="class#Message2#0;class#MyStruct#0" />
+            <element signature="class#Ticket#0;class#MyStruct#0" />
+            <element signature="class#Message3#0;class#MyStruct#0" />
+            <element signature="class#Message4#0;class#MyStruct#0" />
+            <element signature="class#Authenticator#0;class#MyStruct#0" />
+            <element signature="class#Message5#0;class#MyStruct#0" />
+            <element signature="class#Message6#0;class#MyStruct#0" />
+            <element signature="class#User#0;class#MyStruct#0" />
+            <element signature="e#8397#8398#0" expanded="true" />
+            <element signature="e#8434#8435#0" expanded="true" />
+            <element signature="class#Friend#0;class#MyStruct#0" />
+            <element signature="e#8873#8874#0" expanded="true" />
+            <element signature="e#8905#8906#0" expanded="true" />
+            <element signature="class#Chat_Message#0;class#MyStruct#0" />
+            <element signature="class#Record_Message#0;class#MyStruct#0" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/StateMachine/StateMachineEventConfig.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="27" column="8" selection-start-line="27" selection-start-column="8" selection-end-line="27" selection-end-column="8" />
+        <state relative-caret-position="570">
+          <caret line="30" column="23" lean-forward="true" selection-start-line="30" selection-start-column="23" selection-end-line="30" selection-end-column="23" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -862,17 +913,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Server/ServerHandler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="44" column="19" lean-forward="true" selection-start-line="44" selection-start-column="19" selection-end-line="44" selection-end-column="19" />
+        <state relative-caret-position="490">
+          <caret line="287" column="58" lean-forward="true" selection-start-line="287" selection-start-column="58" selection-end-line="287" selection-end-column="58" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Server/ServerDataBase.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/StateMachine/Application.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2860">
-          <caret line="349" column="9" selection-start-line="349" selection-start-column="9" selection-end-line="349" selection-end-column="9" />
+        <state relative-caret-position="-4">
+          <caret line="63" column="72" lean-forward="true" selection-start-line="63" selection-start-column="72" selection-end-line="63" selection-end-column="72" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#2716#2726#0" expanded="true" />
           </folding>
         </state>
       </provider>
