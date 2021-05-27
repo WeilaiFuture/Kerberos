@@ -27,3 +27,4 @@ E:\Kerberos\Kerberos_Client\Kerberos_Client\bin\Debug\WpfAnimatedGif.pdb
 E:\Kerberos\Kerberos_Client\Kerberos_Client\bin\Debug\WpfAnimatedGif.xml
 E:\Kerberos\Kerberos_Client\Kerberos_Client\obj\Debug\UI\ListBoxStyle.baml
 E:\Kerberos\Kerberos_Client\Kerberos_Client\obj\Debug\App.baml
+E:\Kerberos\Kerberos_Client\Kerberos_Client\obj\Debug\Kerberos_Client.csprojAssemblyReference.cache

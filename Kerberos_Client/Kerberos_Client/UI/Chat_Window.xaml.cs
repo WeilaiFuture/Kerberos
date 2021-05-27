@@ -22,28 +22,21 @@ namespace Kerberos_Client.UI
     /// </summary>
     public partial class Chat_Window : Window
     {
+
         private ObservableCollection<ChatMessage> chatMessage = new ObservableCollection<ChatMessage>()
         {
             new ChatMessage()
             {
+                Photo=@"E:\Kerberos\Kerberos_Client\Kerberos_Client\Image_Source\test.jpg",
                 Message="你好",
-                MessageLocation=TypeLocalMessageLocation.chatRecv,
+                MessageLocation=TypeLocalMessageLocation.chatRecv
             },
             new ChatMessage()
             {
+                Photo=@"E:\Kerberos\Kerberos_Client\Kerberos_Client\Image_Source\test.jpg",
                 Message="好久不见,老铁",
-                MessageLocation=TypeLocalMessageLocation.chatSend,
+                MessageLocation=TypeLocalMessageLocation.chatSend
             },
-            new ChatMessage()
-            {
-                Message="来杯二锅头",
-                MessageLocation =TypeLocalMessageLocation.chatSend,
-            },
-            new ChatMessage()
-            {
-                Message="gogogo",
-                MessageLocation =TypeLocalMessageLocation.chatRecv,
-            },   
         };
         public User My_user;
         public Chat_Window(User u, Image i)
@@ -60,9 +53,11 @@ namespace Kerberos_Client.UI
         {
             chatMessage.Add(new ChatMessage()
             {
+                Photo = @"E:\Kerberos\Kerberos_Client\Kerberos_Client\Image_Source\test.jpg",
                 Message = send_text.Text,
                 MessageLocation = TypeLocalMessageLocation.chatSend
-            }) ;
+            }); ;
+            ListBoxChat.SelectedIndex = ListBoxChat.Items.Count - 1;
         }
 
     }

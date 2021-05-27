@@ -11,7 +11,7 @@
                             <ColumnDefinition Width="40" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <Image VerticalAlignment="Top" Width="35" Height="35" Source="qq.ico"></Image>
+                        <Image VerticalAlignment="Top" Width="35" Height="35" Source="{Binding Photo}"></Image>
                         <Border x:Name="border1" Grid.Column="1" CornerRadius="1" BorderBrush="#EDEDED" BorderThickness="1" VerticalAlignment="Top" Margin="10,2,0,2" Background="#FFFFFF" HorizontalAlignment="Left" Padding="5" MinHeight="35" MinWidth="50">
                             <ContentPresenter VerticalAlignment="Center" />
                         </Border>
@@ -42,7 +42,7 @@
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="40" />
                         </Grid.ColumnDefinitions>
-                        <Image VerticalAlignment="Top" Grid.Column="1" Width="35" Height="35" Source="qq.ico"></Image>
+                        <Image VerticalAlignment="Top" Grid.Column="1" Width="35" Height="35" Source="{Binding Photo}"></Image>
                         <Border x:Name="border1" CornerRadius="1" BorderBrush="#9EEA6A" BorderThickness="1" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,2,10,2" Background="#9EEA6A" Padding="5" MinHeight="35" MinWidth="50">
                             <ContentPresenter VerticalAlignment="Center" />
                         </Border>

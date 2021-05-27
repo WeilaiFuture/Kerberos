@@ -10,7 +10,19 @@ namespace Kerberos_Client.UI
 {
     public class ChatMessage : INotifyPropertyChanged
     {
-
+        private string photo;
+        public string Photo
+        {
+            get { return photo; }
+            set
+            {
+                if (photo != value)
+                {
+                    photo = value;
+                    Notify();
+                }
+            }
+        }
         private string message;
         public string Message
         {
