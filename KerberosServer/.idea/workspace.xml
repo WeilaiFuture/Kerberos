@@ -30,6 +30,11 @@
   <component name="ChangeListManager">
     <list default="true" id="0e939090-7ab6-4bc6-875c-d0daf79ad1c7" name="Default Changelist" comment="">
       <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__io_netty_netty_all_4_1_65_Final.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Framework/SessionLayer/Exceptions/SessionLayerNotInitialized.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Framework/SessionLayer/Handlers/DefaultSessionHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Framework/SeverBuilder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Kerberos/As/As.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Kerberos/Tgs/Tgs.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/KerberosServer.iml" beforeDir="false" afterPath="$PROJECT_DIR$/KerberosServer.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
@@ -37,6 +42,14 @@
       <change beforePath="$PROJECT_DIR$/src/main/java/Server/ServerDataBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/ServerDataBase.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Server/ServerFunction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/ServerFunction.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Server/ServerHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/ServerHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Framework/CommunicationLayer/Handlers/ReceiveHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Framework/CommunicationLayer/Handlers/ReceiveHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Framework/SessionLayer/Handlers/SessionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Framework/SessionLayer/Handlers/SessionHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Framework/SessionLayer/SessionLayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Framework/SessionLayer/SessionLayer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Framework/Testing/Sever.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Kerberos/AS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Kerberos/As/AsHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Kerberos/TGS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Kerberos/Tgs/TgsHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Server/ServerDataBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/ServerDataBase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Server/ServerFunction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/ServerFunction.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="SHOW_DIALOG" value="false" />
@@ -401,7 +414,7 @@
       <module name="KerberosServer" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="Framework.Testing.*" />
+          <option name="PATTERN" value="Framework.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -409,8 +422,8 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Framework.Main" />
+    <configuration name="SeverBuilder" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Framework.SeverBuilder" />
       <module name="KerberosServer" />
       <extension name="coverage">
         <pattern>
@@ -552,6 +565,28 @@
       <option name="project" value="LOCAL" />
       <updated>1621648696997</updated>
     </task>
+    <task id="LOCAL-00012" summary="完成了Famework。">
+      <created>1622075955783</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1622075955783</updated>
+    </task>
+    <task id="LOCAL-00013" summary="更改了SeverFunction的父类。">
+      <created>1622077313842</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1622077313842</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Framework的文件结构。">
+      <created>1622077465815</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1622077465815</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <task id="LOCAL-00012" summary="添加部分数据库函数4">
       <created>1622077999797</created>
       <option name="number" value="00012" />
@@ -649,6 +684,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="创建IDEA项目" />
@@ -666,40 +702,48 @@
     <MESSAGE value="状态机添加 状态工厂" />
     <MESSAGE value="添加部分数据库函数4" />
     <option name="LAST_COMMIT_MESSAGE" value="添加部分数据库函数4" />
+    <MESSAGE value="完成了Famework。" />
+    <MESSAGE value="更改了SeverFunction的父类。" />
+    <MESSAGE value="Framework的文件结构。" />
+    <option name="LAST_COMMIT_MESSAGE" value="Framework的文件结构。" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="574" y="117" width="670" height="589" key="#com.intellij.ide.util.MemberChooser" timestamp="1621858098624">
+    <state x="574" y="117" width="670" height="589" key="#com.intellij.ide.util.MemberChooser" timestamp="1622082394431">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="574" y="117" width="670" height="589" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1621858098624" />
-    <state x="499" y="158" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1621841969571">
+    <state x="574" y="117" width="670" height="589" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1622082394431" />
+    <state x="499" y="158" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1622076998774">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="499" y="158" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824@0.0.1536.824" timestamp="1621841969571" />
-    <state width="1493" height="226" key="GridCell.Tab.0.bottom" timestamp="1621862328245">
+    <state x="499" y="158" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824@0.0.1536.824" timestamp="1622076998774" />
+    <state width="1493" height="210" key="GridCell.Tab.0.bottom" timestamp="1622082888635">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="226" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1621862328245" />
-    <state width="1493" height="226" key="GridCell.Tab.0.center" timestamp="1621862328245">
+    <state width="1493" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1622082888635" />
+    <state width="1493" height="210" key="GridCell.Tab.0.center" timestamp="1622082888634">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="226" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1621862328245" />
-    <state width="1493" height="226" key="GridCell.Tab.0.left" timestamp="1621862328245">
+    <state width="1493" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1622082888634" />
+    <state width="1493" height="210" key="GridCell.Tab.0.left" timestamp="1622082888632">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="226" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1621862328245" />
-    <state width="1493" height="226" key="GridCell.Tab.0.right" timestamp="1621862328245">
+    <state width="1493" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1622082888632" />
+    <state width="1493" height="210" key="GridCell.Tab.0.right" timestamp="1622082888635">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="226" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1621862328245" />
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1621839663813">
+    <state width="1493" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1622082888635" />
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1622077475500">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1621839663813" />
-    <state x="425" y="187" width="672" height="677" key="run.anything.popup" timestamp="1621862100626">
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1622077475500" />
+    <state x="574" y="325" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1622077831956">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="425" y="187" width="672" height="677" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1621862100626" />
+    <state x="574" y="325" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824@0.0.1536.824" timestamp="1622077831956" />
+    <state x="425" y="187" width="672" height="677" key="run.anything.popup" timestamp="1622078867028">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="425" y="187" width="672" height="677" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1622078867028" />
     <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1621840422566">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
