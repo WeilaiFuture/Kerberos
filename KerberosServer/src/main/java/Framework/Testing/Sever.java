@@ -1,8 +1,8 @@
-package Framework;
+package Framework.Testing;
 
 import Framework.CommunicationLayer.CommunicationLayer;
 
-public class Main {
+public class Sever {
 
     public static void main(String[] args)throws Exception {
 
