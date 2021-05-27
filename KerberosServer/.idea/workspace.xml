@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0e939090-7ab6-4bc6-875c-d0daf79ad1c7" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__mysql_mysql_connector_java_8_0_25.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__mysql_mysql_connector_java_5_1_49.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KerberosServer.iml" beforeDir="false" afterPath="$PROJECT_DIR$/KerberosServer.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Json/MyStruct.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Json/MyStruct.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Server/ServerDataBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/ServerDataBase.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/classes/" />
@@ -40,67 +36,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/Server/ServerDataBase.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-327">
-              <caret line="240" column="49" selection-start-line="240" selection-start-column="49" selection-end-line="240" selection-end-column="49" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#5307#5315#0" expanded="true" />
-                <element signature="e#6148#6156#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/StateMachine/Application.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="509">
-              <caret line="52" lean-forward="true" selection-start-line="52" selection-end-line="52" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/StateMachine/StateMachineService.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="665">
-              <caret line="35" selection-start-line="35" selection-end-line="35" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/StateMachine/StateMachineEventConfig.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="209">
-              <caret line="16" column="48" selection-start-line="16" selection-start-column="48" selection-end-line="16" selection-end-column="48" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/StateMachine/StateMachineConfig.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4294">
-              <caret line="226" column="2" selection-start-line="226" selection-start-column="2" selection-end-line="226" selection-end-column="2" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/Server/ServerHandler.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-3006">
-              <caret line="16" column="64" selection-start-line="16" selection-start-column="64" selection-end-line="16" selection-end-column="64" />
+            <state relative-caret-position="352">
+              <caret line="271" column="42" lean-forward="true" selection-start-line="271" selection-start-column="42" selection-end-line="271" selection-end-column="42" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -111,8 +48,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/Json/MyStruct.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-162">
-              <caret line="439" column="25" lean-forward="true" selection-start-line="439" selection-start-column="25" selection-end-line="439" selection-end-column="25" />
+            <state relative-caret-position="304">
+              <caret line="445" column="34" lean-forward="true" selection-start-line="445" selection-start-column="34" selection-end-line="445" selection-end-column="34" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="class#Certificate#0;class#MyStruct#0" />
@@ -133,15 +70,6 @@
                 <element signature="class#Group#0;class#MyStruct#0" />
                 <element signature="class#Record_Message#0;class#MyStruct#0" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/StateMachine/RegEventEnum.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="38">
-              <caret line="2" selection-start-line="2" selection-end-line="2" />
             </state>
           </provider>
         </entry>
@@ -257,9 +185,9 @@
       <select />
     </treeState>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="677" />
-    <option name="width" value="1233" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="676" />
+    <option name="width" value="1234" />
     <option name="height" value="1040" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -271,6 +199,7 @@
     </navigator>
     <panes>
       <pane id="PackagesPane" />
+      <pane id="ProjectPane" />
       <pane id="Scope">
         <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
           <expand>
@@ -312,19 +241,10 @@
               <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
               <item name="Server" type="9f88c78c:ScopeViewTreeModel$FileNode" />
             </path>
-            <path>
-              <item name="KerberosServer" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="KerberosServer" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="StateMachine" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="ProjectPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -441,7 +361,8 @@
       <workItem from="1621845437953" duration="3322000" />
       <workItem from="1621857563420" duration="7068000" />
       <workItem from="1621946570171" duration="4361000" />
-      <workItem from="1622036589788" duration="7306000" />
+      <workItem from="1622036589788" duration="7448000" />
+      <workItem from="1622075687130" duration="811000" />
     </task>
     <task id="LOCAL-00001" summary="创建IDEA项目">
       <created>1620305582799</created>
@@ -534,17 +455,24 @@
       <option name="project" value="LOCAL" />
       <updated>1621864325318</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="添加部分数据库处理函数。2">
+      <created>1622044434492</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1622044434492</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="101799000" />
+    <option name="totallyTimeSpent" value="102752000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <frame x="541" y="0" width="987" height="832" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49927008" visible="true" weight="0.22132254" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49927008" weight="0.36235037" />
       <window_info id="Structure" order="1" sideWeight="0.5007299" side_tool="true" weight="0.24966262" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -558,7 +486,7 @@
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4948905" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="Version Control" order="6" sideWeight="0.6653171" weight="0.58468336" />
+      <window_info anchor="bottom" id="Version Control" order="6" sideWeight="0.6653171" weight="0.58248174" />
       <window_info anchor="bottom" id="TODO" order="7" />
       <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
@@ -638,7 +566,8 @@
     <MESSAGE value="状态机添加 状态工厂" />
     <MESSAGE value="完善状态机的启动和消息传递，暂缺处理函数调用。" />
     <MESSAGE value="添加报文处理逻辑。&#10;添加部分数据库处理函数。" />
-    <option name="LAST_COMMIT_MESSAGE" value="添加报文处理逻辑。&#10;添加部分数据库处理函数。" />
+    <MESSAGE value="添加部分数据库处理函数。2" />
+    <option name="LAST_COMMIT_MESSAGE" value="添加部分数据库处理函数。2" />
   </component>
   <component name="editorHistoryManager">
     <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-core/4.2.7.RELEASE/spring-core-4.2.7.RELEASE.jar!/org/springframework/util/CollectionUtils.class">
@@ -950,13 +879,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="893">
-          <caret line="47" selection-start-line="47" selection-end-line="47" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/mysql/mysql-connector-java/5.1.49/mysql-connector-java-5.1.49.jar!/com/mysql/jdbc/StatementImpl.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="103">
@@ -983,9 +905,67 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/StateMachine/Application.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="703">
+          <caret line="52" selection-start-line="52" selection-end-line="52" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/StateMachine/StateMachineService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="513">
+          <caret line="35" selection-start-line="35" selection-end-line="35" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/StateMachine/StateMachineEventConfig.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="16" column="48" selection-start-line="16" selection-start-column="48" selection-end-line="16" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/StateMachine/StateMachineConfig.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3914">
+          <caret line="226" column="2" selection-start-line="226" selection-start-column="2" selection-end-line="226" selection-end-column="2" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/StateMachine/RegEventEnum.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="38">
+          <caret line="2" selection-start-line="2" selection-end-line="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="893">
+          <caret line="47" selection-start-line="47" selection-end-line="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/StateMachine/RegStatusEnum.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="266">
+          <caret line="14" column="12" selection-start-line="14" selection-start-column="12" selection-end-line="14" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Server/ServerHandler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3006">
+        <state relative-caret-position="-608">
           <caret line="16" column="64" selection-start-line="16" selection-start-column="64" selection-end-line="16" selection-end-column="64" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -995,8 +975,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Json/MyStruct.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-162">
-          <caret line="439" column="25" lean-forward="true" selection-start-line="439" selection-start-column="25" selection-end-line="439" selection-end-column="25" />
+        <state relative-caret-position="304">
+          <caret line="445" column="34" lean-forward="true" selection-start-line="445" selection-start-column="34" selection-end-line="445" selection-end-column="34" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="class#Certificate#0;class#MyStruct#0" />
@@ -1020,65 +1000,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/StateMachine/StateMachineService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="665">
-          <caret line="35" selection-start-line="35" selection-end-line="35" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/StateMachine/StateMachineEventConfig.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="16" column="48" selection-start-line="16" selection-start-column="48" selection-end-line="16" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/StateMachine/StateMachineConfig.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4294">
-          <caret line="226" column="2" selection-start-line="226" selection-start-column="2" selection-end-line="226" selection-end-column="2" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/StateMachine/RegStatusEnum.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="14" column="12" selection-start-line="14" selection-start-column="12" selection-end-line="14" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/StateMachine/RegEventEnum.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="38">
-          <caret line="2" selection-start-line="2" selection-end-line="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/StateMachine/Application.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="509">
-          <caret line="52" lean-forward="true" selection-start-line="52" selection-end-line="52" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Server/ServerDataBase.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-327">
-          <caret line="240" column="49" selection-start-line="240" selection-start-column="49" selection-end-line="240" selection-end-column="49" />
+        <state relative-caret-position="352">
+          <caret line="271" column="42" lean-forward="true" selection-start-line="271" selection-start-column="42" selection-end-line="271" selection-end-column="42" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#5307#5315#0" expanded="true" />
-            <element signature="e#6148#6156#0" expanded="true" />
           </folding>
         </state>
       </provider>

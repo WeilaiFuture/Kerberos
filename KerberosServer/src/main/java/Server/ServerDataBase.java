@@ -263,7 +263,21 @@ public class ServerDataBase {
         /*
         修改好友列表，添加好友；
          */
-
+        try {
+            String sql="insert into `friend` (`me` ,`ta` ,`startTime` ,`remark` ,`tid`) values(\""
+                    +ID+"\",\""
+                    +friend.getU().getUid()+"\","
+                    +friend.getStartTime()+"\","
+                    +friend.getRemark()+"\","
+                    +friend.getTid()+ ")";
+            Statement statement = con.createStatement();
+            int result = statement.executeUpdate(sql);
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("存储证书错误");
+            return false;
+        }
         return false;
     }
     static public boolean wAddG(String IDA,String IDG){
