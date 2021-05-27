@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.LinkedList;
 
+import static Framework.SessionLayer.SessionLayer.send;
 import static Server.ServerDataBase.*;
 
 public class ServerHandler {
@@ -27,7 +28,7 @@ public class ServerHandler {
         //获取消息
         MyStruct mystruct=MyJson.StringToStruct(order.getExtend());
         //存入数据库
-        wCertif(mystruct);
+        wCertif(mystruct.certificate);
         return false;
     }
     public boolean Kv(String message){
@@ -71,7 +72,7 @@ public class ServerHandler {
         //获取消息
         MyStruct mystruct=MyJson.StringToStruct(order.getExtend());
         //存入数据库
-        wRegister(mystruct);
+        wLogin(order.getSrc(),mystruct.user.getStatus());
         //发送ACK
         order.setStatusReport(true);
         //发送

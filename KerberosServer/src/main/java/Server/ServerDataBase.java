@@ -43,9 +43,16 @@ public class ServerDataBase {
         user.setGender(1);
         user.setPhoto("111");
         wInfo(user);
-        rSearchID("1");
    */
-
+        wDeleteF("1","2");
+        MyStruct.User user=rSearchID("2");
+        MyStruct.Friend friend=new MyStruct.Friend();
+        friend.setU(user);
+        friend.setTid("1");
+        friend.setStartTime(11);
+        friend.setRemark("小王");
+        wAddF("1",friend);
+        rFriendList("1");
         }
     }
     static public Connection connectData() {
@@ -267,13 +274,12 @@ public class ServerDataBase {
          */
         try {
             MyStruct.User user=rSearchID(friend.getU().getUid());
-            String sql="insert into `friend` (`me` ,`ta` ,`startTime` ,`remark` ,`tid`,`status`) values(\""
+            String sql="insert into `friend` (`me` ,`ta` ,`startTime` ,`remark` ,`tid`) values(\""
                     +ID+"\",\""
                     +friend.getU().getUid()+"\","
-                    +friend.getStartTime()+","
+                    +friend.getStartTime()+",\""
                     +friend.getRemark()+"\","
-                    +friend.getTid()+ ","
-                    +user.getStatus()+")";
+                    +friend.getTid()+ ")";
             Statement statement = con.createStatement();
             int result = statement.executeUpdate(sql);
             System.out.println("添加好友成功");
@@ -284,25 +290,41 @@ public class ServerDataBase {
             return false;
         }
     }
-    static public boolean wAddG(String IDA,String IDG){
+    static public boolean wAddG(MyStruct.User user, String IDG){
         /*
         修改群列表，添加群；
          */
-        return false;
+        try {
+            String sql="insert into `belong` (`gid` ,`uid` ,`nickname` ) values(\""
+                    +IDG+"\",\""
+                    +user.getUid()+"\","
+                    +user.getUname()+"\")";
+            Statement statement = con.createStatement();
+            int result = statement.executeUpdate(sql);
+            String sql1="update `groups` set `sum`=`sum`+1  where `gid`=\""+IDG+"\"";
+            Statement statement1=con.createStatement();
+            statement1.executeUpdate(sql1);
+            System.out.println("添加群成功");
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("添加群错误");
+            return false;
+        }
     }
     static public boolean wDeleteF(String IDA,String IDB){
         /*
         修改好友列表，删除好友；
          */
         try {
-            String sql="delete `friend` where `me`=\""+IDA+"\" and `ta`=\""+IDB+"\"";
+            String sql="delete from `friend` where `me`=\""+IDA+"\" and `ta`=\""+IDB+"\"";
             Statement statement = con.createStatement();
             int result = statement.executeUpdate(sql);
-            System.out.println("添加好友成功");
+            System.out.println("删除好友成功");
             return true;
         } catch (SQLException e) {
             e.printStackTrace();
-            System.out.println("添加好友错误");
+            System.out.println("删除好友错误");
             return false;
         }
     }
@@ -310,13 +332,44 @@ public class ServerDataBase {
         /*
         修改群列表，退出群聊；
          */
-        return false;
+        try {
+            String sql="delete from `belong` where `gid`=(\""
+                    +IDG+"\" and `uid`=\""
+                    +IDA+"\")";
+            Statement statement = con.createStatement();
+            int result = statement.executeUpdate(sql);
+            String sql1="update `groups` set `sum`=`sum`-1  where `gid`=\""+IDG+"\"";
+            Statement statement1=con.createStatement();
+            statement1.executeUpdate(sql1);
+            System.out.println("添加群成功");
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("添加群错误");
+            return false;
+        }
     }
-    static public String wCreateG(String message){
+    static public boolean wCreateG(MyStruct.Group group){
         /*
         组建群聊；
          */
-        String IDG="";//群账号
-        return IDG;
+        try {
+            String sql="insert into `groups` (`gid` ,`gname` ,`photo` ,`leader` ,`sign`,`startTime`,`sum`) values(\""
+                    +group.getGid()+"\",\""
+                    +group.getGname()+"\","
+                    +group.getPhoto()+",\""
+                    +group.getLeader()+"\","
+                    +group.getSign()+"\","
+                    +group.getStartTime()+","
+                    +group.getList().size()+ ")";
+            Statement statement = con.createStatement();
+            int result = statement.executeUpdate(sql);
+            System.out.println("创建群聊成功");
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("创建群聊错误");
+            return false;
+        }
     }
 }

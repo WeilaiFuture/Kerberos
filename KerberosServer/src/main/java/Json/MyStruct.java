@@ -521,10 +521,19 @@ public class MyStruct {
     static public class Group {
         List<Dictionary<User, String>> list;//用户列表
         String gid;//群账号
+        String gname;//群名称
         String photo;//群头像
         String leader;//群主账号
         String sign;//群介绍
         int startTime;//创建时间
+
+        public String getGname() {
+            return gname;
+        }
+
+        public void setGname(String gname) {
+            this.gname = gname;
+        }
 
         public List<Dictionary<User, String>> getList() {
             return list;
