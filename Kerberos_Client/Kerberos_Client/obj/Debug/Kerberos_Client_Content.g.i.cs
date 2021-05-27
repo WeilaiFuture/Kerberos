@@ -8,16 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("image_source/1308531510.jpg")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("image_source/back.jpg")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("image_source/background.gif")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("image_source/close.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("image_source/load.gif")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("image_source/test.jpg")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("image_source/%e6%90%9c%e7%b4%a2.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("image_source/%e6%9c%aa%e7%99%bb%e5%bd%95%e5%a4%b4%e8%b1%a1.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("image_source/%e7%99%bb%e5%bd%95-%e7%94%a8%e6%88%b7%e7%bb%84.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("image_source/%e7%99%bb%e5%bd%95.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("image_source/%e7%99%bb%e5%bd%95%e5%af%86%e7%a0%81%e4%bf%ae%e6%94%b9.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("ui/qq.ico")]
 
 

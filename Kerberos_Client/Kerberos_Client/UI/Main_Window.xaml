@@ -13,7 +13,7 @@
     <Window.Resources>
         <local:MyStruct x:Key="User"></local:MyStruct>
     </Window.Resources>
-    <Grid x:Name="My_grid" >
+    <Grid x:Name="My_grid" Focusable="True">
         <!--按比例切割界面-->
         <Grid.RowDefinitions>
             <RowDefinition Height="4*"></RowDefinition>

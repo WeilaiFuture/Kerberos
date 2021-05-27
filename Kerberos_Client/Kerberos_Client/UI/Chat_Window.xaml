@@ -3,10 +3,13 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Kerberos_Client"
+        xmlns:local="clr-namespace:Kerberos_Client" xmlns:local1="clr-namespace:Kerberos_Client.UI"
         mc:Ignorable="d"
          Title="Chat" Height="500" Width="600">
     <Window.Resources>
+
+        <Color x:Key="green_normal">#07C160</Color>
+        <SolidColorBrush x:Key="green_normal_brush" Color="{StaticResource green_normal}" />
         <local:MyStruct x:Key="User"></local:MyStruct>
     </Window.Resources>
     <Grid>
@@ -22,13 +25,57 @@
                 <RowDefinition Height="4*"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Margin="0,0,-0.8,0"></TextBlock>
-            <TextBox Grid.Row="1" Opacity="0.7" Grid.ColumnSpan="2" Margin="0,0,-0.8,0" TextWrapping="Wrap"></TextBox>
-            <Button Grid.Row="1" Content="关闭"  RenderTransformOrigin="1.166,0.926" Click="Button_Click" Margin="240,64,84.8,0.4"/>
-            <Button Grid.Row="1" Content="发送"  RenderTransformOrigin="1.166,0.926" Click="Button_Click_1" Margin="325,64,-0.2,0.4"/>
+            <ListBox  Name="ListBoxChat" ItemContainerStyle="{StaticResource ListBoxItemChatStyle }" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Margin="0,0,-0.2,0">
+                <ListBox.Style>
+                    <Style TargetType="ListBox">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="ListBox">
+                                    <Border x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="0">
+                                        <ScrollViewer Focusable="False">
+                                            <ItemsPresenter />
+                                        </ScrollViewer>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ListBox.Style>
+            </ListBox>
+
+            <TextBox x:Name="send_text" Grid.Row="1" Opacity="0.7" Grid.ColumnSpan="2" Margin="0,0,-0.8,0" TextWrapping="Wrap"></TextBox>
+            <Button Grid.Row="1" Click="Button_Click"  Content="发送"  RenderTransformOrigin="1.166,0.926"  Margin="325,64,-0.2,0.4">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Background" Value="Green" />
+                        <Setter Property="BorderBrush" Value="Gray" />
+                        <Setter Property="Foreground" Value="White" />
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}" >
+                                    <Border x:Name="PART_BUTTON_BORDER" BorderBrush="{TemplateBinding Control.BorderBrush}" BorderThickness="0.5" CornerRadius="3" Background="{TemplateBinding Background}">
+                                        <ContentPresenter Content="{TemplateBinding ContentControl.Content}" HorizontalAlignment="Center" VerticalAlignment="Center" ></ContentPresenter>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="Green"/>
+                                <Setter Property="Cursor" Value="Hand" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Background" Value="Gray"/>
+                                <Setter Property="Cursor" Value="No" />
+                                <Setter Property="BorderBrush" Value="Gray" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
         </Grid>
-        <Grid Grid.Row="1"  Grid.Column="1" RenderTransformOrigin="0.5,0.5">
-            <Image Name="head_Image" Source="../Image_Source/test.jpg" Margin="-40,37,-43.4,227.4" >
+        <Grid  Grid.Column="1" RenderTransformOrigin="0.5,0.5" Margin="10,0,-0.4,0.4">
+            <Image Name="head_Image" Source="../Image_Source/test.jpg" Margin="-37,20,-46.4,244.4" >
                 <Image.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -41,9 +88,9 @@
                     <EllipseGeometry RadiusX="100" RadiusY="100" Center="100,100"/>
                 </Image.Clip>
             </Image>
-            <TextBlock x:Name="Uname_TextBlock" Height="41"  Opacity="0.6"  Text="{Binding Source=Uname,StringFormat={}昵称:{0}}" Margin="48,249,49.6,180.4" ></TextBlock>
-            <TextBlock x:Name="Uid_TX" Height="41"  Opacity="0.6"  Text="{Binding Source=Uid,StringFormat={}账号:{0}}" Margin="48,312,9.6,117.4" ></TextBlock>
-            <TextBlock x:Name="Email_TX" Height="41"  Opacity="0.6"  Text="{Binding Source=Email,StringFormat={}邮箱:{0}}" Margin="48,379,49.6,50.4" ></TextBlock>
+            <TextBlock x:Name="Uname_TextBlock" Height="41"  Opacity="0.6"  Margin="10,244,87.6,185.4" ></TextBlock>
+            <TextBlock x:Name="Uid_TX" Height="41"  Opacity="0.6"   Margin="10,312,9.6,117.4" ></TextBlock>
+            <TextBlock x:Name="Email_TX" Height="41"  Opacity="0.6"   Margin="10,379,9.6,50.4" ></TextBlock>
         </Grid>
     </Grid>
 </Window>
