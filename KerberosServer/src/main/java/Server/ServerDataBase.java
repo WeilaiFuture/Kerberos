@@ -278,7 +278,6 @@ public class ServerDataBase {
             System.out.println("存储证书错误");
             return false;
         }
-        return false;
     }
     static public boolean wAddG(String IDA,String IDG){
         /*
