@@ -444,7 +444,16 @@ public class MyStruct {
         }
 
         public void setU(User u) {
-            this.u = u;
+            this.u= new MyStruct.User();
+            this.u.setUname(u.getUname());
+            this.u.setUid(u.getUid());
+            this.u.setStatus(u.getStatus());
+            this.u.setStartTime(u.getStartTime());
+            this.u.setSign(u.getSign());
+            this.u.setPhoto(u.getPhoto());
+            this.u.setName(u.getName());
+            this.u.setGender(u.getGender());
+            this.u.setEmail(u.getEmail());
         }
 
         public String getRemark() {

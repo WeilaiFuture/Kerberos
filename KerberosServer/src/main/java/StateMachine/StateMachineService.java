@@ -6,7 +6,6 @@ import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.statemachine.StateMachine;
 import org.springframework.statemachine.config.StateMachineFactory;
 import org.springframework.statemachine.persist.StateMachinePersister;
-import org.springframework.stereotype.Service;
 
 import java.util.Map;
 import java.util.UUID;
