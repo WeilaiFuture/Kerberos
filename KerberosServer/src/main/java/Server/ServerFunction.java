@@ -20,7 +20,7 @@ public class ServerFunction extends SessionHandler {
     }
 
     @Override
-    public void receive(Object msg) {
+    public void receive(String channelName,Object msg) {
 
     }
 }

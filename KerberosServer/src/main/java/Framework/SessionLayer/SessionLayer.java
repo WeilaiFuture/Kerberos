@@ -1,5 +1,6 @@
 package Framework.SessionLayer;
 
+import Framework.SessionLayer.Exceptions.SessionLayerNotInitialized;
 import Framework.SessionLayer.Handlers.SessionHandler;
 import io.netty.channel.Channel;
 import io.netty.util.AttributeKey;
@@ -23,13 +24,18 @@ import java.util.concurrent.ConcurrentHashMap;
  * netty outbound handler 的触发方法，在SessionHandler中被调用
  */
 public class SessionLayer {
-    static private SessionHandler sessionHandler;
+    static private SessionHandler sessionHandler = null;
     static public ConcurrentHashMap<String, Channel> channelMap = new ConcurrentHashMap<>();
     //static public ConcurrentHashMap<String, List<Object>> offlineMsgQueue = new ConcurrentHashMap<>();
     public SessionLayer(SessionHandler sessionHandler){
         this.sessionHandler = sessionHandler;
     }
     private static OfflineMsgQueue offlineMsgQueue = new OfflineMsgQueue();
+    static public void checkInitStatus(){
+        if(sessionHandler == null) {
+            throw new SessionLayerNotInitialized();
+        }
+    }
     static public void send(String userName,Object msg){
         /*
          * 三种情况：
@@ -37,6 +43,7 @@ public class SessionLayer {
          * 2 用户不在线，在离线队列中有用户（不是第一个离线信息）
          * 3 用户不在线，离线队列中没有用户（第一条离线信息）
          */
+        checkInitStatus();
         if(channelMap.get(userName) != null){
             channelMap.get(userName).write(msg);
         }
@@ -44,14 +51,16 @@ public class SessionLayer {
             offlineMsgQueue.write(userName,msg);
         }
     }
-    static public void receive(Object msg){
+    static public void receive(String channelName,Object msg){
         /*
          * 针对已经连接服务器但是没有登录的用户，会先生成一个临时ID，登录后临时ID改为用户ID
          * 临时ID改用户ID的过程在login中完成
          */
-        sessionHandler.receive(msg);
+        checkInitStatus();
+        sessionHandler.receive(channelName,msg);
     }
     static public void logOut(String userName){
+        checkInitStatus();
         Channel channel = channelMap.get(userName);
         channel.close();
         channelMap.remove(userName);
@@ -62,6 +71,7 @@ public class SessionLayer {
          * 用于将channelname和channel存在map中形成映射关系
          */
         //给channel随机生成一个channelName并查重
+        checkInitStatus();
         String channelName = RandomStringUtils.randomAlphanumeric(10);
         channelMap.put(channelName,channel);
         return channelName;
@@ -71,6 +81,7 @@ public class SessionLayer {
         /*
          * 本函数仅在channel被释放时被调用，用于将channelname与channel的映射关系删除
          */
+        checkInitStatus();
         channelMap.remove(channelName);
     }
     static public void bindUserNameWithUserName(String tempName,String userName){
@@ -78,6 +89,7 @@ public class SessionLayer {
          * 当用户在业务逻辑层面完成登录时，应该调用本函数将用户对应的channelname与
          * username绑定，之后就可以通过
          */
+        checkInitStatus();
         Channel channel =  channelMap.get(tempName);
         channelMap.remove(tempName);
         channel.attr(AttributeKey.valueOf("channelName")).set(tempName);
