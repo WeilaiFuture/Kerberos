@@ -29,37 +29,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0e939090-7ab6-4bc6-875c-d0daf79ad1c7" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_logging_commons_logging_1_2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__javax_activation_javax_activation_api_1_2_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__javax_xml_bind_jaxb_api_2_3_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_lang3_3_12_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_aop_4_3_3_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_beans_4_3_3_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_context_4_3_3_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_core_4_3_3_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_expression_4_3_3_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_messaging_4_3_3_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_tx_4_3_3_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_statemachine_spring_statemachine_core_1_2_0_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Framework/CommunicationLayer/Handlers/ClientIdleStateTrigger.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Framework/CommunicationLayer/Handlers/ReceiveHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Framework/CommunicationLayer/LayerChannelInitializer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Framework/SessionLayer/OfflineMsgQueue.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KerberosServer.iml" beforeDir="false" afterPath="$PROJECT_DIR$/KerberosServer.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Framework/Client/EchoClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Framework/Testing/EchoClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Framework/Client/EchoClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Framework/Testing/EchoClientHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Framework/Client/EchoClientHandler2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Framework/Testing/EchoClientHandler2.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Framework/EchoServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Framework/CommunicationLayer/CommunicationLayer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Framework/FunctionSet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Framework/FunctionSet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Framework/Handlers/EchoServerHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Framework/CommunicationLayer/Handlers/TestingHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Framework/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Framework/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Framework/Session/Session.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Framework/SessionLayer/SessionLayer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Framework/Session/SessionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Framework/SessionLayer/Handlers/SessionHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/StateMachine/StateMachineEventConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/StateMachine/StateMachineEventConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Framework/FunctionSet.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Kerberos/AS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Kerberos/AS.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Server/ServerFunction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/ServerFunction.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -344,7 +317,14 @@
       <option name="project" value="LOCAL" />
       <updated>1621648696997</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="完成了Famework。">
+      <created>1622075955783</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1622075955783</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -405,17 +385,18 @@
     <MESSAGE value="添加Json结构体，&#10;完善状态机框架。&#10;2" />
     <MESSAGE value="完善Json功能（更改MyStruct）。" />
     <MESSAGE value="状态机添加 状态工厂" />
-    <option name="LAST_COMMIT_MESSAGE" value="状态机添加 状态工厂" />
+    <MESSAGE value="完成了Famework。" />
+    <option name="LAST_COMMIT_MESSAGE" value="完成了Famework。" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="574" y="117" width="670" height="589" key="#com.intellij.ide.util.MemberChooser" timestamp="1621858098624">
+    <state x="574" y="117" width="670" height="589" key="#com.intellij.ide.util.MemberChooser" timestamp="1622077142952">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="574" y="117" width="670" height="589" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1621858098624" />
-    <state x="499" y="158" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1621841969571">
+    <state x="574" y="117" width="670" height="589" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1622077142952" />
+    <state x="499" y="158" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1622076998774">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="499" y="158" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824@0.0.1536.824" timestamp="1621841969571" />
+    <state x="499" y="158" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824@0.0.1536.824" timestamp="1622076998774" />
     <state width="1493" height="226" key="GridCell.Tab.0.bottom" timestamp="1621862328245">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -432,10 +413,14 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1493" height="226" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1621862328245" />
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1621839663813">
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1622076124065">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1621839663813" />
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1622076124065" />
+    <state x="574" y="325" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1622077152141">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="574" y="325" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824@0.0.1536.824" timestamp="1622077152141" />
     <state x="425" y="187" width="672" height="677" key="run.anything.popup" timestamp="1621862100626">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

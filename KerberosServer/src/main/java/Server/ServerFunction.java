@@ -1,8 +1,8 @@
 package Server;
 
-import Framework.FunctionSet;
+import Framework.SessionLayer.Handlers.SessionHandler;
 
-public class ServerFunction extends FunctionSet {
+public class ServerFunction extends SessionHandler {
     //继承方法集
     ServerFunction(){
         //调用函数，发送本地证书给AS
@@ -17,5 +17,10 @@ public class ServerFunction extends FunctionSet {
          */
 
         return true;
+    }
+
+    @Override
+    public void receive(Object msg) {
+
     }
 }
