@@ -147,8 +147,6 @@ public class ServerDataBase {
                 friend.setStartTime(result.getInt("startTime"));
                 MyStruct.User user=rSearchID(result.getString("ta"));
                 friend.setU(user);
-           //     System.out.println("查询账号 "+result.getString("ta")+" uid "+user.getUid()+user.getStatus()+user.getGender()+user.getStartTime()+user.getEmail());
-
                 String sql1="SELECT `tname` FROM `tags` WHERE `tid`="+result.getInt("tid")+  " and `uid`=\""+ID+"\"";
                 Statement statement1=con.createStatement();
                 ResultSet result1 = statement1.executeQuery(sql1);
@@ -185,7 +183,7 @@ public class ServerDataBase {
         }
         return friends;
     }
-     static public LinkedList<String> rGroupUser(String ID){
+    static public LinkedList<String> rGroupUser(String ID){
         /*
         查询群内成员ID；
          */
@@ -204,7 +202,7 @@ public class ServerDataBase {
              System.out.println(ID+" 查询群成员错误");
          }
          return groups;
-     }
+    }
     static public MyStruct.User rSearchID(String ID){
         /*
         查询用户；
