@@ -8,6 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("ui/qq.ico")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("image_source/test.gif")]
 
 

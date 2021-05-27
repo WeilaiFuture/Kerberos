@@ -57,7 +57,7 @@ namespace Kerberos_Client.UI
                 Message = send_text.Text,
                 MessageLocation = TypeLocalMessageLocation.chatSend
             }); ;
-            ListBoxChat.SelectedIndex = ListBoxChat.Items.Count - 1;
+            ListBoxChat.ScrollIntoView(ListBoxChat.Items[ListBoxChat.Items.Count - 1]);
         }
 
     }

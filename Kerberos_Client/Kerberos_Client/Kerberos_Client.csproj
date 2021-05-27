@@ -150,7 +150,7 @@
     <Resource Include="Image_Source\登录密码修改.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="UI\qq.ico" />
+    <Resource Include="Image_Source\test.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

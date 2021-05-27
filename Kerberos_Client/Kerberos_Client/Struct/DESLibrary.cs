@@ -10,11 +10,10 @@ namespace Kerberos_Client
 {
     class DESLibrary
     {
-
+        private static string ori = "1qaz2wsx";
         //默认密钥向量
-        private static byte[] Keys = { 0x12, 0x34, 0x56, 0x78, 0x90, 0xAB, 0xCD, 0xEF };
+        private static byte[] Keys = ASCIIEncoding.ASCII.GetBytes(ori);
 
-        #region 加密
         /// <summary>
         /// DES加密字符串
         /// </summary>
@@ -41,9 +40,7 @@ namespace Kerberos_Client
                 return encryptString;
             }
         }
-        #endregion
 
-        #region 解密   
         /// <summary>
         /// DES解密字符串
         /// </summary>
@@ -69,6 +66,6 @@ namespace Kerberos_Client
                 return decryptString;
             }
         }
-        #endregion
     }
+
 }

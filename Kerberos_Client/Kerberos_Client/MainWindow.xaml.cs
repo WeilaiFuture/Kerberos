@@ -48,7 +48,26 @@ namespace Kerberos_Client
             //绑定数据
             ID.ItemsSource = User_Item;
             ID.DisplayMemberPath = "Uid";
-            StreamReader sr = new StreamReader(@"../../conf/Login.conf");//读取登录界面配置文件
+            StreamReader sr=null;
+            if (File.Exists(@"../../conf/Login.conf"))
+                sr = new StreamReader(@"../../conf/Login.conf");//读取登录界面配置文件
+            else
+            {
+                string path = @"../../Image_Source\未登录头象.png";
+                BitmapImage bi;
+                using (MemoryStream ms = new MemoryStream(File.ReadAllBytes(path)))
+                {
+                    bi = new BitmapImage();
+                    bi.BeginInit();
+                    bi.CacheOption = BitmapCacheOption.OnLoad;//设置缓存模式
+                    bi.StreamSource = ms;//通过StreamSource加载图片
+                    bi.EndInit();
+                    bi.Freeze();
+
+                }
+                head_Image.Source = bi;
+                return;
+            }
             //恢复列表
             string json = string.Empty;
             while ((json = sr.ReadLine()) != null)
