@@ -1,5 +1,7 @@
 package Framework;
-
+/*
+ * 已弃用，请勿使用
+ */
 public class FunctionSet {
     //其他AS、TGS、Server继承此类
     public FunctionSet(){}
