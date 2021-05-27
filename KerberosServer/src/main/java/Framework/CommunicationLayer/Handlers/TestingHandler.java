@@ -1,12 +1,11 @@
-package Framework.Handlers;
+package Framework.CommunicationLayer.Handlers;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.ChannelInboundHandler;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 
-public class EchoServerHandler extends ChannelInboundHandlerAdapter {
+public class TestingHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
@@ -23,8 +22,11 @@ public class EchoServerHandler extends ChannelInboundHandlerAdapter {
         ctx.flush();
 
         //.addListener(ChannelFutureListener.CLOSE);
+    }
 
-
+    @Override
+    public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
+        super.userEventTriggered(ctx, evt);
     }
 
     @Override

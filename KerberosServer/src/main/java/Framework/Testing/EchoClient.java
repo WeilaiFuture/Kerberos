@@ -1,4 +1,4 @@
-package Framework.Client;
+package Framework.Testing;
 
 
 import io.netty.bootstrap.Bootstrap;
