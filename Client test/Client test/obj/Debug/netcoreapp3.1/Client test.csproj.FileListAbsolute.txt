@@ -7,7 +7,9 @@ E:\Kerberos\Client test\Client test\bin\Debug\netcoreapp3.1\Client test.pdb
 E:\Kerberos\Client test\Client test\obj\Debug\netcoreapp3.1\Client test.csprojAssemblyReference.cache
 E:\Kerberos\Client test\Client test\obj\Debug\netcoreapp3.1\Client test.AssemblyInfoInputs.cache
 E:\Kerberos\Client test\Client test\obj\Debug\netcoreapp3.1\Client test.AssemblyInfo.cs
-E:\Kerberos\Client test\Client test\obj\Debug\netcoreapp3.1\Client test.csproj.CoreCompileInputs.cache
 E:\Kerberos\Client test\Client test\obj\Debug\netcoreapp3.1\Client test.dll
 E:\Kerberos\Client test\Client test\obj\Debug\netcoreapp3.1\Client test.pdb
 E:\Kerberos\Client test\Client test\obj\Debug\netcoreapp3.1\Client test.genruntimeconfig.cache
+E:\Kerberos\Client test\Client test\bin\Debug\netcoreapp3.1\BouncyCastle.Crypto.dll
+E:\Kerberos\Client test\Client test\obj\Debug\netcoreapp3.1\Client test.csproj.CoreCompileInputs.cache
+E:\Kerberos\Client test\Client test\obj\Debug\netcoreapp3.1\Client test.csproj.CopyComplete

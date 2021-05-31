@@ -226,5 +226,17 @@ namespace Kerberos_Client.UI
             }
             DragMove();
         }
+
+        private void Add_Click(object sender, RoutedEventArgs e)
+        {
+            Dispatcher.Invoke(new Action(delegate
+            {
+                Add_Window u = new Add_Window(My_user);
+                Thread newWindowThread = new Thread(() => ThreadStartingPoint(u));
+                newWindowThread.SetApartmentState(ApartmentState.STA);
+                newWindowThread.IsBackground = true;
+                newWindowThread.Start();
+            }));
+        }
     }
 }

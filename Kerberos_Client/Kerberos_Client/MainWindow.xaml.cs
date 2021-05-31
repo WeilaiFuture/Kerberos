@@ -128,10 +128,14 @@ namespace Kerberos_Client
         private void Login_Click(object sender, RoutedEventArgs e)
         {
             //登录时，重新配置当前用户
+            Login_User temp = ID.SelectedItem as Login_User;
             Login_User u;
-            u = new Login_User(ID.Text, password.Password, head_Image.Source.ToString(), key_Check.IsChecked, login_Check.IsChecked);
+            if (temp == null)
+                u = new Login_User(ID.Text, password.Password, @"../../Image_Source\未登录头象.png", key_Check.IsChecked, login_Check.IsChecked);
+            else
+                u = new Login_User(ID.Text, password.Password, temp.Photo, key_Check.IsChecked, login_Check.IsChecked);
             if (key_Check.IsChecked == false)
-                u.Psswd=string.Empty;
+                u.Psswd = string.Empty;
             User_Item.Remove(User_Item.Find(delegate (Login_User user) { return user.Uid.Equals(ID.Text); }));
             User_Item.Insert(0, u);
             //保存配置文件
@@ -177,6 +181,7 @@ namespace Kerberos_Client
                 path = (ID.SelectedItem as Login_User).Photo;
                 if (!File.Exists(path))
                     path = @"../../Image_Source\未登录头象.png";
+                u.Photo = path;
             }
             using (MemoryStream ms = new MemoryStream(File.ReadAllBytes(path)))
             {

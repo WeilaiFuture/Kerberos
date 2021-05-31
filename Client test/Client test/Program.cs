@@ -55,35 +55,44 @@ namespace Client_test
         static void RSA_test()
         {
             string line;
-            StreamReader sr_P = new StreamReader("Plaintext.txt");
+            StreamReader sr_P = new StreamReader(@"F:\Cryption\RSAENout.txt");
             StreamReader sr_K = new StreamReader("Kc.txt");
             StreamWriter sw_EN = new StreamWriter("RSAENout.txt");
             StreamWriter sw_DE = new StreamWriter("RSADEout.txt");
-            StreamWriter sw_dig = new StreamWriter("Digitial.txt");
-            StreamWriter sw_di = new StreamWriter("Dig.txt");
+            //StreamWriter sw_dig = new StreamWriter("Digitial.txt");
+            //StreamWriter sw_di = new StreamWriter("Dig.txt");
+            StreamReader sw1 = new StreamReader("PKB1.txt");
+            StreamReader sw2 = new StreamReader("PKI1.txt");
+            StreamReader sr_dig = new StreamReader(@"F:\Cryption\Digitial.txt");
             string PKB, PKI;
+            PKB = sw1.ReadLine();
+            PKI = sw2.ReadLine();
             while ((line = sr_P.ReadLine()) != null)
             {
-                RSALibrary.RSAKey(out PKI, out PKB);
-
+                //RSALibrary.RSAKey(out PKI, out PKB);
                 string Enc_str = RSALibrary.RSAEncrypt(PKB, line);
-                string Dec_str = RSALibrary.RSADecrypt(PKI, Enc_str) ;
+                string Dec_str = RSALibrary.RSADecrypt(PKI, line) ;
                 string dig_str=string.Empty;
-                RSALibrary.SignatureFormatter(PKI, line, ref dig_str);
-                sw_EN.WriteLine(Dec_str);
-                sw_DE.WriteLine(Enc_str);
-                sw_dig.WriteLine(dig_str);
-                if (RSALibrary.SignatureDeformatter(PKB, dig_str, line))
+                //RSALibrary.SignatureFormatter(PKI, line, ref dig_str);
+                dig_str = sr_dig.ReadLine();
+                sw_EN.WriteLine(Enc_str);
+                sw_DE.WriteLine(Dec_str);
+                //sw_dig.WriteLine(dig_str);
+                string s=null;
+                RSALibrary.SignatureFormatter(PKI, Dec_str, ref s);
+                if (RSALibrary.SignatureDeformatter(PKB, dig_str, Dec_str))
                     Console.WriteLine("1");
-                sw_di.WriteLine(dig_str);
+                //sw_di.WriteLine(dig_str);
 
             }
             sr_P.Close();
             sr_K.Close();
             sw_EN.Close();
             sw_DE.Close();
-            sw_di.Close();
-            sw_dig.Close();
+            //sw_di.Close();
+            //sw_dig.Close();
+            sw1.Close();
+            sw2.Close();
 
         }
         //生成字母和数字随机数

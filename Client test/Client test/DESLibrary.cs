@@ -10,7 +10,7 @@ namespace Client
 {
     class DESLibrary
     {
-        private static string ori = "1qaz2wsx";
+        private static string ori = "12345678";
         //默认密钥向量
         private static byte[] Keys = ASCIIEncoding.ASCII.GetBytes(ori);
 
@@ -24,13 +24,15 @@ namespace Client
         {
             try
             {
-                byte[] rgbKey = Encoding.UTF8.GetBytes(encryptKey.Substring(0, 8));//转换为字节
-                byte[] rgbIV = Keys;
+                //byte[] rgbKey = Encoding.UTF8.GetBytes(encryptKey.Substring(0, 8));//转换为字节
+               // byte[] rgbIV = Keys;
                 byte[] inputByteArray = Encoding.UTF8.GetBytes(encryptString);
                 DESCryptoServiceProvider dCSP = new DESCryptoServiceProvider();//实例化数据加密标准
+                dCSP.Key = Encoding.ASCII.GetBytes(encryptKey);
+                dCSP.IV = Encoding.ASCII.GetBytes(ori);
                 MemoryStream mStream = new MemoryStream();//实例化内存流
                                                           //将数据流链接到加密转换的流
-                CryptoStream cStream = new CryptoStream(mStream, dCSP.CreateEncryptor(rgbKey, rgbIV), CryptoStreamMode.Write);
+                CryptoStream cStream = new CryptoStream(mStream, dCSP.CreateEncryptor(), CryptoStreamMode.Write);
                 cStream.Write(inputByteArray, 0, inputByteArray.Length);
                 cStream.FlushFinalBlock();
                 return Convert.ToBase64String(mStream.ToArray());
@@ -51,12 +53,14 @@ namespace Client
         {
             try
             {
-                byte[] rgbKey = Encoding.UTF8.GetBytes(decryptKey);
-                byte[] rgbIV = Keys;
+                //byte[] rgbKey = Encoding.UTF8.GetBytes(decryptKey);
+                //byte[] rgbIV = Keys;
                 byte[] inputByteArray = Convert.FromBase64String(decryptString);
                 DESCryptoServiceProvider DCSP = new DESCryptoServiceProvider();
+                DCSP.Key = Encoding.ASCII.GetBytes(decryptKey);
+                DCSP.IV = Encoding.ASCII.GetBytes(ori);
                 MemoryStream mStream = new MemoryStream();
-                CryptoStream cStream = new CryptoStream(mStream, DCSP.CreateDecryptor(rgbKey, rgbIV), CryptoStreamMode.Write);
+                CryptoStream cStream = new CryptoStream(mStream, DCSP.CreateDecryptor(), CryptoStreamMode.Write);
                 cStream.Write(inputByteArray, 0, inputByteArray.Length);
                 cStream.FlushFinalBlock();
                 return Encoding.UTF8.GetString(mStream.ToArray());

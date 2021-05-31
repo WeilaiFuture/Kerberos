@@ -35,6 +35,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BouncyCastle.Crypto, Version=1.8.10.0, Culture=neutral, PublicKeyToken=0e99375e54769942, processorArchitecture=MSIL">
+      <HintPath>..\packages\Portable.BouncyCastle.1.8.10\lib\net40\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -68,6 +71,9 @@
     <Compile Include="Struct\MyStruct.cs" />
     <Compile Include="Struct\Number.cs" />
     <Compile Include="Struct\RSALibrary.cs" />
+    <Compile Include="UI\Add_Window.xaml.cs">
+      <DependentUpon>Add_Window.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\ChatMessage.cs" />
     <Compile Include="UI\Chat_Window.xaml.cs">
       <DependentUpon>Chat_Window.xaml</DependentUpon>
@@ -92,6 +98,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="UI\Add_Window.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UI\Chat_Window.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -151,6 +161,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Image_Source\test.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image_Source\add.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
