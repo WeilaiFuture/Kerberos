@@ -4,6 +4,10 @@
              xmlns:local="clr-namespace:Kerberos_Client"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="UI/ListBoxStyle.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>  
     </Application.Resources>
 </Application>

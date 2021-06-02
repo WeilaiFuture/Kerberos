@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -21,72 +22,42 @@ namespace Kerberos_Client.UI
     /// </summary>
     public partial class Chat_Window : Window
     {
-        private string uname;
-        public string Uname
+
+        private ObservableCollection<ChatMessage> chatMessage = new ObservableCollection<ChatMessage>()
         {
-            get
+            new ChatMessage()
             {
-                return uname;
-            }
-            set
+                Photo=@"E:\Kerberos\Kerberos_Client\Kerberos_Client\Image_Source\test.jpg",
+                Message="你好",
+                MessageLocation=TypeLocalMessageLocation.chatRecv
+            },
+            new ChatMessage()
             {
-                if (Uname_TextBlock.Text != value)
-                {
-                    Uid_TX.Text = string.Format("昵称: {0}", value);
-                    PropertyChanged(this, new PropertyChangedEventArgs("Uname_TextBlock.Text"));
-                }
-            }
-        }
-        private string uid;
-        public string Uid
-        {
-            get
-            {
-                return uid;
-            }
-            set
-            {
-                if (Uid_TX.Text != value)
-                {
-                    Uid_TX.Text = string.Format("账号: {0}", value);
-                    PropertyChanged(this, new PropertyChangedEventArgs("Uid_TX.Text"));
-                }
-            }
-        }
-        private string email;
-        public string Email
-        {
-            get
-            {
-                return email;
-            }
-            set
-            {
-                if (Email_TX.Text != value)
-                {
-                    Uid_TX.Text = string.Format("邮箱: {0}", value);
-                    PropertyChanged(this, new PropertyChangedEventArgs("Email_TX.Text"));
-                }
-            }
-        }
-        public event PropertyChangedEventHandler PropertyChanged = delegate { };
+                Photo=@"E:\Kerberos\Kerberos_Client\Kerberos_Client\Image_Source\test.jpg",
+                Message="好久不见,老铁",
+                MessageLocation=TypeLocalMessageLocation.chatSend
+            },
+        };
+        public User My_user;
         public Chat_Window(User u, Image i)
         {
             InitializeComponent();
-            Uname = u.Uname;
-            Uid = u.Uid;
-            Email = u.Email;
+            My_user = u;
             head_Image = i;
-
+            Uname_TextBlock.Text = "昵称:" + My_user.Uname;
+            Uid_TX.Text = "账号:" + My_user.Uid;
+            Email_TX.Text = "邮箱:" + My_user.Email;
+            ListBoxChat.ItemsSource = chatMessage;
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
-        }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-
+            chatMessage.Add(new ChatMessage()
+            {
+                Photo = @"E:\Kerberos\Kerberos_Client\Kerberos_Client\Image_Source\test.jpg",
+                Message = send_text.Text,
+                MessageLocation = TypeLocalMessageLocation.chatSend
+            }); ;
+            ListBoxChat.ScrollIntoView(ListBoxChat.Items[ListBoxChat.Items.Count - 1]);
         }
 
     }

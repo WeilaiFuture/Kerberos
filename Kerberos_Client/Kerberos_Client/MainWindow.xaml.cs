@@ -48,7 +48,26 @@ namespace Kerberos_Client
             //绑定数据
             ID.ItemsSource = User_Item;
             ID.DisplayMemberPath = "Uid";
-            StreamReader sr = new StreamReader(@"../../conf/Login.conf");//读取登录界面配置文件
+            StreamReader sr=null;
+            if (File.Exists(@"../../conf/Login.conf"))
+                sr = new StreamReader(@"../../conf/Login.conf");//读取登录界面配置文件
+            else
+            {
+                string path = @"../../Image_Source\未登录头象.png";
+                BitmapImage bi;
+                using (MemoryStream ms = new MemoryStream(File.ReadAllBytes(path)))
+                {
+                    bi = new BitmapImage();
+                    bi.BeginInit();
+                    bi.CacheOption = BitmapCacheOption.OnLoad;//设置缓存模式
+                    bi.StreamSource = ms;//通过StreamSource加载图片
+                    bi.EndInit();
+                    bi.Freeze();
+
+                }
+                head_Image.Source = bi;
+                return;
+            }
             //恢复列表
             string json = string.Empty;
             while ((json = sr.ReadLine()) != null)
@@ -109,10 +128,14 @@ namespace Kerberos_Client
         private void Login_Click(object sender, RoutedEventArgs e)
         {
             //登录时，重新配置当前用户
+            Login_User temp = ID.SelectedItem as Login_User;
             Login_User u;
-            u = new Login_User(ID.Text, password.Password, head_Image.Source.ToString(), key_Check.IsChecked, login_Check.IsChecked);
+            if (temp == null)
+                u = new Login_User(ID.Text, password.Password, @"../../Image_Source\未登录头象.png", key_Check.IsChecked, login_Check.IsChecked);
+            else
+                u = new Login_User(ID.Text, password.Password, temp.Photo, key_Check.IsChecked, login_Check.IsChecked);
             if (key_Check.IsChecked == false)
-                u.Psswd=string.Empty;
+                u.Psswd = string.Empty;
             User_Item.Remove(User_Item.Find(delegate (Login_User user) { return user.Uid.Equals(ID.Text); }));
             User_Item.Insert(0, u);
             //保存配置文件
@@ -158,6 +181,7 @@ namespace Kerberos_Client
                 path = (ID.SelectedItem as Login_User).Photo;
                 if (!File.Exists(path))
                     path = @"../../Image_Source\未登录头象.png";
+                u.Photo = path;
             }
             using (MemoryStream ms = new MemoryStream(File.ReadAllBytes(path)))
             {
