@@ -333,8 +333,8 @@ namespace Kerberos_Client
             {
                 Uid = id;
                 Psswd = psw;
-                //Photo = photo;
-                Photo = "../../Image_Source/test.jpg";
+                Photo = photo;
+                //Photo = "../../Image_Source/test.jpg";
                 Remember = rem;
                 Automatic = auto;
             }

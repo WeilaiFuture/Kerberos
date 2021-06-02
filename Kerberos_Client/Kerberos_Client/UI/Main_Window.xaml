@@ -13,7 +13,7 @@
     <Window.Resources>
         <local:MyStruct x:Key="User"></local:MyStruct>
     </Window.Resources>
-    <Grid x:Name="My_grid" >
+    <Grid x:Name="My_grid" Focusable="True">
         <!--按比例切割界面-->
         <Grid.RowDefinitions>
             <RowDefinition Height="4*"></RowDefinition>
@@ -47,6 +47,44 @@
             <Button  Width="26" Height="28" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,0,-0.4,0" Click="Close_Click">
                 <WrapPanel >
                     <Image Source="../Image_Source/close.png" Stretch="Fill" Width="20" Height="19" RenderTransformOrigin="6.4,-1.677" ></Image>
+                </WrapPanel>
+                <Button.Template >
+                    <ControlTemplate TargetType="{x:Type Button}" >
+                        <Border Name="Close_Border"  BorderThickness="0" CornerRadius="1,1,1,1">
+                            <Border.Background >
+                                <SolidColorBrush x:Name="ColorQ"/>
+                            </Border.Background>
+                            <ContentPresenter Content="{TemplateBinding ContentControl.Content}" HorizontalAlignment="Center" VerticalAlignment="Center" ></ContentPresenter>
+                            <Border.Triggers>
+                                <EventTrigger RoutedEvent="MouseEnter">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <ColorAnimation Storyboard.TargetName="ColorQ"
+                                            Storyboard.TargetProperty="(SolidColorBrush.Color)"
+                                            From="Red" To="Red"
+                                            AutoReverse="True" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                                <EventTrigger RoutedEvent="MouseLeave">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <ColorAnimation Storyboard.TargetName="ColorQ"
+                                            Storyboard.TargetProperty="(SolidColorBrush.Color)"
+                                            From="#00000000" To="#00000000"
+                                            AutoReverse="True" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                            </Border.Triggers>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+            <!--添加好友-->
+            <Button  Width="26" Height="28" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,0,46,0" Click="Add_Click">
+                <WrapPanel >
+                    <Image Source="../Image_Source/add.png" Stretch="Fill" Width="20" Height="19" RenderTransformOrigin="6.4,-1.677" ></Image>
                 </WrapPanel>
                 <Button.Template >
                     <ControlTemplate TargetType="{x:Type Button}" >

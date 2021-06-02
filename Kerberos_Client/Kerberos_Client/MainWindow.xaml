@@ -17,7 +17,7 @@
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
         <!--动态背景图片-->
-        <Image Name="back_img" gif:ImageBehavior.AnimatedSource="Image_Source/background.gif" Margin="-22,-19,-34,-51" Grid.RowSpan="3" RenderTransformOrigin="0.5,0.5" >
+        <Image Name="back_img" Stretch="Fill" gif:ImageBehavior.AnimatedSource="Image_Source/test.gif" Margin="-22,-19,-34,-51" Grid.RowSpan="3" RenderTransformOrigin="0.5,0.5" >
             <Image.CacheMode>
                 <BitmapCache />
             </Image.CacheMode>

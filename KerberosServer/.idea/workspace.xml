@@ -32,6 +32,8 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Json/MyStruct.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Json/MyStruct.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Server/ServerHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/ServerHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client test/.vs/Client test/v16/.suo" beforeDir="false" afterPath="$PROJECT_DIR$/../Client test/.vs/Client test/v16/.suo" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kerberos_Client/.vs/Kerberos_Client/v16/.suo" beforeDir="false" afterPath="$PROJECT_DIR$/../Kerberos_Client/.vs/Kerberos_Client/v16/.suo" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="SHOW_DIALOG" value="false" />
@@ -214,25 +216,6 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
     <option name="RESET_MODE" value="HARD" />
   </component>
-  <component name="IdeDocumentHistory">
-    <option name="CHANGED_PATHS">
-      <list>
-        <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/Framework/SessionLayer/SessionLayer.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Server/ServerFunction.java" />
-        <option value="$PROJECT_DIR$/src/main/java/UI/log.form" />
-        <option value="$PROJECT_DIR$/src/main/java/UI/log.java" />
-        <option value="$PROJECT_DIR$/src/main/java/StateMachine/Application.java" />
-        <option value="$PROJECT_DIR$/src/main/java/StateMachine/RegStatusEnum.java" />
-        <option value="$PROJECT_DIR$/src/main/java/StateMachine/RegEventEnum.java" />
-        <option value="$PROJECT_DIR$/src/main/java/StateMachine/StateMachineConfig.java" />
-        <option value="$PROJECT_DIR$/src/main/java/StateMachine/StateMachineEventConfig.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Json/MyStruct.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Server/ServerDataBase.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Server/ServerHandler.java" />
-      </list>
-    </option>
-  </component>
   <component name="InvalidFacetManager">
     <ignored-facets>
       <facet id="KerberosServer/invalid/Web" />
@@ -366,6 +349,7 @@
     <property name="RequestMappingsPanelWidth1" value="75" />
     <property name="RequestMappingsPanelWidth2" value="75" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
@@ -482,6 +466,7 @@
     </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" BundledDictionaries="0" Folders="0" CustomDictionaries="0" Dictionaries="0" CorrectionsLimit="5" DefaultDictionary="application-level" UseSingleDictionary="true" />
+  <component name="SpellCheckerSettings" BundledDictionaries="0" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" Dictionaries="0" CorrectionsLimit="5" DefaultDictionary="application-level" UseSingleDictionary="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -503,6 +488,7 @@
       <workItem from="1621473111774" duration="7901000" />
       <workItem from="1621559713641" duration="6053000" />
       <workItem from="1621646463380" duration="23278000" />
+      <workItem from="1622371199351" duration="118000" />
     </task>
     <task id="LOCAL-00001" summary="创建IDEA项目">
       <created>1620305582799</created>
@@ -673,6 +659,7 @@
                   </entry>
                 </map>
               </option>
+              <option name="COLUMN_ORDER" />
             </State>
           </value>
         </entry>
