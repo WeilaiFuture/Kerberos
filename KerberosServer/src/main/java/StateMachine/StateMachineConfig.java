@@ -78,6 +78,10 @@ public class StateMachineConfig extends EnumStateMachineConfigurerAdapter<RegSta
                 // 12.
                 .and().withExternal().source(HEADOVER).target(HANDLER2002).event(HEAD2002)
                 // 13.
-                .and().withExternal().source(HEADOVER).target(HANDLER2).event(HEAD2);
+                .and().withExternal().source(HEADOVER).target(HANDLER1).event(HEAD1)
+                // 13.
+                .and().withExternal().source(HEADOVER).target(HANDLER2).event(HEAD2)
+                // 14.
+                .and().withExternal().source(HEADOVER).target(HANDLER7).event(HEAD7);
     }
 }

@@ -100,7 +100,51 @@ public class ServerDataBase {
             return false;
         }
     }
-
+    static public boolean wKcv(String ID,String K) {
+        /*
+        向数据库存入Kcv；
+         */
+        try {
+            String sql="update `Certificate` set `Kcv`=\""+K+"\" where `name`=\""+ID+"\"";
+            Statement statement=con.createStatement();
+            statement.executeUpdate(sql);
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("存储Kcv错误");
+            return false;
+        }
+    }
+    static public String rKcv(String ID) {
+        /*
+        向数据库读取Kcv；
+         */
+        try {
+            String sql="SELECT `Kcv` FROM `Certificate` WHERE `name`=\"" + ID + "\"";
+            Statement statement=con.createStatement();
+            ResultSet result = statement.executeQuery(sql);
+            return result.getString("Kcv");
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("读取Kcv错误");
+            return "";
+        }
+    }
+    static public String rPK(String ID) {
+        /*
+        向数据库查找PK；
+         */
+        try {
+            String sql="SELECT `pk` FROM `Certificate` WHERE `name`=\"" + ID + "\"";
+            Statement statement=con.createStatement();
+            ResultSet result = statement.executeQuery(sql);
+            return result.getString("pk");
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("查询PK失败");
+            return "";
+        }
+    }
     static public boolean wRegister(MyStruct struct) {
         /*
         向数据库存入注册信息；

@@ -1,33 +1,19 @@
 package Server;
 
+import Json.MyStruct;
+
 public class ServerSecurity {
-    public String enDES(String message,String key){
-        /*DES加密
-         */
-        return message;
-    }
-    public String deDES(String message,String key){
-        /*DES解密
-         */
-        return message;
-    }
-    public String sigRSA(String message,String key){
-        /*RSA数字签名
-         */
-        return message;
-    }
-    public String enRSA(String message,String key){
-        /*
-        RSA解密
-         */
-        return message;
-    }
-    public String createCertif(){
+
+    public static MyStruct.Certificate createCertif(String ID){
         /*
         生成证书
          */
+        MyStruct.Certificate certificate=new MyStruct.Certificate();
+    //    certificate.setPk();
+    //    certificate.setName();
+        //certificate.setDeadline();
         String message="";
-        return message;
+        return certificate;
     }
 
 }
