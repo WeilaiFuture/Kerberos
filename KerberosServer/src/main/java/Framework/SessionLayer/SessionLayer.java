@@ -84,7 +84,7 @@ public class SessionLayer {
         checkInitStatus();
         channelMap.remove(channelName);
     }
-    static public void bindUserNameWithUserName(String tempName,String userName){
+    static public void bindChannelWithUserName(String tempName,String userName){
         /*
          * 当用户在业务逻辑层面完成登录时，应该调用本函数将用户对应的channelname与
          * username绑定，之后就可以通过

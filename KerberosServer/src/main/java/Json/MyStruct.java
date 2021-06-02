@@ -2,6 +2,7 @@ package Json;
 
 
 import java.util.Dictionary;
+import java.util.LinkedList;
 import java.util.List;
 
 public class MyStruct {
@@ -20,7 +21,21 @@ public class MyStruct {
     public Chat_Message chat_message;
     public Group group;
     public Record_Message record_message;
+    public Friendlist friendlist;
 
+    static public class Friendlist{
+        LinkedList<Friend> Friends;
+
+        public LinkedList<Friend> getFriends() {
+            return Friends;
+        }
+
+        public void setFriends(LinkedList<Friend> friends) {
+            for(int i=0;i<friends.size();i++){
+                Friends.addLast(friends.get(i));
+            }
+        }
+    }
     static public class Certificate {
          String version;//版本号
          String serial;//序列号
@@ -521,10 +536,19 @@ public class MyStruct {
     static public class Group {
         List<Dictionary<User, String>> list;//用户列表
         String gid;//群账号
+        String gname;//群名称
         String photo;//群头像
         String leader;//群主账号
         String sign;//群介绍
         int startTime;//创建时间
+
+        public String getGname() {
+            return gname;
+        }
+
+        public void setGname(String gname) {
+            this.gname = gname;
+        }
 
         public List<Dictionary<User, String>> getList() {
             return list;
