@@ -24,13 +24,16 @@ namespace Kerberos_Client.UI
     public partial class Main_Window : Window
     {
         public User My_user;
-        private List<User> Friend_List = new List<User>();
-        private List<User> Message_List = new List<User>();
+        private static List<User> Friend_List = new List<User>();
+        private static List<User> Message_List = new List<User>();
+        private static List<User> Search_List = new List<User>();
+        private static Dictionary<string, Window> Chat_Window = new Dictionary<string, Window>();
         public Main_Window(User u, Image i)
         {
             InitializeComponent();
             init(u,i);
         }
+        #region 界面
         /// <summary>
         /// 界面初始化
         /// </summary>
@@ -50,6 +53,7 @@ namespace Kerberos_Client.UI
             My_user = u;
             friend_List.ItemsSource = Friend_List;
             message_List.ItemsSource = Message_List;
+            search_List.ItemsSource = Search_List;
             name_Block.Text = u.Name;
             sign_TextBox.Text = u.Sign;
             head_Image.Source = i.Source;
@@ -100,16 +104,7 @@ namespace Kerberos_Client.UI
             tb.Background = Brushes.White;
             tb.IsReadOnly = false;
         }
-        /// <summary>
-        /// 搜索框
-        /// </summary>
-        /// <param name="sender">事件</param>
-        /// <param name="e">时间路由</param>
-        /// <returns></returns>
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
 
-        }
         /// <summary>
         /// 双击还有聊天
         /// </summary>
@@ -238,5 +233,50 @@ namespace Kerberos_Client.UI
                 newWindowThread.Start();
             }));
         }
+        /// <summary>
+        /// 搜索框
+        /// </summary>
+        /// <param name="sender">事件</param>
+        /// <param name="e">时间路由</param>
+        /// <returns></returns>
+        private void search_TextBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            if(e.Key ==Key.Enter)
+            {
+                search_TextBox_TextChanged(sender, null);
+            }
+        }
+        /// <summary>
+        /// 搜索框
+        /// </summary>
+        /// <param name="sender">事件</param>
+        /// <param name="e">时间路由</param>
+        /// <returns></returns>
+        private void search_TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string temp = search_TextBox.Text;
+            if (string.Empty.Equals(temp))
+            {
+                Message_Tab.IsSelected = true;
+            }
+            else
+            {
+                Search_List.Clear();
+                foreach (object i in Friend_List)
+                {
+                    if ((i as User).Uname.Contains(temp) || (i as User).Uid.Contains(temp) || (i as User).Sign.Contains(temp))
+                    {
+                        Search_List.Add(i as User);
+                    }
+                }
+                search_TabItem.IsSelected = true;
+                search_List.ItemsSource = null;
+                search_List.ItemsSource=Search_List;
+            }
+           
+        }
+        #endregion
+
+
     }
 }

@@ -1,4 +1,5 @@
-﻿using Kerberos_Client.UI;
+﻿#define test
+using Kerberos_Client.UI;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,16 +19,20 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using static Kerberos_Client.MyStruct;
 
+
 namespace Kerberos_Client
 {
+
     /// <summary>
     /// MainWindow.xaml 的交互逻辑
     /// </summary>
     public partial class MainWindow : Window
     {
-        private string Kc = "20002018";
-        public List<Login_User> User_Item;//数据源
-
+        private static string Kc = "20002018";
+        public static List<Login_User> User_Item;//数据源
+        //public delegate void MyDelegate(string str);
+        //private MyDelegate md;
+        #region UI
         public MainWindow()
         {
             InitializeComponent();
@@ -44,6 +49,9 @@ namespace Kerberos_Client
         /// </summary>
         private void init(bool b)
         {
+            #if test
+            ConnectServer.connectserver(this);
+#endif
             User_Item = new List<Login_User>();
             //绑定数据
             ID.ItemsSource = User_Item;
@@ -78,7 +86,6 @@ namespace Kerberos_Client
             }
             ID.SelectedIndex =0;
             sr.Close();
-
             //判断是否需要自动登录
             Login_User u = ID.SelectedItem as Login_User;
             if (u.Automatic == true&&b)
@@ -127,7 +134,39 @@ namespace Kerberos_Client
         /// <param name="e">时间路由</param>
         private void Login_Click(object sender, RoutedEventArgs e)
         {
-            //登录时，重新配置当前用户
+            if (string.Empty.Equals(ID.Text) || string.Empty.Equals(password.Password))
+                MessageBox.Show("账号或密码为空，请重新输入");
+            else
+            {
+                //发送报文
+                User user = new User(ID.Text, password.Password);
+                string extend = JsonHelper.ToJson(user);
+                Order order = new Order();
+                order.MsgType = "1002";
+                order.Extend = extend;
+                string json= JsonHelper.ToJson(order);
+                ConnectServer.sendMessage(json);
+                Load_Tab.IsSelected = true;
+            }
+        }
+        internal void Call_check_User(User u)
+        {
+            Dispatcher.Invoke(new Action(delegate
+            {
+                //登录时，重新配置当前用户
+                set_User();
+                //保存配置文件
+                Save_conf();
+            User user1 = new User();
+            Window U = new Main_Window(user1, head_Image);
+            U.Show();
+            //回收系统内存，否则多次切换后，内存爆了
+            GC.Collect();
+            this.Close();
+            }));
+        }
+        private void set_User()
+        {
             Login_User temp = ID.SelectedItem as Login_User;
             Login_User u;
             if (temp == null)
@@ -138,15 +177,6 @@ namespace Kerberos_Client
                 u.Psswd = string.Empty;
             User_Item.Remove(User_Item.Find(delegate (Login_User user) { return user.Uid.Equals(ID.Text); }));
             User_Item.Insert(0, u);
-            //保存配置文件
-            Save_conf();
-            //接收报文
-            User user1 = new User();
-            Window U = new Main_Window(user1, head_Image);
-            U.Show();
-            //回收系统内存，否则多次切换后，内存爆了
-            GC.Collect();
-            this.Close();
         }
         /// <summary>
         /// 用户选项改变，更改数据
@@ -213,5 +243,11 @@ namespace Kerberos_Client
         {
             key_Check.IsChecked = true;
         }
+
+        private void Cancle_Click(object sender, RoutedEventArgs e)
+        {
+            Main_Tab.IsSelected = true;
+        }
+        #endregion
     }
 }

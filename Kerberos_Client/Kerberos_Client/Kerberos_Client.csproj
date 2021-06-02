@@ -43,6 +43,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -65,6 +66,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ConnectServer.cs" />
     <Compile Include="Struct\DESLibrary.cs" />
     <Compile Include="Struct\JsonHelper.cs" />
     <Compile Include="Struct\MyJson.cs" />
@@ -74,15 +76,21 @@
     <Compile Include="UI\Add_Window.xaml.cs">
       <DependentUpon>Add_Window.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\ChatMessage.cs" />
+    <Compile Include="Message\ChatMessage.cs" />
     <Compile Include="UI\Chat_Window.xaml.cs">
       <DependentUpon>Chat_Window.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Load.xaml.cs">
+      <DependentUpon>Load.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\LoadingWait.xaml.cs">
+      <DependentUpon>LoadingWait.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Main_Window.xaml.cs">
       <DependentUpon>Main_Window.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\MessageLocationConverter.cs" />
-    <Compile Include="UI\TypeLocalMessageLocation.cs" />
+    <Compile Include="Message\MessageLocationConverter.cs" />
+    <Compile Include="Message\TypeLocalMessageLocation.cs" />
     <Compile Include="UI\User_Window.xaml.cs">
       <DependentUpon>User_Window.xaml</DependentUpon>
     </Compile>
@@ -109,6 +117,14 @@
     <Page Include="UI\ListBoxStyle.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Load.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\LoadingWait.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\Main_Window.xaml">
       <SubType>Designer</SubType>
