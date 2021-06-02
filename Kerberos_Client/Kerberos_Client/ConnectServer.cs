@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Kerberos_Client.UI;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -33,9 +34,6 @@ namespace Kerberos_Client
             Thread threadReceive = new Thread(ReceiveData);
             threadReceive.IsBackground = true;
             threadReceive.Start();
-            Thread heartSend_ = new Thread(heartSend);
-            heartSend_.IsBackground = true;
-            heartSend_.Start();
         }
         /// <summary>
         /// 发送消息
@@ -98,12 +96,54 @@ namespace Kerberos_Client
                 string command = order.MsgType;
                 switch (command)
                 {
-                    case "0001":  //格式：login,用户名
-                       MessageBox.Show(Encoding.UTF8.GetString(result, 0, num)+"0001");
+                    case "0002":
+                        w.Call_certificate(order);
+                        break;
+                    case "0004":
+                        w.Call_AS(order);
+                        break;
+                    case "0006":
+                        w.Call_TGS(order);
+                        break;
+                    case "0008":
+                        w.Call_Server(order);
+                        break;
+                    case "1001": 
+                        MessageBox.Show(Encoding.UTF8.GetString(result, 0, num) + "0001");
                         break;
                     case "1002":
                         User user = JsonHelper.FromJson<User>(order.Extend);
                         w.Call_check_User(user);
+                        break;
+                    case "1003": //好友请求
+                        MessageBox.Show(Encoding.UTF8.GetString(result, 0, num) + "0001");
+                        break;
+                    case "1004"://好友界面
+                        Main_Window.Friend_List=
+                        break;
+                    case "1005": 
+                        MessageBox.Show(Encoding.UTF8.GetString(result, 0, num) + "0001");
+                        break;
+                    case "1006": 
+                        MessageBox.Show(Encoding.UTF8.GetString(result, 0, num) + "0001");
+                        break;
+                    case "1007":
+                        MessageBox.Show(Encoding.UTF8.GetString(result, 0, num) + "0001");
+                        break;
+                    case "1008": 
+                        MessageBox.Show(Encoding.UTF8.GetString(result, 0, num) + "0001");
+                        break;
+                    case "1009": 
+                        MessageBox.Show(Encoding.UTF8.GetString(result, 0, num) + "0001");
+                        break;
+                    case "1010":
+                        MessageBox.Show(Encoding.UTF8.GetString(result, 0, num) + "0001");
+                        break;
+                    case "2001": 
+                        MessageBox.Show(Encoding.UTF8.GetString(result, 0, num) + "0001");
+                        break;
+                    case "2002": 
+                        MessageBox.Show(Encoding.UTF8.GetString(result, 0, num) + "0001");
                         break;
                     default:
                         MessageBox.Show(Encoding.UTF8.GetString(result, 0, num));

@@ -117,7 +117,7 @@ namespace Client_test
                     dictThread.Remove(sokClient.RemoteEndPoint.ToString());
                     // 从列表中移除被中断的连接IP
                     Console.WriteLine(sokClient.RemoteEndPoint.ToString() + "xxxx");
-                    String s = dictID_reverse[sokClient.RemoteEndPoint.ToString()];
+                    string s = dictID_reverse[sokClient.RemoteEndPoint.ToString()];
                     dictID_reverse.Remove(sokClient.RemoteEndPoint.ToString());
                     dictID.Remove(s);
                     run_normal = false;

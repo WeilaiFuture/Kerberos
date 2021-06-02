@@ -24,10 +24,10 @@ namespace Kerberos_Client.UI
     public partial class Main_Window : Window
     {
         public User My_user;
-        private static List<User> Friend_List = new List<User>();
-        private static List<User> Message_List = new List<User>();
+        public static List<User> Friend_List = new List<User>();
+        public static List<User> Message_List = new List<User>();
         private static List<User> Search_List = new List<User>();
-        private static Dictionary<string, Window> Chat_Window = new Dictionary<string, Window>();
+        public static Dictionary<string, Window> Chat_Window = new Dictionary<string, Window>();
         public Main_Window(User u, Image i)
         {
             InitializeComponent();
@@ -277,6 +277,10 @@ namespace Kerberos_Client.UI
         }
         #endregion
 
-
+        internal void Call_Server(Order o)
+        {
+            List<User> users = JsonHelper.FromJson<List<User>>(o.Extend);
+            Friend_List = users;
+        }
     }
 }
