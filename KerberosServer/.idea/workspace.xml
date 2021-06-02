@@ -29,6 +29,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0e939090-7ab6-4bc6-875c-d0daf79ad1c7" name="Default Changelist" comment="">
+<<<<<<< Updated upstream
       <change afterPath="$PROJECT_DIR$/../Cryption/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Cryption/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Cryption/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Cryption/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Cryption/.idea/workspace.xml" afterDir="false" />
@@ -37,6 +38,10 @@
       <change beforePath="$PROJECT_DIR$/KerberosServer.iml" beforeDir="false" afterPath="$PROJECT_DIR$/KerberosServer.iml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
+=======
+      <change beforePath="$PROJECT_DIR$/src/main/java/Communication/Communication.java" beforeDir="false" />
+    </list>
+>>>>>>> Stashed changes
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -48,6 +53,7 @@
   <component name="DefaultGradleProjectSettings">
     <option name="isMigrated" value="true" />
   </component>
+<<<<<<< Updated upstream
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
       <file pinned="false" current-in-tab="false">
@@ -179,6 +185,8 @@
       </file>
     </leaf>
   </component>
+=======
+>>>>>>> Stashed changes
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -217,6 +225,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
     <option name="RESET_MODE" value="HARD" />
   </component>
+<<<<<<< Updated upstream
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
@@ -237,6 +246,8 @@
       </list>
     </option>
   </component>
+=======
+>>>>>>> Stashed changes
   <component name="InvalidFacetManager">
     <ignored-facets>
       <facet id="KerberosServer/invalid/Web" />
@@ -252,16 +263,20 @@
   <component name="ProjectCodeStyleSettingsMigration">
     <option name="version" value="1" />
   </component>
+<<<<<<< Updated upstream
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="87" />
     <option name="y" value="7" />
     <option name="width" value="1235" />
     <option name="height" value="1040" />
   </component>
+=======
+>>>>>>> Stashed changes
   <component name="ProjectId" id="1sz4xwzaWpq9zuFWSkqz0vIk8qg" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
+<<<<<<< Updated upstream
   <component name="ProjectView">
     <navigator currentView="Scope" currentSubView="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope" proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
@@ -324,6 +339,8 @@
       <pane id="ProjectPane" />
     </panes>
   </component>
+=======
+>>>>>>> Stashed changes
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -337,6 +354,10 @@
     <property name="RequestMappingsPanelWidth1" value="75" />
     <property name="RequestMappingsPanelWidth2" value="75" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+<<<<<<< Updated upstream
+=======
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+>>>>>>> Stashed changes
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
@@ -357,6 +378,7 @@
       <command value="mvn compile" />
     </option>
   </component>
+<<<<<<< Updated upstream
   <component name="RunDashboard">
     <option name="ruleStates">
       <list>
@@ -370,6 +392,22 @@
     </option>
   </component>
   <component name="RunManager" selected="Spring Boot.Application (1)">
+=======
+  <component name="RunManager" selected="Application.EchoClient">
+    <configuration name="Application" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="StateMachine.Application" />
+      <module name="KerberosServer" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="StateMachine.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+>>>>>>> Stashed changes
     <configuration name="CommunicationLayer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Framework.CommunicationLayer.CommunicationLayer" />
       <module name="KerberosServer" />
@@ -396,12 +434,21 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+<<<<<<< Updated upstream
     <configuration name="ServerDataBase" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Server.ServerDataBase" />
       <module name="KerberosServer" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="Server.*" />
+=======
+    <configuration name="SeverBuilder" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Framework.SeverBuilder" />
+      <module name="KerberosServer" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Framework.*" />
+>>>>>>> Stashed changes
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -409,6 +456,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+<<<<<<< Updated upstream
     <configuration name="log$ShowAllFrame" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="UI.log$ShowAllFrame" />
       <module name="KerberosServer" />
@@ -418,10 +466,16 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+=======
+    <configuration name="Application (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="KerberosServer" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="StateMachine.Application" />
+>>>>>>> Stashed changes
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+<<<<<<< Updated upstream
     <configuration name="log" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="UI.log" />
       <module name="KerberosServer" />
@@ -431,10 +485,22 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+=======
+    <configuration name="Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="KerberosServer" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="SPRING_BOOT_MAIN_CLASS" value="test.Application" />
+>>>>>>> Stashed changes
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+<<<<<<< Updated upstream
     <configuration name="Application (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="KerberosServer" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="StateMachine.Application" />
@@ -453,6 +519,24 @@
     </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" BundledDictionaries="0" Folders="0" CustomDictionaries="0" Dictionaries="0" CorrectionsLimit="5" DefaultDictionary="application-level" UseSingleDictionary="true" />
+=======
+    <list>
+      <item itemvalue="Application.Application" />
+      <item itemvalue="Application.CommunicationLayer" />
+      <item itemvalue="Application.EchoClient" />
+      <item itemvalue="Application.SeverBuilder" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.EchoClient" />
+        <item itemvalue="Application.CommunicationLayer" />
+        <item itemvalue="Application.SeverBuilder" />
+        <item itemvalue="Application.Application" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="false" />
+>>>>>>> Stashed changes
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -474,6 +558,10 @@
       <workItem from="1621473111774" duration="7901000" />
       <workItem from="1621559713641" duration="6053000" />
       <workItem from="1621646463380" duration="23278000" />
+<<<<<<< Updated upstream
+=======
+      <workItem from="1622371199351" duration="118000" />
+>>>>>>> Stashed changes
     </task>
     <task id="LOCAL-00001" summary="创建IDEA项目">
       <created>1620305582799</created>
@@ -552,6 +640,7 @@
       <option name="project" value="LOCAL" />
       <updated>1621648696997</updated>
     </task>
+<<<<<<< Updated upstream
     <task id="LOCAL-00012" summary="添加部分数据库函数4">
       <created>1622077999797</created>
       <option name="number" value="00012" />
@@ -565,6 +654,21 @@
       <option name="presentableId" value="LOCAL-00013" />
       <option name="project" value="LOCAL" />
       <updated>1622100050602</updated>
+=======
+    <task id="LOCAL-00012" summary="完成了Famework。">
+      <created>1622075955783</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1622075955783</updated>
+    </task>
+    <task id="LOCAL-00013" summary="更改了SeverFunction的父类。">
+      <created>1622077313842</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1622077313842</updated>
+>>>>>>> Stashed changes
     </task>
     <task id="LOCAL-00014" summary="Framework的文件结构。">
       <created>1622077465815</created>
@@ -573,6 +677,7 @@
       <option name="project" value="LOCAL" />
       <updated>1622077465815</updated>
     </task>
+<<<<<<< Updated upstream
     <option name="localTasksCounter" value="14" />
     <servers />
   </component>
@@ -626,6 +731,11 @@
       <window_info anchor="right" id="Bean Validation" order="9" />
     </layout>
   </component>
+=======
+    <option name="localTasksCounter" value="15" />
+    <servers />
+  </component>
+>>>>>>> Stashed changes
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
@@ -635,6 +745,7 @@
         <entry key="MAIN">
           <value>
             <State>
+<<<<<<< Updated upstream
               <option name="RECENTLY_FILTERED_USER_GROUPS">
                 <collection />
               </option>
@@ -648,6 +759,18 @@
                   <option value="2" />
                   <option value="3" />
                 </list>
+=======
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="liu" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+>>>>>>> Stashed changes
               </option>
             </State>
           </value>
@@ -668,6 +791,10 @@
         </entry>
       </map>
     </option>
+<<<<<<< Updated upstream
+=======
+    <option name="oldMeFiltersMigrated" value="true" />
+>>>>>>> Stashed changes
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="创建IDEA项目" />
@@ -683,12 +810,19 @@
     <MESSAGE value="添加Json结构体，&#10;完善状态机框架。&#10;2" />
     <MESSAGE value="完善Json功能（更改MyStruct）。" />
     <MESSAGE value="状态机添加 状态工厂" />
+<<<<<<< Updated upstream
     <MESSAGE value="添加部分数据库函数4" />
     <MESSAGE value="完成了Famework。" />
     <MESSAGE value="更改了SeverFunction的父类。" />
     <MESSAGE value="Framework的文件结构。" />
     <MESSAGE value="添加Log界面；状态机添加0002报文；状态机添加处理函数。" />
     <option name="LAST_COMMIT_MESSAGE" value="添加Log界面；状态机添加0002报文；状态机添加处理函数。" />
+=======
+    <MESSAGE value="完成了Famework。" />
+    <MESSAGE value="更改了SeverFunction的父类。" />
+    <MESSAGE value="Framework的文件结构。" />
+    <option name="LAST_COMMIT_MESSAGE" value="Framework的文件结构。" />
+>>>>>>> Stashed changes
   </component>
   <component name="WindowStateProjectService">
     <state x="574" y="117" width="670" height="589" key="#com.intellij.ide.util.MemberChooser" timestamp="1622082394431">
@@ -732,6 +866,7 @@
     </state>
     <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1621840422566" />
   </component>
+<<<<<<< Updated upstream
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/main/java/Framework/Testing/EchoClientHandler.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -920,6 +1055,8 @@
       </provider>
     </entry>
   </component>
+=======
+>>>>>>> Stashed changes
   <component name="masterDetails">
     <states>
       <state key="ArtifactsStructureConfigurable.UI">
