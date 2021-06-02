@@ -11,6 +11,7 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
       <module name="KerberosServer" target="1.8" />
 =======
       <module name="KerberosServer" target="11" />
@@ -26,4 +27,9 @@
 >>>>>>> Stashed changes
     </option>
   </component>
+=======
+      <module name="KerberosServer" target="11" />
+    </bytecodeTargetLevel>
+  </component>
+>>>>>>> Stashed changes
 </project>
