@@ -37,13 +37,22 @@ public class ServerDataBase {
             rFriendList("2");
 
             rGroupUser("1");
-     */
+
         MyStruct.User user=rSearchID("1");
         user.setEmail("234");
         user.setGender(1);
         user.setPhoto("111");
         wInfo(user);
-        rSearchID("1");
+   */
+        wDeleteF("1","2");
+        MyStruct.User user=rSearchID("2");
+        MyStruct.Friend friend=new MyStruct.Friend();
+        friend.setU(user);
+        friend.setTid("1");
+        friend.setStartTime(11);
+        friend.setRemark("小王");
+        wAddF("1",friend);
+        rFriendList("1");
         }
     }
     static public Connection connectData() {
@@ -71,17 +80,17 @@ public class ServerDataBase {
         return conn;
     }
 
-    static public boolean wCertif(MyStruct struct) {
+    static public boolean wCertif(MyStruct.Certificate certificate) {
         /*
         向数据库存入证书；
          */
         try {
             String sql="insert into `Certificate` (`version` ,`serial` ,`deadline` ,`name` ,`pk`) values(\""
-                    +struct.certificate.getVersion()+"\",\""
-                    +struct.certificate.getSerial()+"\",\""
-                    +struct.certificate.getDeadline()+"\",\""
-                    +struct.certificate.getName()+"\",\""
-                    +struct.certificate.getPk()+ "\")";
+                    +certificate.getVersion()+"\",\""
+                    +certificate.getSerial()+"\",\""
+                    +certificate.getDeadline()+"\",\""
+                    +certificate.getName()+"\",\""
+                    +certificate.getPk()+ "\")";
             Statement statement = con.createStatement();
             int result = statement.executeUpdate(sql);
             return true;
@@ -138,8 +147,6 @@ public class ServerDataBase {
                 friend.setStartTime(result.getInt("startTime"));
                 MyStruct.User user=rSearchID(result.getString("ta"));
                 friend.setU(user);
-           //     System.out.println("查询账号 "+result.getString("ta")+" uid "+user.getUid()+user.getStatus()+user.getGender()+user.getStartTime()+user.getEmail());
-
                 String sql1="SELECT `tname` FROM `tags` WHERE `tid`="+result.getInt("tid")+  " and `uid`=\""+ID+"\"";
                 Statement statement1=con.createStatement();
                 ResultSet result1 = statement1.executeQuery(sql1);
@@ -176,7 +183,7 @@ public class ServerDataBase {
         }
         return friends;
     }
-     static public LinkedList<String> rGroupUser(String ID){
+    static public LinkedList<String> rGroupUser(String ID){
         /*
         查询群内成员ID；
          */
@@ -195,7 +202,7 @@ public class ServerDataBase {
              System.out.println(ID+" 查询群成员错误");
          }
          return groups;
-     }
+    }
     static public MyStruct.User rSearchID(String ID){
         /*
         查询用户；
@@ -264,44 +271,103 @@ public class ServerDataBase {
         修改好友列表，添加好友；
          */
         try {
+            MyStruct.User user=rSearchID(friend.getU().getUid());
             String sql="insert into `friend` (`me` ,`ta` ,`startTime` ,`remark` ,`tid`) values(\""
                     +ID+"\",\""
                     +friend.getU().getUid()+"\","
-                    +friend.getStartTime()+"\","
+                    +friend.getStartTime()+",\""
                     +friend.getRemark()+"\","
                     +friend.getTid()+ ")";
             Statement statement = con.createStatement();
             int result = statement.executeUpdate(sql);
+            System.out.println("添加好友成功");
             return true;
         } catch (SQLException e) {
             e.printStackTrace();
-            System.out.println("存储证书错误");
+            System.out.println("添加好友错误");
             return false;
         }
     }
-    static public boolean wAddG(String IDA,String IDG){
+    static public boolean wAddG(MyStruct.User user, String IDG){
         /*
         修改群列表，添加群；
          */
-        return false;
+        try {
+            String sql="insert into `belong` (`gid` ,`uid` ,`nickname` ) values(\""
+                    +IDG+"\",\""
+                    +user.getUid()+"\","
+                    +user.getUname()+"\")";
+            Statement statement = con.createStatement();
+            int result = statement.executeUpdate(sql);
+            String sql1="update `groups` set `sum`=`sum`+1  where `gid`=\""+IDG+"\"";
+            Statement statement1=con.createStatement();
+            statement1.executeUpdate(sql1);
+            System.out.println("添加群成功");
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("添加群错误");
+            return false;
+        }
     }
     static public boolean wDeleteF(String IDA,String IDB){
         /*
         修改好友列表，删除好友；
          */
-        return false;
+        try {
+            String sql="delete from `friend` where `me`=\""+IDA+"\" and `ta`=\""+IDB+"\"";
+            Statement statement = con.createStatement();
+            int result = statement.executeUpdate(sql);
+            System.out.println("删除好友成功");
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("删除好友错误");
+            return false;
+        }
     }
     static public boolean wDeleteG(String IDA,String IDG){
         /*
         修改群列表，退出群聊；
          */
-        return false;
+        try {
+            String sql="delete from `belong` where `gid`=(\""
+                    +IDG+"\" and `uid`=\""
+                    +IDA+"\")";
+            Statement statement = con.createStatement();
+            int result = statement.executeUpdate(sql);
+            String sql1="update `groups` set `sum`=`sum`-1  where `gid`=\""+IDG+"\"";
+            Statement statement1=con.createStatement();
+            statement1.executeUpdate(sql1);
+            System.out.println("添加群成功");
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("添加群错误");
+            return false;
+        }
     }
-    static public String wCreateG(String message){
+    static public boolean wCreateG(MyStruct.Group group){
         /*
         组建群聊；
          */
-        String IDG="";//群账号
-        return IDG;
+        try {
+            String sql="insert into `groups` (`gid` ,`gname` ,`photo` ,`leader` ,`sign`,`startTime`,`sum`) values(\""
+                    +group.getGid()+"\",\""
+                    +group.getGname()+"\","
+                    +group.getPhoto()+",\""
+                    +group.getLeader()+"\","
+                    +group.getSign()+"\","
+                    +group.getStartTime()+","
+                    +group.getList().size()+ ")";
+            Statement statement = con.createStatement();
+            int result = statement.executeUpdate(sql);
+            System.out.println("创建群聊成功");
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("创建群聊错误");
+            return false;
+        }
     }
 }

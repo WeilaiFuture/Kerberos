@@ -1,4 +1,5 @@
 package StateMachine;
+import Server.ServerHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Configuration;
@@ -20,102 +21,83 @@ public class StateMachineEventConfig {
 
     @OnTransition(source = "WAITINFO", target = "EXIT")
     public void timeout(Message<RegEventEnum> message) {
+
         logger.info("Switch state from W to E");
     }
 
-    @OnTransition(source = "HEADOVER", target = "HANDLER1001")
-    public void head1001(Message<RegEventEnum> message) {
-        logger.info("Switch state from O to 1001");
-    }
-
-    @OnTransition(source = "HEADOVER", target = "HANDLER1002")
-    public void head1002(Message<RegEventEnum> message) {
+    //Kv
+    @OnTransition(source = "HEADOVER", target = "HANDLER2")
+    public void head2(Message<RegEventEnum> message) {
+        ServerHandler.Kv(message.getHeaders().get("order").toString());
         logger.info("Switch state from O to 1002");
     }
 
+    //登录
+    @OnTransition(source = "HEADOVER", target = "HANDLER1002")
+    public void head1002(Message<RegEventEnum> message) {
+        ServerHandler.login(message.getHeaders().get("order").toString());
+        logger.info("Switch state from O to 1002");
+    }
+
+    //请求好友界面
     @OnTransition(source = "HEADOVER", target = "HANDLER1003")
     public void head1003(Message<RegEventEnum> message) {
+        ServerHandler.searchFriendList(message.getHeaders().get("order").toString());
         logger.info("Switch state from O to 2");
     }
 
+    //问好
+    @OnTransition(source = "HEADOVER", target = "HANDLER1005")
+    public void head1001(Message<RegEventEnum> message) {
+        ServerHandler.hello(message.getHeaders().get("order").toString());
+        logger.info("Switch state from O to 1005");
+    }
+
+    //心跳
     @OnTransition(source = "HEADOVER", target = "HANDLER1006")
     public void head1006(Message<RegEventEnum> message) {
         logger.info("Switch state from O to 6");
     }
 
+    //查找ID
     @OnTransition(source = "HEADOVER", target = "HANDLER1007")
     public void head1007(Message<RegEventEnum> message) {
+        ServerHandler.searchID(message.getHeaders().get("order").toString());
         logger.info("Switch state from O to 7");
     }
-
+    //登出
     @OnTransition(source = "HEADOVER", target = "EXIT")
     public void head1008(Message<RegEventEnum> message) {
+        ServerHandler.logout(message.getHeaders().get("order").toString());
         logger.info("Switch state from O to E");
     }
 
+    //个人信息
     @OnTransition(source = "HEADOVER", target = "HANDLER1009")
     public void head1009(Message<RegEventEnum> message) {
+        ServerHandler.information(message.getHeaders().get("order").toString());
         logger.info("Switch state from O to 9");
     }
 
+    //修改信息
     @OnTransition(source = "HEADOVER", target = "HANDLER1010")
     public void head1010(Message<RegEventEnum> message) {
+        ServerHandler.changeInfo(message.getHeaders().get("order").toString());
         logger.info("Switch state from O to 10");
     }
 
+    //单聊信息
     @OnTransition(source = "HEADOVER", target = "HANDLER2001")
     public void head2001(Message<RegEventEnum> message) {
+        ServerHandler.privateChat(message.getHeaders().get("order").toString());
         logger.info("Switch state from O to 21");
     }
 
+    //群聊信息
     @OnTransition(source = "HEADOVER", target = "HNDLER2002")
     public void head2002(Message<RegEventEnum> message) {
+        ServerHandler.publicChat(message.getHeaders().get("order").toString());
         logger.info("Switch state from O to 22");
-    }
-
-    @OnTransition(source = "HANDLER1001", target = "WAITINFO")
-    public void over1001(Message<RegEventEnum> message) {
-        logger.info("Switch state from 1001 to W");
-    }
-
-    @OnTransition(source = "HANDLER1002", target = "WAITINFO")
-    public void over1002(Message<RegEventEnum> message) {
-        logger.info("Switch state from 2 to W");
-    }
-
-    @OnTransition(source = "HANDLER1003", target = "WAITINFO")
-    public void over1003(Message<RegEventEnum> message) {
-        logger.info("Switch state from 3 to W");
-    }
-
-    @OnTransition(source = "HANDLER1006", target = "WAITINFO")
-    public void over1006(Message<RegEventEnum> message) {
-        logger.info("Switch state from 6 to W");
-    }
-
-    @OnTransition(source = "HANDLER1007", target = "WAITINFO")
-    public void over1007(Message<RegEventEnum> message) {
-        logger.info("Switch state from 7 to W");
-    }
-
-    @OnTransition(source = "HANDLER1009", target = "WAITINFO")
-    public void over1009(Message<RegEventEnum> message) {
-        logger.info("Switch state from 9 to W");
-    }
-
-    @OnTransition(source = "HANDLER1010", target = "WAITINFO")
-    public void over1010(Message<RegEventEnum> message) {
-        logger.info("Switch state from 10 to W");
-    }
-
-    @OnTransition(source = "HANDLER2001", target = "WAITINFO")
-    public void over2001(Message<RegEventEnum> message) {
-        logger.info("Switch state from 21 to W");
-    }
-
-    @OnTransition(source = "HANDLER2002", target = "WAITINFO")
-    public void over2002(Message<RegEventEnum> message) {
-        logger.info("Switch state from 22 to W");
     }
 
 }
