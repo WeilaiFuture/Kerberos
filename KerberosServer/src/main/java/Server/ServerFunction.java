@@ -24,12 +24,13 @@ import java.util.concurrent.TimeUnit;
 
 import static Framework.SessionLayer.SessionLayer.bindChannelWithUserName;
 import static Json.MyJson.StringToOrder;
+import static Server.ServerDataBase.connectData;
 import static StateMachine.RegEventEnum.RECIVE;
 import static UI.log.add;
 import static UI.log.createTable;
 
 public class ServerFunction extends SessionHandler {
-    ServerHandler serverHandler;
+     ServerHandler serverHandler;
 
     {
         try {
@@ -41,8 +42,8 @@ public class ServerFunction extends SessionHandler {
         }
     }
 
-    LinkedList<String[]> list = new LinkedList<String[]>();
-    String []s=new String[4];
+    public static LinkedList<String[]> list = new LinkedList<String[]>();
+
 
 
     //继承方法集
@@ -65,6 +66,7 @@ public class ServerFunction extends SessionHandler {
             bindChannelWithUserName(channelName,order.getSrc());
         }
         JTable table = createTable();
+        String []s=new String[4];
         list.addFirst(s);
         s[0]=order.getSrc();//源
         s[1]=order.getDst();//目的

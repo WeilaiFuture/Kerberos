@@ -11,7 +11,9 @@ public class ServerSecurity {
         MyStruct.Certificate certificate=new MyStruct.Certificate();
         certificate.setPk(pk);
         certificate.setName(ID);
-        //certificate.setDeadline();
+        certificate.setDeadline("1");
+        certificate.setVersion("1");
+        certificate.setSerial("1");
         String message="";
         return certificate;
     }

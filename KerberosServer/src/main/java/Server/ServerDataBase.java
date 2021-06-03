@@ -93,6 +93,7 @@ public class ServerDataBase {
                     +certificate.getPk()+ "\")";
             Statement statement = con.createStatement();
             int result = statement.executeUpdate(sql);
+            System.out.println("存储证书成功");
             return true;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -108,6 +109,7 @@ public class ServerDataBase {
             String sql="update `Certificate` set `Kcv`=\""+K+"\" where `name`=\""+ID+"\"";
             Statement statement=con.createStatement();
             statement.executeUpdate(sql);
+            System.out.println("存储Kcv成功");
             return true;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -123,6 +125,7 @@ public class ServerDataBase {
             String sql="SELECT `Kcv` FROM `Certificate` WHERE `name`=\"" + ID + "\"";
             Statement statement=con.createStatement();
             ResultSet result = statement.executeQuery(sql);
+            System.out.println("读取Kcv成功"+result.getString("Kcv"));
             return result.getString("Kcv");
         } catch (SQLException e) {
             e.printStackTrace();
@@ -138,6 +141,7 @@ public class ServerDataBase {
             String sql="SELECT `pk` FROM `Certificate` WHERE `name`=\"" + ID + "\"";
             Statement statement=con.createStatement();
             ResultSet result = statement.executeQuery(sql);
+            System.out.println("查询PK成功"+result.getString("pk"));
             return result.getString("pk");
         } catch (SQLException e) {
             e.printStackTrace();
