@@ -10,7 +10,6 @@ import org.springframework.statemachine.annotation.WithStateMachine;
 @Configuration
 @WithStateMachine(id = "mymachine")
 public class StateMachineEventConfig {
-
     private Logger logger = LoggerFactory.getLogger(getClass());
 
     @OnTransition(source = "WAITINFO", target = "HEADOVER")
@@ -24,14 +23,24 @@ public class StateMachineEventConfig {
 
         logger.info("Switch state from W to E");
     }
-
+    //证书
+    @OnTransition(source = "HEADOVER", target = "HANDLER1")
+    public void head1(Message<RegEventEnum> message) {
+        ServerHandler.Certif(message.getHeaders().get("order").toString());
+        logger.info("Switch state from O to 1");
+    }
     //Kv
     @OnTransition(source = "HEADOVER", target = "HANDLER2")
     public void head2(Message<RegEventEnum> message) {
         ServerHandler.Kv(message.getHeaders().get("order").toString());
-        logger.info("Switch state from O to 1002");
+        logger.info("Switch state from O to 2");
     }
-
+    //Kcv
+    @OnTransition(source = "HEADOVER", target = "HANDLER7")
+    public void head7(Message<RegEventEnum> message) {
+        ServerHandler.Kcv(message.getHeaders().get("order").toString());
+        logger.info("Switch state from O to 7");
+    }
     //登录
     @OnTransition(source = "HEADOVER", target = "HANDLER1002")
     public void head1002(Message<RegEventEnum> message) {

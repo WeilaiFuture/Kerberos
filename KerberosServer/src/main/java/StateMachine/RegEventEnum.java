@@ -3,7 +3,9 @@ package StateMachine;
 public enum RegEventEnum {
     RECIVE,//收到报文
     TIMEOUT,//超时未收到心跳包
+    HEAD1,//证书
     HEAD2,//Kv
+    HEAD7,//Kcv
     HEAD1008,//登出
     HEAD1001,//注册
     HEAD1002,//登录
