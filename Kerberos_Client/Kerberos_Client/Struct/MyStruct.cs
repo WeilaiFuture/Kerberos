@@ -10,6 +10,22 @@ namespace Kerberos_Client
 {
     public class MyStruct
     {
+        public Certificate certificate { get; set; } //证书
+        public My_k my_k { get; set; }
+        public Message1 message1 { get; set; }
+        public Message2 message2 { get; set; }
+        public Ticket ticket { get; set; }
+        public Message3 message3 { get; set; }
+        public Message4 message4 { get; set; }
+        public Message5 message5 { get; set; }
+        public Message6 message6 { get; set; }
+        public User user { get; set; }
+        public Friend friend { get; set; }
+        public Chat_Message chat_message { get; set; }
+        public Group group { get; set; }
+        public Record_Message record_message { get; set; }
+        public List<Friend> friendlist { get; set; }
+
         #region 证书
         public class Certificate
         {
@@ -373,7 +389,7 @@ namespace Kerberos_Client
         }
         #endregion
         #region 聊天信息
-        public class chat_Message
+        public class Chat_Message
         {
             int head;//信息种类
             string content;//信息内容
@@ -443,15 +459,16 @@ namespace Kerberos_Client
         }
         #endregion
         #region 消息记录
-        public class record_Message
+        public class Record_Message
         {
-            List<chat_Message> messages_list;
-            public List<chat_Message> Messages_list
+            List<Chat_Message> messages_list;
+            public List<Chat_Message> Messages_list
             {
                 get { return messages_list; }
-                set { messages_list = new List<chat_Message>(value); }
+                set { messages_list = new List<Chat_Message>(value); }
             }
         }
+       
         #endregion
         public class img
         {
@@ -468,7 +485,6 @@ namespace Kerberos_Client
                     bi.StreamSource = ms;//通过StreamSource加载图片
                     bi.EndInit();
                     bi.Freeze();
-
                 }
                 return bi;
             }

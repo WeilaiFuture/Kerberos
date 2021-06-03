@@ -1,7 +1,10 @@
 ﻿#define test
+//#define danji
+#define lianji
 //#define kerberos
 #define DES
-#define RSA
+//#define RSA
+#define cer
 using Kerberos_Client.UI;
 using System;
 using System.Collections.Generic;
@@ -37,20 +40,15 @@ namespace Kerberos_Client
         string SERVERIP = "127.0.0.1";
         private static string Kc = "20002018";
         public static List<Login_User> User_Item;//数据源
-        private bool flag = true;
         public static string localName;
+        private bool flag;
         //public delegate void MyDelegate(string str);
         //private MyDelegate md;
-        #region UI
+#region UI
         public MainWindow()
         {
+            flag = true;
             InitializeComponent();
-#if kerberos
-            certificateInit();
-            while (!flag) ;
-            KerberosInit();
-            while (flag) ;
-#endif
             init(true);
         }
         public MainWindow(bool login)
@@ -64,12 +62,12 @@ namespace Kerberos_Client
         /// </summary>
         private void init(bool b)
         {
-            ManagementClass mc = new ManagementClass("Win32_Processor");
-            ManagementObjectCollection moc = mc.GetInstances();
-            foreach (ManagementObject mo in moc)
-            {
-               localName = mo.Properties["ProcessorId"].Value.ToString();
-            }
+            //ManagementClass mc = new ManagementClass("Win32_Processor");
+            //ManagementObjectCollection moc = mc.GetInstances();
+            //foreach (ManagementObject mo in moc)
+            //{
+            //   localName = mo.Properties["ProcessorId"].Value.ToString();
+            //}
             User_Item = new List<Login_User>();
             //绑定数据
             ID.ItemsSource = User_Item;
@@ -195,8 +193,8 @@ namespace Kerberos_Client
         {
             Main_Tab.IsSelected = true;
         }
-        #endregion
-        #region Kerberos
+#endregion
+#region Kerberos
         private void certificateInit()
         {
             flag = false;
@@ -214,10 +212,11 @@ namespace Kerberos_Client
             certificate.Serial = "0";
             certificate.Version = "1.0";
 
-
+            MyStruct myStruct = new MyStruct();
+            myStruct.certificate = certificate;
 
             //发送报文
-            string extend = JsonHelper.ToJson(certificate);
+            string extend = JsonHelper.ToJson(myStruct);
             Order order = new Order();
             order.MsgType = "0001";
             order.Extend = extend;
@@ -247,9 +246,28 @@ namespace Kerberos_Client
                 MessageBox.Show("账号或密码为空，请重新输入");
             else
             {
-                //发送报文
+                localName = ID.Text;
+#if lianji
+                certificateInit();
+#endif
+#if kerberos
+            certificateInit();
+            while (!flag) ;
+            KerberosInit();
+            while (flag) ;
+#endif
+#if danji
+                Main_Window.Keys["server"] = "12345678";
+#endif
+#if lianji
+                Main_Window.Keys["server"] = "12345678";
+#endif
                 User user = new User(ID.Text, password.Password);
-                string extend = JsonHelper.ToJson(user);
+                MyStruct myStruct = new MyStruct();
+                myStruct.user = user;
+
+                //发送报文
+                string extend = JsonHelper.ToJson(myStruct);
                 Order order = new Order();
                 order.MsgType = "1002";
                 order.Src = localName;
@@ -269,13 +287,18 @@ namespace Kerberos_Client
         private void KerberosInit()
         {
             flag = false;
+
             //发送报文
             Message1 msg = new Message1();
+            MyStruct myStruct = new MyStruct();
+
             msg.IDC = localName;
             msg.IDT = "TGS";
             msg.TS= DateTime.Now.ToString();
-            string extend = JsonHelper.ToJson(msg);
+            myStruct.message1 = msg;
+            string extend = JsonHelper.ToJson(myStruct);
 #if DES
+
             extend = DESLibrary.EncryptDES(extend, Main_Window.Keys["AS"]);
 #endif
             Order order = new Order();
@@ -284,16 +307,22 @@ namespace Kerberos_Client
             order.MsgType = "0003";
             order.Extend = extend;
             string json = JsonHelper.ToJson(order);
-#if test
+          #if Kerberos
+
+
             ConnectServer.connectserver(this, ASIP);
-#endif
+
             ConnectServer.sendMessage(json);
+#endif
         }
         internal void Call_certificate(Order o)
         {
+#if cer
+            MessageBox.Show(o.Extend);
+#endif
             Order order = o;
-            Certificate certificate = JsonHelper.FromJson<Certificate>(order.Extend);
-            string kc = certificate.Pk;
+            MyStruct myStruct = JsonHelper.FromJson<MyStruct>(order.Extend);
+            string kc = myStruct.certificate.Pk;
             kc = RSALibrary.RSAPublicKeyJava2DotNet(kc);
             Main_Window.Keys["server_pk"] = kc;
             flag = true;
@@ -312,7 +341,8 @@ namespace Kerberos_Client
 #if DES
             o.Extend = DESLibrary.DecryptDES(o.Extend, Main_Window.Keys["as"]);
 #endif
-            Message2 message2 = JsonHelper.FromJson<Message2>(o.Extend);
+            MyStruct myStruct= JsonHelper.FromJson<MyStruct>(o.Extend);
+            Message2 message2 = myStruct.message2;
 
             Main_Window.Keys["tgs"] = message2.Key;
 
@@ -327,7 +357,11 @@ namespace Kerberos_Client
 #if DES
             msg.AC = DESLibrary.DecryptDES(o.Extend, Main_Window.Keys["tgs"]);
 #endif
-            string extend = JsonHelper.ToJson(msg);
+            MyStruct myStruct_ = new MyStruct();
+            myStruct.message3 = msg;
+
+            //发送报文
+            string extend = JsonHelper.ToJson(myStruct_);
             Order order = new Order();
             order.Dst = "TGS";
             order.Src = localName;
@@ -344,7 +378,8 @@ namespace Kerberos_Client
 #if DES
             o.Extend= DESLibrary.DecryptDES(o.Extend, Main_Window.Keys["tgs"]);
 #endif
-            Message4 message4 = JsonHelper.FromJson<Message4>(o.Extend);
+            MyStruct myStruct = JsonHelper.FromJson<MyStruct>(o.Extend);
+            Message4 message4 = myStruct.message4;
 
             Main_Window.Keys["server"] = message4.Key;
 
@@ -355,8 +390,11 @@ namespace Kerberos_Client
             au.ADC = DoGetHostEntry();
             au.TS = DateTime.Now.ToString();
             msg.AC = JsonHelper.ToJson(au);
+            MyStruct myStruct_ = new MyStruct();
+            myStruct.message5 = msg;
 
-            string extend = JsonHelper.ToJson(msg);
+            //发送报文
+            string extend = JsonHelper.ToJson(myStruct_);
             Order order = new Order();
             order.Dst = "SERVER";
             order.Src = localName;
@@ -370,10 +408,11 @@ namespace Kerberos_Client
         }
         internal void Call_Server(Order o)
         {
-            Message6 message6 = JsonHelper.FromJson<Message6>(o.Extend);
+            MyStruct myStruct = JsonHelper.FromJson<MyStruct>(o.Extend);
+            Message6 message6 = myStruct.message6;
             flag = true;
         }
-        #endregion
+#endregion
         internal void Call_check_User(Order o)
         {
 #if DES
@@ -391,7 +430,8 @@ namespace Kerberos_Client
                 set_User();
                 //保存配置文件
                 Save_conf();
-                User user = JsonHelper.FromJson<User>(o.Extend);
+                MyStruct myStruct = JsonHelper.FromJson<MyStruct>(o.Extend);
+                User user = myStruct.user;
                 Window U = new Main_Window(user);
                 U.Show();
                 //回收系统内存，否则多次切换后，内存爆了

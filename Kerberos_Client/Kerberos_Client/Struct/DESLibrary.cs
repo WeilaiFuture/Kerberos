@@ -14,6 +14,10 @@ namespace Kerberos_Client
         //默认密钥向量
         private static byte[] Keys = ASCIIEncoding.ASCII.GetBytes(ori);
 
+        public static string getKey()
+        {
+            return random_str(8); 
+        }
         /// <summary>
         /// DES加密字符串
         /// </summary>
@@ -69,6 +73,28 @@ namespace Kerberos_Client
             {
                 return decryptString;
             }
+        }
+        public static string random_str(int length, bool sleep)
+        {
+            if (sleep)
+            {
+                System.Threading.Thread.Sleep(3);
+            }
+            char[] Pattern = new char[] { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z' };
+            string result = "";
+            int n = Pattern.Length;
+            System.Random random = new Random(~unchecked((int)DateTime.Now.Ticks));
+            for (int i = 0; i < length; i++)
+            {
+                int rnd = random.Next(0, n);
+                result += Pattern[rnd];
+            }
+            return result;
+        }
+
+        public static string random_str(int length)
+        {
+            return random_str(length, false);
         }
     }
 

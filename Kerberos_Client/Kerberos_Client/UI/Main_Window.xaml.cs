@@ -1,4 +1,4 @@
-﻿#define RSA
+﻿//#define RSA
 #define DES
 using System;
 using System.Collections.Generic;
@@ -26,7 +26,7 @@ namespace Kerberos_Client.UI
     public partial class Main_Window : Window
     {
         public User My_user;
-        public static List<User> Friend_List = new List<User>();
+        public static List<Friend> Friend_List = new List<Friend>();
         public static List<User> Message_List = new List<User>();
         public static Dictionary<string, string> Keys = new Dictionary<string, string>();
         private static List<User> Search_List = new List<User>();
@@ -51,10 +51,10 @@ namespace Kerberos_Client.UI
             live = true;
             for (int j = 0; j < 10; j++)
             {
-                User uu = new User();
-                uu.Uname = "LOCAL" + j.ToString();
+                Friend uu = new Friend();
+                uu.U.Uname = "LOCAL" + j.ToString();
                 Friend_List.Add(uu);
-                Message_List.Add(uu);
+                //Message_List.Add(uu);
             }
             ConnectServer.HeartStart();
             My_user = u;
@@ -303,7 +303,8 @@ namespace Kerberos_Client.UI
 #if DES
             o.Extend = DESLibrary.DecryptDES(o.Extend, Keys["server"]);
 #endif
-            List<User> users = JsonHelper.FromJson<List<User>>(o.Extend);
+            MyStruct myStruct = JsonHelper.FromJson<MyStruct>(o.Extend);
+            List<Friend> users = myStruct.friendlist;
             Friend_List = users;
         }
 
@@ -332,6 +333,7 @@ namespace Kerberos_Client.UI
 #if DES
             o.Extend = DESLibrary.DecryptDES(o.Extend, Keys["server"]);
 #endif
+            MyStruct myStruct = JsonHelper.FromJson<MyStruct>(o.Extend);
             List<User> users = JsonHelper.FromJson<List<User>>(o.Extend);
             Message_List = users;
         }
@@ -342,16 +344,16 @@ namespace Kerberos_Client.UI
 #endif
             Dispatcher.Invoke(new Action(delegate
             {
-                User user = Friend_List.Find(delegate (User use)
+                Friend user = Friend_List.Find(delegate (Friend friend)
                 {
-                    return use.Uid.Equals(o.Src);
+                    return friend.U.Uid.Equals(o.Src);
                 });
                 Chat_Window u;
                 if (Chat_Dic.ContainsKey(o.Src))
                     u = Chat_Dic[o.Src];
                 else
                 {
-                    u = new Chat_Window(user);
+                    u = new Chat_Window(user.U);
                     Chat_Dic[o.Src] = u;
                     Thread newWindowThread = new Thread(() => ThreadStartingPoint(u));
                     newWindowThread.SetApartmentState(ApartmentState.STA);
@@ -362,7 +364,7 @@ namespace Kerberos_Client.UI
                 {
                     Photo = @"E:\Kerberos\Kerberos_Client\Kerberos_Client\Image_Source\test.jpg",
                     Message = u.send_text.Text,
-                    MessageLocation = TypeLocalMessageLocation.chatSend
+                    MessageLocation = TypeLocalMessageLocation.chatRecv
                 }); ;
                 u.ListBoxChat.ScrollIntoView(u.ListBoxChat.Items[u.ListBoxChat.Items.Count - 1]);
             }));
