@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media.Imaging;
 
 namespace Kerberos_Client
 {
@@ -85,7 +87,7 @@ namespace Kerberos_Client
             string idt; //tgs
             string ts;  //签发时间
             string lifetime; //有效期
-            Ticket t;   //票据
+            string t;   //票据
             public string Key
             {
                 get { return key; }
@@ -110,7 +112,7 @@ namespace Kerberos_Client
                 set { lifetime = value; }
             }
 
-            public Ticket T
+            public string T
             {
                 get { return t; }
                 set { t = value; }
@@ -162,19 +164,19 @@ namespace Kerberos_Client
         public class Message3
         {
             string idv;//v的id
-            Ticket t;//票据
-            Authenticator ac;//认证
+            string t;//票据
+            string ac;//认证
             public string IDV
             {
                 get { return idv; }
                 set { idv = value; }
             }
-            public Ticket T
+            public string T
             {
                 get { return t; }
                 set { t = value; }
             }
-            public Authenticator AC
+            public string AC
             {
                 get { return ac; }
                 set { ac = value; }
@@ -187,7 +189,7 @@ namespace Kerberos_Client
             string key;//session key
             string idv;//v的id
             string ts;//时间戳
-            Ticket t;//票据
+            string t;//票据
             public string Key
             {
                 get { return key; }
@@ -203,7 +205,7 @@ namespace Kerberos_Client
                 get { return ts; }
                 set { ts = value; }
             }
-            public Ticket T
+            public string T
             {
                 get { return t; }
                 set { t = value; }
@@ -236,14 +238,14 @@ namespace Kerberos_Client
         #region 报文5
         public class Message5
         {
-            Ticket t;//票据
-            Authenticator ac;//认证
-            public Ticket T
+            string t;//票据
+            string ac;//认证
+            public string T
             {
                 get { return t; }
                 set { t = value; }
             }
-            public Authenticator AC
+            public string AC
             {
                 get { return ac; }
                 set { ac = value; }
@@ -451,6 +453,26 @@ namespace Kerberos_Client
             }
         }
         #endregion
+        public class img
+        {
+             public static BitmapImage GetBitmap(string path)
+            {
+                BitmapImage bi;
+                if (!File.Exists(path))
+                    path = @"../../Image_Source\未登录头象.png";
+                using (MemoryStream ms = new MemoryStream(File.ReadAllBytes(path)))
+                {
+                    bi = new BitmapImage();
+                    bi.BeginInit();
+                    bi.CacheOption = BitmapCacheOption.OnLoad;//设置缓存模式
+                    bi.StreamSource = ms;//通过StreamSource加载图片
+                    bi.EndInit();
+                    bi.Freeze();
+
+                }
+                return bi;
+            }
+        }
     }
 }
 

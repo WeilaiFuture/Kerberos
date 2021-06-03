@@ -130,7 +130,7 @@ public class MyStruct {
         String idt; //tgs
         String ts;  //签发时间
         String lifetime; //有效期
-        Ticket t;   //票据
+        String t;   //票据
 
         public String getKey() {
             return key;
@@ -148,7 +148,7 @@ public class MyStruct {
             return lifetime;
         }
 
-        public Ticket getT() {
+        public String getT() {
             return t;
         }
 
@@ -168,7 +168,7 @@ public class MyStruct {
             this.lifetime = lifetime;
         }
 
-        public void setT(Ticket t) {
+        public void setT(String t) {
             this.t = t;
         }
     }
@@ -230,18 +230,18 @@ public class MyStruct {
     }
     static public class Message3 {
         String idv;//v的id
-        Ticket t;//票据
-        Authenticator ac;//认证
+        String t;//票据
+        String ac;//认证
 
         public String getIdv() {
             return idv;
         }
 
-        public Ticket getT() {
+        public String getT() {
             return t;
         }
 
-        public Authenticator getAc() {
+        public String getAc() {
             return ac;
         }
 
@@ -249,11 +249,11 @@ public class MyStruct {
             this.idv = idv;
         }
 
-        public void setT(Ticket t) {
+        public void setT(String t) {
             this.t = t;
         }
 
-        public void setAc(Authenticator ac) {
+        public void setAc(String ac) {
             this.ac = ac;
         }
     }
@@ -261,7 +261,7 @@ public class MyStruct {
         String key;//session key
         String idv;//v的id
         String ts;//时间戳
-        Ticket t;//票据
+        String t;//票据
 
         public String getKey() {
             return key;
@@ -275,7 +275,7 @@ public class MyStruct {
             return ts;
         }
 
-        public Ticket getT() {
+        public String getT() {
             return t;
         }
 
@@ -291,7 +291,7 @@ public class MyStruct {
             this.ts = ts;
         }
 
-        public void setT(Ticket t) {
+        public void setT(String t) {
             this.t = t;
         }
     }
@@ -325,22 +325,22 @@ public class MyStruct {
         }
     }
     static public class Message5 {
-        Ticket t;//票据
-        Authenticator ac;//认证
+        String t;//票据
+        String ac;//认证
 
-        public Ticket getT() {
+        public String getT() {
             return t;
         }
 
-        public Authenticator getAc() {
+        public String getAc() {
             return ac;
         }
 
-        public void setT(Ticket t) {
+        public void setT(String t) {
             this.t = t;
         }
 
-        public void setAc(Authenticator ac) {
+        public void setAc(String ac) {
             this.ac = ac;
         }
     }

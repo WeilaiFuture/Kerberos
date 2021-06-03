@@ -32,6 +32,16 @@ public class MyJson {
         MyStruct struct=JSON.parseObject(jsonObject, MyStruct.class);
         return struct;
     }
+    //序列化
+    public static String ObjectToString(Object object){
+        String jsonOutput= JSON.toJSONString(object);
+        return jsonOutput;
+    }
+    //反序列化
+    public static Object StringToObject(String jsonObject){
+        Object object=JSON.parseObject(jsonObject, MyStruct.class);
+        return object;
+    }
     static public class Order{
         @JSONField(name="msgID")
         String msgId;
