@@ -1,4 +1,4 @@
-﻿#define lianji
+﻿//#define lianji
 using Kerberos_Client.UI;
 using System;
 using System.Collections.Generic;
@@ -57,6 +57,7 @@ namespace Kerberos_Client
                     client.Send(Encoding.UTF8.GetBytes(strMsg));
                 else
                     System.Windows.MessageBox.Show("与服务器断开连接");
+            Thread.Sleep(500);
         }
         public static void HeartStart()
         {

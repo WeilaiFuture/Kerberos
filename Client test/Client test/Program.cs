@@ -9,6 +9,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
 using static Client.DESLibrary;
+using static Kerberos_Client.MyStruct;
 
 namespace Client_test
 {
@@ -126,16 +127,26 @@ namespace Client_test
                 if (run_normal)  // 表示接收到的是数据；
                 {
                     string strMsg = System.Text.Encoding.UTF8.GetString(arrMsgRec, 0, length);// 将接受到的字节数据转化成字符串；
-                    ShowMsg(strMsg);
+                    //ShowMsg(strMsg);
                     Order order= JsonHelper.FromJson<Order>(strMsg);
+                    MyStruct myStruct ;
                     switch (order.MsgType)
                     {
                         case "1002":
+                            order.Extend = DecryptDES(order.Extend, "12345678");
+                            myStruct = JsonHelper.FromJson<MyStruct>(order.Extend);
+                            User user = myStruct.user;
                             order.StatusReport = true;
                             break;
-                                
+                        case "0001":
+                            myStruct = JsonHelper.FromJson<MyStruct>(order.Extend);
+                            Certificate certificate = myStruct.certificate;
+                            StreamReader sw1 = new StreamReader(@"F:\Cryption\PKB.txt");
+                            myStruct.certificate.Pk = sw1.ReadLine();
+                            sw1.Close();
+                            break;                
                     }
-                    sendMsg(sokClient.RemoteEndPoint.ToString(),JsonHelper.ToJson(order));
+                    sendMsg("127.0.0.1", JsonHelper.ToJson(order));
                 }   
             }
         }
@@ -145,12 +156,12 @@ namespace Client_test
             foreach (KeyValuePair<string, Socket> keyValue in dict)
             {
                 string s = keyValue.Key;
-                if (s.Equals(ip))
-                {
+                //if (s.Equals(ip))
+                //{
                     ShowMsg(msg);
                     byte[] bmsg = System.Text.Encoding.UTF8.GetBytes(msg);
                     dict[s].Send(bmsg);
-                }
+               // }
                 //keyValue.Value.Send(by);
                 //MessageBox.Show(msg);
             }
