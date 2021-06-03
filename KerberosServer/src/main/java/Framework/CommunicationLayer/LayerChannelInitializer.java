@@ -22,7 +22,7 @@ public class LayerChannelInitializer extends ChannelInitializer<SocketChannel> {
          * 1-2 设置超时断开时间，配置时间触发器trigger
          * 3 用户初次登陆时写对照表，写入channel 用户对照表
          */
-        p.addLast(new IdleStateHandler(5,0,0));
+        p.addLast(new IdleStateHandler(120,0,0));
         p.addLast(new ClientIdleStateTrigger());
         p.addLast(new ReceiveHandler());
         p.addLast(new TestingHandler());

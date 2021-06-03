@@ -8,8 +8,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.security.Key;
+import java.security.NoSuchAlgorithmException;
 import java.security.interfaces.RSAPrivateKey;
+import java.security.interfaces.RSAPublicKey;
+import java.security.spec.InvalidKeySpecException;
 import java.util.LinkedList;
+import java.util.Map;
 
 import static Framework.SessionLayer.SessionLayer.*;
 import static Server.ServerDataBase.*;
@@ -19,17 +23,23 @@ public class ServerHandler {
     /*
         包含所有收到的报文
     */
-    ServerHandler(){
+    public ServerHandler() throws InvalidKeySpecException, NoSuchAlgorithmException {
+        Map<String, String> kmap= RSAHandler.createKeys(1024);
         //生成公钥
+        String pk1=kmap.get("publicKey");
+        pk=RSAHandler.getPublicKey(pk1);
         //生成私钥
+        String sk1=kmap.get("privateKey");
+        sk=RSAHandler.getPrivateKey(sk1);
         //生成证书
-        String ID="";
-        createCertif(ID);
+        String ID="SERVER";
+        certificate=createCertif(ID,pk1);
         //发送证书
     }
     private static String Key;
     private static MyStruct.Certificate certificate;
     private static RSAPrivateKey sk;
+    private static RSAPublicKey pk;
     public static boolean Kcv(String message){
         /*
         head=7;
