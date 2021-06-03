@@ -1,13 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media.Imaging;
 
 namespace Kerberos_Client
 {
     public class MyStruct
     {
+        public Certificate certificate { get; set; } //证书
+        public My_k my_k { get; set; }
+        public Message1 message1 { get; set; }
+        public Message2 message2 { get; set; }
+        public Ticket ticket { get; set; }
+        public Message3 message3 { get; set; }
+        public Message4 message4 { get; set; }
+        public Message5 message5 { get; set; }
+        public Message6 message6 { get; set; }
+        public User user { get; set; }
+        public Friend friend { get; set; }
+        public Chat_Message chat_message { get; set; }
+        public Group group { get; set; }
+        public Record_Message record_message { get; set; }
+        public List<Friend> friendlist { get; set; }
+
         #region 证书
         public class Certificate
         {
@@ -85,7 +103,7 @@ namespace Kerberos_Client
             string idt; //tgs
             string ts;  //签发时间
             string lifetime; //有效期
-            Ticket t;   //票据
+            string t;   //票据
             public string Key
             {
                 get { return key; }
@@ -110,7 +128,7 @@ namespace Kerberos_Client
                 set { lifetime = value; }
             }
 
-            public Ticket T
+            public string T
             {
                 get { return t; }
                 set { t = value; }
@@ -162,19 +180,19 @@ namespace Kerberos_Client
         public class Message3
         {
             string idv;//v的id
-            Ticket t;//票据
-            Authenticator ac;//认证
+            string t;//票据
+            string ac;//认证
             public string IDV
             {
                 get { return idv; }
                 set { idv = value; }
             }
-            public Ticket T
+            public string T
             {
                 get { return t; }
                 set { t = value; }
             }
-            public Authenticator AC
+            public string AC
             {
                 get { return ac; }
                 set { ac = value; }
@@ -187,7 +205,7 @@ namespace Kerberos_Client
             string key;//session key
             string idv;//v的id
             string ts;//时间戳
-            Ticket t;//票据
+            string t;//票据
             public string Key
             {
                 get { return key; }
@@ -203,7 +221,7 @@ namespace Kerberos_Client
                 get { return ts; }
                 set { ts = value; }
             }
-            public Ticket T
+            public string T
             {
                 get { return t; }
                 set { t = value; }
@@ -236,14 +254,14 @@ namespace Kerberos_Client
         #region 报文5
         public class Message5
         {
-            Ticket t;//票据
-            Authenticator ac;//认证
-            public Ticket T
+            string t;//票据
+            string ac;//认证
+            public string T
             {
                 get { return t; }
                 set { t = value; }
             }
-            public Authenticator AC
+            public string AC
             {
                 get { return ac; }
                 set { ac = value; }
@@ -371,7 +389,7 @@ namespace Kerberos_Client
         }
         #endregion
         #region 聊天信息
-        public class chat_Message
+        public class Chat_Message
         {
             int head;//信息种类
             string content;//信息内容
@@ -441,16 +459,36 @@ namespace Kerberos_Client
         }
         #endregion
         #region 消息记录
-        public class record_Message
+        public class Record_Message
         {
-            List<chat_Message> messages_list;
-            public List<chat_Message> Messages_list
+            List<Chat_Message> messages_list;
+            public List<Chat_Message> Messages_list
             {
                 get { return messages_list; }
-                set { messages_list = new List<chat_Message>(value); }
+                set { messages_list = new List<Chat_Message>(value); }
             }
         }
+       
         #endregion
+        public class img
+        {
+             public static BitmapImage GetBitmap(string path)
+            {
+                BitmapImage bi;
+                if (!File.Exists(path))
+                    path = @"../../Image_Source\未登录头象.png";
+                using (MemoryStream ms = new MemoryStream(File.ReadAllBytes(path)))
+                {
+                    bi = new BitmapImage();
+                    bi.BeginInit();
+                    bi.CacheOption = BitmapCacheOption.OnLoad;//设置缓存模式
+                    bi.StreamSource = ms;//通过StreamSource加载图片
+                    bi.EndInit();
+                    bi.Freeze();
+                }
+                return bi;
+            }
+        }
     }
 }
 

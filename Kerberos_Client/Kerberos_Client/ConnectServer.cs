@@ -1,4 +1,5 @@
-﻿using Kerberos_Client.UI;
+﻿#define lianji
+using Kerberos_Client.UI;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -20,20 +21,30 @@ namespace Kerberos_Client
     {
         public static bool isExit = false;
         public static Socket client = null;
+        private static Thread threadReceive = null;
         private static MainWindow w;
         //连接服务器
-        internal static void connectserver(Window window)
+        internal static void connectserver(Window window, string str="127.0.0.1",int p=50810)
         {
             w = window as MainWindow;
             //连接远端的服务器IP
-            string remoteIP = "127.0.0.1";
+            string remoteIP = str;
+            int port = p;
+#if lianji
+            remoteIP = "192.168.43.64";
+            port = 1122;
+#endif
+
             IPAddress ip = IPAddress.Parse(remoteIP);
             //IPEndPoint endPoint = new IPEndPoint(ip, 59000);
             client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            client.Connect(ip,50810);
-            Thread threadReceive = new Thread(ReceiveData);
-            threadReceive.IsBackground = true;
-            threadReceive.Start();
+            client.Connect(ip, port);
+            if (threadReceive == null)
+            {
+                threadReceive = new Thread(ReceiveData);
+                threadReceive.IsBackground = true;
+                threadReceive.Start();
+            }
         }
         /// <summary>
         /// 发送消息
@@ -58,11 +69,12 @@ namespace Kerberos_Client
         /// </summary>
         private static void heartSend()
         {
-            while(true)
+            while(Main_Window.live)
             {
                 Thread.Sleep(30 * 1000);
                 sendMessage("heart");
             }
+            return;
         }
 
         /// <summary>处理接收的服务器端数据</summary>
@@ -91,13 +103,19 @@ namespace Kerberos_Client
                         return;
                     }
                 }
+                if (num <= 0)
+                    break;
+                //MessageBox.Show("ERROR");
                 string strMsg = System.Text.Encoding.UTF8.GetString(result, 0, num);
                 Order order =JsonHelper.FromJson<Order>(strMsg);
                 string command = order.MsgType;
                 switch (command)
                 {
-                    case "0002":
+                    case "0001":
                         w.Call_certificate(order);
+                        break;
+                    case "0002":
+                        w.Call_Key(order);
                         break;
                     case "0004":
                         w.Call_AS(order);
@@ -108,18 +126,17 @@ namespace Kerberos_Client
                     case "0008":
                         w.Call_Server(order);
                         break;
-                    case "1001": 
-                        MessageBox.Show(Encoding.UTF8.GetString(result, 0, num) + "0001");
+                    case "1001":
+                        MessageBox.Show(Encoding.UTF8.GetString(result, 0, num) + "1001");
                         break;
                     case "1002":
-                        User user = JsonHelper.FromJson<User>(order.Extend);
-                        w.Call_check_User(user);
+                        w.Call_check_User(order);
                         break;
                     case "1003": //好友请求
                         MessageBox.Show(Encoding.UTF8.GetString(result, 0, num) + "0001");
                         break;
                     case "1004"://好友界面
-                        Main_Window.Friend_List=
+                        MessageBox.Show(Encoding.UTF8.GetString(result, 0, num) + "0001");
                         break;
                     case "1005": 
                         MessageBox.Show(Encoding.UTF8.GetString(result, 0, num) + "0001");

@@ -1,4 +1,6 @@
-﻿using System;
+﻿//#define RSA
+#define DES
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
@@ -24,41 +26,48 @@ namespace Kerberos_Client.UI
     public partial class Main_Window : Window
     {
         public User My_user;
-        public static List<User> Friend_List = new List<User>();
+        public static List<Friend> Friend_List = new List<Friend>();
         public static List<User> Message_List = new List<User>();
+        public static Dictionary<string, string> Keys = new Dictionary<string, string>();
         private static List<User> Search_List = new List<User>();
-        public static Dictionary<string, Window> Chat_Window = new Dictionary<string, Window>();
-        public Main_Window(User u, Image i)
+        public static Dictionary<string, Chat_Window> Chat_Dic = new Dictionary<string, Chat_Window>();
+        public static bool live = false;
+        private static bool start = false;
+        public Main_Window(User u)
         {
+            start = false;
+            Request();
             InitializeComponent();
-            init(u,i);
+            while (!start) ;
+            init(u);
         }
-        #region 界面
         /// <summary>
         /// 界面初始化
         /// </summary>
         /// <param name="u">用户信息</param>
-        /// <param name="i">用户头像</param>
         /// <returns></returns>
-        private void init(User u,Image i)
+        private void init(User u)
         {
+            live = true;
             for (int j = 0; j < 10; j++)
             {
-                User uu = new User();
-                uu.Uname = "test" + j.ToString();
+                Friend uu = new Friend();
+                uu.U.Uname = "LOCAL" + j.ToString();
                 Friend_List.Add(uu);
-                Message_List.Add(uu);
+                //Message_List.Add(uu);
             }
-
+            ConnectServer.HeartStart();
             My_user = u;
             friend_List.ItemsSource = Friend_List;
             message_List.ItemsSource = Message_List;
             search_List.ItemsSource = Search_List;
             name_Block.Text = u.Name;
             sign_TextBox.Text = u.Sign;
-            head_Image.Source = i.Source;
+            head_Image.Source = img.GetBitmap(u.Photo);
             my_Exp1.Header += " " + Friend_List.Count();
         }
+
+        #region 界面
         /// <summary>
         /// 关闭界面
         /// </summary>
@@ -76,6 +85,7 @@ namespace Kerberos_Client.UI
         {
             Window w = new MainWindow(false);
             w.Show();
+            live = false;
             this.Close();
         }
         /// <summary>
@@ -113,27 +123,18 @@ namespace Kerberos_Client.UI
         /// <returns></returns>
         private void friend_List_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
+            User temp = (sender as DataGrid).SelectedItem as User;
             Dispatcher.Invoke(new Action(delegate
             {
-                User temp = (sender as DataGrid).SelectedItem as User;
-                Image image = new Image();
-                BitmapImage bi = new BitmapImage();
-                string path = temp.Photo;
 
-                if (!File.Exists(path))
-                    path = @"../../Image_Source\未登录头象.png";
-                using (MemoryStream ms = new MemoryStream(File.ReadAllBytes(path)))
+                Chat_Window u;
+                if (Chat_Dic.ContainsKey(temp.Uid))
+                    u = Chat_Dic[temp.Uid];
+                else
                 {
-                    bi = new BitmapImage();
-                    bi.BeginInit();
-                    bi.CacheOption = BitmapCacheOption.OnLoad;//设置缓存模式
-                    bi.StreamSource = ms;//通过StreamSource加载图片
-                    bi.EndInit();
-                    bi.Freeze();
-
+                    u = new Chat_Window(temp);
+                    Chat_Dic[temp.Uid] = u;
                 }
-                image.Source = bi;
-                Chat_Window u = new Chat_Window(temp, image);
                 Thread newWindowThread = new Thread(() => ThreadStartingPoint(u));
                 newWindowThread.SetApartmentState(ApartmentState.STA);
                 newWindowThread.IsBackground = true;
@@ -241,7 +242,7 @@ namespace Kerberos_Client.UI
         /// <returns></returns>
         private void search_TextBox_KeyUp(object sender, KeyEventArgs e)
         {
-            if(e.Key ==Key.Enter)
+            if (e.Key == Key.Enter)
             {
                 search_TextBox_TextChanged(sender, null);
             }
@@ -271,16 +272,102 @@ namespace Kerberos_Client.UI
                 }
                 search_TabItem.IsSelected = true;
                 search_List.ItemsSource = null;
-                search_List.ItemsSource=Search_List;
+                search_List.ItemsSource = Search_List;
             }
-           
+
         }
         #endregion
-
-        internal void Call_Server(Order o)
+        internal void Request()
         {
-            List<User> users = JsonHelper.FromJson<List<User>>(o.Extend);
+            //发送报文
+            Order order = new Order();
+            order.MsgType = "1003";
+            order.Src = MainWindow.localName;
+            order.Dst = "Server";
+            string extend = "Request";
+#if RSA
+            string sig = string.Empty;
+            RSALibrary.SignatureFormatter(extend, Keys["private"], ref sig);
+            order.Sign = sig;
+#endif
+#if DES
+            extend = DESLibrary.EncryptDES(extend, Keys["server"]);
+#endif
+            order.Extend = extend;
+            string json = JsonHelper.ToJson(order);
+            ConnectServer.sendMessage(json);
+        }
+
+        internal void Call_Friend(Order o)
+        {
+#if DES
+            o.Extend = DESLibrary.DecryptDES(o.Extend, Keys["server"]);
+#endif
+            MyStruct myStruct = JsonHelper.FromJson<MyStruct>(o.Extend);
+            List<Friend> users = myStruct.friendlist;
             Friend_List = users;
+        }
+
+        internal void Greet()
+        {
+            //发送报文
+            Order order = new Order();
+            order.MsgType = "1005";
+            order.Src = MainWindow.localName;
+            order.Dst = "Server";
+            string extend = "Greet";
+#if RSA
+            string sig = string.Empty;
+            RSALibrary.SignatureFormatter(extend, Keys["private"], ref sig);
+            order.Sign = sig;
+#endif
+#if DES
+            extend = DESLibrary.EncryptDES(extend, Keys["server"]);
+#endif
+            order.Extend = extend;
+            string json = JsonHelper.ToJson(order);
+            ConnectServer.sendMessage(json);
+        }
+        internal void Call_Greet(Order o)
+        {
+#if DES
+            o.Extend = DESLibrary.DecryptDES(o.Extend, Keys["server"]);
+#endif
+            MyStruct myStruct = JsonHelper.FromJson<MyStruct>(o.Extend);
+            List<User> users = JsonHelper.FromJson<List<User>>(o.Extend);
+            Message_List = users;
+        }
+        internal void Call_Message(Order o)
+        {
+#if DES
+            o.Extend = DESLibrary.DecryptDES(o.Extend, Keys["server"]);
+#endif
+            Dispatcher.Invoke(new Action(delegate
+            {
+                Friend user = Friend_List.Find(delegate (Friend friend)
+                {
+                    return friend.U.Uid.Equals(o.Src);
+                });
+                Chat_Window u;
+                if (Chat_Dic.ContainsKey(o.Src))
+                    u = Chat_Dic[o.Src];
+                else
+                {
+                    u = new Chat_Window(user.U);
+                    Chat_Dic[o.Src] = u;
+                    Thread newWindowThread = new Thread(() => ThreadStartingPoint(u));
+                    newWindowThread.SetApartmentState(ApartmentState.STA);
+                    newWindowThread.IsBackground = true;
+                    newWindowThread.Start();
+                }
+                u.chatMessage.Add(new ChatMessage()
+                {
+                    Photo = @"E:\Kerberos\Kerberos_Client\Kerberos_Client\Image_Source\test.jpg",
+                    Message = u.send_text.Text,
+                    MessageLocation = TypeLocalMessageLocation.chatRecv
+                }); ;
+                u.ListBoxChat.ScrollIntoView(u.ListBoxChat.Items[u.ListBoxChat.Items.Count - 1]);
+            }));
         }
     }
 }

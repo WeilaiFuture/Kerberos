@@ -11,7 +11,7 @@
         Focusable="True"
         >
     <Window.Resources>
-        <local:MyStruct x:Key="User"></local:MyStruct>
+        <local:MyStruct x:Key="Friend"></local:MyStruct>
     </Window.Resources>
     <Grid x:Name="My_grid" Focusable="True">
         <!--按比例切割界面-->
@@ -155,7 +155,7 @@
                     <Expander x:Name="my_Exp" Header="我的信息"  IsExpanded="False">
                         <!--信息队列-->
                         <DataGrid HeadersVisibility="None" CanUserResizeColumns="False" CanUserReorderColumns="False" x:Name="message_List" IsReadOnly="True" AutoGenerateColumns="False"
-                                  DataContext="{StaticResource User}" HorizontalScrollBarVisibility="Hidden" GridLinesVisibility="Horizontal" 
+                                  DataContext="{StaticResource Friend}" HorizontalScrollBarVisibility="Hidden" GridLinesVisibility="Horizontal" 
                                   MouseDoubleClick="friend_List_MouseDoubleClick" SelectionMode="Single" SelectionUnit="FullRow" >
                             <DataGrid.Columns>
                                 <!--头像行-->
@@ -186,7 +186,7 @@
                 <TabItem Name="Friend_Tab" Header="好友列表" Height="0"   Visibility="Hidden" Focusable="True">
                     <Expander x:Name="my_Exp1" Header="我的信息" IsExpanded="False" >
                         <DataGrid HeadersVisibility="None" CanUserResizeColumns="False" CanUserReorderColumns="False" x:Name="friend_List" IsReadOnly="True" 
-                                  AutoGenerateColumns="False" DataContext="{StaticResource User}"
+                                  AutoGenerateColumns="False" DataContext="{StaticResource Friend}"
                                   HorizontalScrollBarVisibility="Hidden" GridLinesVisibility="Horizontal" 
                                   MouseDoubleClick="friend_List_MouseDoubleClick" SelectionMode="Single" SelectionUnit="FullRow">
                             <DataGrid.Columns>
@@ -217,7 +217,7 @@
                 <!--查找-->
                 <TabItem Name="search_TabItem" IsSelected="False" Margin="0,27,0,-0.4" >
                     <DataGrid HeadersVisibility="None" CanUserResizeColumns="False" CanUserReorderColumns="False" x:Name="search_List" IsReadOnly="True" 
-                                  AutoGenerateColumns="False" DataContext="{StaticResource User}"
+                                  AutoGenerateColumns="False" DataContext="{StaticResource Friend}"
                                   HorizontalScrollBarVisibility="Hidden" GridLinesVisibility="Horizontal" 
                                   MouseDoubleClick="friend_List_MouseDoubleClick" SelectionMode="Single" SelectionUnit="FullRow">
                         <DataGrid.Columns>
