@@ -32,17 +32,29 @@ public class MyJson {
         MyStruct struct=JSON.parseObject(jsonObject, MyStruct.class);
         return struct;
     }
+    //序列化
+    public static String ObjectToString(Object object){
+        String jsonOutput= JSON.toJSONString(object);
+        return jsonOutput;
+    }
+    //反序列化
+    public static Object StringToObject(String jsonObject){
+        Object object=JSON.parseObject(jsonObject, MyStruct.class);
+        return object;
+    }
     static public class Order{
         @JSONField(name="msgID")
         String msgId;
         @JSONField(name="Src")
-        String Src;
+        String src;
         @JSONField(name="Dst")
-        String Dst;
+        String dst;
         @JSONField(name="msgType")
         String msgType;
         @JSONField(name="extend")
         String extend;
+        @JSONField(name = "sign")
+        String sign;
         @JSONField(name="statusReport")
         boolean statusReport;
         @JSONField(name="sTS")
@@ -50,18 +62,26 @@ public class MyJson {
         @JSONField(name="rTS")
         String rTS;
         @JSONField(name="ContentType")
-        String ContentType;
+        String contentType;
+
+        public String getSign() {
+            return sign;
+        }
+
+        public void setSign(String sign) {
+            this.sign = sign;
+        }
 
         public String getMsgId() {
             return msgId;
         }
 
         public String getSrc() {
-            return Src;
+            return src;
         }
 
         public String getDst() {
-            return Dst;
+            return dst;
         }
 
         public String getMsgType() {
@@ -85,7 +105,7 @@ public class MyJson {
         }
 
         public String getContentType() {
-            return ContentType;
+            return contentType;
         }
 
         public void setMsgId(String msgId) {
@@ -93,11 +113,11 @@ public class MyJson {
         }
 
         public void setSrc(String src) {
-            Src = src;
+            this.src = src;
         }
 
         public void setDst(String dst) {
-            Dst = dst;
+            this.dst = dst;
         }
 
         public void setMsgType(String msgType) {
@@ -121,7 +141,7 @@ public class MyJson {
         }
 
         public void setContentType(String contentType) {
-            ContentType = contentType;
+            this.contentType = contentType;
         }
     }
 }

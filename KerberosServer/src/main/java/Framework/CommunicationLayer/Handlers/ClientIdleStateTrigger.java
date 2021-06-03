@@ -27,6 +27,7 @@ public class ClientIdleStateTrigger extends ChannelInboundHandlerAdapter {
 
                 //使用Listener以保证线程安全
                 future.addListener(ChannelFutureListener.CLOSE);
+                //ctx.close();
             }
         } else {
             super.userEventTriggered(ctx, evt);

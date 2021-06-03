@@ -2,7 +2,15 @@ package Framework.SessionLayer;
 
 import Framework.SessionLayer.Exceptions.SessionLayerNotInitialized;
 import Framework.SessionLayer.Handlers.SessionHandler;
-import io.netty.channel.Channel;
+import Framework.Testing.EchoClientHandler;
+import Framework.Testing.EchoClientHandler2;
+import io.netty.bootstrap.Bootstrap;
+import io.netty.buffer.ByteBuf;
+import io.netty.buffer.Unpooled;
+import io.netty.channel.*;
+import io.netty.channel.nio.NioEventLoopGroup;
+import io.netty.channel.socket.SocketChannel;
+import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.util.AttributeKey;
 import org.apache.commons.lang3.RandomStringUtils;
 
@@ -31,11 +39,57 @@ public class SessionLayer {
         this.sessionHandler = sessionHandler;
     }
     private static OfflineMsgQueue offlineMsgQueue = new OfflineMsgQueue();
+    //static private ByteBuf msgBuf;
+
     static public void checkInitStatus(){
         if(sessionHandler == null) {
             throw new SessionLayerNotInitialized();
         }
     }
+    static public void sendByAddress(String host,int port,Object msg){
+        byte[] response = ((String)msg).getBytes();
+        ByteBuf msgBuf = Unpooled.buffer(response.length);
+        msgBuf.writeBytes(response);
+        EventLoopGroup group = new NioEventLoopGroup();
+        try {
+            Bootstrap b = new Bootstrap();
+            b.group(group)
+                    .channel(NioSocketChannel.class)
+                    .option(ChannelOption.TCP_NODELAY, true)
+                    .handler(new ChannelInitializer<SocketChannel>() {
+                        @Override
+                        protected void initChannel(SocketChannel ch) throws Exception {
+
+                            ChannelPipeline p = ch.pipeline();
+                            p.addLast("handler",new ChannelInboundHandlerAdapter(){
+                                @Override
+                                public void channelActive(ChannelHandlerContext ctx) throws Exception {
+                                    //logger.info("client channel active");
+                                    // Send the message to Server
+                                    //logger.info("client send req...");
+                                    ctx.writeAndFlush(msgBuf);
+                                }
+                            });
+
+                        }
+                    });
+            // Start the client.
+            ChannelFuture f = b.connect(host, port).sync();
+
+            //logger.info("client connect to host:{}, port:{}", host, port);
+
+            // Wait until the connection is closed.
+            f.channel().closeFuture().sync();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        finally {
+            // Shut down the event loop to terminate all threads.
+            group.shutdownGracefully();
+        }
+        msgBuf.clear();
+    }
+
     static public void send(String userName,Object msg){
         /*
          * 三种情况：
@@ -45,7 +99,10 @@ public class SessionLayer {
          */
         checkInitStatus();
         if(channelMap.get(userName) != null){
-            channelMap.get(userName).write(msg);
+            byte[] response = ((String)msg).getBytes();
+            ByteBuf msgBuf = Unpooled.buffer(response.length);
+            msgBuf.writeBytes(response);
+            channelMap.get(userName).writeAndFlush(msgBuf);
         }
         else{
             offlineMsgQueue.write(userName,msg);
@@ -57,7 +114,38 @@ public class SessionLayer {
          * 临时ID改用户ID的过程在login中完成
          */
         checkInitStatus();
-        sessionHandler.receive(channelName,msg);
+        ByteBuf buf = (ByteBuf)msg;
+        byte[] data = new byte[buf.readableBytes()];
+        buf.readBytes(data);
+        try {
+            String receive = new String(data, "utf-8");
+            sessionHandler.receive(channelName,receive);
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+    static public void logIn(String tempName,String userName)throws Exception{
+        checkInitStatus();
+
+        bindChannelWithUserName(tempName,userName);
+        /*
+         * 检查绑定结果
+         */
+        Channel channel =  channelMap.get(tempName);
+        if(channel == null){
+            throw new Exception();
+        }
+        /*
+         * 绑定完成后，立刻检查有没有离线队列
+         */
+
+        List<Object> offlineMsgList = offlineMsgQueue.read(userName);
+        if(offlineMsgList != null){
+            for (Object msg:offlineMsgList) {
+                send(userName,msg);
+            }
+        }
     }
     static public void logOut(String userName){
         checkInitStatus();
@@ -65,6 +153,10 @@ public class SessionLayer {
         channel.close();
         channelMap.remove(userName);
     }
+
+/*
+ * 以下函数不应该在SessionLayer以上的层级中被调用
+ */
     static public String bindChannelWithTempName(Channel channel){
         /*
          * 本函数仅在InBoundHandler中被调用，并且仅在一个channel被建立时被调用
@@ -72,7 +164,12 @@ public class SessionLayer {
          */
         //给channel随机生成一个channelName并查重
         checkInitStatus();
-        String channelName = RandomStringUtils.randomAlphanumeric(10);
+        String channelName;
+        do{
+            channelName = RandomStringUtils.randomAlphanumeric(10);
+        }while (channelMap.get(channel) != null);
+
+
         channelMap.put(channelName,channel);
         return channelName;
     }
@@ -94,14 +191,5 @@ public class SessionLayer {
         channelMap.remove(tempName);
         channel.attr(AttributeKey.valueOf("channelName")).set(tempName);
         channelMap.put(userName,channel);
-        /*
-         * 绑定完成后，立刻检查有没有离线队列
-         */
-        List<Object> offlineMsgList = offlineMsgQueue.read(userName);
-        if(offlineMsgList != null){
-            for (Object msg:offlineMsgList) {
-                channel.writeAndFlush(msg);
-            }
-        }
     }
 }
