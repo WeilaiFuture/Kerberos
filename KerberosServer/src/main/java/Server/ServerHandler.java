@@ -2,19 +2,71 @@ package Server;
 
 import Json.MyJson;
 import Json.MyStruct;
+import SecurityUtils.DESHandler;
+import SecurityUtils.RSAHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.security.Key;
+import java.security.NoSuchAlgorithmException;
+import java.security.interfaces.RSAPrivateKey;
+import java.security.interfaces.RSAPublicKey;
+import java.security.spec.InvalidKeySpecException;
 import java.util.LinkedList;
+import java.util.Map;
 
 import static Framework.SessionLayer.SessionLayer.*;
 import static Server.ServerDataBase.*;
+import static Server.ServerSecurity.createCertif;
 
 public class ServerHandler {
     /*
         包含所有收到的报文
     */
-
+    public ServerHandler() throws InvalidKeySpecException, NoSuchAlgorithmException {
+        Map<String, String> kmap= RSAHandler.createKeys(1024);
+        //生成公钥
+        String pk1=kmap.get("publicKey");
+        pk=RSAHandler.getPublicKey(pk1);
+        //生成私钥
+        String sk1=kmap.get("privateKey");
+        sk=RSAHandler.getPrivateKey(sk1);
+        //生成证书
+        String ID="SERVER";
+        certificate=createCertif(ID,pk1);
+        //发送证书
+    }
+    private static String Key;
+    private static MyStruct.Certificate certificate;
+    private static RSAPrivateKey sk;
+    private static RSAPublicKey pk;
+    public static boolean Kcv(String message){
+        /*
+        head=7;
+        Kcv；
+        存入数据库
+         */
+        //获取报文
+        MyJson.Order order =MyJson.StringToOrder(message);
+        //获取消息
+        MyStruct mystruct=MyJson.StringToStruct(order.getExtend());
+        //存入数据库
+        String kcv=mystruct.message5.getT().getKey();
+        wKcv(order.getSrc(),kcv);
+        //发送messgae6
+        mystruct.message6.setTs(mystruct.message5.getAc().getTs()+1);//需要使用Kcv加密
+        //发送
+        String src=order.getSrc();
+        order.setSrc(order.getDst());
+        order.setDst(src);
+        String sstruct=MyJson.StructToString(mystruct);
+        //加密操作
+        sstruct=DESHandler.DecryptDES(sstruct,kcv);
+        order.setExtend(sstruct);
+        String sorder=MyJson.OrderToString(order);
+        send(order.getDst(),sorder);
+        return false;
+    }
     public static boolean Certif(String message){
         /*
         head=0001;
@@ -33,14 +85,15 @@ public class ServerHandler {
         /*
         head=0002;
         Kv；
-        将信息存入数据库；
+        将信息保存；
          */
         //获取报文
         MyJson.Order order =MyJson.StringToOrder(message);
+        //解密，RSA
+        order.setExtend(RSAHandler.privateDecrypt(order.getExtend(),sk));
         //获取消息
         MyStruct mystruct=MyJson.StringToStruct(order.getExtend());
-        //存入数据库
-        //缺少一个数据库函数
+        Key=mystruct.my_k.getKey();//保存Kv
         return false;
     }
     //注册功能属于web server
@@ -68,6 +121,8 @@ public class ServerHandler {
         //获取报文
         MyJson.Order order =MyJson.StringToOrder(message);
         //解密操作
+        String kcv=rKcv(order.getSrc());
+        order.setExtend(DESHandler.DecryptDES(order.getExtend(),kcv));
         //获取消息
         MyStruct mystruct=MyJson.StringToStruct(order.getExtend());
         //存入数据库
@@ -75,9 +130,13 @@ public class ServerHandler {
         //更改ACK
         order.setStatusReport(true);
         //发送
-        order.setDst(order.getSrc());
+        String src=order.getSrc();
+        order.setSrc(order.getDst());
+        order.setDst(src);
         String sstruct=MyJson.StructToString(mystruct);
         //加密操作
+        kcv=rKcv(order.getDst());
+        sstruct=DESHandler.DecryptDES(sstruct,kcv);
         order.setExtend(sstruct);
         String sorder=MyJson.OrderToString(order);
         send(order.getDst(),sorder);
@@ -92,16 +151,22 @@ public class ServerHandler {
          */
         //获取报文
         MyJson.Order order =MyJson.StringToOrder(message);
+        //解密操作
+        String kcv=rKcv(order.getSrc());
+        order.setExtend(DESHandler.DecryptDES(order.getExtend(),kcv));
         //获取消息
         MyStruct mystruct=MyJson.StringToStruct(order.getExtend());
         //查询数据库
         mystruct.friendlist.setFriends(rFriendList(order.getSrc()));
         //发送
-        order.setDst(order.getSrc());
+        String src=order.getSrc();
+        order.setSrc(order.getDst());
         order.setMsgType("1004");
-        order.setDst(order.getSrc());
+        order.setDst(src);
         String sstruct=MyJson.StructToString(mystruct);
         //加密操作
+        kcv=rKcv(order.getDst());
+        sstruct=DESHandler.DecryptDES(sstruct,kcv);
         order.setExtend(sstruct);
         String sorder=MyJson.OrderToString(order);
         send(order.getDst(),sorder);
@@ -116,6 +181,9 @@ public class ServerHandler {
          */
         //获取报文
         MyJson.Order order =MyJson.StringToOrder(message);
+        //解密操作
+        String kcv=rKcv(order.getSrc());
+        order.setExtend(DESHandler.DecryptDES(order.getExtend(),kcv));
         //获取消息
         MyStruct mystruct=MyJson.StringToStruct(order.getExtend());
         //查询数据库，所有上线好友ID
@@ -126,6 +194,8 @@ public class ServerHandler {
             order.setDst(onLineFriends.get(i));
             String sstruct=MyJson.StructToString(mystruct);
             //加密操作
+            kcv=rKcv(order.getDst());
+            sstruct=DESHandler.DecryptDES(sstruct,kcv);
             order.setExtend(sstruct);
             String sorder=MyJson.OrderToString(order);
             send(order.getDst(),sorder);
@@ -152,14 +222,21 @@ public class ServerHandler {
          */
         //获取报文
         MyJson.Order order =MyJson.StringToOrder(message);
+        //解密操作
+        String kcv=rKcv(order.getSrc());
+        order.setExtend(DESHandler.DecryptDES(order.getExtend(),kcv));
         //获取消息
         MyStruct mystruct=MyJson.StringToStruct(order.getExtend());
         //查询数据库，用户信息
         mystruct.user=rSearchID(mystruct.user.getUid());
         //发送
-        order.setDst(order.getSrc());
+        String src=order.getSrc();
+        order.setSrc(order.getDst());
+        order.setDst(src);
         String sstruct=MyJson.StructToString(mystruct);
         //加密操作
+        kcv=rKcv(order.getDst());
+        sstruct=DESHandler.DecryptDES(sstruct,kcv);
         order.setExtend(sstruct);
         String sorder=MyJson.OrderToString(order);
         send(order.getDst(),sorder);
@@ -174,6 +251,9 @@ public class ServerHandler {
          */
         //获取报文
         MyJson.Order order =MyJson.StringToOrder(message);
+        //解密操作
+        String kcv=rKcv(order.getSrc());
+        order.setExtend(DESHandler.DecryptDES(order.getExtend(),kcv));
         //获取消息
         MyStruct mystruct=MyJson.StringToStruct(order.getExtend());
         //查询数据库，所有上线好友ID
@@ -181,10 +261,10 @@ public class ServerHandler {
         LinkedList<String>onLineFriends=rOnLineFriend(ID);
         //向好友发送下线提醒
         for(int i=0;i<onLineFriends.size();i++){
-            onLineFriends.get(i);
             order.setDst(onLineFriends.get(i));
             String sstruct=MyJson.StructToString(mystruct);
             //加密操作
+            kcv=rKcv(order.getDst());
             order.setExtend(sstruct);
             String sorder=MyJson.OrderToString(order);
             send(order.getDst(),sorder);
@@ -200,14 +280,21 @@ public class ServerHandler {
          */
         //获取报文
         MyJson.Order order =MyJson.StringToOrder(message);
+        //解密操作
+        String kcv=rKcv(order.getSrc());
+        order.setExtend(DESHandler.DecryptDES(order.getExtend(),kcv));
         //获取消息
         MyStruct mystruct=MyJson.StringToStruct(order.getExtend());
         //查询数据库，用户信息
         mystruct.user=rSearchID(mystruct.user.getUid());
         //返回个人信息
-        order.setDst(order.getSrc());
+        String src=order.getSrc();
+        order.setSrc(order.getDst());
+        order.setDst(src);
         String sstruct=MyJson.StructToString(mystruct);
         //加密操作
+        kcv=rKcv(order.getDst());
+        sstruct=DESHandler.DecryptDES(sstruct,kcv);
         order.setExtend(sstruct);
         String sorder=MyJson.OrderToString(order);
         send(order.getDst(),sorder);
@@ -221,15 +308,22 @@ public class ServerHandler {
          */
         //获取报文
         MyJson.Order order =MyJson.StringToOrder(message);
+        //解密操作
+        String kcv=rKcv(order.getSrc());
+        order.setExtend(DESHandler.DecryptDES(order.getExtend(),kcv));
         //获取消息
         MyStruct mystruct=MyJson.StringToStruct(order.getExtend());
         //更改数据库，个人信息
         //返回是否修改成功
         order.setStatusReport(wInfo(mystruct.user));
-        order.setDst(order.getSrc());
+        String src=order.getSrc();
+        order.setSrc(order.getDst());
+        order.setDst(src);
         //发送
         String sstruct=MyJson.StructToString(mystruct);
         //加密操作
+        kcv=rKcv(order.getDst());
+        sstruct=DESHandler.DecryptDES(sstruct,kcv);
         order.setExtend(sstruct);
         String sorder=MyJson.OrderToString(order);
         send(order.getDst(),sorder);
@@ -242,6 +336,9 @@ public class ServerHandler {
          */
         //获取报文
         MyJson.Order order =MyJson.StringToOrder(message);
+        //解密操作
+        String kcv=rKcv(order.getSrc());
+        order.setExtend(DESHandler.DecryptDES(order.getExtend(),kcv));
         //获取消息
         MyStruct mystruct=MyJson.StringToStruct(order.getExtend());
         /*
@@ -274,6 +371,8 @@ public class ServerHandler {
         //发送
         String sstruct=MyJson.StructToString(mystruct);
         //加密操作
+        kcv=rKcv(order.getDst());
+        sstruct=DESHandler.DecryptDES(sstruct,kcv);
         order.setExtend(sstruct);
         String sorder=MyJson.OrderToString(order);
         send(order.getDst(),sorder);
@@ -286,6 +385,9 @@ public class ServerHandler {
          */
         //获取报文
         MyJson.Order order =MyJson.StringToOrder(message);
+        //解密操作
+        String kcv=rKcv(order.getSrc());
+        order.setExtend(DESHandler.DecryptDES(order.getExtend(),kcv));
         //获取消息
         MyStruct mystruct=MyJson.StringToStruct(order.getExtend());
         /*
@@ -300,25 +402,82 @@ public class ServerHandler {
         LinkedList<String> GroupUsers=rGroupUser(order.getDst());
         //转发
         MyStruct.User user=rSearchID(order.getSrc());
+        String sstruct="";
+        String sorder="";
         switch (order.getContentType()){
             case "9002":
                 //加入群聊
-                wAddG(user,mystruct.group.getGid());
+                //转发给群主
+                order.setContentType("9002");
+                order.setDst(mystruct.group.getLeader());
+                //发送
+                sstruct=MyJson.StructToString(mystruct);
+                //加密操作
+                kcv=rKcv(order.getDst());
+                sstruct=DESHandler.DecryptDES(sstruct,kcv);
+                order.setExtend(sstruct);
+                sorder=MyJson.OrderToString(order);
+                send(order.getDst(),sorder);
                 break;
             case "9003":
                 //组建群聊
                 wCreateG(mystruct.group);
+                //转发邀请
+                for(int i=0;i<mystruct.group.getList().size();i++){
+                    mystruct.group.getList().get(i);
+                    order.setDst(mystruct.group.getList().get(i).get(user));//这个地方有问题
+                    sstruct=MyJson.StructToString(mystruct);
+                    //加密操作
+                    kcv=rKcv(order.getDst());
+                    sstruct=DESHandler.DecryptDES(sstruct,kcv);
+                    order.setExtend(sstruct);
+                    sorder=MyJson.OrderToString(order);
+                    send(order.getDst(),sorder);
+                }
                 break;
             case "9004":
                 //退出群聊
                 wDeleteG(order.getSrc(),mystruct.group.getGid());
+                //转发给群主
+                order.setContentType("9004");
+                order.setDst(mystruct.group.getLeader());
+                //发送
+                sstruct=MyJson.StructToString(mystruct);
+                //加密操作
+                kcv=rKcv(order.getDst());
+                sstruct=DESHandler.DecryptDES(sstruct,kcv);
+                order.setExtend(sstruct);
+                sorder=MyJson.OrderToString(order);
+                send(order.getDst(),sorder);
                 break;
             case "9008":
                 //同意加群
+                wAddG(user,mystruct.group.getGid());
+                //转发给群主
+                order.setContentType("9008");
+                order.setDst(mystruct.group.getLeader());
+                //发送
+                sstruct=MyJson.StructToString(mystruct);
+                //加密操作
+                kcv=rKcv(order.getDst());
+                sstruct=DESHandler.DecryptDES(sstruct,kcv);
+                order.setExtend(sstruct);
+                sorder=MyJson.OrderToString(order);
+                send(order.getDst(),sorder);
                 break;
             case "9009":
                 //拒绝加群
-                wDeleteG(order.getSrc(),mystruct.group.getGid());
+                //转发给群主
+                order.setContentType("9009");
+                order.setDst(mystruct.group.getLeader());
+                //发送
+                sstruct=MyJson.StructToString(mystruct);
+                //加密操作
+                kcv=rKcv(order.getDst());
+                sstruct=DESHandler.DecryptDES(sstruct,kcv);
+                order.setExtend(sstruct);
+                sorder=MyJson.OrderToString(order);
+                send(order.getDst(),sorder);
                 break;
         }
         return false;

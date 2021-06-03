@@ -1,8 +1,13 @@
 ﻿using Client;
+using Kerberos_Client;
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Net;
+using System.Net.Sockets;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading;
 using static Client.DESLibrary;
 
 namespace Client_test
@@ -11,12 +16,150 @@ namespace Client_test
     {
         static void Main(string[] args)
         {
-            /// <summary>
-            /// 利用RSA生成的密钥来加密解密
-            /// </summary>
-            DES_test();
-            RSA_test();
+            init();
+            while (true) ;
+            //DES_test();
+            //RSA_test();
+
         }
+        static Thread threadWatch = null; // 负责监听客户端连接请求的 线程；
+        static Socket socketWatch = null;
+
+        static Dictionary<string, Socket> dict = new Dictionary<string, Socket>();//ip和socket
+        static Dictionary<string, string> dictID = new Dictionary<string, string>();//id和ip
+        static Dictionary<string, string> dictID_reverse = new Dictionary<string, string>();//ip和id
+        static Dictionary<string, Thread> dictThread = new Dictionary<string, Thread>();//ip和线程
+
+        static private void init()
+        {
+            // 创建负责监听的套接字，注意其中的参数；
+            socketWatch = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            // 获得文本框中的IP对象；
+            IPAddress address = IPAddress.Parse("127.0.0.1");
+            // 创建包含ip和端口号的网络节点对象；
+            IPEndPoint endPoint = new IPEndPoint(address, 50810);
+            try
+            {
+                // 将负责监听的套接字绑定到唯一的ip和端口上；
+                socketWatch.Bind(endPoint);
+            }
+            catch (SocketException se)
+            {
+                Console.WriteLine("异常：" + se.Message);
+                return;
+            }
+            // 设置监听队列的长度；
+            socketWatch.Listen(10);
+            // 创建负责监听的线程；
+            threadWatch = new Thread(WatchConnecting);
+            threadWatch.IsBackground = true;
+            threadWatch.Start();
+            ShowMsg("服务器启动监听成功！");
+            //}
+        }
+
+        /// <summary>
+        /// 监听客户端请求的方法；
+        /// </summary>
+        static void WatchConnecting()
+        {
+            while (true)  // 持续不断的监听客户端的连接请求；
+            {
+                // 开始监听客户端连接请求，Accept方法会阻断当前的线程；
+                Socket sokConnection = socketWatch.Accept(); // 一旦监听到一个客户端的请求，就返回一个与该客户端通信的 套接字；
+                // 想列表控件中添加客户端的IP信息；
+                Console.WriteLine("IP信息:"+sokConnection.RemoteEndPoint.ToString());
+                // 将与客户端连接的 套接字 对象添加到集合中；
+                dict.Add(sokConnection.RemoteEndPoint.ToString(), sokConnection);
+                ShowMsg("客户端连接成功！");
+                Thread thr = new Thread(RecMsg);
+                thr.IsBackground = true;
+                thr.Start(sokConnection);
+                dictThread.Add(sokConnection.RemoteEndPoint.ToString(), thr);  //  将新建的线程 添加 到线程的集合中去。
+            }
+        }
+
+        static void RecMsg(object sokConnectionparn)
+        {
+            Socket sokClient = sokConnectionparn as Socket;
+            while (true)
+            {
+                bool run_normal = true;
+                // 定义一个2M的缓存区；
+                byte[] arrMsgRec = new byte[1024 * 1024 * 2];
+                // 将接受到的数据存入到输入  arrMsgRec中；
+                int length = -1;
+                try
+                {
+                    length = sokClient.Receive(arrMsgRec); // 接收数据，并返回数据的长度；
+                }
+                catch (SocketException se)
+                {
+                    ShowMsg("异常：" + se.Message);
+                    // 从 通信套接字 集合中删除被中断连接的通信套接字；
+                    dict.Remove(sokClient.RemoteEndPoint.ToString());
+                    // 从通信线程集合中删除被中断连接的通信线程对象；
+                    dictThread.Remove(sokClient.RemoteEndPoint.ToString());
+                    // 从列表中移除被中断的连接IP
+                    Console.WriteLine(sokClient.RemoteEndPoint.ToString()+"xxxx");
+                    //String s = dictID_reverse[sokClient.RemoteEndPoint.ToString()];
+                    //dictID_reverse.Remove(sokClient.RemoteEndPoint.ToString());
+                    //dictID.Remove(s);
+                    run_normal = false;
+                    break;
+                }
+                catch (Exception e)
+                {
+                    ShowMsg("异常：" + e.Message);
+                    // 从 通信套接字 集合中删除被中断连接的通信套接字；
+                    dict.Remove(sokClient.RemoteEndPoint.ToString());
+                    // 从通信线程集合中删除被中断连接的通信线程对象；
+                    dictThread.Remove(sokClient.RemoteEndPoint.ToString());
+                    // 从列表中移除被中断的连接IP
+                    Console.WriteLine(sokClient.RemoteEndPoint.ToString() + "xxxx");
+                    string s = dictID_reverse[sokClient.RemoteEndPoint.ToString()];
+                    dictID_reverse.Remove(sokClient.RemoteEndPoint.ToString());
+                    dictID.Remove(s);
+                    run_normal = false;
+                    break;
+                }
+                if (run_normal)  // 表示接收到的是数据；
+                {
+                    string strMsg = System.Text.Encoding.UTF8.GetString(arrMsgRec, 0, length);// 将接受到的字节数据转化成字符串；
+                    ShowMsg(strMsg);
+                    Order order= JsonHelper.FromJson<Order>(strMsg);
+                    switch (order.MsgType)
+                    {
+                        case "1002":
+                            order.StatusReport = true;
+                            break;
+                                
+                    }
+                    sendMsg(sokClient.RemoteEndPoint.ToString(),JsonHelper.ToJson(order));
+                }   
+            }
+        }
+        static public void sendMsg(string ip,string msg)
+        {
+            ShowMsg("sendLoginMsg");
+            foreach (KeyValuePair<string, Socket> keyValue in dict)
+            {
+                string s = keyValue.Key;
+                if (s.Equals(ip))
+                {
+                    ShowMsg(msg);
+                    byte[] bmsg = System.Text.Encoding.UTF8.GetBytes(msg);
+                    dict[s].Send(bmsg);
+                }
+                //keyValue.Value.Send(by);
+                //MessageBox.Show(msg);
+            }
+        }
+        static void ShowMsg(string str)
+        {
+            Console.WriteLine(str);
+        }
+
         public static void my_init()
         {
             string line = "";

@@ -10,28 +10,29 @@
         WindowStyle="None"  ResizeMode="NoResize"
         MouseLeftButtonDown="Window_MouseLeftButtonDown"
         >
-    <Grid>
+    <TabControl>
+        <TabItem Name="Main_Tab">
+            <Grid>
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
         <!--动态背景图片-->
-        <Image Name="back_img" Stretch="Fill" gif:ImageBehavior.AnimatedSource="Image_Source/test.gif" Margin="-22,-19,-34,-51" Grid.RowSpan="3" RenderTransformOrigin="0.5,0.5" >
-            <Image.CacheMode>
-                <BitmapCache />
-            </Image.CacheMode>
-            <Image.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform AngleY="0.139"/>
-                    <RotateTransform/>
-                    <TranslateTransform Y="1.198"/>
-                </TransformGroup>
-            </Image.RenderTransform>
-        </Image>
-        
-        <Grid Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Top" >
+                <Image Name="back_img" Stretch="Fill" gif:ImageBehavior.AnimatedSource="Image_Source/test.gif" Margin="-22,-19,-34,-51" Grid.RowSpan="3" RenderTransformOrigin="0.5,0.5" >
+                    <Image.CacheMode>
+                        <BitmapCache />
+                    </Image.CacheMode>
+                    <Image.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform AngleY="0.139"/>
+                            <RotateTransform/>
+                            <TranslateTransform Y="1.198"/>
+                        </TransformGroup>
+                    </Image.RenderTransform>
+                </Image>
+                <Grid Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Top" >
             <!--关闭按钮，并设置触发器，鼠标进入变成红色-->
             <Button  Width="50" Height="50" Margin="0,0,0,0" Click="Close_Click">
                 <Button.Template >
@@ -71,7 +72,7 @@
                 </WrapPanel>
             </Button>
         </Grid>
-        
+
         <Grid Grid.Row="0" VerticalAlignment="Center" Margin="77,121,-77,79" Grid.RowSpan="3"  >
             <Grid.RowDefinitions>
                 <RowDefinition Height="400"/>
@@ -131,32 +132,56 @@
             </StackPanel>
         </Grid>
         <!--登录按钮-->
-        <Button  HorizontalAlignment="Left" Margin="308,32,0,0" Grid.Row="2" VerticalAlignment="Top" Width="157" Height="61" Click="Login_Click">
-            <Button.Template>
-                <ControlTemplate TargetType="{x:Type Button}" >
-                    <Border x:Name="Close_Border"  BorderThickness="0" CornerRadius="1,1,1,1">
-                        <Border.Background >
-                            <SolidColorBrush x:Name="ColorQ"/>
-                        </Border.Background>
-                        <Border.Triggers>
-                            <EventTrigger RoutedEvent="FrameworkElement.Loaded">
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <ColorAnimation Storyboard.TargetName="ColorQ"
+                <Button  HorizontalAlignment="Left" Margin="308,32,0,0" Grid.Row="2" VerticalAlignment="Top" Width="157" Height="61" Click="Login_Click">
+                    <Button.Template>
+                        <ControlTemplate TargetType="{x:Type Button}" >
+                            <Border x:Name="Close_Border"  BorderThickness="0" CornerRadius="1,1,1,1">
+                                <Border.Background >
+                                    <SolidColorBrush x:Name="ColorQ"/>
+                                </Border.Background>
+                                <Border.Triggers>
+                                    <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <ColorAnimation Storyboard.TargetName="ColorQ"
                                             Storyboard.TargetProperty="(SolidColorBrush.Color)"
                                             From="DodgerBlue" To="DodgerBlue"
                                             AutoReverse="True" />
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </EventTrigger>
-                        </Border.Triggers>
-                        <ContentPresenter Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                    </Border>
-                </ControlTemplate>
-            </Button.Template>
-            <WrapPanel>
-                <Image Source="Image_Source/登录.png" Stretch="Fill"  />
-            </WrapPanel>
-        </Button>
-    </Grid>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger>
+                                </Border.Triggers>
+                                <ContentPresenter Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                    <WrapPanel>
+                        <Image Source="Image_Source/登录.png" Stretch="Fill"  />
+                    </WrapPanel>
+                </Button>
+            </Grid>
+        </TabItem>
+        <TabItem Name="Load_Tab">
+            <Grid>
+                <!--动态背景图片-->
+                <Image Name="back_img1" Stretch="Fill" gif:ImageBehavior.AnimatedSource="Image_Source/test.gif" Margin="-22,-19,-34,-51" Grid.RowSpan="3" RenderTransformOrigin="0.5,0.5" >
+                    <Image.CacheMode>
+                        <BitmapCache />
+                    </Image.CacheMode>
+                    <Image.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform AngleY="0.139"/>
+                            <RotateTransform/>
+                            <TranslateTransform Y="1.198"/>
+                        </TransformGroup>
+                    </Image.RenderTransform>
+                </Image>
+                <local:LoadingWait x:Name="Load_Control" Visibility="Visible" Grid.RowSpan="3"  />
+                <Button  Content="取消" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="50" Height="50" Margin="0,0,0,0" Click="Cancle_Click">
+                   
+                </Button>
+            </Grid>
+        </TabItem>
+   </TabControl>
 </Window>

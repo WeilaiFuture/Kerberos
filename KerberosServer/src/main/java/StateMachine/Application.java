@@ -41,7 +41,7 @@ public class Application implements CommandLineRunner {
        String head="HEAD"+order.getMsgType();
        //判断绑定
        if(!channelName.equals(order.getSrc())){
-           bindChannelWithUserName(channelName,order.getSrc());
+    //       bindChannelWithUserName(channelName,order.getSrc());
        }
        //实例化一个状态机
        StateMachine<RegStatusEnum,RegEventEnum> stateMachine=stateMachineFactory.getStateMachine();
@@ -62,7 +62,7 @@ public class Application implements CommandLineRunner {
     }
 
     public static void main(String []args) throws InterruptedException {
-/*
+
         MyStruct struct=new MyStruct();
         struct.my_k=new MyStruct.My_k();
         struct.my_k.setKey("1");
@@ -70,10 +70,12 @@ public class Application implements CommandLineRunner {
         MyStruct struct1=MyJson.StringToStruct(json);
         MyJson.Order order=new MyJson.Order();
         order.setMsgType("1001");
+        String c="1";
         String info=OrderToString(order);
-        SpringApplication.run(Application.class,info);
-  */
-        JTable table = createTable();
+        String []s={c,info};
+        SpringApplication.run(Application.class,s);
+
+ /*       JTable table = createTable();
         TimeUnit.SECONDS.sleep(1);
         LinkedList<String[]> list = new LinkedList<String[]>();
         for (int i = 0; i < 10; i++) {
@@ -86,5 +88,5 @@ public class Application implements CommandLineRunner {
             add(table, list);
             TimeUnit.SECONDS.sleep(1);
         }
-    }
+ */   }
 }
