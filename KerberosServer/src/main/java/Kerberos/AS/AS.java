@@ -1,6 +1,6 @@
-package Kerberos.As;
+package Kerberos.AS;
 
-public class As {
+public class AS {
     public static void main(String[] args) {
 
     }

@@ -1,6 +1,6 @@
-package Kerberos.Tgs;
+package Kerberos.TGS;
 
-public class Tgs {
+public class TGS {
     public static void main(String[] args) {
 
     }
