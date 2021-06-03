@@ -24,13 +24,13 @@ import java.util.concurrent.TimeUnit;
 
 import static Framework.SessionLayer.SessionLayer.bindChannelWithUserName;
 import static Json.MyJson.StringToOrder;
+import static Server.ServerDataBase.connectData;
 import static StateMachine.RegEventEnum.RECIVE;
 import static UI.log.add;
 import static UI.log.createTable;
 
 public class ServerFunction extends SessionHandler {
-    ServerHandler serverHandler;
-
+     ServerHandler serverHandler;
     {
         try {
             serverHandler = new ServerHandler();
@@ -41,9 +41,7 @@ public class ServerFunction extends SessionHandler {
         }
     }
 
-    LinkedList<String[]> list = new LinkedList<String[]>();
-    String []s=new String[4];
-
+    public static LinkedList<String[]> list = new LinkedList<String[]>();
 
     //继承方法集
     @Override
@@ -64,7 +62,9 @@ public class ServerFunction extends SessionHandler {
         if(!channelName.equals(order.getSrc())){
             bindChannelWithUserName(channelName,order.getSrc());
         }
+        //UI表格
         JTable table = createTable();
+        String []s=new String[4];
         list.addFirst(s);
         s[0]=order.getSrc();//源
         s[1]=order.getDst();//目的
@@ -76,6 +76,7 @@ public class ServerFunction extends SessionHandler {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
         switch (order.getMsgType()){
             case "0001":
                 serverHandler.Certif(info);

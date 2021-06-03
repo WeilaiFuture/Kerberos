@@ -15,46 +15,6 @@ public class ServerDataBase {
     包含所有数据库操作的封装函数；
      */
     static private Connection con=null; // 声明Connection对象
-    public static void main(String []args) {
-
-        MyStruct struct=new MyStruct();
-        MyJson.Order order=new MyJson.Order();
-        struct.certificate=new MyStruct.Certificate();
-        struct.certificate.setDeadline("1");
-        struct.certificate.setName("3");
-        struct.certificate.setPk("3");
-        struct.certificate.setSerial("4");
-        struct.certificate.setVersion("5");
-        if(connectData()!=null){
-      /*      wCertif(struct);
-            rSearchID("1");
-            rSearchID("2");
-            wLogin("1",0);
-            wLogin("2",0);
-
-            rSearchID("2");
-            rFriendList("1");
-            rFriendList("2");
-
-            rGroupUser("1");
-
-        MyStruct.User user=rSearchID("1");
-        user.setEmail("234");
-        user.setGender(1);
-        user.setPhoto("111");
-        wInfo(user);
-   */
-        wDeleteF("1","2");
-        MyStruct.User user=rSearchID("2");
-        MyStruct.Friend friend=new MyStruct.Friend();
-        friend.setU(user);
-        friend.setTid("1");
-        friend.setStartTime(11);
-        friend.setRemark("小王");
-        wAddF("1",friend);
-        rFriendList("1");
-        }
-    }
     static public Connection connectData() {
         /*
         连接数据库；
@@ -93,6 +53,7 @@ public class ServerDataBase {
                     +certificate.getPk()+ "\")";
             Statement statement = con.createStatement();
             int result = statement.executeUpdate(sql);
+            System.out.println("存储证书成功");
             return true;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -108,6 +69,7 @@ public class ServerDataBase {
             String sql="update `Certificate` set `Kcv`=\""+K+"\" where `name`=\""+ID+"\"";
             Statement statement=con.createStatement();
             statement.executeUpdate(sql);
+            System.out.println("存储Kcv成功");
             return true;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -123,6 +85,7 @@ public class ServerDataBase {
             String sql="SELECT `Kcv` FROM `Certificate` WHERE `name`=\"" + ID + "\"";
             Statement statement=con.createStatement();
             ResultSet result = statement.executeQuery(sql);
+            System.out.println("读取Kcv成功"+result.getString("Kcv"));
             return result.getString("Kcv");
         } catch (SQLException e) {
             e.printStackTrace();
@@ -138,6 +101,7 @@ public class ServerDataBase {
             String sql="SELECT `pk` FROM `Certificate` WHERE `name`=\"" + ID + "\"";
             Statement statement=con.createStatement();
             ResultSet result = statement.executeQuery(sql);
+            System.out.println("查询PK成功"+result.getString("pk"));
             return result.getString("pk");
         } catch (SQLException e) {
             e.printStackTrace();

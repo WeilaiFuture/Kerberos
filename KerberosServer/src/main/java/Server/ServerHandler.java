@@ -22,9 +22,15 @@ import static Server.ServerSecurity.createCertif;
 
 public class ServerHandler {
     /*
-        包含所有收到的报文
+        包含所有收到的报文处理
     */
+    private static String Key; //Kv
+    private static MyStruct.Certificate certificate;
+    private static RSAPrivateKey sk;
+    private static RSAPublicKey pk;
+
     public ServerHandler() throws InvalidKeySpecException, NoSuchAlgorithmException {
+        connectData();
         Map<String, String> kmap= RSAHandler.createKeys(1024);
         //生成公钥
         String pk1=kmap.get("publicKey");
@@ -36,12 +42,9 @@ public class ServerHandler {
         String ID="SERVER";
         certificate=createCertif(ID,pk1);
         //发送证书
-       // sendByAddress(,,certificate);
+        // sendByAddress(,,certificate);
+        Key="12345678";//测试使用
     }
-    private static String Key;
-    private static MyStruct.Certificate certificate;
-    private static RSAPrivateKey sk;
-    private static RSAPublicKey pk;
     public static boolean Kcv(String message){
         /*
         head=7;
@@ -75,6 +78,7 @@ public class ServerHandler {
         head=0001;
         证书信息；
         存入数据库
+        发送证书
          */
         //获取报文
         MyJson.Order order =MyJson.StringToOrder(message);
@@ -82,6 +86,14 @@ public class ServerHandler {
         MyStruct mystruct=MyJson.StringToStruct(order.getExtend());
         //存入数据库
         wCertif(mystruct.certificate);
+        //发送
+        mystruct.certificate=certificate;String src=order.getSrc();
+        order.setSrc(order.getDst());
+        order.setDst(src);
+        String sstruct=MyJson.StructToString(mystruct);
+        order.setExtend(sstruct);
+        String sorder=MyJson.OrderToString(order);
+        send(order.getDst(),sorder);
         return false;
     }
     static public boolean Kv(String message){
@@ -92,11 +104,9 @@ public class ServerHandler {
          */
         //获取报文
         MyJson.Order order =MyJson.StringToOrder(message);
-        //解密，RSA
-        order.setExtend(RSAHandler.privateDecrypt(order.getExtend(),sk));
         //获取消息
         MyStruct mystruct=MyJson.StringToStruct(order.getExtend());
-        Key=mystruct.my_k.getKey();//保存Kv
+        Key=RSAHandler.privateDecrypt(mystruct.my_k.getKey(),sk);//保存Kv,需要使用私钥解密
         return false;
     }
     //注册功能属于web server
@@ -160,7 +170,7 @@ public class ServerHandler {
         //获取消息
         MyStruct mystruct=MyJson.StringToStruct(order.getExtend());
         //查询数据库
-        mystruct.friendlist.setFriends(rFriendList(order.getSrc()));
+        mystruct.friendlist=(rFriendList(order.getSrc()));
         //发送
         String src=order.getSrc();
         order.setSrc(order.getDst());

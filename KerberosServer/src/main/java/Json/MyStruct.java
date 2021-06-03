@@ -21,8 +21,8 @@ public class MyStruct {
     public Chat_Message chat_message;
     public Group group;
     public Record_Message record_message;
-    public Friendlist friendlist;
-
+    public LinkedList<Friend> friendlist;
+/*
     static public class Friendlist{
         LinkedList<Friend> Friends;
 
@@ -36,6 +36,8 @@ public class MyStruct {
             }
         }
     }
+
+ */
     static public class Certificate {
          String version;//版本号
          String serial;//序列号

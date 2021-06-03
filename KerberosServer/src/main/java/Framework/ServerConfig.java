@@ -1,5 +1,5 @@
 package Framework;
 
 public class ServerConfig {
-    public static int TIMEOUT = 120;
+    public static int TIMEOUT = 1200;
 }
