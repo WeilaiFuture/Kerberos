@@ -15,46 +15,6 @@ public class ServerDataBase {
     包含所有数据库操作的封装函数；
      */
     static private Connection con=null; // 声明Connection对象
-    public static void main(String []args) {
-
-        MyStruct struct=new MyStruct();
-        MyJson.Order order=new MyJson.Order();
-        struct.certificate=new MyStruct.Certificate();
-        struct.certificate.setDeadline("1");
-        struct.certificate.setName("3");
-        struct.certificate.setPk("3");
-        struct.certificate.setSerial("4");
-        struct.certificate.setVersion("5");
-        if(connectData()!=null){
-      /*      wCertif(struct);
-            rSearchID("1");
-            rSearchID("2");
-            wLogin("1",0);
-            wLogin("2",0);
-
-            rSearchID("2");
-            rFriendList("1");
-            rFriendList("2");
-
-            rGroupUser("1");
-
-        MyStruct.User user=rSearchID("1");
-        user.setEmail("234");
-        user.setGender(1);
-        user.setPhoto("111");
-        wInfo(user);
-   */
-        wDeleteF("1","2");
-        MyStruct.User user=rSearchID("2");
-        MyStruct.Friend friend=new MyStruct.Friend();
-        friend.setU(user);
-        friend.setTid("1");
-        friend.setStartTime(11);
-        friend.setRemark("小王");
-        wAddF("1",friend);
-        rFriendList("1");
-        }
-    }
     static public Connection connectData() {
         /*
         连接数据库；

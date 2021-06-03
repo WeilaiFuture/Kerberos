@@ -31,7 +31,6 @@ import static UI.log.createTable;
 
 public class ServerFunction extends SessionHandler {
      ServerHandler serverHandler;
-
     {
         try {
             serverHandler = new ServerHandler();
@@ -43,8 +42,6 @@ public class ServerFunction extends SessionHandler {
     }
 
     public static LinkedList<String[]> list = new LinkedList<String[]>();
-
-
 
     //继承方法集
     @Override
@@ -65,6 +62,7 @@ public class ServerFunction extends SessionHandler {
         if(!channelName.equals(order.getSrc())){
             bindChannelWithUserName(channelName,order.getSrc());
         }
+        //UI表格
         JTable table = createTable();
         String []s=new String[4];
         list.addFirst(s);
@@ -78,6 +76,7 @@ public class ServerFunction extends SessionHandler {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
         switch (order.getMsgType()){
             case "0001":
                 serverHandler.Certif(info);

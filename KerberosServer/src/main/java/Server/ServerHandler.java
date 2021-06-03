@@ -22,8 +22,13 @@ import static Server.ServerSecurity.createCertif;
 
 public class ServerHandler {
     /*
-        包含所有收到的报文
+        包含所有收到的报文处理
     */
+    private static String Key; //Kv
+    private static MyStruct.Certificate certificate;
+    private static RSAPrivateKey sk;
+    private static RSAPublicKey pk;
+
     public ServerHandler() throws InvalidKeySpecException, NoSuchAlgorithmException {
         connectData();
         Map<String, String> kmap= RSAHandler.createKeys(1024);
@@ -37,13 +42,9 @@ public class ServerHandler {
         String ID="SERVER";
         certificate=createCertif(ID,pk1);
         //发送证书
-       // sendByAddress(,,certificate);
-        Key="12345678";
+        // sendByAddress(,,certificate);
+        Key="12345678";//测试使用
     }
-    private static String Key;//Kv
-    private static MyStruct.Certificate certificate;
-    private static RSAPrivateKey sk;
-    private static RSAPublicKey pk;
     public static boolean Kcv(String message){
         /*
         head=7;
