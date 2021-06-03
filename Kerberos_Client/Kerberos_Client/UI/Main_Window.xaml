@@ -140,7 +140,7 @@
             <!--搜索图标-->
             <Image Grid.Column="0" Source="../Image_Source/搜索.png" RenderTransformOrigin="-2.759,0.242" Margin="0,1,121.4,9.6"/>
             <TextBox Name="search_TextBox" Opacity="0.6" IsReadOnly="False"
-                     BorderThickness="0" TextChanged="TextBox_TextChanged"  Margin="26,0,0,9.6" Grid.ColumnSpan="2"/>
+                     BorderThickness="0"  Margin="26,0,0,9.6" Grid.ColumnSpan="2" KeyUp="search_TextBox_KeyUp" TextChanged="search_TextBox_TextChanged"/>
         </Grid>
         
         <!--好友、信息块-->
@@ -213,6 +213,36 @@
                             </DataGrid.Columns>
                         </DataGrid>
                     </Expander>
+                </TabItem>
+                <!--查找-->
+                <TabItem Name="search_TabItem" IsSelected="False" Margin="0,27,0,-0.4" >
+                    <DataGrid HeadersVisibility="None" CanUserResizeColumns="False" CanUserReorderColumns="False" x:Name="search_List" IsReadOnly="True" 
+                                  AutoGenerateColumns="False" DataContext="{StaticResource User}"
+                                  HorizontalScrollBarVisibility="Hidden" GridLinesVisibility="Horizontal" 
+                                  MouseDoubleClick="friend_List_MouseDoubleClick" SelectionMode="Single" SelectionUnit="FullRow">
+                        <DataGrid.Columns>
+                            <!--头像行-->
+                            <DataGridTemplateColumn >
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Image x:Name="head_Image" Source="{Binding Photo}"  Width="40" Height="40" RenderTransformOrigin="1,1" >
+                                            <Image.Clip>
+                                                <EllipseGeometry RadiusX="60" RadiusY="60" Center="30,30"/>
+                                            </Image.Clip>
+                                        </Image>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <!--姓名行-->
+                            <DataGridTemplateColumn Width="*">
+                                <DataGridTemplateColumn.CellTemplate >
+                                    <DataTemplate>
+                                        <TextBlock x:Name="name_TextBlock" Text="{Binding Uname}" />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
                 </TabItem>
             </TabControl>
         </Grid>
