@@ -23,7 +23,7 @@ namespace Kerberos_Client.UI
     public partial class Chat_Window : Window
     {
 
-        private ObservableCollection<ChatMessage> chatMessage = new ObservableCollection<ChatMessage>()
+        public ObservableCollection<ChatMessage> chatMessage = new ObservableCollection<ChatMessage>()
         {
             new ChatMessage()
             {
@@ -39,11 +39,11 @@ namespace Kerberos_Client.UI
             },
         };
         public User My_user;
-        public Chat_Window(User u, Image i)
+        public Chat_Window(User u)
         {
             InitializeComponent();
             My_user = u;
-            head_Image = i;
+            head_Image.Source = img.GetBitmap(u.Photo);
             Uname_TextBlock.Text = "昵称:" + My_user.Uname;
             Uid_TX.Text = "账号:" + My_user.Uid;
             Email_TX.Text = "邮箱:" + My_user.Email;
@@ -59,6 +59,10 @@ namespace Kerberos_Client.UI
             }); ;
             ListBoxChat.ScrollIntoView(ListBoxChat.Items[ListBoxChat.Items.Count - 1]);
         }
-
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            Main_Window.Chat_Dic.Remove(My_user.Uid);
+            base.OnClosing(e);
+        }
     }
 }

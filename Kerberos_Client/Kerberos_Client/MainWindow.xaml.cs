@@ -1,4 +1,7 @@
 ﻿#define test
+//#define kerberos
+#define DES
+#define RSA
 using Kerberos_Client.UI;
 using System;
 using System.Collections.Generic;
@@ -19,7 +22,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using static Kerberos_Client.MyStruct;
-
+using System.Management;
 
 namespace Kerberos_Client
 {
@@ -29,19 +32,25 @@ namespace Kerberos_Client
     /// </summary>
     public partial class MainWindow : Window
     {
+        string ASIP = "127.0.0.1";
+        string TGSIP = "127.0.0.1";
+        string SERVERIP = "127.0.0.1";
         private static string Kc = "20002018";
         public static List<Login_User> User_Item;//数据源
         private bool flag = true;
+        public static string localName;
         //public delegate void MyDelegate(string str);
         //private MyDelegate md;
         #region UI
         public MainWindow()
         {
             InitializeComponent();
+#if kerberos
             certificateInit();
             while (!flag) ;
             KerberosInit();
             while (flag) ;
+#endif
             init(true);
         }
         public MainWindow(bool login)
@@ -55,9 +64,12 @@ namespace Kerberos_Client
         /// </summary>
         private void init(bool b)
         {
-            #if test
-            ConnectServer.connectserver(this);
-#endif
+            ManagementClass mc = new ManagementClass("Win32_Processor");
+            ManagementObjectCollection moc = mc.GetInstances();
+            foreach (ManagementObject mo in moc)
+            {
+               localName = mo.Properties["ProcessorId"].Value.ToString();
+            }
             User_Item = new List<Login_User>();
             //绑定数据
             ID.ItemsSource = User_Item;
@@ -68,17 +80,7 @@ namespace Kerberos_Client
             else
             {
                 string path = @"../../Image_Source\未登录头象.png";
-                BitmapImage bi;
-                using (MemoryStream ms = new MemoryStream(File.ReadAllBytes(path)))
-                {
-                    bi = new BitmapImage();
-                    bi.BeginInit();
-                    bi.CacheOption = BitmapCacheOption.OnLoad;//设置缓存模式
-                    bi.StreamSource = ms;//通过StreamSource加载图片
-                    bi.EndInit();
-                    bi.Freeze();
-
-                }
+                BitmapImage bi=img.GetBitmap(path);
                 head_Image.Source = bi;
                 return;
             }
@@ -134,28 +136,6 @@ namespace Kerberos_Client
             this.Close();
         }
         /// <summary>
-        /// 登录
-        /// </summary>
-        /// <param name="sender">事件</param>
-        /// <param name="e">时间路由</param>
-        private void Login_Click(object sender, RoutedEventArgs e)
-        {
-            if (string.Empty.Equals(ID.Text) || string.Empty.Equals(password.Password))
-                MessageBox.Show("账号或密码为空，请重新输入");
-            else
-            {
-                //发送报文
-                User user = new User(ID.Text, password.Password);
-                string extend = JsonHelper.ToJson(user);
-                Order order = new Order();
-                order.MsgType = "1002";
-                order.Extend = extend;
-                string json= JsonHelper.ToJson(order);
-                ConnectServer.sendMessage(json);
-                Load_Tab.IsSelected = true;
-            }
-        }
-        /// <summary>
         /// 用户选项改变，更改数据
         /// </summary>
         /// <param name="sender">事件</param>
@@ -177,7 +157,6 @@ namespace Kerberos_Client
             if (key_Check.IsChecked == true)
                 password.Password = u.Psswd;
 
-            BitmapImage bi = new BitmapImage();
             string path = string.Empty;
             if (ID.SelectedItem == null)
             {
@@ -190,16 +169,7 @@ namespace Kerberos_Client
                     path = @"../../Image_Source\未登录头象.png";
                 u.Photo = path;
             }
-            using (MemoryStream ms = new MemoryStream(File.ReadAllBytes(path)))
-            {
-                bi = new BitmapImage();
-                bi.BeginInit();
-                bi.CacheOption = BitmapCacheOption.OnLoad;//设置缓存模式
-                bi.StreamSource = ms;//通过StreamSource加载图片
-                bi.EndInit();
-                bi.Freeze();
-
-            }
+            BitmapImage bi= img.GetBitmap(path);
             head_Image.Source = bi;
         }
         /// <summary>
@@ -226,57 +196,176 @@ namespace Kerberos_Client
             Main_Tab.IsSelected = true;
         }
         #endregion
+        #region Kerberos
         private void certificateInit()
         {
             flag = false;
-            //发送报文
+
+            //生成证书
+            string PKB, PKI;
+            RSALibrary.RSAKey(out PKI, out PKB);
+            Main_Window.Keys["public"] = PKB;
+            Main_Window.Keys["private"] = PKI;
             Certificate certificate = new Certificate();
+            DateTime dt = new DateTime();
+            certificate.Deadline= dt.AddDays(1).ToString();   //加n天
+            certificate.Pk = RSALibrary.RSAPublicKeyDotNet2Java(PKB);
+            certificate.Name = localName;
+            certificate.Serial = "0";
+            certificate.Version = "1.0";
+
+
+
+            //发送报文
             string extend = JsonHelper.ToJson(certificate);
             Order order = new Order();
             order.MsgType = "0001";
             order.Extend = extend;
+            order.Src = localName;
+            order.Dst = "AS";
             string json = JsonHelper.ToJson(order);
+#if test
+            ConnectServer.connectserver(this, ASIP);
+#endif
             ConnectServer.sendMessage(json);
+
+            order.Dst = "Server";
+            json = JsonHelper.ToJson(order);
+#if test
+            ConnectServer.connectserver(this, SERVERIP);
+#endif
+            ConnectServer.sendMessage(json);
+        }
+        /// <summary>
+        /// 登录
+        /// </summary>
+        /// <param name="sender">事件</param>
+        /// <param name="e">时间路由</param>
+        private void Login_Click(object sender, RoutedEventArgs e)
+        {
+            if (string.Empty.Equals(ID.Text) || string.Empty.Equals(password.Password))
+                MessageBox.Show("账号或密码为空，请重新输入");
+            else
+            {
+                //发送报文
+                User user = new User(ID.Text, password.Password);
+                string extend = JsonHelper.ToJson(user);
+                Order order = new Order();
+                order.MsgType = "1002";
+                order.Src = localName;
+                order.Dst = "Server";
+#if DES
+                extend = DESLibrary.EncryptDES(extend, Main_Window.Keys["server"]);
+#endif
+                order.Extend = extend;
+                string json = JsonHelper.ToJson(order);
+#if test
+                ConnectServer.connectserver(this, SERVERIP);
+#endif
+                ConnectServer.sendMessage(json);
+                Load_Tab.IsSelected = true;
+            }
         }
         private void KerberosInit()
         {
             flag = false;
             //发送报文
             Message1 msg = new Message1();
+            msg.IDC = localName;
+            msg.IDT = "TGS";
+            msg.TS= DateTime.Now.ToString();
             string extend = JsonHelper.ToJson(msg);
+#if DES
+            extend = DESLibrary.EncryptDES(extend, Main_Window.Keys["AS"]);
+#endif
             Order order = new Order();
+            order.Dst = "AS";
+            order.Src = localName;
             order.MsgType = "0003";
             order.Extend = extend;
             string json = JsonHelper.ToJson(order);
+#if test
+            ConnectServer.connectserver(this, ASIP);
+#endif
             ConnectServer.sendMessage(json);
         }
         internal void Call_certificate(Order o)
         {
             Order order = o;
             Certificate certificate = JsonHelper.FromJson<Certificate>(order.Extend);
-            string extend = JsonHelper.ToJson(certificate);
+            string kc = certificate.Pk;
+            kc = RSALibrary.RSAPublicKeyJava2DotNet(kc);
+            Main_Window.Keys["server_pk"] = kc;
+            flag = true;
+        }
+        internal void Call_Key(Order o)
+        {
+            Order order = o;
+#if RSA
+            order.Extend = RSALibrary.RSADecrypt(order.Extend, Main_Window.Keys["private"]);
+#endif
+            Main_Window.Keys["as"] = order.Extend;
             flag = true;
         }
         internal void Call_AS(Order o)
         {
+#if DES
+            o.Extend = DESLibrary.DecryptDES(o.Extend, Main_Window.Keys["as"]);
+#endif
             Message2 message2 = JsonHelper.FromJson<Message2>(o.Extend);
+
+            Main_Window.Keys["tgs"] = message2.Key;
+
             Message3 msg = new Message3();
+            msg.T = message2.T;
+            msg.IDV = "Server";
+            Authenticator au = new Authenticator();
+            au.IDC = localName;
+            au.ADC = DoGetHostEntry();
+            au.TS= DateTime.Now.ToString();
+            msg.AC = JsonHelper.ToJson(au);
+#if DES
+            msg.AC = DESLibrary.DecryptDES(o.Extend, Main_Window.Keys["tgs"]);
+#endif
             string extend = JsonHelper.ToJson(msg);
             Order order = new Order();
+            order.Dst = "TGS";
+            order.Src = localName;
             order.MsgType = "0005";
             order.Extend = extend;
             string json = JsonHelper.ToJson(order);
+#if test
+            ConnectServer.connectserver(this, TGSIP);
+#endif
             ConnectServer.sendMessage(json);
         }
         internal void Call_TGS(Order o)
         {
+#if DES
+            o.Extend= DESLibrary.DecryptDES(o.Extend, Main_Window.Keys["tgs"]);
+#endif
             Message4 message4 = JsonHelper.FromJson<Message4>(o.Extend);
+
+            Main_Window.Keys["server"] = message4.Key;
+
             Message5 msg = new Message5();
+            msg.T = message4.T;
+            Authenticator au = new Authenticator();
+            au.IDC = localName;
+            au.ADC = DoGetHostEntry();
+            au.TS = DateTime.Now.ToString();
+            msg.AC = JsonHelper.ToJson(au);
+
             string extend = JsonHelper.ToJson(msg);
             Order order = new Order();
+            order.Dst = "SERVER";
+            order.Src = localName;
             order.MsgType = "0007";
             order.Extend = extend;
             string json = JsonHelper.ToJson(order);
+#if test
+            ConnectServer.connectserver(this, SERVERIP);
+#endif
             ConnectServer.sendMessage(json);
         }
         internal void Call_Server(Order o)
@@ -284,24 +373,33 @@ namespace Kerberos_Client
             Message6 message6 = JsonHelper.FromJson<Message6>(o.Extend);
             flag = true;
         }
-        internal void Call_check_User(User u)
+        #endregion
+        internal void Call_check_User(Order o)
         {
+#if DES
+            o.Extend = DESLibrary.DecryptDES(o.Extend, Main_Window.Keys["server"]);
+#endif
             Thread.Sleep(3 * 1000);
+            if (o.StatusReport == false)
+            {
+                MessageBox.Show("登录信息有误，请重新输入！");
+                return;
+            }
             Dispatcher.Invoke(new Action(delegate
             {
                 //登录时，重新配置当前用户
                 set_User();
                 //保存配置文件
                 Save_conf();
-                User user = u;
-                Window U = new Main_Window(user, head_Image);
+                User user = JsonHelper.FromJson<User>(o.Extend);
+                Window U = new Main_Window(user);
                 U.Show();
                 //回收系统内存，否则多次切换后，内存爆了
                 GC.Collect();
                 this.Close();
             }));
         }
-        private void set_User()
+        public void set_User()
         {
             Login_User temp = ID.SelectedItem as Login_User;
             Login_User u;
@@ -313,6 +411,22 @@ namespace Kerberos_Client
                 u.Psswd = string.Empty;
             User_Item.Remove(User_Item.Find(delegate (Login_User user) { return user.Uid.Equals(ID.Text); }));
             User_Item.Insert(0, u);
+        }
+        public static string DoGetHostEntry()
+        {
+            System.Net.IPHostEntry IpEntry = System.Net.Dns.GetHostEntry(System.Net.Dns.GetHostName());
+            string localhostipv4Address = "";
+
+            for (int i = 0; i != IpEntry.AddressList.Length; i++)
+            {
+                if (!IpEntry.AddressList[i].IsIPv6LinkLocal)
+                {
+                    localhostipv4Address = IpEntry.AddressList[i].ToString();
+                    break;
+                }
+            }
+
+            return localhostipv4Address;
         }
     }
 }
