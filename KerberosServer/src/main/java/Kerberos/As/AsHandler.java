@@ -10,6 +10,6 @@ public class AsHandler extends SessionHandler {
 
     @Override
     public void receive(String channelName,Object msg) {
-
+        
     }
 }
