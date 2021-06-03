@@ -1,10 +1,10 @@
 ﻿#define test
-//#define danji
-#define lianji
+#define danji
+//#define lianji
 //#define kerberos
 #define DES
 //#define RSA
-#define cer
+//#define cer
 using Kerberos_Client.UI;
 using System;
 using System.Collections.Generic;
@@ -221,13 +221,15 @@ namespace Kerberos_Client
             order.MsgType = "0001";
             order.Extend = extend;
             order.Src = localName;
+            string json;
+#if cer
             order.Dst = "AS";
-            string json = JsonHelper.ToJson(order);
+            json = JsonHelper.ToJson(order);
 #if test
             ConnectServer.connectserver(this, ASIP);
 #endif
             ConnectServer.sendMessage(json);
-
+#endif
             order.Dst = "Server";
             json = JsonHelper.ToJson(order);
 #if test
@@ -247,9 +249,8 @@ namespace Kerberos_Client
             else
             {
                 localName = ID.Text;
-#if lianji
+
                 certificateInit();
-#endif
 #if kerberos
             certificateInit();
             while (!flag) ;
@@ -277,11 +278,11 @@ namespace Kerberos_Client
 #endif
                 order.Extend = extend;
                 string json = JsonHelper.ToJson(order);
-#if test
-                ConnectServer.connectserver(this, SERVERIP);
-#endif
-                ConnectServer.sendMessage(json);
+
+                //回收系统内存，否则多次切换后，内存爆了
                 Load_Tab.IsSelected = true;
+                ConnectServer.sendMessage(json);
+                GC.Collect();
             }
         }
         private void KerberosInit()
@@ -415,10 +416,10 @@ namespace Kerberos_Client
 #endregion
         internal void Call_check_User(Order o)
         {
+            Thread.Sleep(3 * 1000);
 #if DES
             o.Extend = DESLibrary.DecryptDES(o.Extend, Main_Window.Keys["server"]);
 #endif
-            Thread.Sleep(3 * 1000);
             if (o.StatusReport == false)
             {
                 MessageBox.Show("登录信息有误，请重新输入！");
