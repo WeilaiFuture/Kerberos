@@ -29,16 +29,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0e939090-7ab6-4bc6-875c-d0daf79ad1c7" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Server/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/KerberosServer.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/KerberosServer.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Framework/CommunicationLayer/LayerChannelInitializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Framework/CommunicationLayer/LayerChannelInitializer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Json/MyStruct.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Json/MyStruct.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Server/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Server/ServerFunction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/ServerFunction.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Server/ServerHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/ServerHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Server/ServerSecurity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/ServerSecurity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/StateMachine/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/StateMachine/Application.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/StateMachine/StateMachineEventConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/StateMachine/StateMachineEventConfig.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="SHOW_DIALOG" value="false" />
@@ -55,19 +52,10 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/Server/ServerSecurity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="209">
-              <caret line="11" column="30" lean-forward="true" selection-start-line="11" selection-start-column="30" selection-end-line="11" selection-end-column="30" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/Server/ServerFunction.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="60" column="27" selection-start-line="60" selection-start-column="27" selection-end-line="60" selection-end-column="27" />
+            <state relative-caret-position="300">
+              <caret line="72" column="25" lean-forward="true" selection-start-line="72" selection-start-column="25" selection-end-line="72" selection-end-column="25" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#888#898#0" expanded="true" />
@@ -77,10 +65,22 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/StateMachine/Application.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="414">
+              <caret line="87" column="29" lean-forward="true" selection-start-line="87" selection-start-column="29" selection-end-line="87" selection-end-column="29" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/Server/ServerHandler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-456">
-              <caret line="36" column="14" lean-forward="true" selection-start-line="36" selection-start-column="14" selection-end-line="36" selection-end-column="14" />
+            <state relative-caret-position="-418">
+              <caret line="38" column="9" selection-start-line="38" selection-start-column="9" selection-end-line="38" selection-end-column="9" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -91,8 +91,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/Server/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="133">
-              <caret line="7" selection-start-line="7" selection-end-line="7" />
+            <state relative-caret-position="95">
+              <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -117,8 +117,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/Framework/SessionLayer/SessionLayer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="66">
-              <caret line="59" column="23" selection-start-line="59" selection-start-column="23" selection-end-line="59" selection-end-column="23" />
+            <state relative-caret-position="1548">
+              <caret line="129" selection-start-line="129" selection-end-line="129" />
             </state>
           </provider>
         </entry>
@@ -133,26 +133,13 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/SecurityUtils/RSAHandler.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="171">
-              <caret line="46" column="34" selection-start-line="46" selection-start-column="23" selection-end-line="46" selection-end-column="34" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/Json/MyJson.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="66">
-              <caret line="21" column="25" selection-start-line="21" selection-start-column="25" selection-end-line="21" selection-end-column="25" />
+            <state relative-caret-position="399">
+              <caret line="31" column="40" lean-forward="true" selection-start-line="31" selection-start-column="24" selection-end-line="31" selection-end-column="40" />
               <folding>
                 <element signature="method#ToStruct#0;class#MyJson#0" />
                 <element signature="method#OrderToString#0;class#MyJson#0" />
-                <element signature="method#StructToString#0;class#MyJson#0" />
               </folding>
             </state>
           </provider>
@@ -161,13 +148,14 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/Json/MyStruct.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="293">
-              <caret line="42" column="18" selection-start-line="42" selection-start-column="18" selection-end-line="42" selection-end-column="18" />
+            <state relative-caret-position="511">
+              <caret line="326" column="33" selection-start-line="326" selection-start-column="33" selection-end-line="326" selection-end-column="33" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="class#Friendlist#0;class#MyStruct#0" />
                 <element signature="e#699#700#0" expanded="true" />
                 <element signature="e#737#738#0" expanded="true" />
+                <element signature="class#Certificate#0;class#MyStruct#0" />
                 <element signature="class#My_k#0;class#MyStruct#0" />
                 <element signature="class#Message1#0;class#MyStruct#0" />
                 <element signature="class#Message2#0;class#MyStruct#0" />
@@ -175,12 +163,22 @@
                 <element signature="class#Message3#0;class#MyStruct#0" />
                 <element signature="class#Message4#0;class#MyStruct#0" />
                 <element signature="class#Authenticator#0;class#MyStruct#0" />
-                <element signature="class#Message5#0;class#MyStruct#0" />
+                <element signature="class#Message6#0;class#MyStruct#0" />
                 <element signature="class#User#0;class#MyStruct#0" />
                 <element signature="class#Friend#0;class#MyStruct#0" />
                 <element signature="class#Chat_Message#0;class#MyStruct#0" />
+                <element signature="class#Group#0;class#MyStruct#0" />
                 <element signature="class#Record_Message#0;class#MyStruct#0" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/Server/ServerData.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="76">
+              <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -234,7 +232,6 @@
         <option value="$PROJECT_DIR$/src/main/java/Framework/SessionLayer/SessionLayer.java" />
         <option value="$PROJECT_DIR$/src/main/java/UI/log.form" />
         <option value="$PROJECT_DIR$/src/main/java/UI/log.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Json/MyStruct.java" />
         <option value="$PROJECT_DIR$/src/main/java/Server/ServerResponse.java" />
         <option value="$PROJECT_DIR$/src/main/java/SecurityUtils/Test.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
@@ -246,11 +243,12 @@
         <option value="$PROJECT_DIR$/src/main/java/StateMachine/Start.java" />
         <option value="$PROJECT_DIR$/src/main/java/Framework/CommunicationLayer/LayerChannelInitializer.java" />
         <option value="$PROJECT_DIR$/src/main/java/StateMachine/Application.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Server/Main.java" />
         <option value="$PROJECT_DIR$/src/main/java/StateMachine/StateMachineEventConfig.java" />
         <option value="$PROJECT_DIR$/src/main/java/Server/ServerSecurity.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Server/ServerHandler.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Server/Main.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Json/MyStruct.java" />
         <option value="$PROJECT_DIR$/src/main/java/Server/ServerFunction.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Server/ServerHandler.java" />
       </list>
     </option>
   </component>
@@ -322,32 +320,7 @@
               <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
               <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
               <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="Framework" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="KerberosServer" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="KerberosServer" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="Framework" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="CommunicationLayer" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="KerberosServer" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="KerberosServer" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
               <item name="Json" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="KerberosServer" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="KerberosServer" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="SecurityUtils" type="9f88c78c:ScopeViewTreeModel$FileNode" />
             </path>
             <path>
               <item name="KerberosServer" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
@@ -388,7 +361,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/pom.xml" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="Modules" />
@@ -629,11 +602,18 @@
       <option name="project" value="LOCAL" />
       <updated>1622639087293</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="添加Server main">
+      <created>1622689766034</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1622689766034</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="120930000" />
+    <option name="totallyTimeSpent" value="124425000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -659,7 +639,7 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.329927" />
       <window_info anchor="bottom" id="Run" order="2" sideWeight="0.597166" weight="0.5810219" />
-      <window_info anchor="bottom" id="Debug" order="3" visible="true" weight="0.4948905" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4948905" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="Version Control" order="6" sideWeight="0.6639676" weight="0.5810219" />
@@ -746,7 +726,8 @@
     <MESSAGE value="Framework的文件结构。" />
     <MESSAGE value="添加Log界面；状态机添加0002报文；状态机添加处理函数。" />
     <MESSAGE value="添加RSA DES" />
-    <option name="LAST_COMMIT_MESSAGE" value="添加RSA DES" />
+    <MESSAGE value="添加Server main" />
+    <option name="LAST_COMMIT_MESSAGE" value="添加Server main" />
   </component>
   <component name="WindowStateProjectService">
     <state x="574" y="117" width="670" height="589" key="#com.intellij.ide.util.MemberChooser" timestamp="1622082394431">
@@ -789,18 +770,6 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1621840422566" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/Server/ServerFunction.java</url>
-          <line>59</line>
-          <properties />
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/main/java/Framework/Testing/EchoClientHandler.java">
@@ -858,13 +827,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1197">
           <caret line="70" column="55" selection-start-line="70" selection-start-column="55" selection-end-line="70" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Server/ServerData.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
         </state>
       </provider>
     </entry>
@@ -959,41 +921,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/StateMachine/Application.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-591">
-          <caret line="28" column="13" selection-start-line="28" selection-start-column="13" selection-end-line="28" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Json/MyStruct.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="293">
-          <caret line="42" column="18" selection-start-line="42" selection-start-column="18" selection-end-line="42" selection-end-column="18" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="class#Friendlist#0;class#MyStruct#0" />
-            <element signature="e#699#700#0" expanded="true" />
-            <element signature="e#737#738#0" expanded="true" />
-            <element signature="class#My_k#0;class#MyStruct#0" />
-            <element signature="class#Message1#0;class#MyStruct#0" />
-            <element signature="class#Message2#0;class#MyStruct#0" />
-            <element signature="class#Ticket#0;class#MyStruct#0" />
-            <element signature="class#Message3#0;class#MyStruct#0" />
-            <element signature="class#Message4#0;class#MyStruct#0" />
-            <element signature="class#Authenticator#0;class#MyStruct#0" />
-            <element signature="class#Message5#0;class#MyStruct#0" />
-            <element signature="class#User#0;class#MyStruct#0" />
-            <element signature="class#Friend#0;class#MyStruct#0" />
-            <element signature="class#Chat_Message#0;class#MyStruct#0" />
-            <element signature="class#Record_Message#0;class#MyStruct#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/SecurityUtils/RSAHandler.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="171">
@@ -1007,36 +934,14 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/Server/ServerSecurity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="209">
-          <caret line="11" column="30" lean-forward="true" selection-start-line="11" selection-start-column="30" selection-end-line="11" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Server/ServerHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-456">
-          <caret line="36" column="14" lean-forward="true" selection-start-line="36" selection-start-column="14" selection-end-line="36" selection-end-column="14" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Json/MyJson.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="66">
-          <caret line="21" column="25" selection-start-line="21" selection-start-column="25" selection-end-line="21" selection-end-column="25" />
-          <folding>
-            <element signature="method#ToStruct#0;class#MyJson#0" />
-            <element signature="method#OrderToString#0;class#MyJson#0" />
-            <element signature="method#StructToString#0;class#MyJson#0" />
-          </folding>
+          <caret line="11" column="30" selection-start-line="11" selection-start-column="30" selection-end-line="11" selection-end-column="30" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Framework/SessionLayer/SessionLayer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="66">
-          <caret line="59" column="23" selection-start-line="59" selection-start-column="23" selection-end-line="59" selection-end-column="23" />
+        <state relative-caret-position="1548">
+          <caret line="129" selection-start-line="129" selection-end-line="129" />
         </state>
       </provider>
     </entry>
@@ -1059,23 +964,88 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Server/Main.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/Server/ServerData.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="7" selection-start-line="7" selection-end-line="7" />
+        <state relative-caret-position="76">
+          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/StateMachine/Application.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="414">
+          <caret line="87" column="29" lean-forward="true" selection-start-line="87" selection-start-column="29" selection-end-line="87" selection-end-column="29" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Server/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Json/MyStruct.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="511">
+          <caret line="326" column="33" selection-start-line="326" selection-start-column="33" selection-end-line="326" selection-end-column="33" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="class#Friendlist#0;class#MyStruct#0" />
+            <element signature="e#699#700#0" expanded="true" />
+            <element signature="e#737#738#0" expanded="true" />
+            <element signature="class#Certificate#0;class#MyStruct#0" />
+            <element signature="class#My_k#0;class#MyStruct#0" />
+            <element signature="class#Message1#0;class#MyStruct#0" />
+            <element signature="class#Message2#0;class#MyStruct#0" />
+            <element signature="class#Ticket#0;class#MyStruct#0" />
+            <element signature="class#Message3#0;class#MyStruct#0" />
+            <element signature="class#Message4#0;class#MyStruct#0" />
+            <element signature="class#Authenticator#0;class#MyStruct#0" />
+            <element signature="class#Message6#0;class#MyStruct#0" />
+            <element signature="class#User#0;class#MyStruct#0" />
+            <element signature="class#Friend#0;class#MyStruct#0" />
+            <element signature="class#Chat_Message#0;class#MyStruct#0" />
+            <element signature="class#Group#0;class#MyStruct#0" />
+            <element signature="class#Record_Message#0;class#MyStruct#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Json/MyJson.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="399">
+          <caret line="31" column="40" lean-forward="true" selection-start-line="31" selection-start-column="24" selection-end-line="31" selection-end-column="40" />
+          <folding>
+            <element signature="method#ToStruct#0;class#MyJson#0" />
+            <element signature="method#OrderToString#0;class#MyJson#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Server/ServerFunction.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="60" column="27" selection-start-line="60" selection-start-column="27" selection-end-line="60" selection-end-column="27" />
+        <state relative-caret-position="300">
+          <caret line="72" column="25" lean-forward="true" selection-start-line="72" selection-start-column="25" selection-end-line="72" selection-end-column="25" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#888#898#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Server/ServerHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-418">
+          <caret line="38" column="9" selection-start-line="38" selection-start-column="9" selection-end-line="38" selection-end-column="9" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>

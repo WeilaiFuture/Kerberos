@@ -76,11 +76,6 @@ public class ServerFunction extends SessionHandler {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        try {
-            TimeUnit.SECONDS.sleep(1);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         switch (order.getMsgType()){
             case "0001":
                 serverHandler.Certif(info);

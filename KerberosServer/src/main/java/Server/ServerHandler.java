@@ -4,6 +4,7 @@ import Json.MyJson;
 import Json.MyStruct;
 import SecurityUtils.DESHandler;
 import SecurityUtils.RSAHandler;
+import com.alibaba.fastjson.JSON;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -35,6 +36,7 @@ public class ServerHandler {
         String ID="SERVER";
         certificate=createCertif(ID,pk1);
         //发送证书
+       // sendByAddress(,,certificate);
     }
     private static String Key;
     private static MyStruct.Certificate certificate;
@@ -49,19 +51,20 @@ public class ServerHandler {
         //获取报文
         MyJson.Order order =MyJson.StringToOrder(message);
         //获取消息
+        //解密
         MyStruct mystruct=MyJson.StringToStruct(order.getExtend());
+        MyStruct.Ticket ticket=JSON.parseObject(DESHandler.DecryptDES(mystruct.message5.getT(),Key), MyStruct.Ticket.class);
+        String kcv=ticket.getKey();
+        MyStruct.Authenticator authenticator=JSON.parseObject(DESHandler.DecryptDES(mystruct.message5.getAc(),kcv), MyStruct.Authenticator.class);
         //存入数据库
-        String kcv=mystruct.message5.getT().getKey();
         wKcv(order.getSrc(),kcv);
         //发送messgae6
-        mystruct.message6.setTs(mystruct.message5.getAc().getTs()+1);//需要使用Kcv加密
+        mystruct.message6.setTs(DESHandler.DecryptDES(authenticator.getTs()+1,kcv));//使用Kcv加密
         //发送
         String src=order.getSrc();
         order.setSrc(order.getDst());
         order.setDst(src);
         String sstruct=MyJson.StructToString(mystruct);
-        //加密操作
-        sstruct=DESHandler.DecryptDES(sstruct,kcv);
         order.setExtend(sstruct);
         String sorder=MyJson.OrderToString(order);
         send(order.getDst(),sorder);
@@ -136,7 +139,7 @@ public class ServerHandler {
         String sstruct=MyJson.StructToString(mystruct);
         //加密操作
         kcv=rKcv(order.getDst());
-        sstruct=DESHandler.DecryptDES(sstruct,kcv);
+        sstruct=DESHandler.EncryptDES(sstruct,kcv);
         order.setExtend(sstruct);
         String sorder=MyJson.OrderToString(order);
         send(order.getDst(),sorder);
@@ -166,7 +169,7 @@ public class ServerHandler {
         String sstruct=MyJson.StructToString(mystruct);
         //加密操作
         kcv=rKcv(order.getDst());
-        sstruct=DESHandler.DecryptDES(sstruct,kcv);
+        sstruct=DESHandler.EncryptDES(sstruct,kcv);
         order.setExtend(sstruct);
         String sorder=MyJson.OrderToString(order);
         send(order.getDst(),sorder);
@@ -195,7 +198,7 @@ public class ServerHandler {
             String sstruct=MyJson.StructToString(mystruct);
             //加密操作
             kcv=rKcv(order.getDst());
-            sstruct=DESHandler.DecryptDES(sstruct,kcv);
+            sstruct=DESHandler.EncryptDES(sstruct,kcv);
             order.setExtend(sstruct);
             String sorder=MyJson.OrderToString(order);
             send(order.getDst(),sorder);
@@ -236,7 +239,7 @@ public class ServerHandler {
         String sstruct=MyJson.StructToString(mystruct);
         //加密操作
         kcv=rKcv(order.getDst());
-        sstruct=DESHandler.DecryptDES(sstruct,kcv);
+        sstruct=DESHandler.EncryptDES(sstruct,kcv);
         order.setExtend(sstruct);
         String sorder=MyJson.OrderToString(order);
         send(order.getDst(),sorder);
@@ -265,6 +268,7 @@ public class ServerHandler {
             String sstruct=MyJson.StructToString(mystruct);
             //加密操作
             kcv=rKcv(order.getDst());
+            sstruct=DESHandler.EncryptDES(sstruct,kcv);
             order.setExtend(sstruct);
             String sorder=MyJson.OrderToString(order);
             send(order.getDst(),sorder);
@@ -294,7 +298,7 @@ public class ServerHandler {
         String sstruct=MyJson.StructToString(mystruct);
         //加密操作
         kcv=rKcv(order.getDst());
-        sstruct=DESHandler.DecryptDES(sstruct,kcv);
+        sstruct=DESHandler.EncryptDES(sstruct,kcv);
         order.setExtend(sstruct);
         String sorder=MyJson.OrderToString(order);
         send(order.getDst(),sorder);
@@ -323,7 +327,7 @@ public class ServerHandler {
         String sstruct=MyJson.StructToString(mystruct);
         //加密操作
         kcv=rKcv(order.getDst());
-        sstruct=DESHandler.DecryptDES(sstruct,kcv);
+        sstruct=DESHandler.EncryptDES(sstruct,kcv);
         order.setExtend(sstruct);
         String sorder=MyJson.OrderToString(order);
         send(order.getDst(),sorder);
@@ -372,7 +376,7 @@ public class ServerHandler {
         String sstruct=MyJson.StructToString(mystruct);
         //加密操作
         kcv=rKcv(order.getDst());
-        sstruct=DESHandler.DecryptDES(sstruct,kcv);
+        sstruct=DESHandler.EncryptDES(sstruct,kcv);
         order.setExtend(sstruct);
         String sorder=MyJson.OrderToString(order);
         send(order.getDst(),sorder);
@@ -414,7 +418,7 @@ public class ServerHandler {
                 sstruct=MyJson.StructToString(mystruct);
                 //加密操作
                 kcv=rKcv(order.getDst());
-                sstruct=DESHandler.DecryptDES(sstruct,kcv);
+                sstruct=DESHandler.EncryptDES(sstruct,kcv);
                 order.setExtend(sstruct);
                 sorder=MyJson.OrderToString(order);
                 send(order.getDst(),sorder);
@@ -429,7 +433,7 @@ public class ServerHandler {
                     sstruct=MyJson.StructToString(mystruct);
                     //加密操作
                     kcv=rKcv(order.getDst());
-                    sstruct=DESHandler.DecryptDES(sstruct,kcv);
+                    sstruct=DESHandler.EncryptDES(sstruct,kcv);
                     order.setExtend(sstruct);
                     sorder=MyJson.OrderToString(order);
                     send(order.getDst(),sorder);
@@ -445,7 +449,7 @@ public class ServerHandler {
                 sstruct=MyJson.StructToString(mystruct);
                 //加密操作
                 kcv=rKcv(order.getDst());
-                sstruct=DESHandler.DecryptDES(sstruct,kcv);
+                sstruct=DESHandler.EncryptDES(sstruct,kcv);
                 order.setExtend(sstruct);
                 sorder=MyJson.OrderToString(order);
                 send(order.getDst(),sorder);
@@ -460,7 +464,7 @@ public class ServerHandler {
                 sstruct=MyJson.StructToString(mystruct);
                 //加密操作
                 kcv=rKcv(order.getDst());
-                sstruct=DESHandler.DecryptDES(sstruct,kcv);
+                sstruct=DESHandler.EncryptDES(sstruct,kcv);
                 order.setExtend(sstruct);
                 sorder=MyJson.OrderToString(order);
                 send(order.getDst(),sorder);
@@ -474,7 +478,7 @@ public class ServerHandler {
                 sstruct=MyJson.StructToString(mystruct);
                 //加密操作
                 kcv=rKcv(order.getDst());
-                sstruct=DESHandler.DecryptDES(sstruct,kcv);
+                sstruct=DESHandler.EncryptDES(sstruct,kcv);
                 order.setExtend(sstruct);
                 sorder=MyJson.OrderToString(order);
                 send(order.getDst(),sorder);
