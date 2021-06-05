@@ -36,3 +36,5 @@ E:\Kerberos\Kerberos_Client\Kerberos_Client\obj\Debug\UI\LoadingWait.g.cs
 E:\Kerberos\Kerberos_Client\Kerberos_Client\obj\Debug\UI\LoadingWait.baml
 E:\Kerberos\Kerberos_Client\Kerberos_Client\obj\Debug\UI\Load.g.cs
 E:\Kerberos\Kerberos_Client\Kerberos_Client\obj\Debug\UI\Load.baml
+E:\Kerberos\Kerberos_Client\Kerberos_Client\obj\Debug\ShowMessage.g.cs
+E:\Kerberos\Kerberos_Client\Kerberos_Client\obj\Debug\ShowMessage.baml

@@ -23,6 +23,7 @@ namespace Kerberos_Client
         public static Socket client = null;
         private static Thread threadReceive = null;
         private static MainWindow w;
+        public static ShowMessage show;
         //连接服务器
         internal static void connectserver(Window window, string str="127.0.0.1",int p=50810)
         {
@@ -50,8 +51,10 @@ namespace Kerberos_Client
         /// 发送消息
         /// </summary>
         /// <param 要发送的消息="text"></param>
-        public static void sendMessage(string strMsg)
+        public static void sendMessage(Order order)
         {
+            show.add(order);
+            string strMsg = JsonHelper.ToJson(order);
             if (!string.Empty.Equals(strMsg))
                 if (client != null && client.Connected)
                     client.Send(Encoding.UTF8.GetBytes(strMsg));
@@ -73,7 +76,14 @@ namespace Kerberos_Client
             while(Main_Window.live)
             {
                 Thread.Sleep(30 * 1000);
-                sendMessage("heart");
+
+                //发送报文
+                Order order = new Order();
+                order.Dst = "Server";
+                order.Src = MainWindow.localName;
+                order.MsgType = "1006";
+                order.Extend = "heart";
+                sendMessage(order);
             }
             return;
         }
@@ -109,6 +119,7 @@ namespace Kerberos_Client
                 //MessageBox.Show("ERROR");
                 string strMsg = System.Text.Encoding.UTF8.GetString(result, 0, num);
                 Order order =JsonHelper.FromJson<Order>(strMsg);
+                show.add(order);
                 string command = order.MsgType;
                 switch (command)
                 {
@@ -137,16 +148,16 @@ namespace Kerberos_Client
                         MessageBox.Show(Encoding.UTF8.GetString(result, 0, num) + "0001");
                         break;
                     case "1004"://好友界面
-                        MessageBox.Show(Encoding.UTF8.GetString(result, 0, num) + "0001");
+                        w.main_Window.Call_Friend(order);
                         break;
-                    case "1005": 
-                        MessageBox.Show(Encoding.UTF8.GetString(result, 0, num) + "0001");
+                    case "1005":
+                        w.main_Window.Call_Greet(order);
                         break;
                     case "1006": 
                         MessageBox.Show(Encoding.UTF8.GetString(result, 0, num) + "0001");
                         break;
                     case "1007":
-                        MessageBox.Show(Encoding.UTF8.GetString(result, 0, num) + "0001");
+                        w.main_Window.Add_.Call_Search(order);
                         break;
                     case "1008": 
                         MessageBox.Show(Encoding.UTF8.GetString(result, 0, num) + "0001");
@@ -157,8 +168,8 @@ namespace Kerberos_Client
                     case "1010":
                         MessageBox.Show(Encoding.UTF8.GetString(result, 0, num) + "0001");
                         break;
-                    case "2001": 
-                        MessageBox.Show(Encoding.UTF8.GetString(result, 0, num) + "0001");
+                    case "2001":
+                        w.main_Window.Call_Message(order);
                         break;
                     case "2002": 
                         MessageBox.Show(Encoding.UTF8.GetString(result, 0, num) + "0001");

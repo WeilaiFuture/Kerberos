@@ -68,6 +68,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ConnectServer.cs" />
+    <Compile Include="ShowMessage.xaml.cs">
+      <DependentUpon>ShowMessage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Struct\DESLibrary.cs" />
     <Compile Include="Struct\JsonHelper.cs" />
     <Compile Include="Struct\MyJson.cs" />
@@ -106,6 +109,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="ShowMessage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UI\Add_Window.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

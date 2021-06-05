@@ -1,4 +1,4 @@
-﻿E:\Kerberos\Kerberos_Client\Kerberos_Client\obj\Debug\GeneratedInternalTypeHelper.g.cs
+﻿
 FE:\Kerberos\Kerberos_Client\Kerberos_Client\App.xaml;;
 FE:\Kerberos\Kerberos_Client\Kerberos_Client\MainWindow.xaml;;
 FE:\Kerberos\Kerberos_Client\Kerberos_Client\UI\Add_Window.xaml;;
@@ -8,4 +8,5 @@ FE:\Kerberos\Kerberos_Client\Kerberos_Client\UI\Load.xaml;;
 FE:\Kerberos\Kerberos_Client\Kerberos_Client\UI\LoadingWait.xaml;;
 FE:\Kerberos\Kerberos_Client\Kerberos_Client\UI\Main_Window.xaml;;
 FE:\Kerberos\Kerberos_Client\Kerberos_Client\UI\User_Window.xaml;;
+FE:\Kerberos\Kerberos_Client\Kerberos_Client\ShowMessage.xaml;;
 

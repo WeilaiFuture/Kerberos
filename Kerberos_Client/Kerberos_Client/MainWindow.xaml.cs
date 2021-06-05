@@ -42,6 +42,7 @@ namespace Kerberos_Client
         public static List<Login_User> User_Item;//数据源
         public static string localName;
         private bool flag;
+        public Main_Window main_Window;
         //public delegate void MyDelegate(string str);
         //private MyDelegate md;
 #region UI
@@ -62,12 +63,16 @@ namespace Kerberos_Client
         /// </summary>
         private void init(bool b)
         {
-            //ManagementClass mc = new ManagementClass("Win32_Processor");
-            //ManagementObjectCollection moc = mc.GetInstances();
-            //foreach (ManagementObject mo in moc)
-            //{
-            //   localName = mo.Properties["ProcessorId"].Value.ToString();
-            //}
+
+            Dispatcher.Invoke(new Action(delegate
+            {
+                ConnectServer.show = new ShowMessage();
+                Thread newWindowThread = new Thread(() => ThreadStartingPoint(ConnectServer.show));
+                newWindowThread.SetApartmentState(ApartmentState.STA);
+                newWindowThread.IsBackground = true;
+                newWindowThread.Start();
+            }));
+
             User_Item = new List<Login_User>();
             //绑定数据
             ID.ItemsSource = User_Item;
@@ -235,7 +240,7 @@ namespace Kerberos_Client
 #if test
             ConnectServer.connectserver(this, SERVERIP);
 #endif
-            ConnectServer.sendMessage(json);
+            ConnectServer.sendMessage(order);
         }
         /// <summary>
         /// 登录
@@ -281,7 +286,7 @@ namespace Kerberos_Client
 
                 //回收系统内存，否则多次切换后，内存爆了
                 Load_Tab.IsSelected = true;
-                ConnectServer.sendMessage(json);
+                ConnectServer.sendMessage(order);
                 GC.Collect();
             }
         }
@@ -372,7 +377,7 @@ namespace Kerberos_Client
 #if test
             ConnectServer.connectserver(this, TGSIP);
 #endif
-            ConnectServer.sendMessage(json);
+            ConnectServer.sendMessage(order);
         }
         internal void Call_TGS(Order o)
         {
@@ -405,7 +410,7 @@ namespace Kerberos_Client
 #if test
             ConnectServer.connectserver(this, SERVERIP);
 #endif
-            ConnectServer.sendMessage(json);
+            ConnectServer.sendMessage(order);
         }
         internal void Call_Server(Order o)
         {
@@ -433,8 +438,8 @@ namespace Kerberos_Client
                 Save_conf();
                 MyStruct myStruct = JsonHelper.FromJson<MyStruct>(o.Extend);
                 User user = myStruct.user;
-                Window U = new Main_Window(user);
-                U.Show();
+                main_Window = new Main_Window(user);
+                main_Window.Show();
                 //回收系统内存，否则多次切换后，内存爆了
                 GC.Collect();
                 this.Close();
@@ -468,6 +473,14 @@ namespace Kerberos_Client
             }
 
             return localhostipv4Address;
+        }
+        private void ThreadStartingPoint(Window w)
+        {
+            Dispatcher.Invoke(new Action(delegate
+            {
+                w.Show();
+            }));
+            System.Windows.Threading.Dispatcher.Run();
         }
     }
 }
