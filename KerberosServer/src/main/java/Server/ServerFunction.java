@@ -40,6 +40,7 @@ public class ServerFunction extends SessionHandler {
             e.printStackTrace();
         }
     }
+    JTable table = createTable();
 
     public static LinkedList<String[]> list = new LinkedList<String[]>();
 
@@ -55,28 +56,27 @@ public class ServerFunction extends SessionHandler {
          */
         String info=msg.toString();
         //解析报文头部
-        System.out.println(info);
+        System.out.println("收到"+info);
         MyJson.Order order=StringToOrder(info);
         String head="HEAD"+order.getMsgType();
         //判断绑定
         if(!channelName.equals(order.getSrc())){
+            System.out.println("channelName:"+channelName+" uname:"+order.getSrc());
             bindChannelWithUserName(channelName,order.getSrc());
         }
         //UI表格
-        JTable table = createTable();
-        String []s=new String[4];
+        String []s=new String[3];
         list.addFirst(s);
         s[0]=order.getSrc();//源
         s[1]=order.getDst();//目的
         s[2]=order.getExtend();//密文
-        s[3]=order.getExtend();//明文
+      //  s[3]=order.getExtend();//明文
         add(table, list);
         try {
             TimeUnit.SECONDS.sleep(1);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
         switch (order.getMsgType()){
             case "0001":
                 serverHandler.Certif(info);

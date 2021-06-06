@@ -189,7 +189,7 @@ public class SessionLayer {
         checkInitStatus();
         Channel channel =  channelMap.get(tempName);
         channelMap.remove(tempName);
-        channel.attr(AttributeKey.valueOf("channelName")).set(tempName);
+        channel.attr(AttributeKey.valueOf("channelName")).set(userName);
         channelMap.put(userName,channel);
     }
 }

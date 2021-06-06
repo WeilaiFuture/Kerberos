@@ -85,12 +85,15 @@ public class ServerDataBase {
             String sql="SELECT `Kcv` FROM `Certificate` WHERE `name`=\"" + ID + "\"";
             Statement statement=con.createStatement();
             ResultSet result = statement.executeQuery(sql);
-            System.out.println("读取Kcv成功"+result.getString("Kcv"));
-            return result.getString("Kcv");
+            if(result.next()){
+                System.out.println("读取Kcv成功"+result.getString("Kcv"));
+                return result.getString("Kcv");
+            }
+            else return "";
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("读取Kcv错误");
-            return "";
+            return null;
         }
     }
     static public String rPK(String ID) {
@@ -101,12 +104,15 @@ public class ServerDataBase {
             String sql="SELECT `pk` FROM `Certificate` WHERE `name`=\"" + ID + "\"";
             Statement statement=con.createStatement();
             ResultSet result = statement.executeQuery(sql);
-            System.out.println("查询PK成功"+result.getString("pk"));
-            return result.getString("pk");
+            if(result.next()){
+                System.out.println("查询PK成功"+result.getString("pk"));
+                return result.getString("pk");
+            }
+            else return "";
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("查询PK失败");
-            return "";
+            return null;
         }
     }
     static public boolean wRegister(MyStruct struct) {
@@ -120,6 +126,27 @@ public class ServerDataBase {
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("存储注册信息错误");
+            return false;
+        }
+    }
+    static public boolean rLogin(String ID,String pswd){
+        /*
+        向数据库查询账号密码；
+         */
+        try {
+            String sql="SELECT `psswd` FROM `users` WHERE `uid`=\"" + ID + "\"";
+            Statement statement=con.createStatement();
+            ResultSet result = statement.executeQuery(sql);
+            if(result.next()){
+                System.out.println("查询账号密码成功"+pswd);
+                if(result.getString("psswd").equals(pswd))
+                    return true;
+                else return false;
+            }
+            else return false;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("查询账号密码失败");
             return false;
         }
     }
@@ -177,12 +204,19 @@ public class ServerDataBase {
          */
         LinkedList<String> friends=new LinkedList<String>();
         try {
-            String sql="SELECT * FROM `friend` WHERE `me`=\"" + ID + "\" and `status`=1";
+            String sql="SELECT * FROM `friend` WHERE `me`=\"" + ID + "\"";
             Statement statement=con.createStatement();
             ResultSet result = statement.executeQuery(sql);
             System.out.println("uid remark tid startTime");
             while (result.next()) {
-                friends.addLast(result.getString("ta"));
+                String IDB=result.getString("ta");
+                String sql1="SELECT `status` FROM `users` WHERE `uid`=\"" + IDB + "\"";
+                Statement statement1=con.createStatement();
+                ResultSet result1 = statement.executeQuery(sql);
+                if(result1.next()){
+                    if(result1.getString("status").equals("1"))
+                        friends.addLast(IDB);
+                }
             }
             System.out.println(ID+" 查询好友列表成功");
         } catch (SQLException e) {
