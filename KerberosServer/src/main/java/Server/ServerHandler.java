@@ -32,7 +32,6 @@ public class ServerHandler {
     private static RSAPublicKey pk;
 
     public ServerHandler() throws InvalidKeySpecException, NoSuchAlgorithmException {
-        connectData();
         Map<String, String> kmap= RSAHandler.createKeys(1024);
         //生成公钥
         String pk1=kmap.get("publicKey");
@@ -52,7 +51,15 @@ public class ServerHandler {
         order.setMsgType("0001");
         String message=OrderToString(order);
         //发送证书
-    //     sendByAddress("192.168.43.130",10087,message);
+        System.out.println("发送证书");
+        String m=(String) sendByAddress("192.168.43.130",10087,message);
+        if(m!=null){
+            Kv(m);
+            System.out.println("Kv"+Key);
+        }
+        else {
+            System.out.println("没有收到Kv");
+        }
     //     System.out.println("发送证书"+message);
        // logOut(order.getSrc());
        // Key="12345678";//测试使用

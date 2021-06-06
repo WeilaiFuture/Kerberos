@@ -14,7 +14,7 @@ public class ServerDataBase {
     /*
     包含所有数据库操作的封装函数；
      */
-    static private Connection con=null; // 声明Connection对象
+    static public Connection con=null; // 声明Connection对象
     static public Connection connectData() {
         /*
         连接数据库；
