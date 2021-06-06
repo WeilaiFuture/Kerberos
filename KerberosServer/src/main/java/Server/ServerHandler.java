@@ -17,8 +17,7 @@ import java.util.LinkedList;
 import java.util.Map;
 
 import static Framework.SessionLayer.SessionLayer.*;
-import static Json.MyJson.OrderToString;
-import static Json.MyJson.StructToString;
+import static Json.MyJson.*;
 import static Server.ServerDataBase.*;
 import static Server.ServerSecurity.createCertif;
 
@@ -32,6 +31,7 @@ public class ServerHandler {
     private static RSAPublicKey pk;
 
     public ServerHandler() throws Exception {
+        connectData();//连接数据库
         Map<String, String> kmap= RSAHandler.createKeys(1024);
         //生成公钥
         String pk1=kmap.get("publicKey");
@@ -51,18 +51,18 @@ public class ServerHandler {
         order.setMsgType("0001");
         String message=OrderToString(order);
         //发送证书
-        System.out.println("发送证书");
-        String m=(String) sendByAddress("192.168.43.130",10087,message);
+        System.out.println("发送证书"+message);
+     /*   String m=(String) sendByAddress("192.168.43.130",10087,message);
         if(m!=null){
+            System.out.println("Kv"+m);
             Kv(m);
-            System.out.println("Kv"+Key);
         }
         else {
             System.out.println("没有收到Kv");
         }
-    //     System.out.println("发送证书"+message);
-       // logOut(order.getSrc());
-       // Key="12345678";//测试使用
+
+      */
+       Key="12345678";//测试使用
     }
     public static boolean Kcv(String message){
         /*
