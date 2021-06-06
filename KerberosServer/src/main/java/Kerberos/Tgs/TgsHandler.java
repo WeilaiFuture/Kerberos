@@ -14,6 +14,20 @@ public class TGSHandler extends SessionHandler {
     2 在构造的时候需要定下来，构造函数要可以抛出异常
      */
 
+    TGSHandler(){
+
+        String Kc = DateBaseOperation.readKc(TGSConfig.TGSID);
+        if(Kc == null){
+            MyStruct.Certificate certificate = new MyStruct.Certificate();
+            //myStruct.certificate.setPk(null);
+            //myStruct.certificate.setDeadline(null);
+
+            certificate.setName(TGSConfig.TGSID);
+
+            DateBaseOperation.writeCertif(certificate);
+            DateBaseOperation.writeKc(TGSConfig.TGSID,RandomStringUtils.randomAlphanumeric(8));
+        }
+    }
     @Override
     public void receive(String channelName,Object msg) {
 
@@ -29,7 +43,7 @@ public class TGSHandler extends SessionHandler {
 
                 MyStruct receiveExtend = MyJson.StringToStruct(receiveOrder.getExtend());
                 //设定TGS的ID
-                String IDtgs = "TGS";
+                String IDtgs = TGSConfig.TGSID;
                 //从message3中读取IDv
                 String IDv = receiveExtend.message3.getIdv();
 
@@ -46,6 +60,7 @@ public class TGSHandler extends SessionHandler {
 
                 //生成ticketV
                 MyStruct ticketV = new MyStruct();
+                ticketV.ticket = new MyStruct.Ticket();
                 ticketV.ticket.setKey(Kc_v);
                 ticketV.ticket.setIdc(IDc);
                 ticketV.ticket.setAdc(null);
@@ -55,6 +70,7 @@ public class TGSHandler extends SessionHandler {
 
                 // 生成message4
                 MyStruct sendExtend = new MyStruct();
+                sendExtend.message4 = new MyStruct.Message4();
                 sendExtend.message4.setKey(Kc_v);
                 sendExtend.message4.setIdv(IDv);
                 sendExtend.message4.setTs(null);

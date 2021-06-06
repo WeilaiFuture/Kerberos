@@ -6,7 +6,7 @@ import Framework.SessionLayer.SessionLayer;
 import Server.ServerFunction;
 
 public abstract class ServerBuilder {
-    protected static CommunicationLayer communicationLayer;
+    public static CommunicationLayer communicationLayer;
     protected static SessionLayer sessionLayer;
 
     public static void initializer(CommunicationLayer myCommunicationLayer,SessionLayer mySessionLayer){
@@ -14,7 +14,8 @@ public abstract class ServerBuilder {
         sessionLayer = mySessionLayer;
     }
     public static void run()throws Exception{
-        communicationLayer.run();
+        communicationLayer.runReceive();
+        //communicationLayer.runSend("192.168.43.130",10087);
     }
     public static void main(String[] args)throws Exception {
 
