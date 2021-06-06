@@ -25,7 +25,7 @@ import static SecurityUtils.RSAUtils.encodeBase64;
 public class RSAHandler {
     public static final String CHARSET = "UTF-8";
     public static final String RSA_ALGORITHM = "RSA";
-    public static Map<String, String> createKeys(int keySize){
+    public static Map<String, String> createKeys(int keySize) throws Exception {
         //为RSA算法创建一个KeyPairGenerator对象
         KeyPairGenerator kpg;
         try{
@@ -39,10 +39,10 @@ public class RSAHandler {
         KeyPair keyPair = kpg.generateKeyPair();
         //得到公钥
         Key publicKey = keyPair.getPublic();
-        String publicKeyStr = Base64.encodeBase64String(publicKey.getEncoded());
+        String publicKeyStr = encodeBase64(publicKey.getEncoded());
         //得到私钥
         Key privateKey = keyPair.getPrivate();
-        String privateKeyStr = Base64.encodeBase64String(privateKey.getEncoded());
+        String privateKeyStr =encodeBase64(privateKey.getEncoded());
         Map<String, String> keyPairMap = new HashMap<String, String>();
         keyPairMap.put("publicKey", publicKeyStr);
         keyPairMap.put("privateKey", privateKeyStr);
