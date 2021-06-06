@@ -22,6 +22,24 @@ namespace Kerberos_Client
         private string rTS;     //接收方时间戳
         string contentType;//消息类型
 
+		public Order(Order o)
+        {
+			this.msgId = o.msgId;
+			this.src = o.src;
+			this.dst = o.dst;
+			this.MsgType = o.MsgType;
+			this.extend = o.extend;
+			this.sign = o.sign;
+			this.statusReport = o.statusReport;
+			this.sTS = o.sTS;
+			this.rTS = o.rTS;
+			this.rTS = o.rTS;
+			this.contentType = o.contentType;
+        }
+		public Order()
+        {
+
+        }
 		public string MsgId
 		{
 			get { return msgId; }

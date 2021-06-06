@@ -39,18 +39,34 @@ namespace Kerberos_Client.UI
             },
         };
         public User My_user;
-        public Chat_Window(User u)
+        public User Chat_user;
+        public Chat_Window(User u,User user)
         {
             InitializeComponent();
-            My_user = u;
+            Chat_user = u;
+            My_user = user;
             head_Image.Source = img.GetBitmap(u.Photo);
-            Uname_TextBlock.Text = "昵称:" + My_user.Uname;
-            Uid_TX.Text = "账号:" + My_user.Uid;
-            Email_TX.Text = "邮箱:" + My_user.Email;
+            Uname_TextBlock.Text = "昵称:" + Chat_user.Uname;
+            Uid_TX.Text = "账号:" + Chat_user.Uid;
+            Email_TX.Text = "邮箱:" + Chat_user.Email;
             ListBoxChat.ItemsSource = chatMessage;
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            Chat_Message chat = new Chat_Message();
+            chat.U = My_user;
+            chat.Head = 101;
+            chat.Content = send_text.Text;
+            MyStruct myStruct = new MyStruct();
+            myStruct.chat_message = chat;
+            Order order = new Order();
+            order.Dst = Chat_user.Uid;
+            order.Src = My_user.Uid;
+            order.MsgType = "2001";
+            order.ContentType = "101";
+            order.Extend = JsonHelper.ToJson(myStruct);
+            ConnectServer.sendMessage(order);
+
             chatMessage.Add(new ChatMessage()
             {
                 Photo = @"E:\Kerberos\Kerberos_Client\Kerberos_Client\Image_Source\test.jpg",
@@ -62,7 +78,7 @@ namespace Kerberos_Client.UI
         }
         protected override void OnClosing(CancelEventArgs e)
         {
-            Main_Window.Chat_Dic.Remove(My_user.Uid);
+            Main_Window.Chat_Dic.Remove(Chat_user.Uid);
             base.OnClosing(e);
         }
     }
