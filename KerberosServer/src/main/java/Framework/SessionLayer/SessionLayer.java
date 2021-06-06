@@ -1,5 +1,6 @@
 package Framework.SessionLayer;
 
+import Framework.ServerBuilder;
 import Framework.SessionLayer.Exceptions.SessionLayerNotInitialized;
 import Framework.SessionLayer.Handlers.SessionHandler;
 import Framework.Testing.EchoClientHandler;
@@ -14,6 +15,8 @@ import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.util.AttributeKey;
 import org.apache.commons.lang3.RandomStringUtils;
 
+import java.io.*;
+import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
@@ -46,48 +49,44 @@ public class SessionLayer {
             throw new SessionLayerNotInitialized();
         }
     }
-    static public void sendByAddress(String host,int port,Object msg){
-        byte[] response = ((String)msg).getBytes();
+    static public Object sendByAddress(String host,int port,Object msg){
+        /*byte[] response = ((String)msg).getBytes();
         ByteBuf msgBuf = Unpooled.buffer(response.length);
         msgBuf.writeBytes(response);
-        EventLoopGroup group = new NioEventLoopGroup();
+        ServerBuilder.communicationLayer.runSend(host,port);
+        msgBuf.clear();*/
         try {
-            Bootstrap b = new Bootstrap();
-            b.group(group)
-                    .channel(NioSocketChannel.class)
-                    .option(ChannelOption.TCP_NODELAY, true)
-                    .handler(new ChannelInitializer<SocketChannel>() {
-                        @Override
-                        protected void initChannel(SocketChannel ch) throws Exception {
+            // 和服务器创建连接
+            Socket socket = new Socket(host,port);
 
-                            ChannelPipeline p = ch.pipeline();
-                            p.addLast("handler",new ChannelInboundHandlerAdapter(){
-                                @Override
-                                public void channelActive(ChannelHandlerContext ctx) throws Exception {
-                                    //logger.info("client channel active");
-                                    // Send the message to Server
-                                    //logger.info("client send req...");
-                                    ctx.writeAndFlush(msgBuf);
-                                }
-                            });
+            // 要发送给服务器的信息
+            OutputStream os = socket.getOutputStream();
+            PrintWriter pw = new PrintWriter(os);
+            pw.write((String) msg);
+            pw.flush();
 
-                        }
-                    });
-            // Start the client.
-            ChannelFuture f = b.connect(host, port).sync();
+            socket.shutdownOutput();
 
-            //logger.info("client connect to host:{}, port:{}", host, port);
+            // 从服务器接收的信息
+            InputStream is = socket.getInputStream();
+            BufferedReader br = new BufferedReader(new InputStreamReader(is));
 
-            // Wait until the connection is closed.
-            f.channel().closeFuture().sync();
-        } catch (Exception e){
+            String receive = null;
+            String temp = null;
+            br.readLine();
+            while((temp = br.readLine())!=null){
+                receive += temp;
+            }
+            br.close();
+            is.close();
+            os.close();
+            pw.close();
+            socket.close();
+            return receive;
+        } catch (Exception e) {
             e.printStackTrace();
+            return null;
         }
-        finally {
-            // Shut down the event loop to terminate all threads.
-            group.shutdownGracefully();
-        }
-        msgBuf.clear();
     }
 
     static public void send(String userName,Object msg){
