@@ -7,6 +7,7 @@ import Json.MyStruct;
 import Kerberos.DateBaseOperation;
 import SecurityUtils.DESHandler;
 import SecurityUtils.RSAHandler;
+import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang3.RandomStringUtils;
 
 import java.security.interfaces.RSAPublicKey;
@@ -39,7 +40,7 @@ public class ASHandler extends SessionHandler {
                     sendExtend.my_k = new MyStruct.My_k();
                     sendExtend.my_k.setKey(RSAHandler.publicEncrypt(Kc,rsaPublicKey));
                     //填写extend字段
-                    receiveOrder.setExtend(MyJson.StructToString(sendExtend));
+                    receiveOrder.setExtend(Base64.encodeBase64String(MyJson.StructToString(sendExtend).getBytes()));
                     //更改消息类型
                     receiveOrder.setMsgType("0002");
                     //源地址和目的地址调换位置
@@ -50,6 +51,7 @@ public class ASHandler extends SessionHandler {
                     DateBaseOperation.writeCertif(receiveExtend.certificate);
                     DateBaseOperation.writeKc(receiveExtend.certificate.getName(),Kc);
                     //发送
+                    System.out.println(MyJson.OrderToString(receiveOrder));
                     SessionLayer.send(channelName,MyJson.OrderToString(receiveOrder));
                     //SessionLayer.logOut(channelName);
                 }

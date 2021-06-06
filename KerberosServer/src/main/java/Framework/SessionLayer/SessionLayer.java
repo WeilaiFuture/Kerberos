@@ -101,6 +101,7 @@ public class SessionLayer {
             byte[] response = ((String)msg).getBytes();
             ByteBuf msgBuf = Unpooled.buffer(response.length);
             msgBuf.writeBytes(response);
+            System.out.println("向"+ userName + "发送信息");
             channelMap.get(userName).writeAndFlush(msgBuf);
         }
         else{

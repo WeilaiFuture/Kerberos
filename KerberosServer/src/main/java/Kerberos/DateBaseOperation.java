@@ -27,8 +27,8 @@ public class DateBaseOperation {
         String url = "jdbc:mysql://" +
                 "rm-uf6t4cbyfz681x569jo.mysql.rds.aliyuncs.com:3306/kerbors" +
                 "?sslmode=require" +
-                "&connectTimeout=3000" +
-                "&socketTimeout=60000";
+                "&connectTimeout=300000" +
+                "&socketTimeout=6000000";
         try {
             Class.forName("com.mysql.jdbc.Driver");
             conn = DriverManager.getConnection(url, "w123", "Wl123456");
@@ -43,10 +43,16 @@ public class DateBaseOperation {
         return conn;
     }
 
-    static public boolean writeCertif(MyStruct.Certificate certificate) {
-        if(connection == null){
-            connectDataBase();
+    static public boolean writeCertif(MyStruct.Certificate certificate){
+        try{
+            if(connection == null||connection.isClosed()){
+                connectDataBase();
+            }
         }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+
         /*
         向数据库存入证书；
          */
@@ -67,10 +73,16 @@ public class DateBaseOperation {
         }
     }
 
-    static public boolean writeKc(String ID,String K) {
-        if(connection == null){
-            connectDataBase();
+    static public boolean writeKc(String ID,String K){
+        try{
+            if(connection == null||connection.isClosed()){
+                connectDataBase();
+            }
         }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+
         /*
         向数据库存入Kcv；
          */
@@ -85,10 +97,16 @@ public class DateBaseOperation {
             return false;
         }
     }
-    static public String readKc(String ID) {
-        if(connection == null){
-            connectDataBase();
+    static public String readKc(String ID){
+        try{
+            if(connection == null||connection.isClosed()){
+                connectDataBase();
+            }
         }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+
         /*
         向数据库读取Kcv；
          */
