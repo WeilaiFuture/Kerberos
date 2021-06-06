@@ -26,33 +26,38 @@ namespace Kerberos_Client
         private static MainWindow w;
         public static ShowMessage show;
         //连接服务器
-        internal static void connectserver(Window window, string str="127.0.0.1",int p=50810)
+        internal static void connectserver(Window window, string str = "127.0.0.1", int p = 50810)
         {
             w = window as MainWindow;
             //连接远端的服务器IP
             string remoteIP = str;
             int port = p;
-#if lianji
-            remoteIP = "192.168.43.64";
-            port = 1122;
-#endif
 
             IPAddress ip = IPAddress.Parse(remoteIP);
             //IPEndPoint endPoint = new IPEndPoint(ip, 59000)
             if (client != null)
             {
-                client.Shutdown(SocketShutdown.Both);
-                client.Disconnect(true);
-                Logger.Instance.WriteLog(remoteIP + "/" + port.ToString(), LogType.DisConnect);
+                if (client.Connected)
+                {
+                    client.Shutdown(SocketShutdown.Both);
+                    client.Disconnect(true);
+                    Logger.Instance.WriteLog(remoteIP + "/" + port.ToString(), LogType.DisConnect);
+                }
             }
-            client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            client.Connect(ip, port);
-            Logger.Instance.WriteLog(remoteIP + "/" + port.ToString(), LogType.Connect);
-            if (threadReceive == null)
+            if (!w.iscancle)
             {
-                threadReceive = new Thread(ReceiveData);
-                threadReceive.IsBackground = true;
-                threadReceive.Start();
+                client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+                client.Connect(ip, port);
+                Logger.Instance.WriteLog(remoteIP + "/" + port.ToString(), LogType.Connect);
+
+                    threadReceive = new Thread(ReceiveData);
+                    threadReceive.IsBackground = true;
+                    threadReceive.Start();
+            }
+            else
+            {
+                if (threadReceive != null)
+                    threadReceive.Abort();
             }
         }
         /// <summary>
@@ -130,6 +135,8 @@ namespace Kerberos_Client
                 string strMsg = System.Text.Encoding.UTF8.GetString(result, 0, num);
                 Logger.Instance.WriteLog(strMsg, LogType.Recv);
                 Order order =JsonHelper.FromJson<Order>(strMsg);
+                if (order == null)
+                    return;
                 show.add(order);
                 string command = order.MsgType;
                 switch (command)
@@ -189,6 +196,15 @@ namespace Kerberos_Client
                         MessageBox.Show(Encoding.UTF8.GetString(result, 0, num));
                         break;
                 }
+            }
+        }
+        public static void disConnet()
+        {
+            if (client != null)
+            {
+                client.Shutdown(SocketShutdown.Both);
+                client.Disconnect(true);
+                Logger.Instance.WriteLog("断开连接", LogType.DisConnect);
             }
         }
 

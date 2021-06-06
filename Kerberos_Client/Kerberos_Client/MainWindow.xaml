@@ -178,7 +178,7 @@
                     </Image.RenderTransform>
                 </Image>
                 <local:LoadingWait x:Name="Load_Control" Visibility="Visible" Grid.RowSpan="3"  />
-                <Button  Content="取消" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="50" Height="50" Margin="0,0,0,0" Click="Cancle_Click">
+                <Button  Content="取消" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="50" Height="50" Margin="0,0,0,0" Click="Cancle_Click" RenderTransformOrigin="0.5,0.508">
                    
                 </Button>
             </Grid>

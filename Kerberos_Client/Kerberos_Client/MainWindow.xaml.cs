@@ -1,8 +1,9 @@
 ﻿#define kerberos
 #define des
 #define rsa
-//#define kbtest
-//#define local
+#define kbtest
+#define local
+//#define lianji
 using Kerberos_Client.UI;
 using System;
 using System.Collections.Generic;
@@ -34,6 +35,7 @@ namespace Kerberos_Client
     /// </summary>
     public partial class MainWindow : Window
     {
+        public bool iscancle=true;
 #if local
         string SERVERIP = "127.0.0.1";
         string ASIP = "127.0.0.1";
@@ -43,7 +45,7 @@ namespace Kerberos_Client
         int ServerPort=1122;
 #endif
 
-#if kerberos
+#if lianji
         string SERVERIP  = "192.168.43.63";
         string ASIP = "192.168.43.130";
         string TGSIP = "192.168.43.130";
@@ -77,7 +79,8 @@ namespace Kerberos_Client
 
             Dispatcher.Invoke(new Action(delegate
             {
-                ConnectServer.show = new ShowMessage();
+                if(ConnectServer.show==null)
+                 ConnectServer.show = new ShowMessage();
                 Thread newWindowThread = new Thread(() => ThreadStartingPoint(ConnectServer.show));
                 newWindowThread.SetApartmentState(ApartmentState.STA);
                 newWindowThread.IsBackground = true;
@@ -209,12 +212,17 @@ namespace Kerberos_Client
         {
             Dispatcher.Invoke(new Action(delegate
             {
+                iscancle = true;
                 Main_Tab.IsSelected = true;
+                //this.Close();
+                //MainWindow w = new MainWindow();
+                //w.Show();
+                GC.Collect();
             }));
         }
-#endregion
-#region Kerberos
-        private void certificateInit(string name,string ip,int port)
+        #endregion
+        #region Kerberos
+        private void certificateInit(string name, string ip, int port)
         {
             //生成证书
             string PKB, PKI;
@@ -231,7 +239,7 @@ namespace Kerberos_Client
             }
             Certificate certificate = new Certificate();
             DateTime dt = new DateTime();
-            certificate.Deadline= dt.AddDays(1).ToString();   //加n天
+            certificate.Deadline = dt.AddDays(1).ToString();   //加n天
             certificate.Pk = RSAKeyConvert.RSAPublicKeyDotNet2Java(PKB);
             certificate.Name = localName;
             certificate.Serial = "0";
@@ -247,7 +255,12 @@ namespace Kerberos_Client
             order.Extend = extend;
             order.Src = localName;
             order.Dst = name;
-            ConnectServer.connectserver(this, ip,port);
+            Dispatcher.Invoke(
+new Action(
+delegate
+{
+    ConnectServer.connectserver(this, ip, port);
+}));
             ConnectServer.sendMessage(order);
         }
         private void KerberosInit()
@@ -268,8 +281,6 @@ namespace Kerberos_Client
             order.MsgType = "0003";
             order.Extend = extend;
 #if kerberos
-
-            ConnectServer.connectserver(this, ASIP,ASPort);
             ConnectServer.sendMessage(order);
 #endif
         }
@@ -278,7 +289,7 @@ namespace Kerberos_Client
             Order order = o;
             MyStruct myStruct = JsonHelper.FromJson<MyStruct>(order.Extend);
             string kc = myStruct.certificate.Pk;
-            kc = RSAKeyConvert.RSAPrivateKeyJava2DotNet(kc);
+            kc = RSAKeyConvert.RSAPublicKeyJava2DotNet(kc);
             Main_Window.Keys["server_pk"] = kc;
             Dispatcher.Invoke(new Action(delegate
             {
@@ -303,7 +314,7 @@ namespace Kerberos_Client
 #if des
             o.Extend = DESLibrary.DecryptDES(o.Extend, Main_Window.Keys["as"]);
 #endif
-            MyStruct myStruct= JsonHelper.FromJson<MyStruct>(o.Extend);
+            MyStruct myStruct = JsonHelper.FromJson<MyStruct>(o.Extend);
             Message2 message2 = myStruct.message2;
 
             Main_Window.Keys["tgs"] = message2.Key;
@@ -314,7 +325,7 @@ namespace Kerberos_Client
             Authenticator au = new Authenticator();
             au.IDC = localName;
             au.ADC = DoGetHostEntry();
-            au.TS= DateTime.Now.ToString();
+            au.TS = DateTime.Now.ToString();
             msg.AC = JsonHelper.ToJson(au);
 #if des
             msg.AC = DESLibrary.DecryptDES(o.Extend, Main_Window.Keys["tgs"]);
@@ -330,14 +341,15 @@ namespace Kerberos_Client
             order.MsgType = "0005";
             order.Extend = extend;
 #if kerberos
-            ConnectServer.connectserver(this, TGSIP,TGSPort);
+
+            ConnectServer.connectserver(this, TGSIP, TGSPort);
             ConnectServer.sendMessage(order);
 #endif
         }
         internal void Call_TGS(Order o)
         {
 #if des
-            o.Extend= DESLibrary.DecryptDES(o.Extend, Main_Window.Keys["tgs"]);
+            o.Extend = DESLibrary.DecryptDES(o.Extend, Main_Window.Keys["tgs"]);
 #endif
             MyStruct myStruct = JsonHelper.FromJson<MyStruct>(o.Extend);
             Message4 message4 = myStruct.message4;
@@ -351,8 +363,9 @@ namespace Kerberos_Client
             au.ADC = DoGetHostEntry();
             au.TS = DateTime.Now.ToString();
             msg.AC = JsonHelper.ToJson(au);
+            msg.AC = DESLibrary.EncryptDES(msg.AC, Main_Window.Keys["server"]);
             MyStruct myStruct_ = new MyStruct();
-            myStruct.message5 = msg;
+            myStruct_.message5 = msg;
 
             //发送报文
             string extend = JsonHelper.ToJson(myStruct_);
@@ -361,13 +374,17 @@ namespace Kerberos_Client
             order.Src = localName;
             order.MsgType = "0007";
             order.Extend = extend;
-            string json = JsonHelper.ToJson(order);
-            ConnectServer.connectserver(this, SERVERIP);
+            Dispatcher.Invoke(
+            new Action(
+            delegate
+                {
+    ConnectServer.connectserver(this, SERVERIP, ServerPort);
+                }));
             ConnectServer.sendMessage(order);
         }
         internal void Call_Server(Order o)
         {
-            MyStruct myStruct = JsonHelper.FromJson<MyStruct>(o.Extend);
+            MyStruct myStruct = JsonHelper.FromJson<MyStruct>(DESLibrary.DecryptDES(o.Extend, Main_Window.Keys["server"]));
             Message6 message6 = myStruct.message6;
             certificateInit("Server", SERVERIP, ServerPort);
         }
@@ -383,9 +400,10 @@ namespace Kerberos_Client
                 MessageBox.Show("账号或密码为空，请重新输入");
             else
             {
+                iscancle = false;
                 Load_Tab.IsSelected = true;
                 localName = ID.Text;
-                certificateInit("Server", SERVERIP, ServerPort);
+                //certificateInit("Server", SERVERIP, ServerPort);
 #if kbtest
                 certificateInit("AS",ASIP,ASPort);
 #endif
@@ -394,7 +412,6 @@ namespace Kerberos_Client
 
         private void Send_login()
         {
-            Main_Window.Keys["server"] = "12345678";
 
             User user = new User(ID.Text, password.Password);
             MyStruct myStruct = new MyStruct();

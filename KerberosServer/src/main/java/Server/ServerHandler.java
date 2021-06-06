@@ -52,7 +52,8 @@ public class ServerHandler {
         String message=OrderToString(order);
         //发送证书
         System.out.println("发送证书"+message);
-     /*   String m=(String) sendByAddress("192.168.43.130",10087,message);
+        //String m=(String) sendByAddress("192.168.43.130",10087,message);
+        String m=(String) sendByAddress("127.0.0.1",10087,message);
         if(m!=null){
             System.out.println("Kv"+m);
             Kv(m);
@@ -60,9 +61,7 @@ public class ServerHandler {
         else {
             System.out.println("没有收到Kv");
         }
-
-      */
-       Key="12345678";//测试使用
+        //Key=RSAHandler.privateDecrypt(m, RSAHandler.getPrivateKey(kmap.get("privateKey")));//测试使用
     }
     public static boolean Kcv(String message){
         /*
@@ -81,7 +80,10 @@ public class ServerHandler {
         //存入数据库
         wKcv(order.getSrc(),kcv);
         //发送messgae6
-        mystruct.message6.setTs(DESHandler.DecryptDES(authenticator.getTs()+1,kcv));//使用Kcv加密
+        mystruct.message5=null;
+        mystruct.message6=new MyStruct.Message6();
+        mystruct.message6.setTs(DESHandler.EncryptDES((authenticator.getTs()+1),kcv));//使用Kcv加密
+        order.setMsgType("0008");
         //发送
         String src=order.getSrc();
         order.setSrc(order.getDst());
