@@ -420,16 +420,16 @@ namespace Kerberos_Client
         #region 群信息
         public class Group
         {
-            List<Dictionary<User, string>> list;//用户列表
+            Dictionary<User, string> list;//用户列表
             string gid;//群账号
             string photo;//群头像
             string leader;//群主账号
             string sign;//群介绍
             int startTime;//创建时间
-            public List<Dictionary<User, string>> LIST
+            public Dictionary<User, string> LIST
             {
                 get { return list; }
-                set { list = new List<Dictionary<User, string>>(value); }
+                set { list = new Dictionary<User, string>(value); }
             }
             public string Gid
             {

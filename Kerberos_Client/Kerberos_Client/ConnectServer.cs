@@ -1,4 +1,5 @@
 ﻿//#define lianji
+using Kerberos_Client.Log;
 using Kerberos_Client.UI;
 using System;
 using System.Collections.Generic;
@@ -37,9 +38,16 @@ namespace Kerberos_Client
 #endif
 
             IPAddress ip = IPAddress.Parse(remoteIP);
-            //IPEndPoint endPoint = new IPEndPoint(ip, 59000);
+            //IPEndPoint endPoint = new IPEndPoint(ip, 59000)
+            if (client != null)
+            {
+                client.Shutdown(SocketShutdown.Both);
+                client.Disconnect(true);
+                Logger.Instance.WriteLog(remoteIP + "/" + port.ToString(), LogType.DisConnect);
+            }
             client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             client.Connect(ip, port);
+            Logger.Instance.WriteLog(remoteIP + "/" + port.ToString(), LogType.Connect);
             if (threadReceive == null)
             {
                 threadReceive = new Thread(ReceiveData);
@@ -55,6 +63,7 @@ namespace Kerberos_Client
         {
             show.add(order);
             string strMsg = JsonHelper.ToJson(order);
+            Logger.Instance.WriteLog(strMsg, LogType.Send);
             if (!string.Empty.Equals(strMsg))
                 if (client != null && client.Connected)
                     client.Send(Encoding.UTF8.GetBytes(strMsg));
@@ -82,7 +91,8 @@ namespace Kerberos_Client
                 order.Dst = "Server";
                 order.Src = MainWindow.localName;
                 order.MsgType = "1006";
-                order.Extend = "heart";
+                MyStruct myStruct = new MyStruct();
+                order.Extend = JsonHelper.ToJson(myStruct);
                 sendMessage(order);
             }
             return;
@@ -118,6 +128,7 @@ namespace Kerberos_Client
                     break;
                 //MessageBox.Show("ERROR");
                 string strMsg = System.Text.Encoding.UTF8.GetString(result, 0, num);
+                Logger.Instance.WriteLog(strMsg, LogType.Recv);
                 Order order =JsonHelper.FromJson<Order>(strMsg);
                 show.add(order);
                 string command = order.MsgType;

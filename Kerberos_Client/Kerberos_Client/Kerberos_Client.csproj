@@ -68,6 +68,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ConnectServer.cs" />
+    <Compile Include="Log\Logger.cs" />
     <Compile Include="ShowMessage.xaml.cs">
       <DependentUpon>ShowMessage.xaml</DependentUpon>
     </Compile>
@@ -75,6 +76,7 @@
     <Compile Include="Struct\JsonHelper.cs" />
     <Compile Include="Struct\MyJson.cs" />
     <Compile Include="Struct\MyStruct.cs" />
+    <Compile Include="Struct\RSAKeyConvert.cs" />
     <Compile Include="Struct\RSALibrary.cs" />
     <Compile Include="UI\Add_Window.xaml.cs">
       <DependentUpon>Add_Window.xaml</DependentUpon>
@@ -188,5 +190,6 @@
   <ItemGroup>
     <Resource Include="Image_Source\add.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

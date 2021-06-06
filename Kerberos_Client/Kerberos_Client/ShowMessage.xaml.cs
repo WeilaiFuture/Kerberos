@@ -27,9 +27,10 @@ namespace Kerberos_Client
         }
         public void add(Order order)
         {
+            Order o = new Order(order);
             Dispatcher.Invoke(new Action(delegate
             {
-                orderList.Add(order);
+                orderList.Add(o);
                 ShowOrder.ItemsSource = null;
                 ShowOrder.ItemsSource = orderList;
             }));
@@ -43,23 +44,17 @@ namespace Kerberos_Client
                 return;
             }
             Order order = ShowOrder.SelectedItem as Order;
-            string msgID = "MsgID: " + order.MsgId ;
-            string src = "Src: " + order.Src;
-            string dst = "Dst: " + order.Dst;
-            string msgType = "MsgType: " + order.MsgType;
-            string extend = "[Extend]: " + order.Extend;
-            string sign = "Sign: " + order.Sign;
-            string statusReport = "StatusReport: " + order.StatusReport;
-            string sTS = "STS: " + order.STS;
-            string rTS = "RTS: " + order.RTS;
-            string contentType = "ConetentType: " + order.ContentType;
-            this.txtBlk.Text = msgID + src + dst + msgType + extend + sign + statusReport +
-                sTS + rTS + contentType;
+            string msgType = "MsgType: " + order.MsgType + "\n";
+            string extend = "[Extend]: " + order.Extend+"\n";
+            string sign = "Sign: " + order.Sign + "\n";
+            string statusReport = "StatusReport: " + order.StatusReport + "\n";
+            string contentType = "ConetentType: " + order.ContentType + "\n";
+            this.txtBlk.Text =  msgType + extend + sign + statusReport +contentType;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        void DataGrid_LoadingRow(object sender, DataGridRowEventArgs e)
         {
-
+            e.Row.Header = (e.Row.GetIndex()).ToString();
         }
     }
 }

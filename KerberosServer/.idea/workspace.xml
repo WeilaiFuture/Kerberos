@@ -29,17 +29,51 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0e939090-7ab6-4bc6-875c-d0daf79ad1c7" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Server/ServerData.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Server/ServerFunction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/ServerFunction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Server/ServerHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/ServerHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Server/ServerResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Server/ServerSecurity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/ServerSecurity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../~$计文档第二稿.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client test/.vs/Client test/v16/.suo" beforeDir="false" afterPath="$PROJECT_DIR$/../Client test/.vs/Client test/v16/.suo" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client test/Client test/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Client test/Client test/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client test/Client test/RSALibrary.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Client test/Client test/RSALibrary.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client test/Client test/bin/Debug/netcoreapp3.1/Client test.dll" beforeDir="false" afterPath="$PROJECT_DIR$/../Client test/Client test/bin/Debug/netcoreapp3.1/Client test.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client test/Client test/bin/Debug/netcoreapp3.1/Client test.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/../Client test/Client test/bin/Debug/netcoreapp3.1/Client test.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client test/Client test/bin/Debug/netcoreapp3.1/PKB1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../Client test/Client test/bin/Debug/netcoreapp3.1/PKB1.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client test/Client test/bin/Debug/netcoreapp3.1/PKI1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../Client test/Client test/bin/Debug/netcoreapp3.1/PKI1.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client test/Client test/obj/Debug/netcoreapp3.1/Client test.csprojAssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/../Client test/Client test/obj/Debug/netcoreapp3.1/Client test.csprojAssemblyReference.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client test/Client test/obj/Debug/netcoreapp3.1/Client test.dll" beforeDir="false" afterPath="$PROJECT_DIR$/../Client test/Client test/obj/Debug/netcoreapp3.1/Client test.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client test/Client test/obj/Debug/netcoreapp3.1/Client test.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/../Client test/Client test/obj/Debug/netcoreapp3.1/Client test.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kerberos_Client/.vs/Kerberos_Client/v16/.suo" beforeDir="false" afterPath="$PROJECT_DIR$/../Kerberos_Client/.vs/Kerberos_Client/v16/.suo" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kerberos_Client/Kerberos_Client/ConnectServer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Kerberos_Client/Kerberos_Client/ConnectServer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kerberos_Client/Kerberos_Client/Kerberos_Client.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../Kerberos_Client/Kerberos_Client/Kerberos_Client.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kerberos_Client/Kerberos_Client/MainWindow.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Kerberos_Client/Kerberos_Client/MainWindow.xaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kerberos_Client/Kerberos_Client/ShowMessage.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/../Kerberos_Client/Kerberos_Client/ShowMessage.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kerberos_Client/Kerberos_Client/ShowMessage.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Kerberos_Client/Kerberos_Client/ShowMessage.xaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kerberos_Client/Kerberos_Client/Struct/MyJson.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Kerberos_Client/Kerberos_Client/Struct/MyJson.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kerberos_Client/Kerberos_Client/Struct/MyStruct.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Kerberos_Client/Kerberos_Client/Struct/MyStruct.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kerberos_Client/Kerberos_Client/UI/Main_Window.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Kerberos_Client/Kerberos_Client/UI/Main_Window.xaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kerberos_Client/Kerberos_Client/bin/Debug/Kerberos_Client.exe" beforeDir="false" afterPath="$PROJECT_DIR$/../Kerberos_Client/Kerberos_Client/bin/Debug/Kerberos_Client.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kerberos_Client/Kerberos_Client/bin/Debug/Kerberos_Client.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/../Kerberos_Client/Kerberos_Client/bin/Debug/Kerberos_Client.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kerberos_Client/Kerberos_Client/conf/Login.conf" beforeDir="false" afterPath="$PROJECT_DIR$/../Kerberos_Client/Kerberos_Client/conf/Login.conf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kerberos_Client/Kerberos_Client/obj/Debug/App.baml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kerberos_Client/Kerberos_Client/obj/Debug/DesignTimeResolveAssemblyReferences.cache" beforeDir="false" afterPath="$PROJECT_DIR$/../Kerberos_Client/Kerberos_Client/obj/Debug/DesignTimeResolveAssemblyReferences.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kerberos_Client/Kerberos_Client/obj/Debug/Kerberos_Client.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/../Kerberos_Client/Kerberos_Client/obj/Debug/Kerberos_Client.csproj.CoreCompileInputs.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kerberos_Client/Kerberos_Client/obj/Debug/Kerberos_Client.csproj.FileListAbsolute.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kerberos_Client/Kerberos_Client/obj/Debug/Kerberos_Client.csproj.FileListAbsolute.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kerberos_Client/Kerberos_Client/obj/Debug/Kerberos_Client.csprojAssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/../Kerberos_Client/Kerberos_Client/obj/Debug/Kerberos_Client.csprojAssemblyReference.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kerberos_Client/Kerberos_Client/obj/Debug/Kerberos_Client.exe" beforeDir="false" afterPath="$PROJECT_DIR$/../Kerberos_Client/Kerberos_Client/obj/Debug/Kerberos_Client.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kerberos_Client/Kerberos_Client/obj/Debug/Kerberos_Client.g.resources" beforeDir="false" afterPath="$PROJECT_DIR$/../Kerberos_Client/Kerberos_Client/obj/Debug/Kerberos_Client.g.resources" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kerberos_Client/Kerberos_Client/obj/Debug/Kerberos_Client.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/../Kerberos_Client/Kerberos_Client/obj/Debug/Kerberos_Client.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kerberos_Client/Kerberos_Client/obj/Debug/Kerberos_Client_MarkupCompile.cache" beforeDir="false" afterPath="$PROJECT_DIR$/../Kerberos_Client/Kerberos_Client/obj/Debug/Kerberos_Client_MarkupCompile.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kerberos_Client/Kerberos_Client/obj/Debug/Kerberos_Client_MarkupCompile.i.cache" beforeDir="false" afterPath="$PROJECT_DIR$/../Kerberos_Client/Kerberos_Client/obj/Debug/Kerberos_Client_MarkupCompile.i.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kerberos_Client/Kerberos_Client/obj/Debug/Kerberos_Client_MarkupCompile.lref" beforeDir="false" afterPath="$PROJECT_DIR$/../Kerberos_Client/Kerberos_Client/obj/Debug/Kerberos_Client_MarkupCompile.lref" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kerberos_Client/Kerberos_Client/obj/Debug/MainWindow.baml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kerberos_Client/Kerberos_Client/obj/Debug/ShowMessage.baml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kerberos_Client/Kerberos_Client/obj/Debug/ShowMessage.g.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Kerberos_Client/Kerberos_Client/obj/Debug/ShowMessage.g.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kerberos_Client/Kerberos_Client/obj/Debug/ShowMessage.g.i.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Kerberos_Client/Kerberos_Client/obj/Debug/ShowMessage.g.i.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kerberos_Client/Kerberos_Client/obj/Debug/UI/Add_Window.baml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kerberos_Client/Kerberos_Client/obj/Debug/UI/Chat_Window.baml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kerberos_Client/Kerberos_Client/obj/Debug/UI/ListBoxStyle.baml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kerberos_Client/Kerberos_Client/obj/Debug/UI/Load.baml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kerberos_Client/Kerberos_Client/obj/Debug/UI/LoadingWait.baml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kerberos_Client/Kerberos_Client/obj/Debug/UI/Main_Window.baml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kerberos_Client/Kerberos_Client/obj/Debug/UI/User_Window.baml" beforeDir="false" />
     </list>
-    <ignored path="$PROJECT_DIR$/target/" />
-    <ignored path="$PROJECT_DIR$/classes/" />
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -50,129 +84,6 @@
   </component>
   <component name="DefaultGradleProjectSettings">
     <option name="isMigrated" value="true" />
-  </component>
-  <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/Server/ServerHandler.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="24" column="19" selection-start-line="24" selection-start-column="19" selection-end-line="24" selection-end-column="19" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/Server/ServerSecurity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="532">
-              <caret line="28" column="35" selection-start-line="28" selection-start-column="35" selection-end-line="28" selection-end-column="35" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/Server/Main.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="57">
-              <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/Framework/SessionLayer/SessionLayer.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2052">
-              <caret line="126" selection-start-line="126" selection-end-line="126" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/Framework/CommunicationLayer/Handlers/ReceiveHandler.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="190">
-              <caret line="13" selection-start-line="13" selection-end-line="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="jar://$MAVEN_REPOSITORY$/io/netty/netty-all/4.1.65.Final/netty-all-4.1.65.Final.jar!/io/netty/channel/AbstractChannelHandlerContext.class">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4313">
-              <caret line="282" selection-start-line="282" selection-end-line="282" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/Json/MyJson.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="399">
-              <caret line="31" selection-start-line="31" selection-end-line="31" />
-              <folding>
-                <element signature="method#ToStruct#0;class#MyJson#0" />
-                <element signature="method#OrderToString#0;class#MyJson#0" />
-                <element signature="e#2326#2327#0" expanded="true" />
-                <element signature="e#2364#2365#0" expanded="true" />
-                <element signature="e#2401#2402#0" expanded="true" />
-                <element signature="e#2438#2439#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/Server/ServerFunction.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-308">
-              <caret line="81" selection-start-line="81" selection-end-line="81" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/Json/MyStruct.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="684">
-              <caret line="38" selection-start-line="38" selection-end-line="38" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="class#Certificate#0;class#MyStruct#0" />
-                <element signature="class#My_k#0;class#MyStruct#0" />
-                <element signature="class#Message1#0;class#MyStruct#0" />
-                <element signature="class#Message2#0;class#MyStruct#0" />
-                <element signature="class#Ticket#0;class#MyStruct#0" />
-                <element signature="class#Message3#0;class#MyStruct#0" />
-                <element signature="class#Message4#0;class#MyStruct#0" />
-                <element signature="class#Authenticator#0;class#MyStruct#0" />
-                <element signature="class#Message5#0;class#MyStruct#0" />
-                <element signature="class#Message6#0;class#MyStruct#0" />
-                <element signature="class#User#0;class#MyStruct#0" />
-                <element signature="class#Friend#0;class#MyStruct#0" />
-                <element signature="class#Chat_Message#0;class#MyStruct#0" />
-                <element signature="class#Group#0;class#MyStruct#0" />
-                <element signature="class#Record_Message#0;class#MyStruct#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -215,33 +126,6 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
     <option name="RESET_MODE" value="HARD" />
   </component>
-  <component name="IdeDocumentHistory">
-    <option name="CHANGED_PATHS">
-      <list>
-        <option value="$PROJECT_DIR$/src/main/java/Framework/SessionLayer/SessionLayer.java" />
-        <option value="$PROJECT_DIR$/src/main/java/UI/log.form" />
-        <option value="$PROJECT_DIR$/src/main/java/UI/log.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Server/ServerResponse.java" />
-        <option value="$PROJECT_DIR$/src/main/java/SecurityUtils/Test.java" />
-        <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/StateMachine/RegStatusEnum.java" />
-        <option value="$PROJECT_DIR$/src/main/java/StateMachine/RegEventEnum.java" />
-        <option value="$PROJECT_DIR$/src/main/java/StateMachine/StateMachineConfig.java" />
-        <option value="$PROJECT_DIR$/src/main/java/StateMachine/Start.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Framework/CommunicationLayer/LayerChannelInitializer.java" />
-        <option value="$PROJECT_DIR$/src/main/java/StateMachine/Application.java" />
-        <option value="$PROJECT_DIR$/src/main/java/StateMachine/StateMachineEventConfig.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Server/Main.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Json/MyJson.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Framework/ServerConfig.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Json/MyStruct.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Server/ServerDataBase.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Server/ServerSecurity.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Server/ServerFunction.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Server/ServerHandler.java" />
-      </list>
-    </option>
-  </component>
   <component name="InvalidFacetManager">
     <ignored-facets>
       <facet id="KerberosServer/invalid/Web" />
@@ -253,12 +137,6 @@
         <option name="mavenHome" value="D:\Program Files\IDEA\IntelliJ IDEA Educational Edition 2020.2.4\plugins\maven\lib\maven3" />
       </MavenGeneralSettings>
     </option>
-  </component>
-  <component name="MavenProjectNavigator">
-    <treeState>
-      <expand />
-      <select />
-    </treeState>
   </component>
   <component name="ProjectCodeStyleSettingsMigration">
     <option name="version" value="1" />
@@ -272,52 +150,6 @@
   <component name="ProjectId" id="1sz4xwzaWpq9zuFWSkqz0vIk8qg" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
-  </component>
-  <component name="ProjectView">
-    <navigator currentView="Scope" currentSubView="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope" proportions="" version="1">
-      <foldersAlwaysOnTop value="true" />
-    </navigator>
-    <panes>
-      <pane id="Scope">
-        <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
-          <expand>
-            <path>
-              <item name="KerberosServer" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="KerberosServer" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-            </path>
-            <path>
-              <item name="KerberosServer" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="KerberosServer" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="KerberosServer" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="KerberosServer" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="KerberosServer" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="KerberosServer" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="KerberosServer" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="KerberosServer" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="Server" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="PackagesPane" />
-      <pane id="ProjectPane" />
-    </panes>
   </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -335,7 +167,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/pom.xml" />
+    <property name="last_opened_file_path" value="F:/Cryption" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="Modules" />
@@ -358,18 +190,6 @@
   <component name="RunAnythingCache">
     <option name="myCommands">
       <command value="mvn compile" />
-    </option>
-  </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
     </option>
   </component>
   <component name="RunManager" selected="Application.Main">
@@ -455,7 +275,7 @@
       </list>
     </recent_temporary>
   </component>
-  <component name="SpellCheckerSettings" BundledDictionaries="0" Folders="0" CustomDictionaries="0" Dictionaries="0" CorrectionsLimit="5" DefaultDictionary="application-level" UseSingleDictionary="true" />
+  <component name="SpellCheckerSettings" BundledDictionaries="0" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" Dictionaries="0" CorrectionsLimit="5" DefaultDictionary="application-level" UseSingleDictionary="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -478,6 +298,7 @@
       <workItem from="1621559713641" duration="6053000" />
       <workItem from="1621646463380" duration="23278000" />
       <workItem from="1622716240880" duration="282000" />
+      <workItem from="1622979343783" duration="175000" />
     </task>
     <task id="LOCAL-00001" summary="创建IDEA项目">
       <created>1620305582799</created>
@@ -601,9 +422,6 @@
     <option name="localTasksCounter" value="18" />
     <servers />
   </component>
-  <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="134657000" />
-  </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
       <is-autoscroll-to-source value="true" />
@@ -612,45 +430,6 @@
       <are-packages-shown value="true" />
       <is-autoscroll-to-source value="true" />
     </todo-panel>
-  </component>
-  <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
-    <editor active="true" />
-    <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49927008" visible="true" weight="0.2516869" />
-      <window_info id="Structure" order="1" sideWeight="0.5007299" side_tool="true" weight="0.24966262" />
-      <window_info id="Image Layers" order="2" />
-      <window_info id="Designer" order="3" />
-      <window_info id="UI Designer" order="4" />
-      <window_info id="Capture Tool" order="5" />
-      <window_info id="Favorites" order="6" side_tool="true" />
-      <window_info id="Web" order="7" side_tool="true" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.329927" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.597166" weight="0.5678832" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.6437956" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="Version Control" order="6" sideWeight="0.6639676" weight="0.5810219" />
-      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Database Changes" order="8" />
-      <window_info anchor="bottom" id="TODO" order="9" weight="0.329927" />
-      <window_info anchor="bottom" id="Terminal" order="10" weight="0.329927" />
-      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.3360324" side_tool="true" weight="0.5810219" />
-      <window_info anchor="bottom" id="Spring" order="12" />
-      <window_info anchor="bottom" id="Messages" order="13" weight="0.3270073" />
-      <window_info anchor="bottom" id="Java Enterprise" order="14" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="Palette" order="3" />
-      <window_info anchor="right" id="Theme Preview" order="4" />
-      <window_info anchor="right" id="Maven" order="5" weight="0.3299595" />
-      <window_info anchor="right" id="Capture Analysis" order="6" />
-      <window_info anchor="right" id="Palette&#9;" order="7" />
-      <window_info anchor="right" id="Database" order="8" />
-      <window_info anchor="right" id="Bean Validation" order="9" />
-    </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -661,20 +440,7 @@
         <entry key="MAIN">
           <value>
             <State>
-              <option name="RECENTLY_FILTERED_USER_GROUPS">
-                <collection />
-              </option>
-              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
-                <collection />
-              </option>
-              <option name="COLUMN_ORDER">
-                <list>
-                  <option value="0" />
-                  <option value="1" />
-                  <option value="2" />
-                  <option value="3" />
-                </list>
-              </option>
+              <option name="COLUMN_ORDER" />
             </State>
           </value>
         </entry>
@@ -729,6 +495,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="499" y="158" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824@0.0.1536.824" timestamp="1622076998774" />
+    <state x="549" y="187" key="FileChooserDialogImpl" timestamp="1622979520638">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="549" y="187" key="FileChooserDialogImpl/0.0.1536.864@0.0.1536.864" timestamp="1622979520638" />
     <state width="1493" height="210" key="GridCell.Tab.0.bottom" timestamp="1622082888635">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -768,310 +538,10 @@
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/Server/ServerHandler.java</url>
           <line>84</line>
-          <properties />
           <option name="timeStamp" value="6" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
-  </component>
-  <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/Framework/Testing/EchoClientHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Framework/SessionLayer/Handlers/SessionHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="10" selection-start-line="10" selection-end-line="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/UI/log.form">
-      <provider selected="true" editor-type-id="ui-designer" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Communication/Communication.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="38">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Digitial.txt" />
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-57">
-          <caret line="15" selection-start-line="15" selection-end-line="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/SecurityUtils/RSAUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="19" column="13" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/SecurityUtils/DESHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1121">
-          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/SecurityUtils/Test.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1197">
-          <caret line="70" column="55" selection-start-line="70" selection-start-column="55" selection-end-line="70" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/StateMachine/StateMachineService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/UI/log.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="21" column="25" selection-start-line="21" selection-start-column="25" selection-end-line="21" selection-end-column="25" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/StateMachine/Start.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/Framework/SeverBuilder.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/StateMachine/StateMachineConfig.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="31" column="14" lean-forward="true" selection-start-line="31" selection-start-column="14" selection-end-line="31" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/StateMachine/RegStatusEnum.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="532">
-          <caret line="28" column="70" lean-forward="true" selection-start-line="28" selection-start-column="70" selection-end-line="28" selection-end-column="70" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/StateMachine/RegEventEnum.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="5" selection-start-line="5" selection-end-line="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/StateMachine/Application.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="414">
-          <caret line="87" column="29" selection-start-line="87" selection-start-column="29" selection-end-line="87" selection-end-column="29" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/SecurityUtils/RSAHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="46" column="34" selection-start-line="46" selection-start-column="23" selection-end-line="46" selection-end-column="34" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/StateMachine/StateMachineEventConfig.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="456">
-          <caret line="30" column="5" selection-start-line="30" selection-start-column="5" selection-end-line="30" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Framework/CommunicationLayer/CommunicationLayer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-144">
-          <caret line="13" selection-start-line="13" selection-end-line="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#439#440#0" expanded="true" />
-            <element signature="e#471#472#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Framework/CommunicationLayer/LayerChannelInitializer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="24" column="40" selection-start-line="24" selection-start-column="40" selection-end-line="24" selection-end-column="40" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Framework/ServerConfig.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="57">
-          <caret line="3" column="36" selection-start-line="3" selection-start-column="36" selection-end-line="3" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/com/alibaba/fastjson/1.2.75/fastjson-1.2.75-sources.jar!/com/alibaba/fastjson/JSON.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="103">
-          <caret line="571" selection-start-line="571" selection-end-line="571" />
-          <folding>
-            <element signature="e#21504#21505#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Server/ServerDataBase.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1843">
-          <caret line="105" column="18" selection-start-line="105" selection-start-column="18" selection-end-line="105" selection-end-column="18" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Server/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="57">
-          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Framework/SessionLayer/SessionLayer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2052">
-          <caret line="126" selection-start-line="126" selection-end-line="126" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Framework/CommunicationLayer/Handlers/ReceiveHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="13" selection-start-line="13" selection-end-line="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/io/netty/netty-all/4.1.65.Final/netty-all-4.1.65.Final.jar!/io/netty/channel/AbstractChannelHandlerContext.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4313">
-          <caret line="282" selection-start-line="282" selection-end-line="282" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Json/MyJson.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="31" selection-start-line="31" selection-end-line="31" />
-          <folding>
-            <element signature="method#ToStruct#0;class#MyJson#0" />
-            <element signature="method#OrderToString#0;class#MyJson#0" />
-            <element signature="e#2326#2327#0" expanded="true" />
-            <element signature="e#2364#2365#0" expanded="true" />
-            <element signature="e#2401#2402#0" expanded="true" />
-            <element signature="e#2438#2439#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Json/MyStruct.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="684">
-          <caret line="38" selection-start-line="38" selection-end-line="38" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="class#Certificate#0;class#MyStruct#0" />
-            <element signature="class#My_k#0;class#MyStruct#0" />
-            <element signature="class#Message1#0;class#MyStruct#0" />
-            <element signature="class#Message2#0;class#MyStruct#0" />
-            <element signature="class#Ticket#0;class#MyStruct#0" />
-            <element signature="class#Message3#0;class#MyStruct#0" />
-            <element signature="class#Message4#0;class#MyStruct#0" />
-            <element signature="class#Authenticator#0;class#MyStruct#0" />
-            <element signature="class#Message5#0;class#MyStruct#0" />
-            <element signature="class#Message6#0;class#MyStruct#0" />
-            <element signature="class#User#0;class#MyStruct#0" />
-            <element signature="class#Friend#0;class#MyStruct#0" />
-            <element signature="class#Chat_Message#0;class#MyStruct#0" />
-            <element signature="class#Group#0;class#MyStruct#0" />
-            <element signature="class#Record_Message#0;class#MyStruct#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Server/ServerSecurity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="532">
-          <caret line="28" column="35" selection-start-line="28" selection-start-column="35" selection-end-line="28" selection-end-column="35" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Server/ServerFunction.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-308">
-          <caret line="81" selection-start-line="81" selection-end-line="81" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Server/ServerResponse.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="38">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Server/ServerData.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Server/ServerHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="24" column="19" selection-start-line="24" selection-start-column="19" selection-end-line="24" selection-end-column="19" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
   </component>
   <component name="masterDetails">
     <states>

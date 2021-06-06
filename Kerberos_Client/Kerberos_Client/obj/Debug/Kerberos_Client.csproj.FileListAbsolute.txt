@@ -29,7 +29,6 @@ E:\Kerberos\Kerberos_Client\Kerberos_Client\obj\Debug\UI\ListBoxStyle.baml
 E:\Kerberos\Kerberos_Client\Kerberos_Client\obj\Debug\App.baml
 E:\Kerberos\Kerberos_Client\Kerberos_Client\bin\Debug\BouncyCastle.Crypto.dll
 E:\Kerberos\Kerberos_Client\Kerberos_Client\bin\Debug\BouncyCastle.Crypto.xml
-E:\Kerberos\Kerberos_Client\Kerberos_Client\obj\Debug\Kerberos_Client.csprojAssemblyReference.cache
 E:\Kerberos\Kerberos_Client\Kerberos_Client\obj\Debug\UI\Add_Window.g.cs
 E:\Kerberos\Kerberos_Client\Kerberos_Client\obj\Debug\UI\Add_Window.baml
 E:\Kerberos\Kerberos_Client\Kerberos_Client\obj\Debug\UI\LoadingWait.g.cs
@@ -38,3 +37,4 @@ E:\Kerberos\Kerberos_Client\Kerberos_Client\obj\Debug\UI\Load.g.cs
 E:\Kerberos\Kerberos_Client\Kerberos_Client\obj\Debug\UI\Load.baml
 E:\Kerberos\Kerberos_Client\Kerberos_Client\obj\Debug\ShowMessage.g.cs
 E:\Kerberos\Kerberos_Client\Kerberos_Client\obj\Debug\ShowMessage.baml
+E:\Kerberos\Kerberos_Client\Kerberos_Client\obj\Debug\Kerberos_Client.csprojAssemblyReference.cache

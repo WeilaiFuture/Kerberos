@@ -1,5 +1,5 @@
 ﻿//#define RSA
-//#define DES
+#define des
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -317,23 +317,22 @@ namespace Kerberos_Client.UI
             order.MsgType = "1003";
             order.Src = MainWindow.localName;
             order.Dst = "Server";
-            string extend = "Request";
+            MyStruct myStruct = new MyStruct();
+            order.Extend = JsonHelper.ToJson(myStruct);
 #if RSA
             string sig = string.Empty;
             RSALibrary.SignatureFormatter(extend, Keys["private"], ref sig);
             order.Sign = sig;
 #endif
-#if DES
-            extend = DESLibrary.EncryptDES(extend, Keys["server"]);
+#if des
+            order.Extend = DESLibrary.EncryptDES(order.Extend, Keys["server"]);
 #endif
-            order.Extend = extend;
-            string json = JsonHelper.ToJson(order);
             ConnectServer.sendMessage(order);
         }
 
         internal void Call_Friend(Order o)
         {
-#if DES
+#if des
             o.Extend = DESLibrary.DecryptDES(o.Extend, Keys["server"]);
 #endif
             MyStruct myStruct = JsonHelper.FromJson<MyStruct>(o.Extend);
@@ -354,17 +353,17 @@ namespace Kerberos_Client.UI
             order.MsgType = "1005";
             order.Src = MainWindow.localName;
             order.Dst = "Server";
-            string extend = "Greet";
+            MyStruct myStruct = new MyStruct();
+            order.Extend = JsonHelper.ToJson(myStruct);
 #if RSA
             string sig = string.Empty;
             RSALibrary.SignatureFormatter(extend, Keys["private"], ref sig);
             order.Sign = sig;
 #endif
-#if DES
-            extend = DESLibrary.EncryptDES(extend, Keys["server"]);
+
+#if des
+            order.Extend = DESLibrary.EncryptDES(order.Extend, Keys["server"]);
 #endif
-            order.Extend = extend;
-            string json = JsonHelper.ToJson(order);
             ConnectServer.sendMessage(order);
         }
         internal void Call_Greet(Order o)

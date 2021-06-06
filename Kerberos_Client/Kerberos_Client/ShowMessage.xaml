@@ -17,6 +17,7 @@ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         </Grid.RowDefinitions>
         <DataGrid Grid.Row="0" Name="ShowOrder"  CanUserReorderColumns="False" IsReadOnly="True" 
                                   AutoGenerateColumns="False" DataContext="{StaticResource Order}"
+                                  LoadingRow="DataGrid_LoadingRow"
                                   HorizontalScrollBarVisibility="Hidden" GridLinesVisibility="Horizontal" 
                                   SelectionMode="Single" SelectionUnit="FullRow" SelectedCellsChanged="choose">
             <DataGrid.Columns>

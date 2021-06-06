@@ -9,6 +9,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
 using static Client.DESLibrary;
+using static Client.RSAKeyConvert;
 using static Kerberos_Client.MyStruct;
 
 namespace Client_test
@@ -17,10 +18,11 @@ namespace Client_test
     {
         static void Main(string[] args)
         {
-            init();
-            while (true) ;
+            //init();
+            //while (true) ;
             //DES_test();
             //RSA_test();
+            RSA_();
 
         }
         static Thread threadWatch = null; // 负责监听客户端连接请求的 线程；
@@ -31,6 +33,16 @@ namespace Client_test
         static Dictionary<string, string> dictID_reverse = new Dictionary<string, string>();//ip和id
         static Dictionary<string, Thread> dictThread = new Dictionary<string, Thread>();//ip和线程
 
+        static void RSA_()
+        {
+            StreamReader sw1 = new StreamReader("PKB.txt");
+            StreamReader sw2 = new StreamReader("PKI.txt");
+            string pkb = sw1.ReadLine();
+            string pki = sw2.ReadLine();
+            Console.WriteLine(RSAPublicKeyJava2DotNet(pkb));
+            Console.WriteLine();
+            Console.WriteLine(RSAPrivateKeyJava2DotNet(pki));
+        }
         static private void init()
         {
             // 创建负责监听的套接字，注意其中的参数；
