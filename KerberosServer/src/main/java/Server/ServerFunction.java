@@ -15,6 +15,7 @@ import org.springframework.statemachine.StateMachine;
 
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
+import java.sql.SQLException;
 import java.util.concurrent.TimeUnit;
 
 import javax.swing.*;
@@ -24,13 +25,14 @@ import java.util.concurrent.TimeUnit;
 
 import static Framework.SessionLayer.SessionLayer.bindChannelWithUserName;
 import static Json.MyJson.StringToOrder;
+import static Server.ServerDataBase.con;
+import static Server.ServerDataBase.connectData;
 import static StateMachine.RegEventEnum.RECIVE;
 import static UI.log.add;
 import static UI.log.createTable;
 
 public class ServerFunction extends SessionHandler {
-    ServerHandler serverHandler;
-
+     ServerHandler serverHandler;
     {
         try {
             serverHandler = new ServerHandler();
@@ -40,10 +42,9 @@ public class ServerFunction extends SessionHandler {
             e.printStackTrace();
         }
     }
+   // JTable table = createTable();
 
-    LinkedList<String[]> list = new LinkedList<String[]>();
-    String []s=new String[4];
-
+  //  LinkedList<String[]> list = new LinkedList<String[]>();
 
     //继承方法集
     @Override
@@ -55,27 +56,17 @@ public class ServerFunction extends SessionHandler {
         调用这个函数进入到等待报文状态和报文处理状态；
         直到用户登出，转为等待连接状态。
          */
-        String info=msg.toString();
+        String info=(String) msg;
         //解析报文头部
-        System.out.println(info);
+        System.out.println("收到"+info);
         MyJson.Order order=StringToOrder(info);
         String head="HEAD"+order.getMsgType();
         //判断绑定
         if(!channelName.equals(order.getSrc())){
+            System.out.println("channelName:"+channelName+" uname:"+order.getSrc());
             bindChannelWithUserName(channelName,order.getSrc());
         }
-        JTable table = createTable();
-        list.addFirst(s);
-        s[0]=order.getSrc();//源
-        s[1]=order.getDst();//目的
-        s[2]=order.getExtend();//密文
-        s[3]=order.getExtend();//明文
-        add(table, list);
-        try {
-            TimeUnit.SECONDS.sleep(1);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        connectData();
         switch (order.getMsgType()){
             case "0001":
                 serverHandler.Certif(info);

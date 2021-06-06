@@ -14,47 +14,7 @@ public class ServerDataBase {
     /*
     包含所有数据库操作的封装函数；
      */
-    static private Connection con=null; // 声明Connection对象
-    public static void main(String []args) {
-
-        MyStruct struct=new MyStruct();
-        MyJson.Order order=new MyJson.Order();
-        struct.certificate=new MyStruct.Certificate();
-        struct.certificate.setDeadline("1");
-        struct.certificate.setName("3");
-        struct.certificate.setPk("3");
-        struct.certificate.setSerial("4");
-        struct.certificate.setVersion("5");
-        if(connectData()!=null){
-      /*      wCertif(struct);
-            rSearchID("1");
-            rSearchID("2");
-            wLogin("1",0);
-            wLogin("2",0);
-
-            rSearchID("2");
-            rFriendList("1");
-            rFriendList("2");
-
-            rGroupUser("1");
-
-        MyStruct.User user=rSearchID("1");
-        user.setEmail("234");
-        user.setGender(1);
-        user.setPhoto("111");
-        wInfo(user);
-   */
-        wDeleteF("1","2");
-        MyStruct.User user=rSearchID("2");
-        MyStruct.Friend friend=new MyStruct.Friend();
-        friend.setU(user);
-        friend.setTid("1");
-        friend.setStartTime(11);
-        friend.setRemark("小王");
-        wAddF("1",friend);
-        rFriendList("1");
-        }
-    }
+    static public Connection con=null; // 声明Connection对象
     static public Connection connectData() {
         /*
         连接数据库；
@@ -93,6 +53,7 @@ public class ServerDataBase {
                     +certificate.getPk()+ "\")";
             Statement statement = con.createStatement();
             int result = statement.executeUpdate(sql);
+            System.out.println("存储证书成功");
             return true;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -108,6 +69,7 @@ public class ServerDataBase {
             String sql="update `Certificate` set `Kcv`=\""+K+"\" where `name`=\""+ID+"\"";
             Statement statement=con.createStatement();
             statement.executeUpdate(sql);
+            System.out.println("存储Kcv成功");
             return true;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -123,11 +85,15 @@ public class ServerDataBase {
             String sql="SELECT `Kcv` FROM `Certificate` WHERE `name`=\"" + ID + "\"";
             Statement statement=con.createStatement();
             ResultSet result = statement.executeQuery(sql);
-            return result.getString("Kcv");
+            if(result.next()){
+                System.out.println("读取Kcv成功"+result.getString("Kcv"));
+                return result.getString("Kcv");
+            }
+            else return "";
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("读取Kcv错误");
-            return "";
+            return null;
         }
     }
     static public String rPK(String ID) {
@@ -138,11 +104,15 @@ public class ServerDataBase {
             String sql="SELECT `pk` FROM `Certificate` WHERE `name`=\"" + ID + "\"";
             Statement statement=con.createStatement();
             ResultSet result = statement.executeQuery(sql);
-            return result.getString("pk");
+            if(result.next()){
+                System.out.println("查询PK成功"+result.getString("pk"));
+                return result.getString("pk");
+            }
+            else return "";
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("查询PK失败");
-            return "";
+            return null;
         }
     }
     static public boolean wRegister(MyStruct struct) {
@@ -156,6 +126,27 @@ public class ServerDataBase {
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("存储注册信息错误");
+            return false;
+        }
+    }
+    static public boolean rLogin(String ID,String pswd){
+        /*
+        向数据库查询账号密码；
+         */
+        try {
+            String sql="SELECT `psswd` FROM `users` WHERE `uid`=\"" + ID + "\"";
+            Statement statement=con.createStatement();
+            ResultSet result = statement.executeQuery(sql);
+            if(result.next()){
+                System.out.println("查询账号密码成功"+pswd);
+                if(result.getString("psswd").equals(pswd))
+                    return true;
+                else return false;
+            }
+            else return false;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("查询账号密码失败");
             return false;
         }
     }
@@ -213,12 +204,19 @@ public class ServerDataBase {
          */
         LinkedList<String> friends=new LinkedList<String>();
         try {
-            String sql="SELECT * FROM `friend` WHERE `me`=\"" + ID + "\" and `status`=1";
+            String sql="SELECT * FROM `friend` WHERE `me`=\"" + ID + "\"";
             Statement statement=con.createStatement();
             ResultSet result = statement.executeQuery(sql);
             System.out.println("uid remark tid startTime");
             while (result.next()) {
-                friends.addLast(result.getString("ta"));
+                String IDB=result.getString("ta");
+                String sql1="SELECT `status` FROM `users` WHERE `uid`=\"" + IDB + "\"";
+                Statement statement1=con.createStatement();
+                ResultSet result1 = statement.executeQuery(sql);
+                if(result1.next()){
+                    if(result1.getString("status").equals("1"))
+                        friends.addLast(IDB);
+                }
             }
             System.out.println(ID+" 查询好友列表成功");
         } catch (SQLException e) {

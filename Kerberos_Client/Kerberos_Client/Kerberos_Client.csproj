@@ -72,7 +72,6 @@
     <Compile Include="Struct\JsonHelper.cs" />
     <Compile Include="Struct\MyJson.cs" />
     <Compile Include="Struct\MyStruct.cs" />
-    <Compile Include="Struct\Number.cs" />
     <Compile Include="Struct\RSALibrary.cs" />
     <Compile Include="UI\Add_Window.xaml.cs">
       <DependentUpon>Add_Window.xaml</DependentUpon>

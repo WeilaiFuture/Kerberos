@@ -1,4 +1,4 @@
-﻿#define test
+﻿//#define lianji
 using Kerberos_Client.UI;
 using System;
 using System.Collections.Generic;
@@ -30,8 +30,8 @@ namespace Kerberos_Client
             //连接远端的服务器IP
             string remoteIP = str;
             int port = p;
-#if test
-            remoteIP = "192.168.43.140";
+#if lianji
+            remoteIP = "192.168.43.64";
             port = 1122;
 #endif
 
@@ -57,6 +57,7 @@ namespace Kerberos_Client
                     client.Send(Encoding.UTF8.GetBytes(strMsg));
                 else
                     System.Windows.MessageBox.Show("与服务器断开连接");
+            Thread.Sleep(500);
         }
         public static void HeartStart()
         {
@@ -103,10 +104,10 @@ namespace Kerberos_Client
                         return;
                     }
                 }
-                string strMsg = System.Text.Encoding.UTF8.GetString(result, 0, num);
-                if (num == 0)
+                if (num <= 0)
                     break;
-                    //MessageBox.Show("ERROR");
+                //MessageBox.Show("ERROR");
+                string strMsg = System.Text.Encoding.UTF8.GetString(result, 0, num);
                 Order order =JsonHelper.FromJson<Order>(strMsg);
                 string command = order.MsgType;
                 switch (command)
