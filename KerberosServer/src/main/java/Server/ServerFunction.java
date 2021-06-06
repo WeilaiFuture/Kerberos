@@ -38,13 +38,13 @@ public class ServerFunction extends SessionHandler {
             serverHandler = new ServerHandler();
         } catch (InvalidKeySpecException e) {
             e.printStackTrace();
-        } catch (NoSuchAlgorithmException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
-   // JTable table = createTable();
+    JTable table = createTable();
 
-  //  LinkedList<String[]> list = new LinkedList<String[]>();
+    LinkedList<String[]> list = new LinkedList<String[]>();
 
     //继承方法集
     @Override
@@ -66,7 +66,14 @@ public class ServerFunction extends SessionHandler {
             System.out.println("channelName:"+channelName+" uname:"+order.getSrc());
             bindChannelWithUserName(channelName,order.getSrc());
         }
-        connectData();
+        //UI表格
+        String []s=new String[3];
+        list.addFirst(s);
+        s[0]=order.getSrc();//源
+        s[1]=order.getDst();//目的
+        s[2]=order.getExtend();//密文
+        //  s[3]=order.getExtend();//明文
+        add(table, list);
         switch (order.getMsgType()){
             case "0001":
                 serverHandler.Certif(info);
