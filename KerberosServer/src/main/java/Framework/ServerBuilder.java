@@ -19,7 +19,6 @@ public abstract class ServerBuilder {
     public static void main(String[] args)throws Exception {
 
         initializer(new CommunicationLayer(1122),new SessionLayer(new DefaultSessionHandler()));
-        //initializer(new CommunicationLayer(1122),new SessionLayer(new ServerFunction()));
         run();
     }
 }
