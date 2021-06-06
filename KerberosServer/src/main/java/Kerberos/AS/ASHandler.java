@@ -7,6 +7,7 @@ import Json.MyStruct;
 import Kerberos.DateBaseOperation;
 import SecurityUtils.DESHandler;
 import SecurityUtils.RSAHandler;
+import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang3.RandomStringUtils;
 
 import java.security.interfaces.RSAPublicKey;
@@ -31,7 +32,8 @@ public class ASHandler extends SessionHandler {
                 MyStruct receiveExtend = MyJson.StringToStruct(receiveOrder.getExtend());
                 String publicKey = receiveExtend.certificate.getPk();
                 //随机生成一个字符串作为对称钥
-                String Kc = RandomStringUtils.randomAlphanumeric(8);
+                //String Kc = RandomStringUtils.randomAlphanumeric(8);
+                String Kc = "12345678";
                 //使用公钥加密对称钥
                 try{
                     MyStruct sendExtend = new MyStruct();
@@ -50,7 +52,10 @@ public class ASHandler extends SessionHandler {
                     DateBaseOperation.writeCertif(receiveExtend.certificate);
                     DateBaseOperation.writeKc(receiveExtend.certificate.getName(),Kc);
                     //发送
+                    System.out.println(MyJson.OrderToString(receiveOrder));
                     SessionLayer.send(channelName,MyJson.OrderToString(receiveOrder));
+                    MyJson.StringToOrder(MyJson.OrderToString(receiveOrder));
+                    System.out.println("回复：0002");
                     //SessionLayer.logOut(channelName);
                 }
                 catch (Exception e){
@@ -77,6 +82,7 @@ public class ASHandler extends SessionHandler {
                 MyStruct ticket = new MyStruct();
 
                 //生成Ticket
+                ticket.ticket = new MyStruct.Ticket();
                 ticket.ticket.setKey(Kc_tgs);
                 ticket.ticket.setIdc(IDc);
                 ticket.ticket.setAdc("");
@@ -85,6 +91,7 @@ public class ASHandler extends SessionHandler {
                 ticket.ticket.setLifetime("");
 
                 //填写字段
+                sendExtend.message2 = new MyStruct.Message2();
                 sendExtend.message2 = new MyStruct.Message2();
                 sendExtend.message2.setKey(Kc_tgs);
                 sendExtend.message2.setIdt(receiveExtend.message1.getIdt());
@@ -101,6 +108,7 @@ public class ASHandler extends SessionHandler {
                 receiveOrder.setDst(src);
                 //发送
                 SessionLayer.send(channelName,MyJson.OrderToString(receiveOrder));
+                System.out.println("回复：0004");
                 //SessionLayer.logOut(channelName);
                 break;
             }
