@@ -40,7 +40,7 @@ public class TGSHandler extends SessionHandler {
                  * 2
                  * 3 从数据库中读取Ktgs、Kv
                  */
-
+                System.out.println(receiveOrder.getExtend());
                 MyStruct receiveExtend = MyJson.StringToStruct(receiveOrder.getExtend());
                 //设定TGS的ID
                 String IDtgs = TGSConfig.TGSID;
@@ -86,6 +86,7 @@ public class TGSHandler extends SessionHandler {
                 receiveOrder.setDst(src);
                 //发送信息
                 SessionLayer.send(channelName,MyJson.OrderToString(receiveOrder));
+                System.out.println("回复：0006");
                 break;
             }
             default:{

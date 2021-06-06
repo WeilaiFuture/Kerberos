@@ -52,8 +52,6 @@ public class SessionLayer {
     private static OfflineMsgQueue offlineMsgQueue = new OfflineMsgQueue();
     //static private ByteBuf msgBuf;
 
-    static JTable table = createTable();
-    static LinkedList<String[]> list = new LinkedList<String[]>();
 
     static public void checkInitStatus(){
         if(sessionHandler == null) {
@@ -112,18 +110,6 @@ public class SessionLayer {
          * 2 用户不在线，在离线队列中有用户（不是第一个离线信息）
          * 3 用户不在线，离线队列中没有用户（第一条离线信息）
          */
-        //UI表格
-        String info=(String) msg;
-        //解析报文头部
-        MyJson.Order order=StringToOrder(info);
-        String []s=new String[3];
-        list.addFirst(s);
-        s[0]=order.getSrc();//源
-        s[1]=order.getDst();//目的
-        s[2]=order.getExtend();//密文
-        //  s[3]=order.getExtend();//明文
-        add(table, list);
-
         try {
             TimeUnit.SECONDS.sleep(1);
         } catch (InterruptedException e) {
@@ -146,18 +132,6 @@ public class SessionLayer {
          * 针对已经连接服务器但是没有登录的用户，会先生成一个临时ID，登录后临时ID改为用户ID
          * 临时ID改用户ID的过程在login中完成
          */
-        //UI表格
-        String info=msg.toString();
-        //解析报文头部
-        MyJson.Order order=StringToOrder(info);
-        String []s=new String[3];
-        list.addFirst(s);
-        s[0]=order.getSrc();//源
-        s[1]=order.getDst();//目的
-        s[2]=order.getExtend();//密文
-        //  s[3]=order.getExtend();//明文
-        add(table, list);
-
         checkInitStatus();
         ByteBuf buf = (ByteBuf)msg;
         byte[] data = new byte[buf.readableBytes()];

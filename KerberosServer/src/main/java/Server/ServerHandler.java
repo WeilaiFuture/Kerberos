@@ -31,7 +31,7 @@ public class ServerHandler {
     private static RSAPrivateKey sk;
     private static RSAPublicKey pk;
 
-    public ServerHandler() throws InvalidKeySpecException, NoSuchAlgorithmException {
+    public ServerHandler() throws Exception {
         Map<String, String> kmap= RSAHandler.createKeys(1024);
         //生成公钥
         String pk1=kmap.get("publicKey");

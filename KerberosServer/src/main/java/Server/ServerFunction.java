@@ -38,7 +38,7 @@ public class ServerFunction extends SessionHandler {
             serverHandler = new ServerHandler();
         } catch (InvalidKeySpecException e) {
             e.printStackTrace();
-        } catch (NoSuchAlgorithmException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
