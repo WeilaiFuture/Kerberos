@@ -96,11 +96,12 @@ public class DateBaseOperation {
             String sql="SELECT `Kc` FROM `Certificate` WHERE `name`=\"" + ID + "\"";
             Statement statement=connection.createStatement();
             ResultSet result = statement.executeQuery(sql);
+            result.next();
             return result.getString("Kc");
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("读取Kc错误");
-            return "";
+            return null;
         }
     }
 }

@@ -24,6 +24,7 @@ public class ASHandler extends SessionHandler {
          * 另一种是认证报文
          */
         MyJson.Order receiveOrder = MyJson.StringToOrder((String) msg);
+        System.out.println(receiveOrder.getSrc());
         switch (receiveOrder.getMsgType()){
             case "0001":{
                 //从报文中读取公钥
@@ -35,6 +36,7 @@ public class ASHandler extends SessionHandler {
                 try{
                     MyStruct sendExtend = new MyStruct();
                     RSAPublicKey rsaPublicKey = RSAHandler.getPublicKey(publicKey);
+                    sendExtend.my_k = new MyStruct.My_k();
                     sendExtend.my_k.setKey(RSAHandler.publicEncrypt(Kc,rsaPublicKey));
                     //填写extend字段
                     receiveOrder.setExtend(MyJson.StructToString(sendExtend));
@@ -49,11 +51,11 @@ public class ASHandler extends SessionHandler {
                     DateBaseOperation.writeKc(receiveExtend.certificate.getName(),Kc);
                     //发送
                     SessionLayer.send(channelName,MyJson.OrderToString(receiveOrder));
+                    //SessionLayer.logOut(channelName);
                 }
                 catch (Exception e){
                     e.printStackTrace();
                 }
-
                 break;
             }
 
@@ -83,6 +85,7 @@ public class ASHandler extends SessionHandler {
                 ticket.ticket.setLifetime("");
 
                 //填写字段
+                sendExtend.message2 = new MyStruct.Message2();
                 sendExtend.message2.setKey(Kc_tgs);
                 sendExtend.message2.setIdt(receiveExtend.message1.getIdt());
                 sendExtend.message2.setTs("");
@@ -98,6 +101,7 @@ public class ASHandler extends SessionHandler {
                 receiveOrder.setDst(src);
                 //发送
                 SessionLayer.send(channelName,MyJson.OrderToString(receiveOrder));
+                //SessionLayer.logOut(channelName);
                 break;
             }
 

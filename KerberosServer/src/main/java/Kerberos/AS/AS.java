@@ -9,7 +9,7 @@ public class AS extends ServerBuilder {
     public static void main(String[] args) {
 
         try{
-            initializer(new CommunicationLayer(1122),new SessionLayer(new ASHandler()));
+            initializer(new CommunicationLayer(10087),new SessionLayer(new ASHandler()));
             run();
         }
         catch (Exception e){
