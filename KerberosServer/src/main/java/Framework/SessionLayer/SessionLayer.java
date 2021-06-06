@@ -1,9 +1,11 @@
 package Framework.SessionLayer;
 
+import Framework.ServerBuilder;
 import Framework.SessionLayer.Exceptions.SessionLayerNotInitialized;
 import Framework.SessionLayer.Handlers.SessionHandler;
 import Framework.Testing.EchoClientHandler;
 import Framework.Testing.EchoClientHandler2;
+import Json.MyJson;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
@@ -14,9 +16,18 @@ import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.util.AttributeKey;
 import org.apache.commons.lang3.RandomStringUtils;
 
+import javax.swing.*;
+import java.io.*;
+import java.net.Socket;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.TimeUnit;
+
+import static Json.MyJson.StringToOrder;
+import static UI.log.add;
+import static UI.log.createTable;
 
 /*
  * 本类要存储用户登录状态，屏蔽channel的相关细节，因此要么用单例，要么就是：
@@ -41,53 +52,57 @@ public class SessionLayer {
     private static OfflineMsgQueue offlineMsgQueue = new OfflineMsgQueue();
     //static private ByteBuf msgBuf;
 
+    static JTable table = createTable();
+    static LinkedList<String[]> list = new LinkedList<String[]>();
+
     static public void checkInitStatus(){
         if(sessionHandler == null) {
             throw new SessionLayerNotInitialized();
         }
     }
-    static public void sendByAddress(String host,int port,Object msg){
-        byte[] response = ((String)msg).getBytes();
+    static public Object sendByAddress(String host,int port,Object msg){
+        /*byte[] response = ((String)msg).getBytes();
         ByteBuf msgBuf = Unpooled.buffer(response.length);
         msgBuf.writeBytes(response);
-        EventLoopGroup group = new NioEventLoopGroup();
+        ServerBuilder.communicationLayer.runSend(host,port);
+        msgBuf.clear();*/
         try {
-            Bootstrap b = new Bootstrap();
-            b.group(group)
-                    .channel(NioSocketChannel.class)
-                    .option(ChannelOption.TCP_NODELAY, true)
-                    .handler(new ChannelInitializer<SocketChannel>() {
-                        @Override
-                        protected void initChannel(SocketChannel ch) throws Exception {
+            // 和服务器创建连接
+            Socket socket = new Socket(host,port);
 
-                            ChannelPipeline p = ch.pipeline();
-                            p.addLast("handler",new ChannelInboundHandlerAdapter(){
-                                @Override
-                                public void channelActive(ChannelHandlerContext ctx) throws Exception {
-                                    //logger.info("client channel active");
-                                    // Send the message to Server
-                                    //logger.info("client send req...");
-                                    ctx.writeAndFlush(msgBuf);
-                                }
-                            });
+            // 要发送给服务器的信息
+            OutputStream os = socket.getOutputStream();
+            PrintWriter pw = new PrintWriter(os);
+            pw.write((String) msg);
+            pw.flush();
 
-                        }
-                    });
-            // Start the client.
-            ChannelFuture f = b.connect(host, port).sync();
+            socket.shutdownOutput();
 
-            //logger.info("client connect to host:{}, port:{}", host, port);
+            // 从服务器接收的信息
+            InputStream is = socket.getInputStream();
+            BufferedReader br = new BufferedReader(new InputStreamReader(is));
 
-            // Wait until the connection is closed.
-            f.channel().closeFuture().sync();
-        } catch (Exception e){
+            String receive = null;
+            String temp = null;
+            char[] buf = new char[1024];
+            br.read(buf,0,buf.length);
+            for(int i=0;i<buf.length;i++){
+                receive += buf[i];
+            }
+            /*br.readLine();
+            while((temp = br.readLine())!=null){
+                receive += temp;
+            }*/
+            br.close();
+            is.close();
+            os.close();
+            pw.close();
+            socket.close();
+            return receive;
+        } catch (Exception e) {
             e.printStackTrace();
+            return null;
         }
-        finally {
-            // Shut down the event loop to terminate all threads.
-            group.shutdownGracefully();
-        }
-        msgBuf.clear();
     }
 
     static public void send(String userName,Object msg){
@@ -97,6 +112,23 @@ public class SessionLayer {
          * 2 用户不在线，在离线队列中有用户（不是第一个离线信息）
          * 3 用户不在线，离线队列中没有用户（第一条离线信息）
          */
+        //UI表格
+        String info=(String) msg;
+        //解析报文头部
+        MyJson.Order order=StringToOrder(info);
+        String []s=new String[3];
+        list.addFirst(s);
+        s[0]=order.getSrc();//源
+        s[1]=order.getDst();//目的
+        s[2]=order.getExtend();//密文
+        //  s[3]=order.getExtend();//明文
+        add(table, list);
+
+        try {
+            TimeUnit.SECONDS.sleep(1);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         checkInitStatus();
         if(channelMap.get(userName) != null){
             byte[] response = ((String)msg).getBytes();
@@ -113,6 +145,18 @@ public class SessionLayer {
          * 针对已经连接服务器但是没有登录的用户，会先生成一个临时ID，登录后临时ID改为用户ID
          * 临时ID改用户ID的过程在login中完成
          */
+        //UI表格
+        String info=msg.toString();
+        //解析报文头部
+        MyJson.Order order=StringToOrder(info);
+        String []s=new String[3];
+        list.addFirst(s);
+        s[0]=order.getSrc();//源
+        s[1]=order.getDst();//目的
+        s[2]=order.getExtend();//密文
+        //  s[3]=order.getExtend();//明文
+        add(table, list);
+
         checkInitStatus();
         ByteBuf buf = (ByteBuf)msg;
         byte[] data = new byte[buf.readableBytes()];
@@ -189,7 +233,7 @@ public class SessionLayer {
         checkInitStatus();
         Channel channel =  channelMap.get(tempName);
         channelMap.remove(tempName);
-        channel.attr(AttributeKey.valueOf("channelName")).set(tempName);
+        channel.attr(AttributeKey.valueOf("channelName")).set(userName);
         channelMap.put(userName,channel);
     }
 }

@@ -501,7 +501,7 @@ public class MyStruct {
         int head;//信息种类
         String content;//信息内容
         User u;//发送方
-        int time;//时间戳
+        long time;//时间戳
 
         public int getHead() {
             return head;
@@ -527,7 +527,7 @@ public class MyStruct {
             this.u = u;
         }
 
-        public int getTime() {
+        public long getTime() {
             return time;
         }
 
@@ -536,7 +536,7 @@ public class MyStruct {
         }
     }
     static public class Group {
-        List<Dictionary<User, String>> list;//用户列表
+        Dictionary<User, String> list;//用户列表
         String gid;//群账号
         String gname;//群名称
         String photo;//群头像
@@ -552,11 +552,11 @@ public class MyStruct {
             this.gname = gname;
         }
 
-        public List<Dictionary<User, String>> getList() {
+        public Dictionary<User, String> getList() {
             return list;
         }
 
-        public void setList(List<Dictionary<User, String>> list) {
+        public void setList(Dictionary<User, String> list) {
             this.list = list;
         }
 
