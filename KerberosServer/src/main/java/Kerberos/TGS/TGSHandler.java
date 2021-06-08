@@ -40,7 +40,7 @@ public class TGSHandler extends SessionHandler {
                  * 2
                  * 3 从数据库中读取Ktgs、Kv
                  */
-
+                System.out.println(receiveOrder.getExtend());
                 MyStruct receiveExtend = MyJson.StringToStruct(receiveOrder.getExtend());
                 //设定TGS的ID
                 String IDtgs = TGSConfig.TGSID;
@@ -59,14 +59,13 @@ public class TGSHandler extends SessionHandler {
                 String Kc_v = RandomStringUtils.randomAlphanumeric(8);
 
                 //生成ticketV
-                MyStruct ticketV = new MyStruct();
-                ticketV.ticket = new MyStruct.Ticket();
-                ticketV.ticket.setKey(Kc_v);
-                ticketV.ticket.setIdc(IDc);
-                ticketV.ticket.setAdc(null);
-                ticketV.ticket.setIdt(IDv);
-                ticketV.ticket.setLifetime(null);
-                ticketV.ticket.setTs(null);
+                MyStruct.Ticket t=new MyStruct.Ticket();
+                t.setKey(Kc_v);
+                t.setIdc(IDc);
+                t.setAdc(null);
+                t.setIdt(IDv);
+                t.setLifetime(null);
+                t.setTs(null);
 
                 // 生成message4
                 MyStruct sendExtend = new MyStruct();
@@ -74,7 +73,7 @@ public class TGSHandler extends SessionHandler {
                 sendExtend.message4.setKey(Kc_v);
                 sendExtend.message4.setIdv(IDv);
                 sendExtend.message4.setTs(null);
-                sendExtend.message4.setT(DESHandler.EncryptDES(MyJson.StructToString(ticketV),Kv));
+                sendExtend.message4.setT(DESHandler.EncryptDES(MyJson.ObjectToString(t),Kv));
 
                 //加密、填写extend字段
                 receiveOrder.setExtend(DESHandler.EncryptDES(MyJson.StructToString(sendExtend),Kc_tgs));
@@ -86,6 +85,7 @@ public class TGSHandler extends SessionHandler {
                 receiveOrder.setDst(src);
                 //发送信息
                 SessionLayer.send(channelName,MyJson.OrderToString(receiveOrder));
+                System.out.println("回复：0006");
                 break;
             }
             default:{

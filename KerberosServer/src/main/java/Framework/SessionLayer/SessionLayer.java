@@ -52,6 +52,7 @@ public class SessionLayer {
     private static OfflineMsgQueue offlineMsgQueue = new OfflineMsgQueue();
     //static private ByteBuf msgBuf;
 
+
     static public void checkInitStatus(){
         if(sessionHandler == null) {
             throw new SessionLayerNotInitialized();
@@ -79,7 +80,8 @@ public class SessionLayer {
             InputStream is = socket.getInputStream();
             BufferedReader br = new BufferedReader(new InputStreamReader(is));
 
-            String receive = br.readLine();
+            String receive =br.readLine();
+
             /*br.readLine();
             while((temp = br.readLine())!=null){
                 receive += temp;
@@ -103,7 +105,6 @@ public class SessionLayer {
          * 2 用户不在线，在离线队列中有用户（不是第一个离线信息）
          * 3 用户不在线，离线队列中没有用户（第一条离线信息）
          */
-
         try {
             TimeUnit.SECONDS.sleep(1);
         } catch (InterruptedException e) {
@@ -114,6 +115,7 @@ public class SessionLayer {
             byte[] response = ((String)msg).getBytes();
             ByteBuf msgBuf = Unpooled.buffer(response.length);
             msgBuf.writeBytes(response);
+            System.out.println("向"+ userName + "发送信息");
             channelMap.get(userName).writeAndFlush(msgBuf);
         }
         else{

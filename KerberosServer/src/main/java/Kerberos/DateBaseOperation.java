@@ -27,8 +27,8 @@ public class DateBaseOperation {
         String url = "jdbc:mysql://" +
                 "rm-uf6t4cbyfz681x569jo.mysql.rds.aliyuncs.com:3306/kerbors" +
                 "?sslmode=require" +
-                "&connectTimeout=3000" +
-                "&socketTimeout=60000";
+                "&connectTimeout=300000" +
+                "&socketTimeout=6000000";
         try {
             Class.forName("com.mysql.jdbc.Driver");
             conn = DriverManager.getConnection(url, "w123", "Wl123456");
@@ -43,10 +43,16 @@ public class DateBaseOperation {
         return conn;
     }
 
-    static public boolean writeCertif(MyStruct.Certificate certificate) {
-        if(connection == null){
-            connectDataBase();
+    static public boolean writeCertif(MyStruct.Certificate certificate){
+        try{
+            if(connection == null||connection.isClosed()){
+                connectDataBase();
+            }
         }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+
         /*
         向数据库存入证书；
          */
@@ -62,15 +68,21 @@ public class DateBaseOperation {
             return true;
         } catch (SQLException e) {
             e.printStackTrace();
-            System.out.println("存储证书错误");
+            //System.out.println("无法存储证书");
             return false;
         }
     }
 
-    static public boolean writeKc(String ID,String K) {
-        if(connection == null){
-            connectDataBase();
+    static public boolean writeKc(String ID,String K){
+        try{
+            if(connection == null||connection.isClosed()){
+                connectDataBase();
+            }
         }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+
         /*
         向数据库存入Kcv；
          */
@@ -81,26 +93,32 @@ public class DateBaseOperation {
             return true;
         } catch (SQLException e) {
             e.printStackTrace();
-            System.out.println("存储Kcv错误");
+            //System.out.println("存储Kcv错误");
             return false;
         }
     }
-    static public String readKc(String ID) {
-        if(connection == null){
-            connectDataBase();
+    static public String readKc(String ID){
+        try{
+            if(connection == null||connection.isClosed()){
+                connectDataBase();
+            }
         }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+
         /*
         向数据库读取Kcv；
          */
         try {
             String sql="SELECT `Kc` FROM `Certificate` WHERE `name`=\"" + ID + "\"";
-            Statement statement=connection.createStatement();
+            Statement statement = connection.createStatement();
             ResultSet result = statement.executeQuery(sql);
             result.next();
             return result.getString("Kc");
         } catch (SQLException e) {
             e.printStackTrace();
-            System.out.println("读取Kc错误");
+            //System.out.println("读取Kc错误");
             return null;
         }
     }

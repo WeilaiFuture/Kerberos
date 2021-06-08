@@ -42,7 +42,7 @@ public class RSAHandler {
         String publicKeyStr = encodeBase64(publicKey.getEncoded());
         //得到私钥
         Key privateKey = keyPair.getPrivate();
-        String privateKeyStr =encodeBase64(privateKey.getEncoded());
+        String privateKeyStr = encodeBase64(privateKey.getEncoded());
         Map<String, String> keyPairMap = new HashMap<String, String>();
         keyPairMap.put("publicKey", publicKeyStr);
         keyPairMap.put("privateKey", privateKeyStr);
