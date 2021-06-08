@@ -39,18 +39,48 @@ public class ServerDataBase {
         con=conn;
         return conn;
     }
-
+    static public boolean rCertif(String ID) {
+        /*
+        向数据库查询证书是否存在；
+         */
+        try {
+            String sql="SELECT * FROM `Certificate` WHERE `name`=\"" + ID + "\"";
+            Statement statement=con.createStatement();
+            ResultSet result = statement.executeQuery(sql);
+            if(result.next()){
+                System.out.println("查询证书成功"+result.getString("name"));
+                return true;
+            }
+            else return false;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("查询证书失败");
+            return false;
+        }
+    }
     static public boolean wCertif(MyStruct.Certificate certificate) {
         /*
         向数据库存入证书；
          */
         try {
-            String sql="insert into `Certificate` (`version` ,`serial` ,`deadline` ,`name` ,`pk`) values(\""
-                    +certificate.getVersion()+"\",\""
-                    +certificate.getSerial()+"\",\""
-                    +certificate.getDeadline()+"\",\""
-                    +certificate.getName()+"\",\""
-                    +certificate.getPk()+ "\")";
+            String sql="";
+            if(rCertif(certificate.getName())){
+                //证书已存在，进行更新
+                sql="update `Certificate` set `version`="+certificate.getVersion()
+                        +"\", `serial`=\"" +certificate.getSerial()
+                        +"\", `deadline`=\"" +certificate.getDeadline()
+                        +"\", `pk`=\"" +certificate.getPk()
+                        +"\"  where  `name`="+certificate.getName();
+            }
+            else {
+                //不存在，进行插入
+                sql="insert into `Certificate` (`version` ,`serial` ,`deadline` ,`name` ,`pk`) values(\""
+                        +certificate.getVersion()+"\",\""
+                        +certificate.getSerial()+"\",\""
+                        +certificate.getDeadline()+"\",\""
+                        +certificate.getName()+"\",\""
+                        +certificate.getPk()+ "\")";
+            }
             Statement statement = con.createStatement();
             int result = statement.executeUpdate(sql);
             System.out.println("存储证书成功");
