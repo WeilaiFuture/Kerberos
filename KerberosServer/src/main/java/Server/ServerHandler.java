@@ -52,8 +52,8 @@ public class ServerHandler {
         String message=OrderToString(order);
         //发送证书
         System.out.println("发送证书"+message);
-        //String m=(String) sendByAddress("192.168.43.130",10087,message);
-        String m=(String) sendByAddress("127.0.0.1",10087,message);
+        String m=(String) sendByAddress("192.168.43.130",10087,message);
+        //String m=(String) sendByAddress("127.0.0.1",10087,message);
         if(m!=null){
             System.out.println("Kv"+m);
             Kv(m);

@@ -211,6 +211,7 @@ public class ServerDataBase {
                 friend.setRemark(result.getString("remark"));
                 friend.setStartTime(result.getInt("startTime"));
                 MyStruct.User user=rSearchID(result.getString("ta"));
+                user.setPsswd(null);
                 friend.setU(user);
                 String sql1="SELECT `tname` FROM `tags` WHERE `tid`="+result.getInt("tid")+  " and `uid`=\""+ID+"\"";
                 Statement statement1=con.createStatement();
