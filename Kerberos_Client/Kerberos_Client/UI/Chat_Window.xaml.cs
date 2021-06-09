@@ -65,11 +65,12 @@ namespace Kerberos_Client.UI
             order.MsgType = "2001";
             order.ContentType = "101";
             order.Extend = JsonHelper.ToJson(myStruct);
+            order.Extend = DESLibrary.EncryptDES(JsonHelper.ToJson(myStruct), Main_Window.Keys["server"]);
             ConnectServer.sendMessage(order);
 
             chatMessage.Add(new ChatMessage()
             {
-                Photo = @"E:\Kerberos\Kerberos_Client\Kerberos_Client\Image_Source\test.jpg",
+                Photo = My_user.Photo,
                 Message = send_text.Text,
                 MessageLocation = TypeLocalMessageLocation.chatSend
             }); ;

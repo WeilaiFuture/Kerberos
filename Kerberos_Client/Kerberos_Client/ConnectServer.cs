@@ -214,7 +214,7 @@ namespace Kerberos_Client
                                 w.main_Window.Call_Message(order);
                                 break;
                             case "9001":
-                                w.main_Window.Call_Friend(order);
+                                w.main_Window.ReCall_Friend(order);
                                 break;
                             case "9006":
                                 w.main_Window.Call_Result(order);

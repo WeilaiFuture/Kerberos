@@ -37,6 +37,7 @@ namespace Kerberos_Client.UI
         public Main_Window(User u)
         {
             Request();
+            Greet();
             InitializeComponent();
             init(u);
         }
@@ -343,7 +344,6 @@ namespace Kerberos_Client.UI
                 friend_List.ItemsSource = null;
                 friend_List.ItemsSource = Friend_List;
             }));
-            Greet();
         }
 
         internal void Greet()
@@ -371,14 +371,7 @@ namespace Kerberos_Client.UI
 #if DES
             o.Extend = DESLibrary.DecryptDES(o.Extend, Keys["server"]);
 #endif
-            MyStruct myStruct = JsonHelper.FromJson<MyStruct>(o.Extend);
-            List<Chat_Message> chat = myStruct.record_message.Messages_list;
-            Message_List = chat;
-            Dispatcher.Invoke(new Action(delegate
-            {
-                message_List.ItemsSource = null;
-                message_List.ItemsSource = Message_List;
-            }));
+            Request();
         }
         internal void Call_Message(Order o)
         {
@@ -404,10 +397,12 @@ namespace Kerberos_Client.UI
                     newWindowThread.IsBackground = true;
                     newWindowThread.Start();
                 }
+                o.Extend = DESLibrary.DecryptDES(o.Extend, Main_Window.Keys["server"]);
+                MyStruct myStruct = JsonHelper.FromJson<MyStruct>(o.Extend);
                 u.chatMessage.Add(new ChatMessage()
                 {
-                    Photo = @"E:\Kerberos\Kerberos_Client\Kerberos_Client\Image_Source\test.jpg",
-                    Message = "send_test",
+                    Photo =user.U.Photo ,
+                    Message = myStruct.chat_message.Content,
                     MessageLocation = TypeLocalMessageLocation.chatRecv
                 }); ;
                 u.ListBoxChat.ScrollIntoView(u.ListBoxChat.Items[u.ListBoxChat.Items.Count - 1]);
@@ -426,10 +421,15 @@ namespace Kerberos_Client.UI
             }
             else
                 order.ContentType = "9007";
+
             order.MsgType = "2001";
             order.Src = MainWindow.localName;
-            order.Dst = o.Dst;
+            order.Dst = o.Src;
             MyStruct myStruct_ = new MyStruct();
+            myStruct_.friend = new Friend();
+            myStruct_.friend.Tid = "1";
+            myStruct_.user = My_user;
+            myStruct_.friend.U = myStruct.user;
             order.Extend = JsonHelper.ToJson(myStruct_);
 #if RSA
             string sig = string.Empty;
@@ -439,6 +439,7 @@ namespace Kerberos_Client.UI
 #if des
             order.Extend = DESLibrary.EncryptDES(order.Extend, Keys["server"]);
 #endif
+            Request();
             ConnectServer.sendMessage(order);
         }
         internal void Call_Result(Order o)
@@ -451,6 +452,28 @@ namespace Kerberos_Client.UI
                 MessageBox.Show("ID:" + myStruct.user.Uid + "\n" + "昵称:" + myStruct.user.Uname + "\n" + "同意了添加好友", "回复");
             else
                 MessageBox.Show("ID:" + myStruct.user.Uid + "\n" + "昵称:" + myStruct.user.Uname + "\n" + "拒绝了添加好友", "回复");
+            Request();
+        }
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            //发送报文
+            Order order = new Order();
+            order.MsgType = "1008";
+            order.Src = MainWindow.localName;
+            order.Dst = "Server";
+            MyStruct myStruct = new MyStruct();
+            order.Extend = JsonHelper.ToJson(myStruct);
+#if RSA
+            string sig = string.Empty;
+            RSALibrary.SignatureFormatter(extend, Keys["private"], ref sig);
+            order.Sign = sig;
+#endif
+
+#if des
+            order.Extend = DESLibrary.EncryptDES(order.Extend, Keys["server"]);
+#endif
+            ConnectServer.sendMessage(order);
+            base.OnClosing(e);
         }
     }
 }
