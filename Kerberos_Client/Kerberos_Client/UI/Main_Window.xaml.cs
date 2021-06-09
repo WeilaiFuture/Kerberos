@@ -413,5 +413,9 @@ namespace Kerberos_Client.UI
                 u.ListBoxChat.ScrollIntoView(u.ListBoxChat.Items[u.ListBoxChat.Items.Count - 1]);
             }));
         }
+        internal void Call_Friend()
+        {
+
+        }
     }
 }

@@ -25,6 +25,7 @@ namespace Kerberos_Client
         private static Thread threadReceive = null;
         private static MainWindow w;
         public static ShowMessage show;
+        static string recv = string.Empty;
         //连接服务器
         internal static void connectserver(Window window, string str = "127.0.0.1", int p = 50810)
         {
@@ -133,8 +134,20 @@ namespace Kerberos_Client
                     break;
                 //MessageBox.Show("ERROR");
                 string strMsg = System.Text.Encoding.UTF8.GetString(result, 0, num);
+                if (strMsg[strMsg.Length - 1] != '}')
+                {
+                    if(recv==string.Empty)
+                        recv = strMsg;
+                    else
+                        recv += strMsg;
+                    return;
+                }
+                else
+                    recv += strMsg;
+                strMsg = recv;
                 Logger.Instance.WriteLog(strMsg, LogType.Recv);
                 Order order =JsonHelper.FromJson<Order>(strMsg);
+                recv = string.Empty;
                 if (order == null)
                     return;
                 show.add(order);
@@ -171,24 +184,34 @@ namespace Kerberos_Client
                     case "1005":
                         w.main_Window.Call_Greet(order);
                         break;
-                    case "1006": 
+                    case "1006":
                         MessageBox.Show(Encoding.UTF8.GetString(result, 0, num) + "0001");
                         break;
                     case "1007":
                         w.main_Window.Add_.Call_Search(order);
                         break;
-                    case "1008": 
+                    case "1008":
                         MessageBox.Show(Encoding.UTF8.GetString(result, 0, num) + "0001");
                         break;
-                    case "1009": 
+                    case "1009":
                         MessageBox.Show(Encoding.UTF8.GetString(result, 0, num) + "0001");
                         break;
                     case "1010":
                         MessageBox.Show(Encoding.UTF8.GetString(result, 0, num) + "0001");
                         break;
                     case "2001":
-                        w.main_Window.Call_Message(order);
+                        #region 信息报文
+                        switch (order.ContentType)
+                        {
+                            case "101":
+                                w.main_Window.Call_Message(order);
+                                break;
+                            case "9001":
+                                w.main_Window.Call_Friend(order);
+                                break;
+                        }
                         break;
+                    #endregion
                     case "2002": 
                         MessageBox.Show(Encoding.UTF8.GetString(result, 0, num) + "0001");
                         break;

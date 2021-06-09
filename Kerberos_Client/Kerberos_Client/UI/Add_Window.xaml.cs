@@ -48,16 +48,22 @@ namespace Kerberos_Client.UI
             order.ContentType = "9001";
             order.Src = my_User.Uid;
             MyStruct myStruct = new MyStruct();
+            myStruct.user = my_User;
             myStruct.friend = search_List.SelectedItem as Friend;
+            myStruct.friend.Tid = "0";
             order.Extend = JsonHelper.ToJson(myStruct);
             ConnectServer.sendMessage(order);
         }
         internal void Call_Search(Order o)
         {
+            o.Extend = DESLibrary.DecryptDES(o.Extend, Main_Window.Keys["server"]);
             MyStruct myStruct = JsonHelper.FromJson<MyStruct>(o.Extend);
             Search_List = myStruct.friendlist;
-            search_List.ItemsSource = null;
-            search_List.ItemsSource = Search_List;
+            Dispatcher.Invoke(new Action(delegate
+            {
+                search_List.ItemsSource = null;
+                search_List.ItemsSource = Search_List;
+            }));
         }
     }
 }

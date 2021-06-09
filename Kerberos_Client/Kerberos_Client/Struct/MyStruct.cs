@@ -283,7 +283,20 @@ namespace Kerberos_Client
         #region 用户
         public class User
         {
-            public string Photo { get; set; } //图片在本机的地址
+            string photo;
+            public string Photo
+            {
+                get { return photo; }
+                set
+                {
+                    if (File.Exists(@value))
+                        photo = value;
+                    else
+                    {
+                        photo = @"../../Image_Source\未登录头象.png";
+                    }
+                }
+            }//图片在本机的地址
             public string Uname { get; set; }//用户昵称
             public string Uid { get; set; }//用户账号
             public string Psswd { get; set; }//用户密码
@@ -292,7 +305,7 @@ namespace Kerberos_Client
             public string Email { get; set; }//邮箱
             public int Gender { get; set; }//性别
             public int Status { get; set; }//状态
-            public int StartTime { get; set; }//注册时间
+            public long StartTime { get; set; }//注册时间
             public User()
             {
                 Uid = "123456789";
@@ -385,6 +398,11 @@ namespace Kerberos_Client
             {
                 get { return startTime; }
                 set { startTime = value; }
+            }
+            public string Tid
+            {
+                get { return tid; }
+                set { tid = value; }
             }
         }
         #endregion
