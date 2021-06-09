@@ -35,6 +35,8 @@ namespace Kerberos_Client.UI
             order.MsgType = "1007";
             order.Src = my_User.Uid;
             MyStruct myStruct = new MyStruct();
+            myStruct.user = new User();
+            myStruct.user.Uid = Account.Text;
             order.Extend =DESLibrary.EncryptDES( JsonHelper.ToJson(myStruct),Main_Window.Keys["server"]);
             ConnectServer.sendMessage(order);
         }

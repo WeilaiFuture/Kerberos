@@ -17,7 +17,7 @@
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
             <Label Content="找人/群" HorizontalAlignment="Left" Margin="360,10,0,0" VerticalAlignment="Top" Height="34" Width="78" FontSize="16"/>
-            <TextBox x:Name="Account" HorizontalAlignment="Left" Height="28" Margin="164,51,0,0" TextWrapping="Wrap" Text="132165460" VerticalAlignment="Top" Width="437" FontSize="16"/>
+            <TextBox x:Name="Account" HorizontalAlignment="Left" Height="28" Margin="164,51,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="437" FontSize="16"/>
             <Label Content="Label" HorizontalAlignment="Left" Margin="821,115,-127.4,0" VerticalAlignment="Top" Width="100"/>
             <Button x:Name="BtnClr" Content="搜索" HorizontalAlignment="Left" Margin="621,51,0,0" VerticalAlignment="Top" Width="75" Height="28" Click="Button_Click" FontSize="16" FontWeight="Bold"
                     Background="#FF1ACFD9" Foreground="#FFFCFCFC" />
