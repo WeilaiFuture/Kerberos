@@ -48,7 +48,14 @@ namespace Kerberos_Client
             if (!w.iscancle)
             {
                 client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-                client.Connect(ip, port);
+                try
+                {
+                    client.Connect(ip, port);
+                }
+                catch
+                {
+                    MessageBox.Show("连接超时！");
+                }
                 Logger.Instance.WriteLog(remoteIP + "/" + port.ToString(), LogType.Connect);
 
                     threadReceive = new Thread(ReceiveData);
@@ -208,6 +215,12 @@ namespace Kerberos_Client
                                 break;
                             case "9001":
                                 w.main_Window.Call_Friend(order);
+                                break;
+                            case "9006":
+                                w.main_Window.Call_Result(order);
+                                break;
+                            case "9007" :
+                                w.main_Window.Call_Result(order);
                                 break;
                         }
                         break;

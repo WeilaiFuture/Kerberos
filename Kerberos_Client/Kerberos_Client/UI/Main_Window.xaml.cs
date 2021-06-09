@@ -413,9 +413,44 @@ namespace Kerberos_Client.UI
                 u.ListBoxChat.ScrollIntoView(u.ListBoxChat.Items[u.ListBoxChat.Items.Count - 1]);
             }));
         }
-        internal void Call_Friend()
+        internal void ReCall_Friend(Order o)
         {
-
+#if des
+            o.Extend = DESLibrary.DecryptDES(o.Extend, Keys["server"]);
+#endif
+            Order order = new Order();
+            MyStruct myStruct = JsonHelper.FromJson<MyStruct>(o.Extend);
+            if (MessageBox.Show("ID:"+myStruct.user.Uid+"\n"+ "昵称:" + myStruct.user.Uname + "\n"+"请求添加好友", "请求", MessageBoxButton.YesNo, MessageBoxImage.Information) == MessageBoxResult.Yes)
+            {
+                order.ContentType = "9006";
+            }
+            else
+                order.ContentType = "9007";
+            order.MsgType = "2001";
+            order.Src = MainWindow.localName;
+            order.Dst = o.Dst;
+            MyStruct myStruct_ = new MyStruct();
+            order.Extend = JsonHelper.ToJson(myStruct_);
+#if RSA
+            string sig = string.Empty;
+            RSALibrary.SignatureFormatter(extend, Keys["private"], ref sig);
+            order.Sign = sig;
+#endif
+#if des
+            order.Extend = DESLibrary.EncryptDES(order.Extend, Keys["server"]);
+#endif
+            ConnectServer.sendMessage(order);
+        }
+        internal void Call_Result(Order o)
+        {
+#if des
+            o.Extend = DESLibrary.DecryptDES(o.Extend, Keys["server"]);
+#endif
+            MyStruct myStruct = JsonHelper.FromJson<MyStruct>(o.Extend);
+            if (o.ContentType == "9006")
+                MessageBox.Show("ID:" + myStruct.user.Uid + "\n" + "昵称:" + myStruct.user.Uname + "\n" + "同意了添加好友", "回复");
+            else
+                MessageBox.Show("ID:" + myStruct.user.Uid + "\n" + "昵称:" + myStruct.user.Uname + "\n" + "拒绝了添加好友", "回复");
         }
     }
 }

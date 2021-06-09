@@ -43,7 +43,6 @@ namespace Kerberos_Client.UI
         private void Add_Click(object sender, RoutedEventArgs e)
         {
             Order order = new Order();
-            order.Dst = "Server";
             order.MsgType = "2001";
             order.ContentType = "9001";
             order.Src = my_User.Uid;
@@ -51,7 +50,9 @@ namespace Kerberos_Client.UI
             myStruct.user = my_User;
             myStruct.friend = search_List.SelectedItem as Friend;
             myStruct.friend.Tid = "0";
+            order.Dst = myStruct.friend.U.Uid;
             order.Extend = JsonHelper.ToJson(myStruct);
+            order.Extend = DESLibrary.EncryptDES(order.Extend, Main_Window.Keys["server"]);
             ConnectServer.sendMessage(order);
         }
         internal void Call_Search(Order o)
