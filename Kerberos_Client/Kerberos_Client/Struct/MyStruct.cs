@@ -394,7 +394,7 @@ namespace Kerberos_Client
             int head;//信息种类
             string content;//信息内容
             User u;//发送方
-            int time;//时间戳
+            long time;//时间戳
             public int Head
             {
                 get { return head; }
@@ -410,9 +410,9 @@ namespace Kerberos_Client
                 get { return u; }
                 set { u = value; }
             }
-            public int Time
+            public long Time
             {
-                get { return Time; }
+                get { return time; }
                 set { time = value; }
             }
         }
@@ -420,16 +420,16 @@ namespace Kerberos_Client
         #region 群信息
         public class Group
         {
-            List<Dictionary<User, string>> list;//用户列表
+            Dictionary<User, string> list;//用户列表
             string gid;//群账号
             string photo;//群头像
             string leader;//群主账号
             string sign;//群介绍
             int startTime;//创建时间
-            public List<Dictionary<User, string>> LIST
+            public Dictionary<User, string> LIST
             {
                 get { return list; }
-                set { list = new List<Dictionary<User, string>>(value); }
+                set { list = new Dictionary<User, string>(value); }
             }
             public string Gid
             {

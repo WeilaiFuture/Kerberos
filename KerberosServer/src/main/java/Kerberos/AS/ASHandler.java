@@ -32,8 +32,8 @@ public class ASHandler extends SessionHandler {
                 MyStruct receiveExtend = MyJson.StringToStruct(receiveOrder.getExtend());
                 String publicKey = receiveExtend.certificate.getPk();
                 //随机生成一个字符串作为对称钥
-                //String Kc = RandomStringUtils.randomAlphanumeric(8);
-                String Kc = "12345678";
+                String Kc = RandomStringUtils.randomAlphanumeric(8);
+                //String Kc = "12345678";
                 //使用公钥加密对称钥
                 try{
                     MyStruct sendExtend = new MyStruct();

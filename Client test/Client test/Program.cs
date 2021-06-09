@@ -9,6 +9,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
 using static Client.DESLibrary;
+using static Client.RSAKeyConvert;
 using static Kerberos_Client.MyStruct;
 
 namespace Client_test
@@ -17,10 +18,11 @@ namespace Client_test
     {
         static void Main(string[] args)
         {
-            init();
-            while (true) ;
+            //init();
+            //while (true) ;
             //DES_test();
             //RSA_test();
+            RSA_();
 
         }
         static Thread threadWatch = null; // 负责监听客户端连接请求的 线程；
@@ -31,6 +33,16 @@ namespace Client_test
         static Dictionary<string, string> dictID_reverse = new Dictionary<string, string>();//ip和id
         static Dictionary<string, Thread> dictThread = new Dictionary<string, Thread>();//ip和线程
 
+        static void RSA_()
+        {
+            StreamReader sw1 = new StreamReader("PKB.txt");
+            StreamReader sw2 = new StreamReader("PKI.txt");
+            string pkb = sw1.ReadLine();
+            string pki = sw2.ReadLine();
+            Console.WriteLine(RSAPublicKeyJava2DotNet(pkb));
+            Console.WriteLine();
+            Console.WriteLine(RSAPrivateKeyJava2DotNet(pki));
+        }
         static private void init()
         {
             // 创建负责监听的套接字，注意其中的参数；
@@ -126,8 +138,10 @@ namespace Client_test
                 }
                 if (run_normal)  // 表示接收到的是数据；
                 {
+                    if (length <= 0)
+                        return;
                     string strMsg = System.Text.Encoding.UTF8.GetString(arrMsgRec, 0, length);// 将接受到的字节数据转化成字符串；
-                    //ShowMsg(strMsg);
+                    ShowMsg("test"+strMsg);
                     Order order= JsonHelper.FromJson<Order>(strMsg);
                     MyStruct myStruct ;
                     switch (order.MsgType)
@@ -135,7 +149,10 @@ namespace Client_test
                         case "1002":
                             order.Extend = DecryptDES(order.Extend, "12345678");
                             myStruct = JsonHelper.FromJson<MyStruct>(order.Extend);
-                            User user = myStruct.user;
+                            myStruct.user.Uname="RECALL";
+                            myStruct.user.Photo = "RECALL";
+                            myStruct.user.Sign = "RECALL_SIGN";
+                            order.Extend = JsonHelper.ToJson(myStruct);
                             order.StatusReport = true;
                             break;
                         case "0001":
@@ -144,7 +161,85 @@ namespace Client_test
                             StreamReader sw1 = new StreamReader(@"F:\Cryption\PKB.txt");
                             myStruct.certificate.Pk = sw1.ReadLine();
                             sw1.Close();
-                            break;                
+                            break;
+                        case "0002":
+                            order.StatusReport = true;
+                            break;
+                        case "0004":
+                            order.StatusReport = true;
+                            break;
+                        case "0006":
+                            order.StatusReport = true;
+                            break;
+                        case "0008":
+                            order.StatusReport = true;
+                            break;
+                        case "1001":
+                            order.StatusReport = true;
+                            break;
+                        case "1003": //好友请求
+                            Friend f = new Friend();
+                            f.U = new User();
+                            List<Friend> fs = new List<Friend>();
+                            f.U.Uid = "123";
+                            f.U.Uname = "test";
+                            fs.Add(f);
+                            Friend f1 = new Friend();
+                            f1.U = new User();
+                            f1.U.Uid = "456";
+                            f1.U.Uname = "test1";
+                            fs.Add(f1);
+                            order.MsgType = "1004";
+                            myStruct = new MyStruct();
+                            myStruct.friendlist = fs;
+                            order.Extend = JsonHelper.ToJson(myStruct);
+                            order.StatusReport = true;
+                            break;
+                        case "1005":
+                            Record_Message m= new Record_Message();
+                            m.Messages_list = new List<Chat_Message>();
+                            Chat_Message chat = new Chat_Message();
+                            chat.U = new User();
+                            chat.Time = GetTimeStamp();
+                            chat.Head = 101;
+                            chat.Content = "hello test";
+                            m.Messages_list.Add(chat);
+                            order.MsgType = "1005";
+                            myStruct = new MyStruct();
+                            myStruct.record_message=m;
+                            order.Extend = JsonHelper.ToJson(myStruct);
+                            order.StatusReport = true;
+                            break;
+                        case "1006":
+                            order.StatusReport = true;
+                            break;
+                        case "1007":
+                            order.StatusReport = true;
+                            break;
+                        case "1008":
+                            order.StatusReport = true;
+                            break;
+                        case "1009":
+                            order.StatusReport = true;
+                            break;
+                        case "1010":
+                            order.StatusReport = true;
+                            break;
+                        case "2001":
+                            myStruct = JsonHelper.FromJson<MyStruct>(order.Extend);
+                            Chat_Message chat_recv = myStruct.chat_message;
+                            chat_recv.Content += "RECV";
+                            order.ContentType = "2001";
+                            myStruct.chat_message = chat_recv;
+                            order.Extend = JsonHelper.ToJson(myStruct);
+                            order.Src = "456";
+                            break;
+                        case "2002":
+                            order.StatusReport = true;
+                            break;
+                        default:
+                            ShowMsg(strMsg+"Default");
+                            break;
                     }
                     sendMsg("127.0.0.1", JsonHelper.ToJson(order));
                 }   
@@ -248,6 +343,12 @@ namespace Client_test
             sw1.Close();
             sw2.Close();
 
+        }
+
+        public static long GetTimeStamp()
+        {
+            TimeSpan ts = DateTime.Now - new DateTime(1970, 1, 1, 0, 0, 0, 0);
+            return Convert.ToInt64(ts.TotalSeconds);
         }
         //生成字母和数字随机数
         public static string random_str(int length, bool sleep)

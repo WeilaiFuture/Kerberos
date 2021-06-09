@@ -393,7 +393,7 @@ namespace Kerberos_Client
             int head;//信息种类
             string content;//信息内容
             User u;//发送方
-            int time;//时间戳
+            long time;//时间戳
             public int Head
             {
                 get { return head; }
@@ -409,9 +409,9 @@ namespace Kerberos_Client
                 get { return u; }
                 set { u = value; }
             }
-            public int Time
+            public long Time
             {
-                get { return Time; }
+                get { return time; }
                 set { time = value; }
             }
         }

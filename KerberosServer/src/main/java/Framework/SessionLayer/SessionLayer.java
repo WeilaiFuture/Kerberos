@@ -80,13 +80,8 @@ public class SessionLayer {
             InputStream is = socket.getInputStream();
             BufferedReader br = new BufferedReader(new InputStreamReader(is));
 
-            String receive = null;
-            String temp = null;
-            char[] buf = new char[1024];
-            br.read(buf,0,buf.length);
-            for(int i=0;i<buf.length;i++){
-                receive += buf[i];
-            }
+            String receive =br.readLine();
+
             /*br.readLine();
             while((temp = br.readLine())!=null){
                 receive += temp;

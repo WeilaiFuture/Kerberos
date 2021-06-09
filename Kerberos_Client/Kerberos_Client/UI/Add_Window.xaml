@@ -1,12 +1,61 @@
 ﻿<Window x:Class="Kerberos_Client.UI.Add_Window"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Kerberos_Client.UI"
+        xmlns:local1="clr-namespace:Kerberos_Client"
         mc:Ignorable="d"
-        Title="Add_Window" Height="450" Width="800">
+        Title="WndSrch" Height="450" Width="800">
+    <Window.Resources>
+        <local1:MyStruct x:Key="Friend"></local1:MyStruct>
+    </Window.Resources>
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="3*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Label Content="找人/群" HorizontalAlignment="Left" Margin="360,10,0,0" VerticalAlignment="Top" Height="34" Width="78" FontSize="16"/>
+            <TextBox x:Name="Account" HorizontalAlignment="Left" Height="28" Margin="164,51,0,0" TextWrapping="Wrap" Text="132165460" VerticalAlignment="Top" Width="437" FontSize="16"/>
+            <Label Content="Label" HorizontalAlignment="Left" Margin="821,115,-127.4,0" VerticalAlignment="Top" Width="100"/>
+            <Button x:Name="BtnClr" Content="搜索" HorizontalAlignment="Left" Margin="621,51,0,0" VerticalAlignment="Top" Width="75" Height="28" Click="Button_Click" FontSize="16" FontWeight="Bold"
+                    Background="#FF1ACFD9" Foreground="#FFFCFCFC" />
+        </Grid>
+        <DataGrid Grid.Row="1" HeadersVisibility="None" CanUserResizeColumns="False" CanUserReorderColumns="False" x:Name="search_List" IsReadOnly="True" 
+                                  AutoGenerateColumns="False" DataContext="{StaticResource Friend}"
+                                  HorizontalScrollBarVisibility="Hidden" GridLinesVisibility="Horizontal" 
+                                  SelectionMode="Single" SelectionUnit="FullRow">
+            <DataGrid.Columns>
+                <!--头像行-->
+                <DataGridTemplateColumn >
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image x:Name="head_Image" Source="{Binding U.Photo}"  Width="40" Height="40" RenderTransformOrigin="1,1" >
+                                <Image.Clip>
+                                    <EllipseGeometry RadiusX="60" RadiusY="60" Center="30,30"/>
+                                </Image.Clip>
+                            </Image>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <!--姓名行-->
+                <DataGridTemplateColumn Width="*">
+                    <DataGridTemplateColumn.CellTemplate >
+                        <DataTemplate>
+                            <TextBlock x:Name="name_TextBlock" Text="{Binding U.Uname}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Width="40">
+                    <DataGridTemplateColumn.CellTemplate >
+                        <DataTemplate>
+                            <Button Content="添加" Click="Add_Click"></Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
     </Grid>
 </Window>
