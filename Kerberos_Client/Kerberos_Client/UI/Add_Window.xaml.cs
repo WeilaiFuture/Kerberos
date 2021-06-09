@@ -34,7 +34,8 @@ namespace Kerberos_Client.UI
             order.Dst = "Server";
             order.MsgType = "1007";
             order.Src = my_User.Uid;
-            order.Extend = "search";
+            MyStruct myStruct = new MyStruct();
+            order.Extend =DESLibrary.EncryptDES( JsonHelper.ToJson(myStruct),Main_Window.Keys["server"]);
             ConnectServer.sendMessage(order);
         }
         private void Add_Click(object sender, RoutedEventArgs e)
