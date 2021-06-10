@@ -23,7 +23,7 @@ public class ServerDataBase {
         // no ssl certificate:
         String url = "jdbc:mysql://" +
                 "rm-uf6t4cbyfz681x569jo.mysql.rds.aliyuncs.com:3306/kerbors" +
-                "?sslmode=require" +
+                "?sslmode=require&autoReconnect=true" +
                 "&connectTimeout=3000" +
                 "&socketTimeout=60000";
         try {
@@ -63,27 +63,15 @@ public class ServerDataBase {
         向数据库存入证书；
          */
         try {
-            String sql="";
-            if(rCertif(certificate.getName())){
-                //证书已存在，进行更新
-                sql="update `Certificate` set `version`="+certificate.getVersion()
-                        +"\", `serial`=\"" +certificate.getSerial()
-                        +"\", `deadline`=\"" +certificate.getDeadline()
-                        +"\", `pk`=\"" +certificate.getPk()
-                        +"\"  where  `name`="+certificate.getName();
-            }
-            else {
-                //不存在，进行插入
-                sql="insert into `Certificate` (`version` ,`serial` ,`deadline` ,`name` ,`pk`) values(\""
+            String sql="insert into `Certificate` (`version` ,`serial` ,`deadline` ,`name` ,`pk`) values(\""
                         +certificate.getVersion()+"\",\""
                         +certificate.getSerial()+"\",\""
                         +certificate.getDeadline()+"\",\""
                         +certificate.getName()+"\",\""
                         +certificate.getPk()+ "\")";
-            }
             Statement statement = con.createStatement();
             int result = statement.executeUpdate(sql);
-            System.out.println("存储证书成功");
+            System.out.println(certificate.getName()+"存储证书成功");
             return true;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -99,11 +87,11 @@ public class ServerDataBase {
             String sql="update `Certificate` set `Kcv`=\""+K+"\" where `name`=\""+ID+"\"";
             Statement statement=con.createStatement();
             statement.executeUpdate(sql);
-            System.out.println("存储Kcv成功");
+            System.out.println(ID+" 存储Kcv成功 "+K);
             return true;
         } catch (SQLException e) {
             e.printStackTrace();
-            System.out.println("存储Kcv错误");
+            System.out.println("ID+存储Kcv错误"+K);
             return false;
         }
     }
@@ -116,7 +104,7 @@ public class ServerDataBase {
             Statement statement=con.createStatement();
             ResultSet result = statement.executeQuery(sql);
             if(result.next()){
-                System.out.println("读取Kcv成功"+result.getString("Kcv"));
+                System.out.println(ID+"读取Kcv成功"+result.getString("Kcv"));
                 return result.getString("Kcv");
             }
             else return "";
@@ -135,7 +123,7 @@ public class ServerDataBase {
             Statement statement=con.createStatement();
             ResultSet result = statement.executeQuery(sql);
             if(result.next()){
-                System.out.println("查询PK成功"+result.getString("pk"));
+                System.out.println(ID+"查询PK成功"+result.getString("pk"));
                 return result.getString("pk");
             }
             else return "";
@@ -168,7 +156,7 @@ public class ServerDataBase {
             Statement statement=con.createStatement();
             ResultSet result = statement.executeQuery(sql);
             if(result.next()){
-                System.out.println("查询账号密码成功"+pswd);
+                System.out.println(ID+"查询账号密码成功"+pswd);
                 if(result.getString("psswd").equals(pswd))
                     return true;
                 else return false;
@@ -210,14 +198,10 @@ public class ServerDataBase {
                 MyStruct.Friend friend=new MyStruct.Friend();
                 friend.setRemark(result.getString("remark"));
                 friend.setStartTime(result.getInt("startTime"));
-                MyStruct.User user=rSearchID(result.getString("ta"));
+                MyStruct.User user=rInfo(result.getString("ta"));
                 user.setPsswd(null);
                 friend.setU(user);
-                String sql1="SELECT `tname` FROM `tags` WHERE `tid`="+result.getInt("tid")+  " and `uid`=\""+ID+"\"";
-                Statement statement1=con.createStatement();
-                ResultSet result1 = statement1.executeQuery(sql1);
-                result1.next();
-                friend.setTid(result1.getString("tname"));
+                friend.setTid(result.getString("tid"));
 
                 System.out.println(friend.getU().getUid()+" "+friend.getRemark()+" "+friend.getTid()+" "+friend.getStartTime());
                 friends.addLast(friend);
@@ -241,9 +225,9 @@ public class ServerDataBase {
             System.out.println("uid remark tid startTime");
             while (result.next()) {
                 String IDB=result.getString("ta");
-                String sql1="SELECT `status` FROM `users` WHERE `uid`=\"" + IDB + "\"";
+                String sql1="SELECT * FROM `users` WHERE `uid`=\"" + IDB + "\"";
                 Statement statement1=con.createStatement();
-                ResultSet result1 = statement.executeQuery(sql);
+                ResultSet result1 = statement1.executeQuery(sql1);
                 if(result1.next()){
                     if(result1.getString("status").equals("1"))
                         friends.addLast(IDB);
@@ -276,9 +260,45 @@ public class ServerDataBase {
          }
          return groups;
     }
-    static public MyStruct.User rSearchID(String ID){
+    static public LinkedList<MyStruct.Friend> rSearchID(String ID){
         /*
         查询用户；
+         */
+        MyStruct.User user=new MyStruct.User();
+        MyStruct myStruct=new MyStruct();
+        myStruct.friendlist=new LinkedList<MyStruct.Friend>();
+        try {
+            String sql="SELECT * FROM `users` WHERE `uid`like \"%" + ID + "%\"";
+            Statement statement=con.createStatement();
+            ResultSet result = statement.executeQuery(sql);
+            System.out.println("uid email name photo pswd sign uname startTime gender status");
+            while (result.next()) {
+                user.setEmail(result.getString("email"));
+                user.setGender(result.getInt("gender"));
+                user.setName(result.getString("name"));
+                user.setPhoto(result.getString("photo"));
+               // user.setPsswd(result.getString("psswd"));
+                user.setSign(result.getString("sign"));
+                user.setStartTime(result.getLong("startTime"));
+                user.setStatus(result.getInt("status"));
+                user.setUid(result.getString("uid"));
+                user.setUname(result.getString("uname"));
+                myStruct.friend=new MyStruct.Friend();
+                myStruct.friend.setU(user);
+                myStruct.friendlist.addLast(myStruct.friend);
+                System.out.println(user.getUid()+" "+user.getEmail()+" "+user.getName()+" "+user.getPhoto()+" "+user.getPsswd()+" "+user.getSign()
+                        +" "+user.getUname()+" "+user.getStartTime()+" "+user.getGender()+" "+user.getStatus());
+            }
+            System.out.println(ID+" 查询ID成功");
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println(ID+" 查询ID错误");
+        }
+        return myStruct.friendlist;
+    }
+    static public MyStruct.User rInfo(String ID){
+        /*
+        查询个人信息；
          */
         MyStruct.User user=new MyStruct.User();
         try {
@@ -306,13 +326,6 @@ public class ServerDataBase {
             System.out.println(ID+" 查询ID错误");
         }
         return user;
-    }
-    static public boolean rInfo(String ID){
-        /*
-        查询个人信息；
-        与查询用户功能重复，暂时保留
-         */
-         return false;
      }
      static public boolean wInfo(MyStruct.User user){
         /*
@@ -344,7 +357,7 @@ public class ServerDataBase {
         修改好友列表，添加好友；
          */
         try {
-            MyStruct.User user=rSearchID(friend.getU().getUid());
+            MyStruct.User user=rInfo(friend.getU().getUid());
             String sql="insert into `friend` (`me` ,`ta` ,`startTime` ,`remark` ,`tid`) values(\""
                     +ID+"\",\""
                     +friend.getU().getUid()+"\","

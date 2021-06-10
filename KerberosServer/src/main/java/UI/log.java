@@ -24,7 +24,7 @@ public class log {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Container contentPane=frame.getContentPane();
         Object[][] tableDate=new Object[0][3];
-        String[] name={"源地址","目的地址","密文"};
+        String[] name={"源地址","目的地址","报文类型","密文","明文"};
         JTable table=new JTable(tableDate,name);
         contentPane.add(new JScrollPane(table));
         frame.setVisible(true);
@@ -36,12 +36,16 @@ public class log {
         Vector vRow;
         vName.add("源地址");
         vName.add("目的地址");
+        vName.add("报文类型");
         vName.add("密文");
+        vName.add("明文");
         for(int k=0;k<list.size();k++){
             vRow = new Vector();
             vRow.add(list.get(k)[0]);
             vRow.add(list.get(k)[1]);
             vRow.add(list.get(k)[2]);
+            vRow.add(list.get(k)[3]);
+            vRow.add(list.get(k)[4]);
             vData.add(vRow.clone());
         }
         DefaultTableModel model = new DefaultTableModel(vData, vName);

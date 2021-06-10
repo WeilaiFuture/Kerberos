@@ -6,6 +6,7 @@ import Framework.SessionLayer.Handlers.SessionHandler;
 import Framework.Testing.EchoClientHandler;
 import Framework.Testing.EchoClientHandler2;
 import Json.MyJson;
+import SecurityUtils.DESHandler;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
@@ -26,6 +27,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
 
 import static Json.MyJson.StringToOrder;
+import static Server.ServerDataBase.rKcv;
 import static UI.log.add;
 import static UI.log.createTable;
 
@@ -119,7 +121,17 @@ public class SessionLayer {
             channelMap.get(userName).writeAndFlush(msgBuf);
         }
         else{
+            //获取报文
+            MyJson.Order order =MyJson.StringToOrder((String)msg);
+            //解密操作
+            String kcv=rKcv(order.getDst());
+            System.out.println("#####存入离线消息解密前"+order.getExtend());
+            order.setExtend(DESHandler.DecryptDES(order.getExtend(),kcv));
+            System.out.println("#####离线消息解密后"+order.getExtend());
+            //获取消息
+            msg=MyJson.OrderToString(order);
             offlineMsgQueue.write(userName,msg);
+            System.out.println("############存入离线队列"+(String)msg);
         }
     }
     static public void receive(String channelName,Object msg){
@@ -139,17 +151,19 @@ public class SessionLayer {
             e.printStackTrace();
         }
     }
-    static public void logIn(String tempName,String userName)throws Exception{
+    static public void logIn(String userName)throws Exception{
         checkInitStatus();
-
-        bindChannelWithUserName(tempName,userName);
         /*
          * 检查绑定结果
          */
+ /*
         Channel channel =  channelMap.get(tempName);
+
         if(channel == null){
             throw new Exception();
         }
+       bindChannelWithUserName(tempName,userName);
+ */
         /*
          * 绑定完成后，立刻检查有没有离线队列
          */
@@ -158,12 +172,16 @@ public class SessionLayer {
         if(offlineMsgList != null){
             for (Object msg:offlineMsgList) {
                 send(userName,msg);
+                System.out.println("#####发送离线消息"+msg);
             }
         }
     }
-    static public void logOut(String userName){
+    static public void logOut(String userName)throws Exception{
         checkInitStatus();
         Channel channel = channelMap.get(userName);
+        if(channel == null){
+            throw new Exception();
+        }
         channel.close();
         channelMap.remove(userName);
     }

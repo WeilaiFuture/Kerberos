@@ -380,15 +380,10 @@ namespace Kerberos_Client
         #region 好友
         public class Friend
         {
-            User u;//用户信息
+            public User U { get; set; }//用户信息
             string remark;//备注
             int startTime;//添加好友时间
             string tid;//分组信息
-            public User U
-            {
-                get { return u; }
-                set { u = value; }
-            }
             public string Remark
             {
                 get { return remark; }
@@ -479,11 +474,19 @@ namespace Kerberos_Client
         #region 消息记录
         public class Record_Message
         {
-            List<Chat_Message> messages_list;
+            public Friend Owner { get; set; }
+            public Group group { get; set; }
+            public Chat_Message Last_Message { get; set; }
+            private List<Chat_Message> messages_list=new List<Chat_Message>();
             public List<Chat_Message> Messages_list
             {
                 get { return messages_list; }
                 set { messages_list = new List<Chat_Message>(value); }
+            }
+            public void add(Chat_Message chat_Message)
+            {
+                messages_list.Add(chat_Message);
+                Last_Message = chat_Message;
             }
         }
        

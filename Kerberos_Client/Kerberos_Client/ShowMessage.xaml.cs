@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Kerberos_Client.UI;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -45,11 +46,61 @@ namespace Kerberos_Client
             }
             Order order = ShowOrder.SelectedItem as Order;
             string msgType = "MsgType: " + order.MsgType + "\n";
-            string extend = "[Extend]: " + order.Extend+"\n";
+            string extend = "[Extend]: " + order.Extend + "\n";
             string sign = "Sign: " + order.Sign + "\n";
             string statusReport = "StatusReport: " + order.StatusReport + "\n";
             string contentType = "ConetentType: " + order.ContentType + "\n";
-            this.txtBlk.Text =  msgType + extend + sign + statusReport +contentType;
+            this.txtBlk.Text = msgType + extend + sign + statusReport + contentType;
+            switch (order.Src)
+            {
+                case "Server":
+                    this.txtBlk.Text += "Encryption mode: " + "DES\n";
+                    this.txtBlk.Text += "Session Key:" + Main_Window.Keys["server"] + "\n";
+                    this.txtBlk.Text += "Decryption Str: " + DESLibrary.DecryptDES(order.Extend, Main_Window.Keys["server"]) + "\n";
+                    break;
+                case "AS":
+                    if (order.MsgType.Equals("0002"))
+                    {
+                        this.txtBlk.Text += "Encryption mode: " + "RSA\n";
+                        this.txtBlk.Text += "Public Key:" + Main_Window.Keys["public"] + "\n";
+                        this.txtBlk.Text += "Private Key:" + Main_Window.Keys["private"] + "\n";
+                        MyStruct myStruct = JsonHelper.FromJson<MyStruct>(order.Extend);
+                        this.txtBlk.Text += "Decryption key: " + RSALibrary.RSADecrypt(Main_Window.Keys["private"], myStruct.my_k.Key) + "\n";
+                    }
+                    else
+                    {
+                        this.txtBlk.Text += "Encryption mode: " + "DES\n";
+                        this.txtBlk.Text += "Session Key:" + Main_Window.Keys["as"] + "\n";
+                        this.txtBlk.Text += "Decryption Str: " + DESLibrary.DecryptDES(order.Extend, Main_Window.Keys["as"]) + "\n";
+                    }
+                    break;
+                case "TGS":
+                    this.txtBlk.Text += "Encryption mode: " + "DES\n";
+                    this.txtBlk.Text += "Session Key:" + Main_Window.Keys["tgs"] + "\n";
+                    this.txtBlk.Text += "Decryption Str: " + DESLibrary.DecryptDES(order.Extend, Main_Window.Keys["tgs"]) + "\n";
+                    break;
+                default:
+                    {
+                        switch (order.Dst)
+                        {
+                            case "Server":
+                                this.txtBlk.Text += "Encryption mode: " + "DES\n";
+                                this.txtBlk.Text += "Session Key:" + Main_Window.Keys["server"] + "\n";
+                                this.txtBlk.Text += "Decryption Str: " + DESLibrary.DecryptDES(order.Extend, Main_Window.Keys["server"]) + "\n";
+                                break;
+                            case "AS":         
+                                this.txtBlk.Text += "Encryption mode: " + "NULL\n";
+                                break;
+                            case "TGS":
+                                this.txtBlk.Text += "Encryption mode: " + "DES\n";
+                                this.txtBlk.Text += "Session Key:" + Main_Window.Keys["tgs"] + "\n";
+                                MyStruct myStruct = JsonHelper.FromJson<MyStruct>(order.Extend);
+                                this.txtBlk.Text += "Decryption Ac: " + DESLibrary.DecryptDES(myStruct.message3.AC, Main_Window.Keys["server"]) + "\n";
+                                break;
+                        }
+                    }
+                    break;
+            }
         }
 
         void DataGrid_LoadingRow(object sender, DataGridRowEventArgs e)

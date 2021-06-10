@@ -76,7 +76,7 @@ public class StateMachineEventConfig {
     }
     //登出
     @OnTransition(source = "HEADOVER", target = "EXIT")
-    public void head1008(Message<RegEventEnum> message) {
+    public void head1008(Message<RegEventEnum> message) throws Exception {
         ServerHandler.logout(message.getHeaders().get("order").toString());
         logger.info("Switch state from O to E");
     }

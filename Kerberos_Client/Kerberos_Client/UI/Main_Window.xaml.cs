@@ -28,10 +28,10 @@ namespace Kerberos_Client.UI
     {
         public User My_user;
         public static List<Friend> Friend_List = new List<Friend>();
-        public static List<Chat_Message> Message_List = new List<Chat_Message>();
+        public static List<Record_Message> Message_List = new List<Record_Message>();
         public Add_Window Add_;
         public static Dictionary<string, string> Keys = new Dictionary<string, string>();
-        private static List<User> Search_List = new List<User>();
+        private static List<Friend> Search_List = new List<Friend>();
         public static Dictionary<string, Chat_Window> Chat_Dic = new Dictionary<string, Chat_Window>();
         public static bool live = false;
         public Main_Window(User u)
@@ -65,7 +65,7 @@ namespace Kerberos_Client.UI
             name_Block.Text = u.Uname;
             sign_TextBox.Text = u.Sign;
             head_Image.Source = img.GetBitmap(u.Photo);
-            my_Exp1.Header += " " + Friend_List.Count();
+            my_Exp1.Header ="我的好友 " + Friend_List.Count();
         }
 
         #region 界面
@@ -126,8 +126,8 @@ namespace Kerberos_Client.UI
         {
             if ((sender as DataGrid).SelectedItem == null)
                 return;
-            Chat_Message chat = (sender as DataGrid).SelectedItem as Chat_Message;
-            User temp = chat.U;
+            Record_Message chat = (sender as DataGrid).SelectedItem as Record_Message;
+            User temp = chat.Owner.U;
             Dispatcher.Invoke(new Action(delegate
             {
 
@@ -299,9 +299,11 @@ namespace Kerberos_Client.UI
                 Search_List.Clear();
                 foreach (object i in Friend_List)
                 {
-                    if ((i as User).Uname.Contains(temp) || (i as User).Uid.Contains(temp) || (i as User).Sign.Contains(temp))
+                    Friend friend=i as Friend;
+                    User user = friend.U;
+                    if (user.Uname.Contains(temp) || user.Uid.Contains(temp) || user.Sign.Contains(temp))
                     {
-                        Search_List.Add(i as User);
+                        Search_List.Add(friend);
                     }
                 }
                 search_TabItem.IsSelected = true;
@@ -343,6 +345,7 @@ namespace Kerberos_Client.UI
             {
                 friend_List.ItemsSource = null;
                 friend_List.ItemsSource = Friend_List;
+                my_Exp1.Header = "我的好友 " + Friend_List.Count();
             }));
         }
 
@@ -399,6 +402,19 @@ namespace Kerberos_Client.UI
                 }
                 o.Extend = DESLibrary.DecryptDES(o.Extend, Main_Window.Keys["server"]);
                 MyStruct myStruct = JsonHelper.FromJson<MyStruct>(o.Extend);
+                Chat_Message chat_Message = myStruct.chat_message;
+                Record_Message record=Message_List.Find(delegate (Record_Message record_) { return record_.Owner.U.Uid.Equals(chat_Message.U.Uid); });
+                if(record!=null)
+                {
+                    record.add(chat_Message);
+                }
+                else
+                {
+                    record = new Record_Message();
+                    record.Owner= Friend_List.Find(delegate (Friend friend) { return friend.U.Uid.Equals(chat_Message.U.Uid); });
+                    record.add(chat_Message);
+                }
+                Message_List.Add(record);
                 u.chatMessage.Add(new ChatMessage()
                 {
                     Photo =user.U.Photo ,

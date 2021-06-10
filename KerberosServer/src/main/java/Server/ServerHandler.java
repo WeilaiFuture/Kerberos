@@ -52,7 +52,7 @@ public class ServerHandler {
         String message=OrderToString(order);
         //发送证书
         System.out.println("发送证书"+message);
-        String m=(String) sendByAddress("192.168.43.130",10087,message);
+        String m=(String) sendByAddress("127.0.0.1",10087,message);
         //String m=(String) sendByAddress("127.0.0.1",10087,message);
         if(m!=null){
             System.out.println("Kv"+m);
@@ -171,7 +171,8 @@ public class ServerHandler {
         else{
             //存入数据库
             wLogin(order.getSrc(),1);
-            mystruct.user=rSearchID(order.getSrc());
+            mystruct.user=rInfo(order.getSrc());
+            System.out.println("########user name="+mystruct.user.getUname());
             //更改ACK
             order.setStatusReport(true);
         }
@@ -260,7 +261,7 @@ public class ServerHandler {
         //获取报文
         MyJson.Order order =MyJson.StringToOrder(message);
         //获取消息
-        MyStruct mystruct=MyJson.StringToStruct(order.getExtend());
+        //MyStruct mystruct=MyJson.StringToStruct(order.getExtend());
         return false;
     }
     static public boolean searchID(String message){
@@ -277,7 +278,7 @@ public class ServerHandler {
         //获取消息
         MyStruct mystruct=MyJson.StringToStruct(order.getExtend());
         //查询数据库，用户信息
-        mystruct.user=rSearchID(mystruct.user.getUid());
+        mystruct.friendlist=rSearchID(mystruct.user.getUid());
         //发送
         String src=order.getSrc();
         order.setSrc(order.getDst());
@@ -292,7 +293,7 @@ public class ServerHandler {
         System.out.println("发送:"+sorder);
         return false;
     }
-    static public boolean logout(String message){
+    static public boolean logout(String message) throws Exception {
         /*
         head=1008;
         登出信息；
@@ -322,8 +323,6 @@ public class ServerHandler {
             System.out.println("发送:"+sorder);
         }
         wLogin(ID,0);
-        //向netty发送登出信息
-        logOut(order.getSrc());
         return false;
     }
     static public boolean information(String message){
@@ -339,7 +338,7 @@ public class ServerHandler {
         //获取消息
         MyStruct mystruct=MyJson.StringToStruct(order.getExtend());
         //查询数据库，用户信息
-        mystruct.user=rSearchID(mystruct.user.getUid());
+        mystruct.user=rInfo(mystruct.user.getUid());
         //返回个人信息
         String src=order.getSrc();
         order.setSrc(order.getDst());
@@ -457,7 +456,7 @@ public class ServerHandler {
         //查询群内好友
         LinkedList<String> GroupUsers=rGroupUser(order.getDst());
         //转发
-        MyStruct.User user=rSearchID(order.getSrc());
+        MyStruct.User user=rInfo(order.getSrc());
         String sstruct="";
         String sorder="";
         switch (order.getContentType()){

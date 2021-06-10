@@ -23,7 +23,7 @@ import javax.swing.*;
 import java.util.LinkedList;
 import java.util.concurrent.TimeUnit;
 
-import static Framework.SessionLayer.SessionLayer.bindChannelWithUserName;
+import static Framework.SessionLayer.SessionLayer.*;
 import static Json.MyJson.StringToOrder;
 import static Server.ServerDataBase.con;
 import static Server.ServerDataBase.connectData;
@@ -45,10 +45,10 @@ public class ServerFunction extends SessionHandler {
     JTable table = createTable();
 
     LinkedList<String[]> list = new LinkedList<String[]>();
-
+    String message="";
     //继承方法集
     @Override
-    public void receive(String channelName,Object msg){
+    public void receive(String channelName,Object msg) throws Exception {
         /*
         判断消息头部，转到相应的处理函数；
         这里应使用状态机；
@@ -57,6 +57,14 @@ public class ServerFunction extends SessionHandler {
         直到用户登出，转为等待连接状态。
          */
         String info=(String) msg;
+        if((info).substring((info).length()-1).equals("}")){
+            info=message+info;
+            message="";
+        }
+        else{
+            message=info;
+            return;
+        }
         //解析报文头部
         System.out.println("收到"+info);
         MyJson.Order order=StringToOrder(info);
@@ -67,12 +75,13 @@ public class ServerFunction extends SessionHandler {
             bindChannelWithUserName(channelName,order.getSrc());
         }
         //UI表格
-        String []s=new String[3];
+        String []s=new String[5];
         list.addFirst(s);
         s[0]=order.getSrc();//源
         s[1]=order.getDst();//目的
-        s[2]=order.getExtend();//密文
-        //  s[3]=order.getExtend();//明文
+        s[2]=order.getMsgType();//报文类型
+        s[3]=order.getExtend();//密文
+        s[4]=order.getExtend();//明文
         add(table, list);
         switch (order.getMsgType()){
             case "0001":
@@ -92,12 +101,17 @@ public class ServerFunction extends SessionHandler {
                 break;
             case "1005":
                 serverHandler.hello(info);
+                logIn(order.getSrc());
                 break;
             case "1006":
                 serverHandler.heart(info);
                 break;
+            case "1007":
+                serverHandler.searchID(info);
+                break;
             case "1008":
                 serverHandler.logout(info);
+                logOut(order.getSrc());
                 break;
             case "1009":
                 serverHandler.information(info);

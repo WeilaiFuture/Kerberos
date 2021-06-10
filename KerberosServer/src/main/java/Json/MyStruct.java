@@ -368,7 +368,7 @@ public class MyStruct {
         String Email;//邮箱
         int Gender ;//性别
         int Status ;//状态
-        int StartTime;//注册时间
+        long StartTime;//注册时间
 
         public String getPhoto() {
             return Photo;
@@ -406,7 +406,7 @@ public class MyStruct {
             return Status;
         }
 
-        public int getStartTime() {
+        public long getStartTime() {
             return StartTime;
         }
 
@@ -446,7 +446,7 @@ public class MyStruct {
             Status = status;
         }
 
-        public void setStartTime(int startTime) {
+        public void setStartTime(long startTime) {
             StartTime = startTime;
         }
     }

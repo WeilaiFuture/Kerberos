@@ -74,6 +74,9 @@ namespace Kerberos_Client
         /// <param 要发送的消息="text"></param>
         public static void sendMessage(Order order)
         {
+            string sig = string.Empty;
+            RSALibrary.SignatureFormatter(Main_Window.Keys["private"],order.Extend,  ref sig);
+            order.Sign = sig;
             show.add(order);
             string strMsg = JsonHelper.ToJson(order);
             Logger.Instance.WriteLog(strMsg, LogType.Send);
@@ -106,6 +109,7 @@ namespace Kerberos_Client
                 order.MsgType = "1006";
                 MyStruct myStruct = new MyStruct();
                 order.Extend = JsonHelper.ToJson(myStruct);
+                order.Extend = DESLibrary.EncryptDES(order.Extend, Main_Window.Keys["server"]);
                 sendMessage(order);
             }
             return;

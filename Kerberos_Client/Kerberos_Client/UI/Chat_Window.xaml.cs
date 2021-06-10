@@ -68,6 +68,22 @@ namespace Kerberos_Client.UI
             order.Extend = DESLibrary.EncryptDES(JsonHelper.ToJson(myStruct), Main_Window.Keys["server"]);
             ConnectServer.sendMessage(order);
 
+            Chat_Message chat_Message = myStruct.chat_message;
+            Record_Message record = Main_Window.Message_List.Find
+                (delegate (Record_Message record_) 
+                { return record_.Owner.U.Uid.Equals(Chat_user.Uid); });
+            if (record != null)
+            {
+                record.add(chat_Message);
+            }
+            else
+            {
+                record = new Record_Message();
+                record.Owner = Main_Window.Friend_List.Find(delegate (Friend friend) { MessageBox.Show(friend.U.Uid.Equals(chat_Message.U.Uid).ToString()); return friend.U.Uid.Equals(Chat_user.Uid); });
+                record.add(chat_Message);
+            }
+            Main_Window.Message_List.Add(record);
+
             chatMessage.Add(new ChatMessage()
             {
                 Photo = My_user.Photo,
