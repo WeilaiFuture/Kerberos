@@ -14,6 +14,11 @@
         <local:MyStruct x:Key="User"></local:MyStruct>
         <local:MyStruct x:Key="Friend"></local:MyStruct>
         <local:MyStruct x:Key="Record_Message"></local:MyStruct>
+        <ContextMenu x:Key="ContextMenu">
+            <MenuItem Name="Delete" Header="删除好友" Click="Delete_Click"/>
+            <Separator></Separator>
+            <MenuItem Name="Refresh" Header="刷新" Click="Refresh_Click"/>
+        </ContextMenu>
     </Window.Resources>
     <Grid x:Name="My_grid" Focusable="True">
         <!--按比例切割界面-->
@@ -27,7 +32,7 @@
         <Border Grid.RowSpan="4" Opacity="0.6">
             <Image  Source="../Image_Source/back.jpg" Stretch="Fill" Margin="-7,-6,-4.4,-9.4" HorizontalAlignment="Right" Width="305"/>
         </Border>
-        
+
         <!--用户信息块-->
         <Grid Grid.Row="0" Focusable="True">
             <!--头像，鼠标点击进入个人信息界面-->
@@ -130,7 +135,7 @@
                      Background="Transparent" GotFocus="Tb_GotFocus" LostFocus="Tb_LostFocus">
             </TextBox>
         </Grid>
-        
+
         <!--搜索块-->
         <Grid Grid.Row="1"  Focusable="True">
             <Grid.ColumnDefinitions>
@@ -144,60 +149,67 @@
             <TextBox Name="search_TextBox" Opacity="0.6" IsReadOnly="False"
                      BorderThickness="0"  Margin="26,0,0,9.6" Grid.ColumnSpan="2" KeyUp="search_TextBox_KeyUp" TextChanged="search_TextBox_TextChanged"/>
         </Grid>
-        
+
         <!--好友、信息块-->
         <Grid Grid.Row="2" Grid.RowSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="229*"/>
+                <ColumnDefinition Width="71*"/>
+            </Grid.ColumnDefinitions>
             <Button x:Name="message_Button" Grid.Column="0" BorderThickness="0,0,0,4" Background="SkyBlue" Content="消息" Opacity="0.6" Click="message_Button_Click" HorizontalAlignment="Left" Width="150" Margin="0,-7,0,411.6" ></Button>
-            <Button x:Name="friend_Button" Content="联系人" Opacity="0.6" Click="friend_Button_Click" BorderThickness="0" HorizontalAlignment="Right" Width="150" Margin="0,-7,0,411.6"/>
-            
+            <Button x:Name="friend_Button" Content="联系人" Opacity="0.6" Click="friend_Button_Click" BorderThickness="0" HorizontalAlignment="Right" Width="150" Margin="0,-7,0,411.6" Grid.ColumnSpan="2"/>
+
             <!--选项卡-->
-            <TabControl Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"   TabStripPlacement="Top"  Opacity="0.8" Margin="0,20,0,-0.4" RenderTransformOrigin="0.296,0.478" >
+            <TabControl Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"   TabStripPlacement="Top"  Opacity="0.8" Margin="0,20,0,-0.4" RenderTransformOrigin="0.296,0.478" Grid.ColumnSpan="2" >
                 <!--消息列表-->
                 <TabItem Name="Message_Tab"  Header="消息列表" Grid.Column="0" Height="0" Visibility="Hidden" Focusable="True" >
                     <Expander x:Name="my_Exp" Header="我的信息" IsExpanded="False" >
                         <!--信息队列-->
-                    <DataGrid HeadersVisibility="None" CanUserResizeColumns="False" CanUserReorderColumns="False" x:Name="message_List" IsReadOnly="True" AutoGenerateColumns="False"
+                        <DataGrid HeadersVisibility="None" CanUserResizeColumns="False" CanUserReorderColumns="False" x:Name="message_List" IsReadOnly="True" AutoGenerateColumns="False"
                                   DataContext="{StaticResource Record_Message}" HorizontalScrollBarVisibility="Hidden" GridLinesVisibility="Horizontal" 
                                   MouseDoubleClick="message_List_MouseDoubleClick" SelectionMode="Single" SelectionUnit="FullRow" ItemsSource="{Binding Path=Message_List}">
-                        <DataGrid.Columns>
-                            <!--头像行-->
-                            <DataGridTemplateColumn >
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <Image x:Name="head_Image" Source="{Binding Owner.U.Photo}"  Width="40" Height="40" RenderTransformOrigin="1,1" >
-                                            <Image.Clip>
-                                                <EllipseGeometry RadiusX="60" RadiusY="60" Center="30,30"/>
-                                            </Image.Clip>
-                                        </Image>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-                            <!--姓名行-->
-                            <DataGridTemplateColumn Width="*">
-                                <DataGridTemplateColumn.CellTemplate >
-                                    <DataTemplate>
-                                        <Grid>
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="*"></RowDefinition>
-                                                <RowDefinition Height="2*"></RowDefinition>
-                                            </Grid.RowDefinitions>
-                                            <TextBlock Grid.Row="0" x:Name="name_TextBlock" Text="{Binding Owner.U.Uname}" />
-                                            <TextBlock Grid.Row="2" x:Name="message_TextBlock" Text="{Binding Last_Message.Content}" />
-                                        </Grid>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-                        </DataGrid.Columns>
-                    </DataGrid>
-                        </Expander>
+                            <DataGrid.Columns>
+                                <!--头像行-->
+                                <DataGridTemplateColumn >
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Image x:Name="head_Image" Source="{Binding Owner.U.Photo}"  Width="40" Height="40" RenderTransformOrigin="1,1" >
+                                                <Image.Clip>
+                                                    <EllipseGeometry RadiusX="60" RadiusY="60" Center="30,30"/>
+                                                </Image.Clip>
+                                            </Image>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <!--姓名行-->
+                                <DataGridTemplateColumn Width="*">
+                                    <DataGridTemplateColumn.CellTemplate >
+                                        <DataTemplate>
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="*"></RowDefinition>
+                                                    <RowDefinition Height="2*"></RowDefinition>
+                                                </Grid.RowDefinitions>
+                                                <TextBlock Grid.Row="0" x:Name="name_TextBlock" Text="{Binding Owner.U.Uname}" />
+                                                <TextBlock Grid.Row="2" x:Name="message_TextBlock" Text="{Binding Last_Message.Content}" />
+                                            </Grid>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Expander>
                 </TabItem>
                 <!--好友列表-->
                 <TabItem Name="Friend_Tab" Header="好友列表" Height="0"   Visibility="Hidden" Focusable="True">
                     <Expander x:Name="my_Exp1" Header="我的好友" IsExpanded="False" >
-                        <DataGrid HeadersVisibility="None" CanUserResizeColumns="False" CanUserReorderColumns="False" x:Name="friend_List" IsReadOnly="True" 
+
+                        <DataGrid HeadersVisibility="None" CanUserResizeColumns="False" CanUserReorderColumns="False" x:Name="friend_List" 
+                                  IsReadOnly="True" 
                                   AutoGenerateColumns="False" DataContext="{StaticResource Friend}"
                                   HorizontalScrollBarVisibility="Hidden" GridLinesVisibility="Horizontal" 
-                                  MouseDoubleClick="friend_List_MouseDoubleClick" SelectionMode="Single" SelectionUnit="FullRow">
+                                  SelectionMode="Single" SelectionUnit="FullRow"
+                                  MouseLeftButtonUp="friend_List_MouseDoubleClick" ContextMenu="{StaticResource ContextMenu}">
                             <DataGrid.Columns>
                                 <!--头像行-->
                                 <DataGridTemplateColumn >

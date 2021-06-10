@@ -2,8 +2,8 @@
 #define des
 #define rsa
 #define kbtest
-#define local
-//#define lianji
+//#define local
+#define lianji
 using Kerberos_Client.UI;
 using System;
 using System.Collections.Generic;
@@ -46,8 +46,8 @@ namespace Kerberos_Client
 #endif
 
 #if lianji
-        string SERVERIP  = "192.168.43.63";
-        string ASIP = "192.168.43.130";
+        string SERVERIP  = "192.168.1.102";
+        string ASIP = "192.168.1.103";
         string TGSIP = "192.168.43.130";
         int ASPort = 10087;
         int TGSPort = 10086;
@@ -141,7 +141,12 @@ namespace Kerberos_Client
         {
             // Hyperlink link = sender as Hyperlink;
             //Process.Start(new ProcessStartInfo(link.NavigateUri.AbsoluteUri));
+
+#if lianji
+            Process.Start(new ProcessStartInfo(@"192.168.1.104:12350"));
+#else
             Process.Start(new ProcessStartInfo(@"../../../../\Web-Server\index.html"));
+#endif
         }
         /// <summary>
         /// 关闭按钮

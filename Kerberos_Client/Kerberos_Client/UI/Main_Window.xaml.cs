@@ -491,5 +491,15 @@ namespace Kerberos_Client.UI
             ConnectServer.sendMessage(order);
             base.OnClosing(e);
         }
+
+        private void Delete_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Refresh_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
