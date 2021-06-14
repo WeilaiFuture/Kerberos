@@ -60,6 +60,7 @@ public class SessionLayer {
             throw new SessionLayerNotInitialized();
         }
     }
+
     static public Object sendByAddress(String host,int port,Object msg){
         /*byte[] response = ((String)msg).getBytes();
         ByteBuf msgBuf = Unpooled.buffer(response.length);
@@ -107,11 +108,11 @@ public class SessionLayer {
          * 2 用户不在线，在离线队列中有用户（不是第一个离线信息）
          * 3 用户不在线，离线队列中没有用户（第一条离线信息）
          */
-        try {
-            TimeUnit.SECONDS.sleep(1);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            TimeUnit.SECONDS.sleep(1);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
         checkInitStatus();
         if(channelMap.get(userName) != null){
             byte[] response = ((String)msg).getBytes();

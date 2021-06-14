@@ -43,21 +43,21 @@ public class StateMachineEventConfig {
     }
     //登录
     @OnTransition(source = "HEADOVER", target = "HANDLER1002")
-    public void head1002(Message<RegEventEnum> message) {
+    public void head1002(Message<RegEventEnum> message) throws Exception {
         ServerHandler.login(message.getHeaders().get("order").toString());
         logger.info("Switch state from O to 1002");
     }
 
     //请求好友界面
     @OnTransition(source = "HEADOVER", target = "HANDLER1003")
-    public void head1003(Message<RegEventEnum> message) {
+    public void head1003(Message<RegEventEnum> message) throws Exception {
         ServerHandler.searchFriendList(message.getHeaders().get("order").toString());
         logger.info("Switch state from O to 2");
     }
 
     //问好
     @OnTransition(source = "HEADOVER", target = "HANDLER1005")
-    public void head1001(Message<RegEventEnum> message) {
+    public void head1001(Message<RegEventEnum> message) throws Exception {
         ServerHandler.hello(message.getHeaders().get("order").toString());
         logger.info("Switch state from O to 1005");
     }
@@ -70,7 +70,7 @@ public class StateMachineEventConfig {
 
     //查找ID
     @OnTransition(source = "HEADOVER", target = "HANDLER1007")
-    public void head1007(Message<RegEventEnum> message) {
+    public void head1007(Message<RegEventEnum> message) throws Exception {
         ServerHandler.searchID(message.getHeaders().get("order").toString());
         logger.info("Switch state from O to 7");
     }
@@ -83,28 +83,28 @@ public class StateMachineEventConfig {
 
     //个人信息
     @OnTransition(source = "HEADOVER", target = "HANDLER1009")
-    public void head1009(Message<RegEventEnum> message) {
+    public void head1009(Message<RegEventEnum> message) throws Exception {
         ServerHandler.information(message.getHeaders().get("order").toString());
         logger.info("Switch state from O to 9");
     }
 
     //修改信息
     @OnTransition(source = "HEADOVER", target = "HANDLER1010")
-    public void head1010(Message<RegEventEnum> message) {
+    public void head1010(Message<RegEventEnum> message) throws Exception {
         ServerHandler.changeInfo(message.getHeaders().get("order").toString());
         logger.info("Switch state from O to 10");
     }
 
     //单聊信息
     @OnTransition(source = "HEADOVER", target = "HANDLER2001")
-    public void head2001(Message<RegEventEnum> message) {
+    public void head2001(Message<RegEventEnum> message) throws Exception {
         ServerHandler.privateChat(message.getHeaders().get("order").toString());
         logger.info("Switch state from O to 21");
     }
 
     //群聊信息
     @OnTransition(source = "HEADOVER", target = "HNDLER2002")
-    public void head2002(Message<RegEventEnum> message) {
+    public void head2002(Message<RegEventEnum> message) throws Exception {
         ServerHandler.publicChat(message.getHeaders().get("order").toString());
         logger.info("Switch state from O to 22");
     }

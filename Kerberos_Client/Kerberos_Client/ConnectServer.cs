@@ -8,6 +8,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -85,7 +86,6 @@ namespace Kerberos_Client
                     client.Send(Encoding.UTF8.GetBytes(strMsg));
                 else
                     System.Windows.MessageBox.Show("与服务器断开连接");
-            Thread.Sleep(500);
         }
         public static void HeartStart()
         {
@@ -101,7 +101,6 @@ namespace Kerberos_Client
             while(Main_Window.live)
             {
                 Thread.Sleep(30 * 1000);
-
                 //发送报文
                 Order order = new Order();
                 order.Dst = "Server";
@@ -144,10 +143,11 @@ namespace Kerberos_Client
                 if (num <= 0)
                     break;
                 //MessageBox.Show("ERROR");
+
                 string strMsg = System.Text.Encoding.UTF8.GetString(result, 0, num);
                 if (strMsg[strMsg.Length - 1] != '}')
                 {
-                    if(recv==string.Empty)
+                    if (recv == string.Empty)
                         recv = strMsg;
                     else
                         recv += strMsg;
@@ -156,85 +156,131 @@ namespace Kerberos_Client
                 else
                     recv += strMsg;
                 strMsg = recv;
-                Logger.Instance.WriteLog(strMsg, LogType.Recv);
-                Order order =JsonHelper.FromJson<Order>(strMsg);
-                recv = string.Empty;
-                if (order == null)
-                    return;
-                show.add(order);
-                string command = order.MsgType;
-                switch (command)
+                string pattern = "\"{*}\"";
+                string[] ans = Regex.Split(strMsg,pattern);
+                foreach (object o in ans)
                 {
-                    case "0001":
-                        w.Call_certificate(order);
-                        break;
-                    case "0002":
-                        w.Call_Key(order);
-                        break;
-                    case "0004":
-                        w.Call_AS(order);
-                        break;
-                    case "0006":
-                        w.Call_TGS(order);
-                        break;
-                    case "0008":
-                        w.Call_Server(order);
-                        break;
-                    case "1001":
-                        MessageBox.Show(Encoding.UTF8.GetString(result, 0, num) + "1001");
-                        break;
-                    case "1002":
-                        w.Call_check_User(order);
-                        break;
-                    case "1003": //好友请求
-                        MessageBox.Show(Encoding.UTF8.GetString(result, 0, num) + "0001");
-                        break;
-                    case "1004"://好友界面
-                        w.main_Window.Call_Friend(order);
-                        break;
-                    case "1005":
-                        w.main_Window.Call_Greet(order);
-                        break;
-                    case "1006":
-                        MessageBox.Show(Encoding.UTF8.GetString(result, 0, num) + "0001");
-                        break;
-                    case "1007":
-                        w.main_Window.Add_.Call_Search(order);
-                        break;
-                    case "1008":
-                        MessageBox.Show(Encoding.UTF8.GetString(result, 0, num) + "0001");
-                        break;
-                    case "1009":
-                        MessageBox.Show(Encoding.UTF8.GetString(result, 0, num) + "0001");
-                        break;
-                    case "1010":
-                        MessageBox.Show(Encoding.UTF8.GetString(result, 0, num) + "0001");
-                        break;
-                    case "2001":
-                        #region 信息报文
-                        switch (order.ContentType)
+                    strMsg = o as string;
+                    Logger.Instance.WriteLog(strMsg, LogType.Recv);
+                    Order order = JsonHelper.FromJson<Order>(strMsg);
+                    recv = string.Empty;
+                    if (order == null)
+                        return;
+                    show.add(order);
+                    string command = order.MsgType;
+                    if (order.Src.Equals("Server"))
+                    {
+                        if (!order.MsgType.Equals("0001") && !order.MsgType.Equals("0008"))
                         {
-                            case "101":
-                                w.main_Window.Call_Message(order);
-                                break;
-                            case "9001":
-                                w.main_Window.ReCall_Friend(order);
-                                break;
-                            case "9006":
-                                w.main_Window.Call_Result(order);
-                                break;
-                            case "9007" :
-                                w.main_Window.Call_Result(order);
-                                break;
+
                         }
-                        break;
-                    #endregion
-                    case "2002": 
-                        MessageBox.Show(Encoding.UTF8.GetString(result, 0, num) + "0001");
-                        break;
-                    default:
-                        MessageBox.Show(Encoding.UTF8.GetString(result, 0, num));
-                        break;
+                        //MessageBox.Show(RSALibrary.SignatureDeformatter(Main_Window.Keys["server_pk"], order.Sign, order.Extend.ToString()).ToString());
+                    }
+                    switch (command)
+                    {
+                        case "0001":
+                            w.Call_certificate(order);
+                            break;
+                        case "0002":
+                            w.Call_Key(order);
+                            break;
+                        case "0004":
+                            w.Call_AS(order);
+                            break;
+                        case "0006":
+                            w.Call_TGS(order);
+                            break;
+                        case "0008":
+                            w.Call_Server(order);
+                            break;
+                        case "1001":
+                            MessageBox.Show(Encoding.UTF8.GetString(result, 0, num) + "1001");
+                            break;
+                        case "1002":
+                            w.Call_check_User(order);
+                            break;
+                        case "1003": //好友请求
+                            MessageBox.Show(Encoding.UTF8.GetString(result, 0, num) + "0001");
+                            break;
+                        case "1004"://好友界面
+                            w.main_Window.Call_Friend(order);
+                            break;
+                        case "1005":
+                            //MyStruct myStruct1 = JsonHelper.FromJson<MyStruct>(DESLibrary.DecryptDES(order.Extend, Main_Window.Keys["server"]));
+                            //MessageBox.Show(myStruct1.user.Uname + "上线了");
+                            w.main_Window.Call_Greet(order);
+                            break;
+                        case "1006":
+                            MessageBox.Show(Encoding.UTF8.GetString(result, 0, num) + "0001");
+                            break;
+                        case "1007":
+                            w.main_Window.Add_.Call_Search(order);
+                            break;
+                        case "1008":
+                            MyStruct myStruct = JsonHelper.FromJson<MyStruct>(DESLibrary.DecryptDES(order.Extend, Main_Window.Keys["server"]));
+                            MessageBox.Show(myStruct.user.Uname + "下线了");
+                            break;
+                        case "1009":
+                            MessageBox.Show(Encoding.UTF8.GetString(result, 0, num) + "0001");
+                            break;
+                        case "1010":
+                            MessageBox.Show(Encoding.UTF8.GetString(result, 0, num) + "0001");
+                            break;
+                        case "2001":
+                            #region 信息报文
+                            switch (order.ContentType)
+                            {
+                                case "101":
+                                    w.main_Window.Call_Message(order);
+                                    break;
+                                case "9001":
+                                    w.main_Window.ReCall_Friend(order);
+                                    break;
+                                case "9005":
+                                    w.main_Window.Request();
+                                    break;
+                                case "9006":
+                                    w.main_Window.Call_Result(order);
+                                    break;
+                                case "9007":
+                                    w.main_Window.Call_Result(order);
+                                    break;
+                                default:
+                                    break;
+                            }
+                            break;
+                        #endregion
+                        case "2002":
+                            #region 信息报文
+                            switch (order.ContentType)
+                            {
+                                case "101":
+                                    w.main_Window.Call_Message(order);
+                                    break;
+                                case "9002":
+                                    w.main_Window.ReCall_Add_Group(order);
+                                    break;
+                                case "9003":
+                                    w.main_Window.Call_Request_Group(order);
+                                    break;
+                                case "9004":
+                                    w.main_Window.Request();
+                                    break;
+                                case "9008":
+                                    w.main_Window.Call_Result_Group(order);
+                                    break;
+                                case "9009":
+                                    w.main_Window.Call_Result_Group(order);
+                                    break;
+                                default:
+                                    break;
+                            }
+                            break;
+                        #endregion
+                        default:
+                            MessageBox.Show(Encoding.UTF8.GetString(result, 0, num));
+                            break;
+                    }
                 }
             }
         }

@@ -2,8 +2,8 @@
 #define des
 #define rsa
 #define kbtest
-//#define local
-#define lianji
+#define local
+//#define lianji
 using Kerberos_Client.UI;
 using System;
 using System.Collections.Generic;
@@ -46,9 +46,9 @@ namespace Kerberos_Client
 #endif
 
 #if lianji
-        string SERVERIP  = "192.168.1.102";
-        string ASIP = "192.168.1.103";
-        string TGSIP = "192.168.43.130";
+        string SERVERIP  = "192.168.43.21";
+        string ASIP = "192.168.43.130";
+        string TGSIP = "192.168.43.21";
         int ASPort = 10087;
         int TGSPort = 10086;
         int ServerPort = 1122;
@@ -143,7 +143,7 @@ namespace Kerberos_Client
             //Process.Start(new ProcessStartInfo(link.NavigateUri.AbsoluteUri));
 
 #if lianji
-            Process.Start(new ProcessStartInfo(@"192.168.1.104:12350"));
+            Process.Start(new ProcessStartInfo(@"http://192.168.43.238:12350/"));
 #else
             Process.Start(new ProcessStartInfo(@"../../../../\Web-Server\index.html"));
 #endif
@@ -441,7 +441,6 @@ delegate
         }
         internal void Call_check_User(Order o)
         {
-            Thread.Sleep(3 * 1000);
             if (o.StatusReport == false)
             {
                 MessageBox.Show("登录信息有误，请重新输入！");

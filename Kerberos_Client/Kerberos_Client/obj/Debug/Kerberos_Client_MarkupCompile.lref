@@ -4,9 +4,12 @@ FE:\Kerberos\Kerberos_Client\Kerberos_Client\MainWindow.xaml;;
 FE:\Kerberos\Kerberos_Client\Kerberos_Client\ShowMessage.xaml;;
 FE:\Kerberos\Kerberos_Client\Kerberos_Client\UI\Add_Window.xaml;;
 FE:\Kerberos\Kerberos_Client\Kerberos_Client\UI\Chat_Window.xaml;;
+FE:\Kerberos\Kerberos_Client\Kerberos_Client\UI\CreateGroup.xaml;;
+FE:\Kerberos\Kerberos_Client\Kerberos_Client\UI\DataGridStyle.xaml;;
 FE:\Kerberos\Kerberos_Client\Kerberos_Client\UI\ListBoxStyle.xaml;;
 FE:\Kerberos\Kerberos_Client\Kerberos_Client\UI\Load.xaml;;
 FE:\Kerberos\Kerberos_Client\Kerberos_Client\UI\LoadingWait.xaml;;
 FE:\Kerberos\Kerberos_Client\Kerberos_Client\UI\Main_Window.xaml;;
+FE:\Kerberos\Kerberos_Client\Kerberos_Client\UI\MenuItemStyle.xaml;;
 FE:\Kerberos\Kerberos_Client\Kerberos_Client\UI\User_Window.xaml;;
 

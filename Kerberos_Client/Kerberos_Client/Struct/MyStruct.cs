@@ -23,7 +23,6 @@ namespace Kerberos_Client
         public Friend friend { get; set; }
         public Chat_Message chat_message { get; set; }
         public Group group { get; set; }
-        public Record_Message record_message { get; set; }
         public List<Friend> friendlist { get; set; }
 
         #region 证书
@@ -376,7 +375,6 @@ namespace Kerberos_Client
             }
 
         }
-        #endregion
         #region 好友
         public class Friend
         {
@@ -401,18 +399,61 @@ namespace Kerberos_Client
             }
         }
         #endregion
+        #endregion
         #region 聊天信息
+        public abstract class Chat_information:Add_Chat
+        {
+            public string Last_Message { get; set; }
+            public string Last_Time { get; set; }
+            public string Photo { get; set; }
+            public string Name { get; set; }
+            public string Id { get; set; }
+            public List<Chat_Message> Messages_list { get; set; }
+            public abstract void Add(Chat_Message chat_Message);
+        }
+        interface Add_Chat
+        {
+            public abstract void Add(Chat_Message chat_Message);
+        }
+        public class Person_Chat : Chat_information
+        { 
+            public Person_Chat(string P,string N,string I)
+            {
+                Photo = P;
+                Name = N;
+                Id = I;
+                Messages_list = new List<Chat_Message>();
+            }
+            public override void Add(Chat_Message chat_Message)
+            {
+                Messages_list.Add(chat_Message);
+                Last_Message =chat_Message.Content;
+                DateTime d=new DateTime(chat_Message.Time);
+                Last_Time = d.ToString();
+            }
+        }
+        public class Group_Chat : Chat_information
+        {
+            public Group_Chat(string P, string N, string I)
+            {
+                Photo = P;
+                Name = N;
+                Id = I;
+                Messages_list = new List<Chat_Message>();
+            }
+            public override void Add(Chat_Message chat_Message)
+            {
+                Messages_list.Add(chat_Message);
+                Last_Message = chat_Message.U.Name + ":" + chat_Message.Content;
+                DateTime d = new DateTime(chat_Message.Time);
+                Last_Time = d.ToString();
+            }
+        }
         public class Chat_Message
         {
-            int head;//信息种类
             string content;//信息内容
             User u;//发送方
             long time;//时间戳
-            public int Head
-            {
-                get { return head; }
-                set { head = value; }
-            }
             public string Content
             {
                 get { return content; }
@@ -433,17 +474,13 @@ namespace Kerberos_Client
         #region 群信息
         public class Group
         {
-            Dictionary<User, string> list;//用户列表
+            public List<User> list;//用户列表
             string gid;//群账号
             string photo;//群头像
             string leader;//群主账号
             string sign;//群介绍
             int startTime;//创建时间
-            public Dictionary<User, string> LIST
-            {
-                get { return list; }
-                set { list = new Dictionary<User, string>(value); }
-            }
+
             public string Gid
             {
                 get { return gid; }
@@ -471,26 +508,7 @@ namespace Kerberos_Client
             }
         }
         #endregion
-        #region 消息记录
-        public class Record_Message
-        {
-            public Friend Owner { get; set; }
-            public Group group { get; set; }
-            public Chat_Message Last_Message { get; set; }
-            private List<Chat_Message> messages_list=new List<Chat_Message>();
-            public List<Chat_Message> Messages_list
-            {
-                get { return messages_list; }
-                set { messages_list = new List<Chat_Message>(value); }
-            }
-            public void add(Chat_Message chat_Message)
-            {
-                messages_list.Add(chat_Message);
-                Last_Message = chat_Message;
-            }
-        }
        
-        #endregion
         public class img
         {
              public static BitmapImage GetBitmap(string path)

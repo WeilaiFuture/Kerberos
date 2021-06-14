@@ -81,8 +81,10 @@ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
             </DataGrid.Columns>
         </DataGrid>
 
-        <TextBox IsReadOnly="True" Grid.Row="1" x:Name="txtBlk" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" TextWrapping="Wrap" VerticalAlignment="Bottom" FontSize="14" Background="#FFF3F3F3" Padding="15" Height="177" Margin="0,0,0,0.4"/>
-
+        <TextBox IsReadOnly="True" Grid.Row="1" 
+                 x:Name="txtBlk" 
+                 VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" 
+                 TextWrapping="Wrap" FontSize="14" Background="#FFF3F3F3" Padding="15"  Margin="0,0,0,0.4"/>
     </Grid>
 </Window>
 

@@ -24,6 +24,7 @@ public class DateBaseOperation {
          */
         Connection conn = null;
         // no ssl certificate:
+        //information_schema@rm-uf6t4cbyfz681x569.mysql.rds.aliyuncs.com:3306【rm-uf6t4cbyfz681x569】
         String url = "jdbc:mysql://" +
                 "rm-uf6t4cbyfz681x569jo.mysql.rds.aliyuncs.com:3306/kerbors" +
                 "?sslmode=require" +
@@ -62,7 +63,7 @@ public class DateBaseOperation {
                     +certificate.getSerial()+"\",\""
                     +certificate.getDeadline()+"\",\""
                     +certificate.getName()+"\",\""
-                    +certificate.getPk()+ "\")";
+                    +certificate.getPk()+ "\")"+"\n"+"on duplicate key update `pk` =\""+ certificate.getPk()+"\"";
             Statement statement = connection.createStatement();
             int result = statement.executeUpdate(sql);
             return true;

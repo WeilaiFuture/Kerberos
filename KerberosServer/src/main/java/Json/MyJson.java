@@ -1,7 +1,10 @@
 package Json;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.annotation.JSONField;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 
 public class MyJson {
    //报文解析
@@ -30,8 +33,10 @@ public class MyJson {
     //反序列化
     public static MyStruct StringToStruct(String jsonObject){
         MyStruct struct=JSON.parseObject(jsonObject, MyStruct.class);
+        //MyStruct struct=gson.fromJson(jsonObject, MyStruct.class);
         return struct;
     }
+
     //序列化
     public static String ObjectToString(Object object){
         String jsonOutput= JSON.toJSONString(object);

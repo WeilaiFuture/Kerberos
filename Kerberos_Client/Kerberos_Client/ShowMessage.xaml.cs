@@ -45,12 +45,9 @@ namespace Kerberos_Client
                 return;
             }
             Order order = ShowOrder.SelectedItem as Order;
-            string msgType = "MsgType: " + order.MsgType + "\n";
             string extend = "[Extend]: " + order.Extend + "\n";
             string sign = "Sign: " + order.Sign + "\n";
-            string statusReport = "StatusReport: " + order.StatusReport + "\n";
-            string contentType = "ConetentType: " + order.ContentType + "\n";
-            this.txtBlk.Text = msgType + extend + sign + statusReport + contentType;
+            this.txtBlk.Text =extend + sign;
             switch (order.Src)
             {
                 case "Server":
@@ -95,7 +92,12 @@ namespace Kerberos_Client
                                 this.txtBlk.Text += "Encryption mode: " + "DES\n";
                                 this.txtBlk.Text += "Session Key:" + Main_Window.Keys["tgs"] + "\n";
                                 MyStruct myStruct = JsonHelper.FromJson<MyStruct>(order.Extend);
-                                this.txtBlk.Text += "Decryption Ac: " + DESLibrary.DecryptDES(myStruct.message3.AC, Main_Window.Keys["server"]) + "\n";
+                                this.txtBlk.Text += "Decryption Ac: " + DESLibrary.DecryptDES(myStruct.message3.AC, Main_Window.Keys["tgs"]) + "\n";
+                                break;
+                            default:
+                                this.txtBlk.Text += "Encryption mode: " + "DES\n";
+                                this.txtBlk.Text += "Session Key:" + Main_Window.Keys["server"] + "\n";
+                                this.txtBlk.Text += "Decryption Str: " + DESLibrary.DecryptDES(order.Extend, Main_Window.Keys["server"]) + "\n";
                                 break;
                         }
                     }

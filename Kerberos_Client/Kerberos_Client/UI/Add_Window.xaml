@@ -21,6 +21,8 @@
             <Label Content="Label" HorizontalAlignment="Left" Margin="821,115,-127.4,0" VerticalAlignment="Top" Width="100"/>
             <Button x:Name="BtnClr" Content="搜索" HorizontalAlignment="Left" Margin="621,51,0,0" VerticalAlignment="Top" Width="75" Height="28" Click="Button_Click" FontSize="16" FontWeight="Bold"
                     Background="#FF1ACFD9" Foreground="#FFFCFCFC" />
+            <Button Content="组建群聊" HorizontalAlignment="Left" Margin="709,51,0,0" VerticalAlignment="Top" Width="75" Height="28" Click="Button_Click1" FontSize="16" FontWeight="Bold"
+                    Background="#FF1ACFD9" Foreground="#FFFCFCFC" />
         </Grid>
         <DataGrid Grid.Row="1" HeadersVisibility="None" CanUserResizeColumns="False" CanUserReorderColumns="False" x:Name="search_List" IsReadOnly="True" 
                                   AutoGenerateColumns="False" DataContext="{StaticResource Friend}"

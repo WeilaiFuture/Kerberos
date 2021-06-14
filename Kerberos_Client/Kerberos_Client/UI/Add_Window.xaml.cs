@@ -40,6 +40,12 @@ namespace Kerberos_Client.UI
             order.Extend =DESLibrary.EncryptDES( JsonHelper.ToJson(myStruct),Main_Window.Keys["server"]);
             ConnectServer.sendMessage(order);
         }
+        private void Button_Click1(object sender, RoutedEventArgs e)
+        {
+            CreateGroup createGroup = new CreateGroup(my_User);
+            createGroup.ShowDialog();
+        }
+
         private void Add_Click(object sender, RoutedEventArgs e)
         {
             Order order = new Order();
@@ -49,7 +55,7 @@ namespace Kerberos_Client.UI
             MyStruct myStruct = new MyStruct();
             myStruct.user = my_User;
             myStruct.friend = search_List.SelectedItem as Friend;
-            myStruct.friend.Tid = "0";
+            myStruct.friend.Tid = "我的好友";
             order.Dst = myStruct.friend.U.Uid;
             order.Extend = JsonHelper.ToJson(myStruct);
             order.Extend = DESLibrary.EncryptDES(order.Extend, Main_Window.Keys["server"]);

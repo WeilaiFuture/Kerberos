@@ -1,9 +1,7 @@
 package Json;
 
 
-import java.util.Dictionary;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class MyStruct {
 
@@ -498,18 +496,11 @@ public class MyStruct {
         }
     }
     static public class Chat_Message {
-        int head;//信息种类
         String content;//信息内容
         User u;//发送方
         long time;//时间戳
 
-        public int getHead() {
-            return head;
-        }
-
-        public void setHead(int head) {
-            this.head = head;
-        }
+        
 
         public String getContent() {
             return content;
@@ -531,12 +522,12 @@ public class MyStruct {
             return time;
         }
 
-        public void setTime(int time) {
+        public void setTime(long time) {
             this.time = time;
         }
     }
     static public class Group {
-        Dictionary<User, String> list;//用户列表
+        List<User> list=new LinkedList<User>();//用户列表
         String gid;//群账号
         String gname;//群名称
         String photo;//群头像
@@ -552,11 +543,11 @@ public class MyStruct {
             this.gname = gname;
         }
 
-        public Dictionary<User, String> getList() {
+        public List<User> getList() {
             return list;
         }
 
-        public void setList(Dictionary<User, String> list) {
+        public void setList(List<User> list) {
             this.list = list;
         }
 

@@ -27,19 +27,21 @@ namespace Kerberos_Client.UI
     public partial class Main_Window : Window
     {
         public User My_user;
-        public static List<Friend> Friend_List = new List<Friend>();
-        public static List<Record_Message> Message_List = new List<Record_Message>();
+        public static List<Chat_information> Message_List = new List<Chat_information>();
         public Add_Window Add_;
         public static Dictionary<string, string> Keys = new Dictionary<string, string>();
         private static List<Friend> Search_List = new List<Friend>();
         public static Dictionary<string, Chat_Window> Chat_Dic = new Dictionary<string, Chat_Window>();
+        public static Dictionary<string, List<Friend>> Group_Dic = new Dictionary<string, List<Friend>>();
         public static bool live = false;
+        public static List<Expander> ExpList = new List<Expander>();
+        public static List<Friend> static_friends;
         public Main_Window(User u)
         {
-            Request();
-            Greet();
             InitializeComponent();
             init(u);
+            Request();
+            Greet(); 
         }
         /// <summary>
         /// 界面初始化
@@ -49,23 +51,34 @@ namespace Kerberos_Client.UI
         private void init(User u)
         {
             live = true;
-            for (int j = 0; j < 10; j++)
-            {
-                Friend uu = new Friend();
-                uu.U = new User();
-                uu.U.Uname = "LOCAL" + j.ToString();
-                Friend_List.Add(uu);
-                //Message_List.Add(uu);
-            }
             ConnectServer.HeartStart();
             My_user = u;
-            friend_List.ItemsSource = Friend_List;
             message_List.ItemsSource = Message_List;
             search_List.ItemsSource = Search_List;
             name_Block.Text = u.Uname;
             sign_TextBox.Text = u.Sign;
             head_Image.Source = img.GetBitmap(u.Photo);
-            my_Exp1.Header ="我的好友 " + Friend_List.Count();
+
+            FileStream sr = null;
+            if (!Directory.Exists(@My_user.Uid))
+                Directory.CreateDirectory(@My_user.Uid);
+            string path = @My_user.Uid+"\\" + My_user.Uid +".txt";
+            sr = new FileStream(path, FileMode.OpenOrCreate, FileAccess.ReadWrite);
+            StreamReader streamReader = new StreamReader(sr);
+            string json = string.Empty;
+            while ((json = streamReader.ReadLine()) != null)
+            {
+                Chat_information U = JsonHelper.FromJson1<Chat_information>(json);
+                if (!Message_List.Exists(delegate (Chat_information information)
+                {
+                    return information.Id.Equals(U.Id);
+                })) 
+                    Message_List.Add(U);
+            }
+            message_List.ItemsSource = null;
+            message_List.ItemsSource = Message_List;
+            streamReader.Close();
+            sr.Close();
         }
 
         #region 界面
@@ -84,10 +97,10 @@ namespace Kerberos_Client.UI
         /// <returns></returns>
         private void TransID_Click(object sender, RoutedEventArgs e)
         {
+            this.Close();
             Window w = new MainWindow(false);
             w.Show();
             live = false;
-            this.Close();
         }
         /// <summary>
         /// 个性签名失去焦点
@@ -126,8 +139,18 @@ namespace Kerberos_Client.UI
         {
             if ((sender as DataGrid).SelectedItem == null)
                 return;
-            Record_Message chat = (sender as DataGrid).SelectedItem as Record_Message;
-            User temp = chat.Owner.U;
+            Chat_information chat = (sender as DataGrid).SelectedItem as Chat_information;
+            Friend u=new Friend();
+            foreach(var o in Group_Dic)
+            {
+                List<Friend> friends = o.Value;
+                if(friends.Exists(delegate (Friend friend){ return friend.U.Uid.Equals(chat.Id); }))
+                {
+                    u = friends.Find(delegate (Friend friend) { return friend.U.Uid.Equals(chat.Id); });
+                    break;
+                }
+            }
+            User temp = u.U;
             Dispatcher.Invoke(new Action(delegate
             {
 
@@ -136,7 +159,7 @@ namespace Kerberos_Client.UI
                     u = Chat_Dic[temp.Uid];
                 else
                 {
-                    u = new Chat_Window(temp,My_user);
+                    u = new Chat_Window(temp,My_user,this);
                     Chat_Dic[temp.Uid] = u;
                 }
                 Thread newWindowThread = new Thread(() => ThreadStartingPoint(u));
@@ -154,9 +177,9 @@ namespace Kerberos_Client.UI
         /// <returns></returns>
         private void friend_List_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            if ((sender as DataGrid).SelectedItem == null)
+            if ((sender as ListView).SelectedItem == null)
                 return;
-            Friend friend = (sender as DataGrid).SelectedItem as Friend;
+            Friend friend = (sender as ListView).SelectedItem as Friend;
             User temp = friend.U;
             Dispatcher.Invoke(new Action(delegate
             {
@@ -166,7 +189,7 @@ namespace Kerberos_Client.UI
                     u = Chat_Dic[temp.Uid];
                 else
                 {
-                    u = new Chat_Window(temp, My_user);
+                    u = new Chat_Window(temp, My_user,this);
                     Chat_Dic[temp.Uid] = u;
                 }
                 Thread newWindowThread = new Thread(() => ThreadStartingPoint(u));
@@ -297,13 +320,17 @@ namespace Kerberos_Client.UI
             else
             {
                 Search_List.Clear();
-                foreach (object i in Friend_List)
+                foreach (var o in Group_Dic)
                 {
-                    Friend friend=i as Friend;
-                    User user = friend.U;
-                    if (user.Uname.Contains(temp) || user.Uid.Contains(temp) || user.Sign.Contains(temp))
+                    List<Friend> friends = o.Value;
+                    foreach (object i in friends)
                     {
-                        Search_List.Add(friend);
+                        Friend friend = i as Friend;
+                        User user = friend.U;
+                        if (user.Uname.Contains(temp) || user.Uid.Contains(temp) || user.Sign.Contains(temp))
+                        {
+                            Search_List.Add(friend);
+                        }
                     }
                 }
                 search_TabItem.IsSelected = true;
@@ -339,14 +366,51 @@ namespace Kerberos_Client.UI
             o.Extend = DESLibrary.DecryptDES(o.Extend, Keys["server"]);
 #endif
             MyStruct myStruct = JsonHelper.FromJson<MyStruct>(o.Extend);
-            List<Friend> users = myStruct.friendlist;
-            Friend_List = users;
+            static_friends = myStruct.friendlist;
+
+            ExpList.Clear();
+            Group_Dic.Clear();
+
             Dispatcher.Invoke(new Action(delegate
             {
-                friend_List.ItemsSource = null;
-                friend_List.ItemsSource = Friend_List;
-                my_Exp1.Header = "我的好友 " + Friend_List.Count();
+                foreach (object i in static_friends)
+                {
+                    Friend friend = i as Friend;
+                    if (!Group_Dic.ContainsKey(friend.Tid))
+                    {
+                        Group_Dic[friend.Tid] = new List<Friend>();
+                        ListView listView = new ListView();
+                        listView.HorizontalAlignment = HorizontalAlignment.Stretch;
+                        listView.Style = FindResource("FriendListView") as Style;
+                        listView.Width = 280;
+                        listView.ContextMenu = GetContext();
+                        listView.MouseDoubleClick += friend_List_MouseDoubleClick;
+                        Expander my_Exp1 = new Expander();
+                        my_Exp1.HorizontalAlignment= HorizontalAlignment.Stretch;
+                        my_Exp1.Header = friend.Tid;
+                        my_Exp1.Content = listView;
+                        ExpList.Add(my_Exp1);
+                    }
+                    if(!Group_Dic[friend.Tid].Exists(delegate (Friend fri) { return fri.U.Uid.Equals(friend.U.Uid); }))
+                        Group_Dic[friend.Tid].Add(friend);
+                }
+                foreach (var v in ExpList)
+                {
+                    ListView listView = v.Content as ListView;
+                    listView.ItemsSource = null;
+                    listView.ItemsSource = Group_Dic[v.Header.ToString()];
+                }
+                Group_View.ItemsSource = null;
+                Group_View.ItemsSource = ExpList;
             }));
+            //Dispatcher.Invoke(new Action(delegate
+            //{
+
+            //    ListView friend_List = my_Exp1.Content as ListView;
+            //    friend_List.ItemsSource = null;
+            //    friend_List.ItemsSource = Friend_List;
+            //    my_Exp1.Header = "我的好友 " + Friend_List.Count();
+            //}));
         }
 
         internal void Greet()
@@ -384,16 +448,22 @@ namespace Kerberos_Client.UI
 
             Dispatcher.Invoke(new Action(delegate
             {
-                Friend user = Friend_List.Find(delegate (Friend friend)
+                Friend user = new Friend();
+                foreach (var v in Group_Dic)
                 {
-                    return friend.U.Uid.Equals(o.Src);
-                });
+                    List<Friend> friends = v.Value;
+                    if (friends.Exists(delegate (Friend friend) { return friend.U.Uid.Equals(o.Src); }))
+                    {
+                        user = friends.Find(delegate (Friend friend) { return friend.U.Uid.Equals(o.Src); });
+                        break;
+                    }
+                }
                 Chat_Window u;
                 if (Chat_Dic.ContainsKey(o.Src))
                     u = Chat_Dic[o.Src];
                 else
                 {
-                    u = new Chat_Window(user.U, My_user);
+                    u = new Chat_Window(user.U, My_user,this);
                     Chat_Dic[o.Src] = u;
                     Thread newWindowThread = new Thread(() => ThreadStartingPoint(u));
                     newWindowThread.SetApartmentState(ApartmentState.STA);
@@ -403,18 +473,19 @@ namespace Kerberos_Client.UI
                 o.Extend = DESLibrary.DecryptDES(o.Extend, Main_Window.Keys["server"]);
                 MyStruct myStruct = JsonHelper.FromJson<MyStruct>(o.Extend);
                 Chat_Message chat_Message = myStruct.chat_message;
-                Record_Message record=Message_List.Find(delegate (Record_Message record_) { return record_.Owner.U.Uid.Equals(chat_Message.U.Uid); });
-                if(record!=null)
+                Chat_information record = Message_List.Find(delegate (Chat_information record_) { return record_.Id.Equals(chat_Message.U.Uid); });
+                if (record != null)
                 {
-                    record.add(chat_Message);
+                    record.Add(chat_Message);
                 }
                 else
                 {
-                    record = new Record_Message();
-                    record.Owner= Friend_List.Find(delegate (Friend friend) { return friend.U.Uid.Equals(chat_Message.U.Uid); });
-                    record.add(chat_Message);
+                    record = new Person_Chat(chat_Message.U.Photo, chat_Message.U.Uname, chat_Message.U.Uid);
+                    record.Add(chat_Message);
+                    Main_Window.Message_List.Add(record);
                 }
-                Message_List.Add(record);
+                message_List.ItemsSource = null;
+                message_List.ItemsSource = Message_List;
                 u.chatMessage.Add(new ChatMessage()
                 {
                     Photo =user.U.Photo ,
@@ -422,6 +493,29 @@ namespace Kerberos_Client.UI
                     MessageLocation = TypeLocalMessageLocation.chatRecv
                 }); ;
                 u.ListBoxChat.ScrollIntoView(u.ListBoxChat.Items[u.ListBoxChat.Items.Count - 1]);
+            }));
+        }
+
+        internal void Update(MyStruct myStruct)
+        {
+            Dispatcher.Invoke(new Action(delegate
+            {
+                Chat_Message chat_Message = myStruct.chat_message;
+                Chat_information record = Main_Window.Message_List.Find
+                (delegate (Chat_information record_)
+                { return record_.Id.Equals(chat_Message.U.Uid); });
+                if (record != null)
+                {
+                    record.Add(chat_Message);
+                }
+                else
+                {
+                    record = new Person_Chat(chat_Message.U.Photo, chat_Message.U.Uname, chat_Message.U.Uid);
+                    record.Add(chat_Message);
+                    Message_List.Add(record);
+                }
+                message_List.ItemsSource = null;
+                message_List.ItemsSource = Message_List;
             }));
         }
         internal void ReCall_Friend(Order o)
@@ -470,6 +564,81 @@ namespace Kerberos_Client.UI
                 MessageBox.Show("ID:" + myStruct.user.Uid + "\n" + "昵称:" + myStruct.user.Uname + "\n" + "拒绝了添加好友", "回复");
             Request();
         }
+
+
+
+        internal void ReCall_Add_Group(Order o)
+        {
+#if des
+            o.Extend = DESLibrary.DecryptDES(o.Extend, Keys["server"]);
+#endif
+            Order order = new Order();
+            MyStruct myStruct = JsonHelper.FromJson<MyStruct>(o.Extend);
+            if (MessageBox.Show("ID:" + myStruct.user.Uid + "\n" + "昵称:" + myStruct.user.Uname + "\n" + "请求加入群聊："+ myStruct.group.Gid, "请求", MessageBoxButton.YesNo, MessageBoxImage.Information) == MessageBoxResult.Yes)
+            {
+                order.ContentType = "9008";
+            }
+            else
+                order.ContentType = "9009";
+
+            order.MsgType = "2002";
+            order.Src = MainWindow.localName;
+            order.Dst = o.Src;
+            MyStruct myStruct_ = new MyStruct();
+            myStruct_.friend = new Friend();
+            myStruct_.friend.Tid = "1";
+            myStruct_.user = My_user;
+            myStruct_.friend.U = myStruct.user;
+            order.Extend = JsonHelper.ToJson(myStruct_);
+#if des
+            order.Extend = DESLibrary.EncryptDES(order.Extend, Keys["server"]);
+#endif
+            Request();
+            ConnectServer.sendMessage(order);
+        }
+        internal void Call_Result_Group(Order o)
+        {
+#if des
+            o.Extend = DESLibrary.DecryptDES(o.Extend, Keys["server"]);
+#endif
+            MyStruct myStruct = JsonHelper.FromJson<MyStruct>(o.Extend);
+            if (o.ContentType == "9008")
+                MessageBox.Show("ID:" + myStruct.user.Uid + "\n" + "昵称:" + myStruct.user.Uname + "\n" + "同意了加群:"+myStruct.group.Gid, "回复");
+            else
+                MessageBox.Show("ID:" + myStruct.user.Uid + "\n" + "昵称:" + myStruct.user.Uname + "\n" + "拒绝了加群:" + myStruct.group.Gid, "回复");
+            Request();
+        }
+        internal void Call_Request_Group(Order o)
+        {
+#if des
+            o.Extend = DESLibrary.DecryptDES(o.Extend, Keys["server"]);
+#endif
+            Order order = new Order();
+            MyStruct myStruct = JsonHelper.FromJson<MyStruct>(o.Extend);
+            if (MessageBox.Show("ID:" + myStruct.user.Uid + "\n" + "昵称:" + myStruct.user.Uname + "\n" + "邀请你加入群聊：" + myStruct.group.Gid, "请求", MessageBoxButton.YesNo, MessageBoxImage.Information) == MessageBoxResult.Yes)
+            {
+                order.ContentType = "9008";
+            }
+            else
+                order.ContentType = "9009";
+
+            order.MsgType = "2002";
+            order.Src = MainWindow.localName;
+            order.Dst = o.Src;
+            MyStruct myStruct_ = new MyStruct();
+            myStruct_.friend = new Friend();
+            myStruct_.friend.Tid = "1";
+            myStruct_.user = My_user;
+            myStruct_.friend.U = myStruct.user;
+            order.Extend = JsonHelper.ToJson(myStruct_);
+
+#if des
+            order.Extend = DESLibrary.EncryptDES(order.Extend, Keys["server"]);
+#endif
+            Request();
+            ConnectServer.sendMessage(order);
+        }
+
         protected override void OnClosing(CancelEventArgs e)
         {
             //发送报文
@@ -478,28 +647,167 @@ namespace Kerberos_Client.UI
             order.Src = MainWindow.localName;
             order.Dst = "Server";
             MyStruct myStruct = new MyStruct();
-            order.Extend = JsonHelper.ToJson(myStruct);
-#if RSA
-            string sig = string.Empty;
-            RSALibrary.SignatureFormatter(extend, Keys["private"], ref sig);
-            order.Sign = sig;
-#endif
+            myStruct.user = My_user;
+            order.Extend = JsonHelper.ToJson1(myStruct);
 
 #if des
             order.Extend = DESLibrary.EncryptDES(order.Extend, Keys["server"]);
 #endif
             ConnectServer.sendMessage(order);
+            FileStream sr = null;
+            string path = @My_user.Uid + "\\" + My_user.Uid + ".txt";
+            sr = new FileStream(path, FileMode.Truncate, FileAccess.ReadWrite);
+            StreamWriter sw = new StreamWriter(sr);
+            string json = string.Empty;
+            foreach (object i in Message_List)
+            {
+                Chat_information m = i as Chat_information;
+                json = JsonHelper.ToJson(m);
+                sw.WriteLine(json);
+            }
+            sw.Close();
+            sr.Close();
             base.OnClosing(e);
         }
 
         private void Delete_Click(object sender, RoutedEventArgs e)
         {
+            //发送报文
+            Order order = new Order();
+            order.MsgType = "2001";
+            order.Src = MainWindow.localName;
+            order.Dst = "Server";
+            order.ContentType = "9005";
+            MyStruct myStruct = new MyStruct();
 
+
+            Expander expander = FindExpander();
+            ListView listView = expander.Content as ListView;
+            Friend friend = listView.SelectedItem as Friend;
+            myStruct.friend = friend;
+            order.Extend = JsonHelper.ToJson(myStruct);
+#if des
+            order.Extend = DESLibrary.EncryptDES(order.Extend, Keys["server"]);
+#endif
+            ConnectServer.sendMessage(order);
         }
 
         private void Refresh_Click(object sender, RoutedEventArgs e)
         {
+            Request();
+        }
+        private void Move_Click(object sender, RoutedEventArgs e)
+        {
+            //发送报文
+            Order order = new Order();
+            order.MsgType = "2001";
+            order.Src = MainWindow.localName;
+            order.Dst = "Server";
+            order.ContentType = "9010";
+            MyStruct myStruct = new MyStruct();
 
+            Expander expander = FindExpander();
+            ListView listView = expander.Content as ListView;
+            Friend friend = listView.SelectedItem as Friend;
+            friend.Tid = (sender as MenuItem).Header.ToString();
+
+            myStruct.friend = friend;
+            order.Extend = JsonHelper.ToJson(myStruct);
+#if des
+            order.Extend = DESLibrary.EncryptDES(order.Extend, Keys["server"]);
+#endif
+            ConnectServer.sendMessage(order);
+        }
+        private void AddMove_Click(object sender, RoutedEventArgs e)
+        {
+            //发送报文
+            Order order = new Order();
+            order.MsgType = "2001";
+            order.Src = MainWindow.localName;
+            order.Dst = "Server";
+            order.ContentType = "9010";
+            MyStruct myStruct = new MyStruct();
+            Expander expander = FindExpander();
+            ListView listView1 = expander.Content as ListView;
+            Friend friend = listView1.SelectedItem as Friend;
+            friend.Tid =(((sender as Button).Parent as Grid).Children[0] as TextBox).Text;
+
+            myStruct.friend = friend;
+            myStruct.user = My_user;
+            order.Extend = JsonHelper.ToJson(myStruct);
+#if des
+            order.Extend = DESLibrary.EncryptDES(order.Extend, Keys["server"]);
+#endif
+            ConnectServer.sendMessage(order);
+        }
+        private Expander FindExpander()
+        {
+            foreach (var o in ExpList)
+            {
+                ListView listView1 = o.Content as ListView;
+                if (listView1.SelectedIndex >= 0)
+                {
+                    return o;
+                }
+            }
+            return null;
+        }
+        private ContextMenu GetContext()
+        {
+
+            ContextMenu cm = new ContextMenu();
+            MenuItem menu = new MenuItem();
+            menu.Header = "删除好友";
+            menu.Click += Delete_Click;
+            Separator separator = new Separator();
+            cm.Items.Add(menu);
+            cm.Items.Add(new Separator());
+            MenuItem menu1 = new MenuItem();
+            menu1.Header = "刷新";
+            menu1.Click += Refresh_Click;
+            cm.Items.Add(menu1);
+            cm.Items.Add(new Separator());
+            MenuItem menu2 = new MenuItem();
+            menu2.Header = "移动至分组";
+            menu2.MouseEnter += MenuMouseEnter;
+            //menu2.MouseLeave += MenuMouseLeave;
+            cm.Items.Add(menu2);
+            return cm;
+        }
+        private void MenuMouseEnter(object sender, MouseEventArgs e)
+        {
+            MenuItem menuItem = sender as MenuItem;
+            menuItem.Items.Clear();
+            MenuItem m1 = new MenuItem();
+            m1.Header = "新建分组";
+            MenuItem menuItem1 = new MenuItem();
+
+            Grid grid = new Grid();
+            grid.ColumnDefinitions.Add(new ColumnDefinition());
+            grid.ColumnDefinitions.Add(new ColumnDefinition());
+            TextBox textBox = new TextBox();
+            textBox.Name = "TB";
+            textBox.Text = "新建分组";
+            textBox.MinWidth = 80;
+            Button button = new Button();
+            button.Content = "确认";
+            button.Click += AddMove_Click;
+            grid.Children.Add(textBox);
+            Grid.SetColumn(textBox, 0);
+            grid.Children.Add(button);
+            Grid.SetColumn(button, 1);
+
+            m1.Items.Add(grid);
+            menuItem.Items.Add(m1);
+            //menuItem.Items.Add(new Separator());
+            foreach (var v in ExpList)
+            {
+                MenuItem m = new MenuItem();
+                m.Header = v.Header;
+                m.Click += Move_Click;
+                menuItem.Items.Add(m);
+                //menuItem.Items.Add(new Separator());
+            }
         }
     }
 }

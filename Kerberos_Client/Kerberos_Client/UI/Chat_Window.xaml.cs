@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,25 +24,13 @@ namespace Kerberos_Client.UI
     public partial class Chat_Window : Window
     {
 
-        public ObservableCollection<ChatMessage> chatMessage = new ObservableCollection<ChatMessage>()
-        {
-            new ChatMessage()
-            {
-                Photo=@"E:\Kerberos\Kerberos_Client\Kerberos_Client\Image_Source\test.jpg",
-                Message="你好",
-                MessageLocation=TypeLocalMessageLocation.chatRecv
-            },
-            new ChatMessage()
-            {
-                Photo=@"E:\Kerberos\Kerberos_Client\Kerberos_Client\Image_Source\test.jpg",
-                Message="好久不见,老铁",
-                MessageLocation=TypeLocalMessageLocation.chatSend
-            },
-        };
+        public ObservableCollection<ChatMessage> chatMessage = new ObservableCollection<ChatMessage>();
         public User My_user;
         public User Chat_user;
-        public Chat_Window(User u,User user)
+        Main_Window window;
+        public Chat_Window(User u,User user,Main_Window w)
         {
+            window = w;
             InitializeComponent();
             Chat_user = u;
             My_user = user;
@@ -50,13 +39,29 @@ namespace Kerberos_Client.UI
             Uid_TX.Text = "账号:" + Chat_user.Uid;
             Email_TX.Text = "邮箱:" + Chat_user.Email;
             ListBoxChat.ItemsSource = chatMessage;
+            init();
+        }
+        private void init()
+        {
+            FileStream sr = null;
+            string path = @My_user.Uid + "/" + Chat_user.Uid + ".txt";
+            sr = new FileStream(path, FileMode.OpenOrCreate, FileAccess.ReadWrite);
+            StreamReader streamReader = new StreamReader(sr);
+            string json = string.Empty;
+            while ((json = streamReader.ReadLine()) != null)
+            {
+                ChatMessage U = JsonHelper.FromJson<ChatMessage>(json);
+                chatMessage.Add(U);
+            }
+            streamReader.Close();
+            sr.Close();
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Chat_Message chat = new Chat_Message();
             chat.U = My_user;
-            chat.Head = 101;
             chat.Content = send_text.Text;
+            chat.Time = DateTime.Now.Ticks;
             MyStruct myStruct = new MyStruct();
             myStruct.chat_message = chat;
             Order order = new Order();
@@ -69,21 +74,21 @@ namespace Kerberos_Client.UI
             ConnectServer.sendMessage(order);
 
             Chat_Message chat_Message = myStruct.chat_message;
-            Record_Message record = Main_Window.Message_List.Find
-                (delegate (Record_Message record_) 
-                { return record_.Owner.U.Uid.Equals(Chat_user.Uid); });
+            Chat_information record = Main_Window.Message_List.Find
+                (delegate (Chat_information record_) 
+                { return record_.Id.Equals(Chat_user.Uid); });
             if (record != null)
             {
-                record.add(chat_Message);
+                record.Add(chat_Message);
             }
             else
             {
-                record = new Record_Message();
-                record.Owner = Main_Window.Friend_List.Find(delegate (Friend friend) { MessageBox.Show(friend.U.Uid.Equals(chat_Message.U.Uid).ToString()); return friend.U.Uid.Equals(Chat_user.Uid); });
-                record.add(chat_Message);
+                record = new Person_Chat(Chat_user.Photo, Chat_user.Uname, Chat_user.Uid);
+                record.Add(chat_Message);
+                Main_Window.Message_List.Add(record);
             }
-            Main_Window.Message_List.Add(record);
-
+            window.message_List.ItemsSource = null;
+            window.message_List.ItemsSource = Main_Window.Message_List;
             chatMessage.Add(new ChatMessage()
             {
                 Photo = My_user.Photo,
@@ -95,6 +100,19 @@ namespace Kerberos_Client.UI
         }
         protected override void OnClosing(CancelEventArgs e)
         {
+            FileStream sr = null;
+            string path = @My_user.Uid + "/" + Chat_user.Uid + ".txt";
+            sr = new FileStream(path, FileMode.OpenOrCreate, FileAccess.ReadWrite);
+            StreamWriter sw = new StreamWriter(sr);
+            string json = string.Empty;
+            foreach (object i in chatMessage)
+            {
+                ChatMessage m = i as ChatMessage;
+                json = JsonHelper.ToJson(m);
+                sw.WriteLine(json);
+            }
+            sw.Close();
+            sr.Close();
             Main_Window.Chat_Dic.Remove(Chat_user.Uid);
             base.OnClosing(e);
         }

@@ -4,6 +4,7 @@ package Server;
 import Framework.SessionLayer.Handlers.SessionHandler;
 import Framework.SessionLayer.SessionLayer;
 import Json.MyJson;
+import SecurityUtils.RSAHandler;
 import StateMachine.Application;
 import StateMachine.RegEventEnum;
 import StateMachine.RegStatusEnum;
@@ -25,8 +26,8 @@ import java.util.concurrent.TimeUnit;
 
 import static Framework.SessionLayer.SessionLayer.*;
 import static Json.MyJson.StringToOrder;
-import static Server.ServerDataBase.con;
-import static Server.ServerDataBase.connectData;
+import static SecurityUtils.RSAHandler.verifySign;
+import static Server.ServerDataBase.*;
 import static StateMachine.RegEventEnum.RECIVE;
 import static UI.log.add;
 import static UI.log.createTable;
@@ -42,9 +43,9 @@ public class ServerFunction extends SessionHandler {
             e.printStackTrace();
         }
     }
-    JTable table = createTable();
+ //   JTable table = createTable();
 
-    LinkedList<String[]> list = new LinkedList<String[]>();
+ //   LinkedList<String[]> list = new LinkedList<String[]>();
     String message="";
     //继承方法集
     @Override
@@ -75,14 +76,16 @@ public class ServerFunction extends SessionHandler {
             bindChannelWithUserName(channelName,order.getSrc());
         }
         //UI表格
-        String []s=new String[5];
-        list.addFirst(s);
-        s[0]=order.getSrc();//源
-        s[1]=order.getDst();//目的
-        s[2]=order.getMsgType();//报文类型
-        s[3]=order.getExtend();//密文
-        s[4]=order.getExtend();//明文
-        add(table, list);
+//        String []s=new String[5];
+//        list.addFirst(s);
+//        s[0]=order.getSrc();//源
+//        s[1]=order.getDst();//目的
+//        s[2]=order.getMsgType();//报文类型
+//        s[3]=order.getExtend();//密文
+//        s[4]=order.getExtend();//明文
+//        add(table, list);
+        String type=order.getMsgType();
+
         switch (order.getMsgType()){
             case "0001":
                 serverHandler.Certif(info);
@@ -94,36 +97,79 @@ public class ServerFunction extends SessionHandler {
                 serverHandler.Kcv(info);
                 break;
             case "1002":
-                serverHandler.login(info);
+                System.out.println(rPK(order.getSrc()));
+                System.out.println(order.getSign());
+                System.out.println(order.getExtend());
+                if(verifySign(RSAHandler.getPublicKey(rPK(order.getSrc())),order.getSign(),order.getExtend())){
+                    System.out.println("1002#####签名验证成功");
+                    serverHandler.login(info);
+                }
+                else System.out.println("1002####签名验证失败");
                 break;
             case "1003":
-                serverHandler.searchFriendList(info);
+                if(verifySign(RSAHandler.getPublicKey(rPK(order.getSrc())),order.getSign(),order.getExtend())){
+                    System.out.println("1003#####签名验证成功");
+                    serverHandler.searchFriendList(info);
+                }
+                else System.out.println("1003####签名验证失败");
                 break;
             case "1005":
-                serverHandler.hello(info);
+                if(verifySign(RSAHandler.getPublicKey(rPK(order.getSrc())),order.getSign(),order.getExtend())){
+                    System.out.println("1005#####签名验证成功");
+                    serverHandler.hello(info);
+                }
+                else System.out.println("1005####签名验证失败");
                 logIn(order.getSrc());
                 break;
             case "1006":
-                serverHandler.heart(info);
+                if(verifySign(RSAHandler.getPublicKey(rPK(order.getSrc())),order.getSign(),order.getExtend())){
+                    System.out.println("1006#####签名验证成功");
+                    serverHandler.heart(info);
+                }
+                else System.out.println("1006####签名验证失败");
                 break;
             case "1007":
-                serverHandler.searchID(info);
+                if(verifySign(RSAHandler.getPublicKey(rPK(order.getSrc())),order.getSign(),order.getExtend())){
+                    System.out.println("1007#####签名验证成功");
+                    serverHandler.searchID(info);
+                }
+                else System.out.println("1007####签名验证失败");
                 break;
             case "1008":
-                serverHandler.logout(info);
+                if(verifySign(RSAHandler.getPublicKey(rPK(order.getSrc())),order.getSign(),order.getExtend())){
+                    System.out.println("1008#####签名验证成功");
+                    serverHandler.logout(info);
+                }
+                else System.out.println("1008####签名验证失败");
                 logOut(order.getSrc());
                 break;
             case "1009":
-                serverHandler.information(info);
+                if(verifySign(RSAHandler.getPublicKey(rPK(order.getSrc())),order.getSign(),order.getExtend())){
+                    System.out.println("1009#####签名验证成功");
+                    serverHandler.information(info);
+                }
+                else System.out.println("1009####签名验证失败");
                 break;
             case "1010":
-                serverHandler.changeInfo(info);
+                if(verifySign(RSAHandler.getPublicKey(rPK(order.getSrc())),order.getSign(),order.getExtend())){
+                    System.out.println("1010#####签名验证成功");
+                    serverHandler.changeInfo(info);
+                }
+                else System.out.println("1010####签名验证失败");
                 break;
             case "2001":
-                serverHandler.privateChat(info);
+                if(verifySign(RSAHandler.getPublicKey(rPK(order.getSrc())),order.getSign(),order.getExtend())){
+                    System.out.println("2001#####签名验证成功");
+                    serverHandler.privateChat(info);
+                }
+                else System.out.println("2001####签名验证失败");
                 break;
             case "2002":
-                serverHandler.publicChat(info);
+                if(verifySign(RSAHandler.getPublicKey(rPK(order.getSrc())),order.getSign(),order.getExtend())){
+                    System.out.println("2002#####签名验证成功");
+                    serverHandler.publicChat(info);
+                }
+                else System.out.println("2002####签名验证失败");
                 break;
             default:
                 break;

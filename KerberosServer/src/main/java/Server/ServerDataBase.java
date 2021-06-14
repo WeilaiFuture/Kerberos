@@ -1,5 +1,6 @@
 package Server;
 
+import Json.IdWorker;
 import Json.MyJson;
 import Json.MyStruct;
 import StateMachine.Application;
@@ -11,6 +12,7 @@ import java.util.LinkedList;
 import static Json.MyJson.OrderToString;
 
 public class ServerDataBase {
+    static IdWorker worker = new IdWorker(1,1,1);
     /*
     包含所有数据库操作的封装函数；
      */
@@ -64,11 +66,11 @@ public class ServerDataBase {
          */
         try {
             String sql="insert into `Certificate` (`version` ,`serial` ,`deadline` ,`name` ,`pk`) values(\""
-                        +certificate.getVersion()+"\",\""
-                        +certificate.getSerial()+"\",\""
-                        +certificate.getDeadline()+"\",\""
-                        +certificate.getName()+"\",\""
-                        +certificate.getPk()+ "\")";
+                    +certificate.getVersion()+"\",\""
+                    +certificate.getSerial()+"\",\""
+                    +certificate.getDeadline()+"\",\""
+                    +certificate.getName()+"\",\""
+                    +certificate.getPk()+ "\")"+"\n"+"on duplicate key update `pk` =\""+ certificate.getPk()+"\"";
             Statement statement = con.createStatement();
             int result = statement.executeUpdate(sql);
             System.out.println(certificate.getName()+"存储证书成功");
@@ -313,7 +315,7 @@ public class ServerDataBase {
                 user.setPhoto(result.getString("photo"));
                 user.setPsswd(result.getString("psswd"));
                 user.setSign(result.getString("sign"));
-                user.setStartTime(result.getInt("startTime"));
+                user.setStartTime(result.getLong("startTime"));
                 user.setStatus(result.getInt("status"));
                 user.setUid(ID);
                 user.setUname(result.getString("uname"));
@@ -404,7 +406,10 @@ public class ServerDataBase {
             String sql="delete from `friend` where `me`=\""+IDA+"\" and `ta`=\""+IDB+"\"";
             Statement statement = con.createStatement();
             int result = statement.executeUpdate(sql);
-            System.out.println("删除好友成功");
+            if(result>0)
+              System.out.println("删除好友成功");
+            else
+                System.out.println("删除好友失败");
             return true;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -439,13 +444,13 @@ public class ServerDataBase {
          */
         try {
             String sql="insert into `groups` (`gid` ,`gname` ,`photo` ,`leader` ,`sign`,`startTime`,`sum`) values(\""
-                    +group.getGid()+"\",\""
-                    +group.getGname()+"\","
-                    +group.getPhoto()+",\""
-                    +group.getLeader()+"\","
-                    +group.getSign()+"\","
-                    +group.getStartTime()+","
-                    +group.getList().size()+ ")";
+                    +worker.StrnextId()+"\",\""
+                    +group.getGname()+"\",\""
+                    +group.getPhoto()+"\",\""
+                    +group.getLeader()+"\",\""
+                    +group.getSign()+"\",\""
+                    +group.getStartTime()+"\",\""
+                    +group.getList().size()+ "\")";
             Statement statement = con.createStatement();
             int result = statement.executeUpdate(sql);
             System.out.println("创建群聊成功");
@@ -453,6 +458,28 @@ public class ServerDataBase {
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("创建群聊错误");
+            return false;
+        }
+    }
+    static public boolean wUpdateF(String ID,MyStruct.Friend friend){
+        /*
+        修改好友列表，添加好友；
+         */
+        try {
+            MyStruct.User user=rInfo(friend.getU().getUid());
+            String sql="insert into `friend` (`me` ,`ta` ,`startTime` ,`remark` ,`tid`) values(\""
+                    +ID+"\",\""
+                    +friend.getU().getUid()+"\","
+                    +friend.getStartTime()+",\""
+                    +friend.getRemark()+"\",\""
+                    +friend.getTid()+ "\")"+"\n"+"on duplicate key update `tid` =\""+ friend.getTid()+"\"";
+            Statement statement = con.createStatement();
+            int result = statement.executeUpdate(sql);
+            System.out.println("更新好友成功");
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("更新好友错误");
             return false;
         }
     }
