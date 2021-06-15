@@ -1,11 +1,12 @@
-﻿
+﻿E:\Kerberos\Kerberos_Client\Kerberos_Client\obj\Debug\GeneratedInternalTypeHelper.g.cs
 FE:\Kerberos\Kerberos_Client\Kerberos_Client\App.xaml;;
 FE:\Kerberos\Kerberos_Client\Kerberos_Client\MainWindow.xaml;;
 FE:\Kerberos\Kerberos_Client\Kerberos_Client\ShowMessage.xaml;;
 FE:\Kerberos\Kerberos_Client\Kerberos_Client\UI\Add_Window.xaml;;
-FE:\Kerberos\Kerberos_Client\Kerberos_Client\UI\Chat_Window.xaml;;
+FE:\Kerberos\Kerberos_Client\Kerberos_Client\UI\friend_Chat.xaml;;
 FE:\Kerberos\Kerberos_Client\Kerberos_Client\UI\CreateGroup.xaml;;
 FE:\Kerberos\Kerberos_Client\Kerberos_Client\UI\DataGridStyle.xaml;;
+FE:\Kerberos\Kerberos_Client\Kerberos_Client\UI\group_Chat.xaml;;
 FE:\Kerberos\Kerberos_Client\Kerberos_Client\UI\ListBoxStyle.xaml;;
 FE:\Kerberos\Kerberos_Client\Kerberos_Client\UI\Load.xaml;;
 FE:\Kerberos\Kerberos_Client\Kerberos_Client\UI\LoadingWait.xaml;;

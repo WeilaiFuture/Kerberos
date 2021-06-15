@@ -45,3 +45,6 @@ E:\Kerberos\Kerberos_Client\Kerberos_Client\bin\Debug\Microsoft.Expression.Inter
 E:\Kerberos\Kerberos_Client\Kerberos_Client\bin\Debug\System.Windows.Interactivity.dll
 E:\Kerberos\Kerberos_Client\Kerberos_Client\bin\Debug\Microsoft.Expression.Interactions.xml
 E:\Kerberos\Kerberos_Client\Kerberos_Client\bin\Debug\System.Windows.Interactivity.xml
+E:\Kerberos\Kerberos_Client\Kerberos_Client\obj\Debug\Kerberos_Client.csprojAssemblyReference.cache
+E:\Kerberos\Kerberos_Client\Kerberos_Client\obj\Debug\UI\friend_Chat.g.cs
+E:\Kerberos\Kerberos_Client\Kerberos_Client\obj\Debug\UI\group_Chat.g.cs

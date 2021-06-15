@@ -90,6 +90,51 @@
         </Setter>
     </Style>
 
+    <Style TargetType="ListViewItem" x:Key="GroupGrid" >
+        <Style.Resources>
+            <local:MyStruct x:Key="Friend"></local:MyStruct>
+        </Style.Resources>
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ListViewItem}">
+                    <Border x:Name="border" >
+                        <Grid  Margin="4,4,4,4">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="40"></ColumnDefinition>
+                                <ColumnDefinition ></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Column="0">
+                                <Image x:Name="head_Image" Source="{Binding Photo}"  Width="40" Height="40" RenderTransformOrigin="1,1" >
+                                    <Image.Clip>
+                                        <EllipseGeometry RadiusX="60" RadiusY="60" Center="30,30"/>
+                                    </Image.Clip>
+                                </Image>
+                            </Grid>
+                            <Grid Grid.Column="1" HorizontalAlignment="Stretch">
+                                <TextBlock x:Name="name_TextBlock" Text="{Binding Gid}" HorizontalAlignment="Stretch" />
+                            </Grid>
+                            <Border BorderThickness="0,0,0,2"/>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter TargetName="border" Property="Background" Value="#fceeb9"/>
+                        </Trigger>
+                        <Trigger Property="Selector.IsSelected" Value="True">
+                            <Setter TargetName="Ck" Property="IsChecked" Value="True"></Setter>
+                            <Setter TargetName="border" Property="Background" Value="#fae388"/>
+                        </Trigger>
+                        <Trigger Property="Selector.IsSelected" Value="False">
+                            <Setter TargetName="Ck" Property="IsChecked" Value="False"></Setter>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <Style TargetType="ListView" x:Key="FriendListView">
         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Hidden"></Setter>
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"></Setter>
@@ -103,5 +148,12 @@
         <Setter Property="SelectionMode" Value="Multiple"></Setter>
         <Setter Property="DataContext" Value="{StaticResource Friend}"></Setter>
         <Setter Property="ItemContainerStyle" Value="{StaticResource AddGroupGrid}"></Setter>
+    </Style>
+    <Style TargetType="ListView" x:Key="GroupView">
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Hidden"></Setter>
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"></Setter>
+        <Setter Property="SelectionMode" Value="Multiple"></Setter>
+        <Setter Property="DataContext" Value="{StaticResource Group}"></Setter>
+        <Setter Property="ItemContainerStyle" Value="{StaticResource GroupGrid}"></Setter>
     </Style>
 </ResourceDictionary>

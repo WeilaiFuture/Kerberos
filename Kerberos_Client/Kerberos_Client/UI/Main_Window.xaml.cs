@@ -36,6 +36,7 @@ namespace Kerberos_Client.UI
         public static bool live = false;
         public static List<Expander> ExpList = new List<Expander>();
         public static List<Friend> static_friends;
+        public static List<Group> static_groups;
         public Main_Window(User u)
         {
             InitializeComponent();
@@ -198,6 +199,35 @@ namespace Kerberos_Client.UI
                 newWindowThread.Start();
             }));
         }
+
+        /// <summary>
+        /// 双击还有聊天
+        /// </summary>
+        /// <param name="sender">事件</param>
+        /// <param name="e">时间路由</param>
+        /// <returns></returns>
+        private void group_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if ((sender as ListView).SelectedItem == null)
+                return;
+            Group group = (sender as ListView).SelectedItem as Group;
+            Dispatcher.Invoke(new Action(delegate
+            {
+
+                Chat_Window u;
+                if (Chat_Dic.ContainsKey(group.Gid))
+                    u = Chat_Dic[group.Gid];
+                else
+                {
+                    u = new Chat_Window(temp, My_user, this);
+                    Chat_Dic[temp.Uid] = u;
+                }
+                Thread newWindowThread = new Thread(() => ThreadStartingPoint(u));
+                newWindowThread.SetApartmentState(ApartmentState.STA);
+                newWindowThread.IsBackground = true;
+                newWindowThread.Start();
+            }));
+        }
         /// <summary>
         /// 线程启动界面
         /// </summary>
@@ -349,11 +379,6 @@ namespace Kerberos_Client.UI
             order.Dst = "Server";
             MyStruct myStruct = new MyStruct();
             order.Extend = JsonHelper.ToJson(myStruct);
-#if RSA
-            string sig = string.Empty;
-            RSALibrary.SignatureFormatter(extend, Keys["private"], ref sig);
-            order.Sign = sig;
-#endif
 #if des
             order.Extend = DESLibrary.EncryptDES(order.Extend, Keys["server"]);
 #endif
@@ -367,7 +392,7 @@ namespace Kerberos_Client.UI
 #endif
             MyStruct myStruct = JsonHelper.FromJson<MyStruct>(o.Extend);
             static_friends = myStruct.friendlist;
-
+            static_groups = myStruct.groups;
             ExpList.Clear();
             Group_Dic.Clear();
 
@@ -394,8 +419,23 @@ namespace Kerberos_Client.UI
                     if(!Group_Dic[friend.Tid].Exists(delegate (Friend fri) { return fri.U.Uid.Equals(friend.U.Uid); }))
                         Group_Dic[friend.Tid].Add(friend);
                 }
+                ListView View = new ListView();
+                View.HorizontalAlignment = HorizontalAlignment.Stretch;
+                View.Style = FindResource("GroupView") as Style;
+                View.Width = 280;
+                View.ContextMenu = GetgroupContext();
+                View.MouseDoubleClick += group_MouseDoubleClick;
+                View.ItemsSource = null;
+                View.ItemsSource = static_groups;
+                Expander my_Exp = new Expander();
+                my_Exp.HorizontalAlignment = HorizontalAlignment.Stretch;
+                my_Exp.Header = "我的群聊("+ static_groups.Count.ToString()+")";
+                my_Exp.Content = View;
+                ExpList.Add(my_Exp);
                 foreach (var v in ExpList)
                 {
+                    if (v.Header.Equals("我的群聊"))
+                        continue;
                     ListView listView = v.Content as ListView;
                     listView.ItemsSource = null;
                     listView.ItemsSource = Group_Dic[v.Header.ToString()];
@@ -422,11 +462,6 @@ namespace Kerberos_Client.UI
             order.Dst = "Server";
             MyStruct myStruct = new MyStruct();
             order.Extend = JsonHelper.ToJson(myStruct);
-#if RSA
-            string sig = string.Empty;
-            RSALibrary.SignatureFormatter(extend, Keys["private"], ref sig);
-            order.Sign = sig;
-#endif
 
 #if des
             order.Extend = DESLibrary.EncryptDES(order.Extend, Keys["server"]);
@@ -541,11 +576,7 @@ namespace Kerberos_Client.UI
             myStruct_.user = My_user;
             myStruct_.friend.U = myStruct.user;
             order.Extend = JsonHelper.ToJson(myStruct_);
-#if RSA
-            string sig = string.Empty;
-            RSALibrary.SignatureFormatter(extend, Keys["private"], ref sig);
-            order.Sign = sig;
-#endif
+
 #if des
             order.Extend = DESLibrary.EncryptDES(order.Extend, Keys["server"]);
 #endif
@@ -564,7 +595,6 @@ namespace Kerberos_Client.UI
                 MessageBox.Show("ID:" + myStruct.user.Uid + "\n" + "昵称:" + myStruct.user.Uname + "\n" + "拒绝了添加好友", "回复");
             Request();
         }
-
 
 
         internal void ReCall_Add_Group(Order o)
@@ -773,6 +803,42 @@ namespace Kerberos_Client.UI
             //menu2.MouseLeave += MenuMouseLeave;
             cm.Items.Add(menu2);
             return cm;
+        }
+        private ContextMenu GetgroupContext()
+        {
+
+            ContextMenu cm = new ContextMenu();
+            MenuItem menu = new MenuItem();
+            menu.Header = "退出群聊";
+            menu.Click += Delete_groupClick;
+            Separator separator = new Separator();
+            cm.Items.Add(menu);
+            cm.Items.Add(new Separator());
+            MenuItem menu1 = new MenuItem();
+            menu1.Header = "刷新";
+            menu1.Click += Refresh_Click;
+            cm.Items.Add(menu1);
+            return cm;
+        }
+        private void Delete_groupClick(object sender, RoutedEventArgs e)
+        {
+            //发送报文
+            Order order = new Order();
+            order.MsgType = "2002";
+            order.Src = MainWindow.localName;
+            order.Dst = "Server";
+            order.ContentType = "9005";
+            MyStruct myStruct = new MyStruct();
+
+            Expander expander = FindExpander();
+            ListView listView = expander.Content as ListView;
+            Group group = listView.SelectedItem as Group;
+            myStruct.group = group;
+            order.Extend = JsonHelper.ToJson(myStruct);
+#if des
+            order.Extend = DESLibrary.EncryptDES(order.Extend, Keys["server"]);
+#endif
+            ConnectServer.sendMessage(order);
         }
         private void MenuMouseEnter(object sender, MouseEventArgs e)
         {

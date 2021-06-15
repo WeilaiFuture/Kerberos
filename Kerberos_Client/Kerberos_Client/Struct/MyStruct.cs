@@ -24,6 +24,7 @@ namespace Kerberos_Client
         public Chat_Message chat_message { get; set; }
         public Group group { get; set; }
         public List<Friend> friendlist { get; set; }
+        public List<Group> groups { get; set; }
 
         #region 证书
         public class Certificate

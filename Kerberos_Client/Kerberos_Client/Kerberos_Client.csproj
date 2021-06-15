@@ -90,11 +90,14 @@
       <DependentUpon>Add_Window.xaml</DependentUpon>
     </Compile>
     <Compile Include="Message\ChatMessage.cs" />
-    <Compile Include="UI\Chat_Window.xaml.cs">
-      <DependentUpon>Chat_Window.xaml</DependentUpon>
+    <Compile Include="UI\friend_Chat.xaml.cs">
+      <DependentUpon>friend_Chat.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\CreateGroup.xaml.cs">
       <DependentUpon>CreateGroup.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\group_Chat.xaml.cs">
+      <DependentUpon>group_Chat.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Load.xaml.cs">
       <DependentUpon>Load.xaml</DependentUpon>
@@ -130,7 +133,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI\Chat_Window.xaml">
+    <Page Include="UI\friend_Chat.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -139,6 +142,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\DataGridStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\group_Chat.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

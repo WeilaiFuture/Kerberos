@@ -21,14 +21,14 @@ namespace Kerberos_Client.UI
     /// <summary>
     /// Chat_Window.xaml 的交互逻辑
     /// </summary>
-    public partial class Chat_Window : Window
+    public partial class friend_Chat : Window
     {
 
         public ObservableCollection<ChatMessage> chatMessage = new ObservableCollection<ChatMessage>();
         public User My_user;
         public User Chat_user;
         Main_Window window;
-        public Chat_Window(User u,User user,Main_Window w)
+        public friend_Chat(User u,User user,Main_Window w)
         {
             window = w;
             InitializeComponent();
