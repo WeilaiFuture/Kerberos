@@ -199,7 +199,7 @@ public class ServerHandler {
     static public boolean searchFriendList(String message) throws Exception {
         /*
         head=1003;
-        请求好友界面；
+        请求好友界面；加返回群聊列表
         查询数据库；
         返回好友列表，转1004；
          */
@@ -212,6 +212,7 @@ public class ServerHandler {
         MyStruct mystruct=MyJson.StringToStruct(order.getExtend());
         //查询数据库
         mystruct.friendlist=rFriendList(order.getSrc());
+        mystruct.groups=rGroupList(order.getSrc());
         //发送
         String src=order.getSrc();
         order.setSrc(order.getDst());

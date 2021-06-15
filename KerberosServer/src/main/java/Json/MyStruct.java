@@ -18,6 +18,7 @@ public class MyStruct {
     public Friend friend;
     public Chat_Message chat_message;
     public Group group;
+    public LinkedList<Group> groups;
     public Record_Message record_message;
     public LinkedList<Friend> friendlist;
 /*
@@ -533,7 +534,7 @@ public class MyStruct {
         String photo;//群头像
         String leader;//群主账号
         String sign;//群介绍
-        int startTime;//创建时间
+        long startTime;//创建时间
 
         public String getGname() {
             return gname;
@@ -583,11 +584,11 @@ public class MyStruct {
             this.sign = sign;
         }
 
-        public int getStartTime() {
+        public long getStartTime() {
             return startTime;
         }
 
-        public void setStartTime(int startTime) {
+        public void setStartTime(long startTime) {
             this.startTime = startTime;
         }
     }

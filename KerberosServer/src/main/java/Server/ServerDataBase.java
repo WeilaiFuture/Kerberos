@@ -242,26 +242,6 @@ public class ServerDataBase {
         }
         return friends;
     }
-    static public LinkedList<String> rGroupUser(String ID){
-        /*
-        查询群内成员ID；
-         */
-         LinkedList<String> groups=new LinkedList<String>();
-         try {
-             String sql="SELECT `uid` FROM `belong` WHERE `gid`=\"" + ID+"\"";
-             Statement statement=con.createStatement();
-             ResultSet result = statement.executeQuery(sql);
-             System.out.println("uid");
-             while (result.next()) {
-                 groups.addLast(result.getString("uid"));
-             }
-             System.out.println(ID+" 查询群成员成功");
-         } catch (SQLException e) {
-             e.printStackTrace();
-             System.out.println(ID+" 查询群成员错误");
-         }
-         return groups;
-    }
     static public LinkedList<MyStruct.Friend> rSearchID(String ID){
         /*
         查询用户；
@@ -448,8 +428,8 @@ public class ServerDataBase {
                     +group.getGname()+"\",\""
                     +group.getPhoto()+"\",\""
                     +group.getLeader()+"\",\""
-                    +group.getSign()+"\",\""
-                    +group.getStartTime()+"\",\""
+                    +group.getSign()+"\","
+                    +group.getStartTime()+",\""
                     +group.getList().size()+ "\")";
             Statement statement = con.createStatement();
             int result = statement.executeUpdate(sql);
@@ -460,6 +440,77 @@ public class ServerDataBase {
             System.out.println("创建群聊错误");
             return false;
         }
+    }
+    static public LinkedList<String> rGroupUser(String ID){
+        /*
+        查询群内成员ID；
+         */
+        LinkedList<String> groups=new LinkedList<String>();
+        try {
+            String sql="SELECT `uid` FROM `belong` WHERE `gid`=\"" + ID+"\"";
+            Statement statement=con.createStatement();
+            ResultSet result = statement.executeQuery(sql);
+            System.out.println("uid");
+            while (result.next()) {
+                groups.addLast(result.getString("uid"));
+            }
+            System.out.println(ID+" 查询群成员成功");
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println(ID+" 查询群成员错误");
+        }
+        return groups;
+    }
+    static public MyStruct.Group rGroupInfo(String ID){
+        /*
+        查询群信息；
+         */
+         MyStruct.Group group=new MyStruct.Group();
+        try {
+            String sql="SELECT * FROM `groups` WHERE `gid`=\"" + ID+"\"";
+            Statement statement=con.createStatement();
+            ResultSet result = statement.executeQuery(sql);
+            if (result.next()) {
+                group.setGid(result.getString("gid"));
+                group.setGname(result.getString("gname"));
+                group.setLeader(result.getString("leader"));
+                LinkedList<String> IDs=rGroupUser(ID); //查询群内成员ID
+                LinkedList<MyStruct.User> users=new LinkedList<MyStruct.User>();
+                for(int i=0;i<IDs.size();i++){
+                    users.addLast(rInfo(IDs.get(i)));//根据ID查找USER信息
+                }
+                group.setList(users);
+                group.setPhoto(result.getString("photo"));
+                group.setSign(result.getString("sign"));
+                group.setStartTime(result.getLong("startTime"));
+            }
+            System.out.println(ID+" 查询群信息成功");
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println(ID+" 查询群信息错误");
+        }
+        return group;
+    }
+    static public LinkedList<MyStruct.Group> rGroupList(String ID){
+        /*
+        查询群列表；
+         */
+        LinkedList<MyStruct.Group> groups=new LinkedList<MyStruct.Group>();
+        try {
+            //先查找ID加入的所有群的群号
+            String sql="SELECT `gid` FROM `belong` WHERE `uid`=\"" + ID+"\"";
+            Statement statement=con.createStatement();
+            ResultSet result = statement.executeQuery(sql);
+            while (result.next()) {
+                //根据群号查其他所有的群成员和群信息
+                groups.addLast(rGroupInfo(result.getString("gid")));
+            }
+            System.out.println(ID+" 查询群列表成功");
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println(ID+" 查询群列表错误");
+        }
+        return groups;
     }
     static public boolean wUpdateF(String ID,MyStruct.Friend friend){
         /*
