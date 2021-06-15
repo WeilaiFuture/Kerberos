@@ -122,11 +122,7 @@
                             <Setter TargetName="border" Property="Background" Value="#fceeb9"/>
                         </Trigger>
                         <Trigger Property="Selector.IsSelected" Value="True">
-                            <Setter TargetName="Ck" Property="IsChecked" Value="True"></Setter>
                             <Setter TargetName="border" Property="Background" Value="#fae388"/>
-                        </Trigger>
-                        <Trigger Property="Selector.IsSelected" Value="False">
-                            <Setter TargetName="Ck" Property="IsChecked" Value="False"></Setter>
                         </Trigger>
                     </ControlTemplate.Triggers>
 

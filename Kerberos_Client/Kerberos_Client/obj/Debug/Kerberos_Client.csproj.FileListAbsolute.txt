@@ -1,7 +1,6 @@
 E:\Kerberos\Kerberos_Client\Kerberos_Client\obj\Debug\MainWindow.g.cs
 E:\Kerberos\Kerberos_Client\Kerberos_Client\obj\Debug\ShowMessage.g.cs
 E:\Kerberos\Kerberos_Client\Kerberos_Client\obj\Debug\UI\Add_Window.g.cs
-E:\Kerberos\Kerberos_Client\Kerberos_Client\obj\Debug\UI\Chat_Window.g.cs
 E:\Kerberos\Kerberos_Client\Kerberos_Client\obj\Debug\UI\CreateGroup.g.cs
 E:\Kerberos\Kerberos_Client\Kerberos_Client\obj\Debug\UI\Load.g.cs
 E:\Kerberos\Kerberos_Client\Kerberos_Client\obj\Debug\UI\LoadingWait.g.cs
@@ -25,7 +24,6 @@ E:\Kerberos\Kerberos_Client\Kerberos_Client\obj\Debug\App.baml
 E:\Kerberos\Kerberos_Client\Kerberos_Client\obj\Debug\MainWindow.baml
 E:\Kerberos\Kerberos_Client\Kerberos_Client\obj\Debug\ShowMessage.baml
 E:\Kerberos\Kerberos_Client\Kerberos_Client\obj\Debug\UI\Add_Window.baml
-E:\Kerberos\Kerberos_Client\Kerberos_Client\obj\Debug\UI\Chat_Window.baml
 E:\Kerberos\Kerberos_Client\Kerberos_Client\obj\Debug\UI\CreateGroup.baml
 E:\Kerberos\Kerberos_Client\Kerberos_Client\obj\Debug\UI\DataGridStyle.baml
 E:\Kerberos\Kerberos_Client\Kerberos_Client\obj\Debug\UI\ListBoxStyle.baml
@@ -48,3 +46,5 @@ E:\Kerberos\Kerberos_Client\Kerberos_Client\bin\Debug\System.Windows.Interactivi
 E:\Kerberos\Kerberos_Client\Kerberos_Client\obj\Debug\Kerberos_Client.csprojAssemblyReference.cache
 E:\Kerberos\Kerberos_Client\Kerberos_Client\obj\Debug\UI\friend_Chat.g.cs
 E:\Kerberos\Kerberos_Client\Kerberos_Client\obj\Debug\UI\group_Chat.g.cs
+E:\Kerberos\Kerberos_Client\Kerberos_Client\obj\Debug\UI\friend_Chat.baml
+E:\Kerberos\Kerberos_Client\Kerberos_Client\obj\Debug\UI\group_Chat.baml

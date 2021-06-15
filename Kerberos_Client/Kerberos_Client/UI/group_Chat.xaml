@@ -3,10 +3,130 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Kerberos_Client.UI"
+        xmlns:local="clr-namespace:Kerberos_Client"
         mc:Ignorable="d"
-        Title="group_Chat" Height="450" Width="800">
+         Title="Chat" Height="500" Width="600">
+    <Window.Resources>
+
+        <Color x:Key="green_normal">#07C160</Color>
+        <SolidColorBrush x:Key="green_normal_brush" Color="{StaticResource green_normal}" />
+        <local:MyStruct x:Key="User"></local:MyStruct>
+    </Window.Resources>
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Border Opacity="0.6" Grid.ColumnSpan="2" Margin="0,0,0.2,0" >
+            <Image  Source="../Image_Source/back.jpg" Stretch="Fill" Margin="0,-16,0.6,0.4" HorizontalAlignment="Right" Width="593"/>
+        </Border>
+        <Grid Grid.Column="0"  Margin="0,0,0.2,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="4*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <ListBox  Name="ListBoxChat" ItemContainerStyle="{StaticResource ListBoxItemChatStyle }" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Margin="0,0,-0.2,0">
+                <ListBox.Style>
+                    <Style TargetType="ListBox">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="ListBox">
+                                    <Border x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="0">
+                                        <ScrollViewer Focusable="False">
+                                            <ItemsPresenter />
+                                        </ScrollViewer>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ListBox.Style>
+            </ListBox>
+
+            <TextBox x:Name="send_text" Grid.Row="1" Opacity="0.7" Grid.ColumnSpan="2" Margin="0,0,-0.8,0" TextWrapping="Wrap"></TextBox>
+            <Button Grid.Row="1" Click="Button_Click"  Content="发送"  RenderTransformOrigin="1.166,0.926"  Margin="325,64,-0.2,0.4">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Background" Value="Green" />
+                        <Setter Property="BorderBrush" Value="Gray" />
+                        <Setter Property="Foreground" Value="White" />
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}" >
+                                    <Border x:Name="PART_BUTTON_BORDER" BorderBrush="{TemplateBinding Control.BorderBrush}" BorderThickness="0.5" CornerRadius="3" Background="{TemplateBinding Background}">
+                                        <ContentPresenter Content="{TemplateBinding ContentControl.Content}" HorizontalAlignment="Center" VerticalAlignment="Center" ></ContentPresenter>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="Green"/>
+                                <Setter Property="Cursor" Value="Hand" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Background" Value="Gray"/>
+                                <Setter Property="Cursor" Value="No" />
+                                <Setter Property="BorderBrush" Value="Gray" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+        </Grid>
+        <Grid  Grid.Column="1" RenderTransformOrigin="0.5,0.5" Margin="10,0,-0.4,0.4">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Image Name="head_Image" Source="../Image_Source/test.jpg" Margin="22,26,38,186.6" >
+                    <Image.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform AngleX="-0.239"/>
+                            <RotateTransform/>
+                            <TranslateTransform X="-0.396"/>
+                        </TransformGroup>
+                    </Image.RenderTransform>
+                    <Image.Clip>
+                        <EllipseGeometry RadiusX="50" RadiusY="50" Center="50,50"/>
+                    </Image.Clip>
+                </Image>
+                <TextBlock x:Name="Uname_TextBlock" Height="41"  Opacity="0.6"  Margin="0,145,19,127.6" ></TextBlock>
+                <TextBlock x:Name="Uid_TX" Height="41"  Opacity="0.6"   Margin="0,209,19,63.6" ></TextBlock>
+            </Grid>
+            <Grid Grid.Row="1">
+                <DataGrid HeadersVisibility="None" CanUserResizeColumns="False" CanUserReorderColumns="False" x:Name="group_List" IsReadOnly="True" AutoGenerateColumns="False"
+                                  DataContext="{StaticResource User}" HorizontalScrollBarVisibility="Hidden" GridLinesVisibility="Horizontal" 
+                                  SelectionMode="Single" SelectionUnit="FullRow">
+                    <DataGrid.Columns>
+                        <!--头像行-->
+                        <DataGridTemplateColumn >
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Image x:Name="head_Image" Source="{Binding Photo}"  Width="20" Height="20" RenderTransformOrigin="1,1" >
+                                        <Image.Clip>
+                                            <EllipseGeometry RadiusX="20" RadiusY="20" Center="20,20"/>
+                                        </Image.Clip>
+                                    </Image>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <!--信息行-->
+                        <DataGridTemplateColumn Width="*">
+                            <DataGridTemplateColumn.CellTemplate >
+                                <DataTemplate>
+                                    <Grid>
+                                        <TextBlock Grid.Row="0" x:Name="name_TextBlock" Text="{Binding Uname}" />
+                                    </Grid>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+
+            </Grid>
+        </Grid>
     </Grid>
 </Window>

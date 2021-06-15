@@ -480,7 +480,7 @@ namespace Kerberos_Client
             string photo;//群头像
             string leader;//群主账号
             string sign;//群介绍
-            int startTime;//创建时间
+            long startTime;//创建时间
 
             public string Gid
             {
@@ -502,7 +502,7 @@ namespace Kerberos_Client
                 get { return sign; }
                 set { sign = value; }
             }
-            public int StartTime
+            public long StartTime
             {
                 get { return startTime; }
                 set { startTime = value; }

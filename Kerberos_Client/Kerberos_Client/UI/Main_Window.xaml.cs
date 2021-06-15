@@ -31,7 +31,7 @@ namespace Kerberos_Client.UI
         public Add_Window Add_;
         public static Dictionary<string, string> Keys = new Dictionary<string, string>();
         private static List<Friend> Search_List = new List<Friend>();
-        public static Dictionary<string, Chat_Window> Chat_Dic = new Dictionary<string, Chat_Window>();
+        public static Dictionary<string, Window> Chat_Dic = new Dictionary<string, Window>();
         public static Dictionary<string, List<Friend>> Group_Dic = new Dictionary<string, List<Friend>>();
         public static bool live = false;
         public static List<Expander> ExpList = new List<Expander>();
@@ -141,33 +141,47 @@ namespace Kerberos_Client.UI
             if ((sender as DataGrid).SelectedItem == null)
                 return;
             Chat_information chat = (sender as DataGrid).SelectedItem as Chat_information;
-            Friend u=new Friend();
-            foreach(var o in Group_Dic)
+            Friend u = static_friends.Find(delegate (Friend friend) { return friend.U.Uid.Equals(chat.Id); });
+            if (u != null)
             {
-                List<Friend> friends = o.Value;
-                if(friends.Exists(delegate (Friend friend){ return friend.U.Uid.Equals(chat.Id); }))
+                User temp = u.U;
+                Dispatcher.Invoke(new Action(delegate
                 {
-                    u = friends.Find(delegate (Friend friend) { return friend.U.Uid.Equals(chat.Id); });
-                    break;
-                }
-            }
-            User temp = u.U;
-            Dispatcher.Invoke(new Action(delegate
-            {
 
-                Chat_Window u;
-                if (Chat_Dic.ContainsKey(temp.Uid))
-                    u = Chat_Dic[temp.Uid];
-                else
+                    Window u;
+                    if (Chat_Dic.ContainsKey(temp.Uid))
+                        u = Chat_Dic[temp.Uid];
+                    else
+                    {
+                        u = new friend_Chat(temp, My_user, this);
+                        Chat_Dic[temp.Uid] = u;
+                    }
+                    Thread newWindowThread = new Thread(() => ThreadStartingPoint(u));
+                    newWindowThread.SetApartmentState(ApartmentState.STA);
+                    newWindowThread.IsBackground = true;
+                    newWindowThread.Start();
+                }));
+            }
+            else
+            {
+                Group group=static_groups.Find(delegate (Group g) { return g.Gid.Equals(chat.Id); });
+                Dispatcher.Invoke(new Action(delegate
                 {
-                    u = new Chat_Window(temp,My_user,this);
-                    Chat_Dic[temp.Uid] = u;
-                }
-                Thread newWindowThread = new Thread(() => ThreadStartingPoint(u));
-                newWindowThread.SetApartmentState(ApartmentState.STA);
-                newWindowThread.IsBackground = true;
-                newWindowThread.Start();
-            }));
+
+                    Window u;
+                    if (Chat_Dic.ContainsKey(group.Gid))
+                        u = Chat_Dic[group.Gid];
+                    else
+                    {
+                        u = new group_Chat(group,My_user, this);
+                        Chat_Dic[group.Gid] = u;
+                    }
+                    Thread newWindowThread = new Thread(() => ThreadStartingPoint(u));
+                    newWindowThread.SetApartmentState(ApartmentState.STA);
+                    newWindowThread.IsBackground = true;
+                    newWindowThread.Start();
+                }));
+            }
         }
 
         /// <summary>
@@ -185,12 +199,12 @@ namespace Kerberos_Client.UI
             Dispatcher.Invoke(new Action(delegate
             {
 
-                Chat_Window u;
+                Window u;
                 if (Chat_Dic.ContainsKey(temp.Uid))
                     u = Chat_Dic[temp.Uid];
                 else
                 {
-                    u = new Chat_Window(temp, My_user,this);
+                    u = new friend_Chat(temp, My_user,this);
                     Chat_Dic[temp.Uid] = u;
                 }
                 Thread newWindowThread = new Thread(() => ThreadStartingPoint(u));
@@ -214,13 +228,13 @@ namespace Kerberos_Client.UI
             Dispatcher.Invoke(new Action(delegate
             {
 
-                Chat_Window u;
+                Window u;
                 if (Chat_Dic.ContainsKey(group.Gid))
                     u = Chat_Dic[group.Gid];
                 else
                 {
-                    u = new Chat_Window(temp, My_user, this);
-                    Chat_Dic[temp.Uid] = u;
+                    u = new group_Chat(group, My_user, this);
+                    Chat_Dic[group.Gid] = u;
                 }
                 Thread newWindowThread = new Thread(() => ThreadStartingPoint(u));
                 newWindowThread.SetApartmentState(ApartmentState.STA);
@@ -429,12 +443,15 @@ namespace Kerberos_Client.UI
                 View.ItemsSource = static_groups;
                 Expander my_Exp = new Expander();
                 my_Exp.HorizontalAlignment = HorizontalAlignment.Stretch;
-                my_Exp.Header = "我的群聊("+ static_groups.Count.ToString()+")";
+                if(static_groups!=null)
+                    my_Exp.Header = "我的群聊("+ static_groups.Count.ToString()+")";
+                else
+                    my_Exp.Header = "我的群聊(0)";
                 my_Exp.Content = View;
                 ExpList.Add(my_Exp);
                 foreach (var v in ExpList)
                 {
-                    if (v.Header.Equals("我的群聊"))
+                    if (v.Header.ToString().Contains("我的群聊"))
                         continue;
                     ListView listView = v.Content as ListView;
                     listView.ItemsSource = null;
@@ -477,10 +494,6 @@ namespace Kerberos_Client.UI
         }
         internal void Call_Message(Order o)
         {
-#if DES
-            o.Extend = DESLibrary.DecryptDES(o.Extend, Keys["server"]);
-#endif
-
             Dispatcher.Invoke(new Action(delegate
             {
                 Friend user = new Friend();
@@ -493,12 +506,12 @@ namespace Kerberos_Client.UI
                         break;
                     }
                 }
-                Chat_Window u;
+                friend_Chat u;
                 if (Chat_Dic.ContainsKey(o.Src))
-                    u = Chat_Dic[o.Src];
+                    u =(friend_Chat)Chat_Dic[o.Src];
                 else
                 {
-                    u = new Chat_Window(user.U, My_user,this);
+                    u = new friend_Chat(user.U, My_user,this);
                     Chat_Dic[o.Src] = u;
                     Thread newWindowThread = new Thread(() => ThreadStartingPoint(u));
                     newWindowThread.SetApartmentState(ApartmentState.STA);
@@ -524,6 +537,50 @@ namespace Kerberos_Client.UI
                 u.chatMessage.Add(new ChatMessage()
                 {
                     Photo =user.U.Photo ,
+                    Message = myStruct.chat_message.Content,
+                    MessageLocation = TypeLocalMessageLocation.chatRecv
+                }); ;
+                u.ListBoxChat.ScrollIntoView(u.ListBoxChat.Items[u.ListBoxChat.Items.Count - 1]);
+            }));
+        }
+        internal void Call_groupMessage(Order o)
+        {
+
+            Dispatcher.Invoke(new Action(delegate
+            {
+                Group group = static_groups.Find(delegate (Group g) { return g.Gid.Equals(o.Src); });
+
+                group_Chat u;
+                if (Chat_Dic.ContainsKey(o.Src))
+                    u =(group_Chat) Chat_Dic[o.Src];
+                else
+                {
+                    u = new group_Chat(group,My_user,this);
+                    Chat_Dic[o.Src] = u;
+                    Thread newWindowThread = new Thread(() => ThreadStartingPoint(u));
+                    newWindowThread.SetApartmentState(ApartmentState.STA);
+                    newWindowThread.IsBackground = true;
+                    newWindowThread.Start();
+                }
+                o.Extend = DESLibrary.DecryptDES(o.Extend, Main_Window.Keys["server"]);
+                MyStruct myStruct = JsonHelper.FromJson<MyStruct>(o.Extend);
+                Chat_Message chat_Message = myStruct.chat_message;
+                Chat_information record = Message_List.Find(delegate (Chat_information record_) { return record_.Id.Equals(chat_Message.U.Uid); });
+                if (record != null)
+                {
+                    record.Add(chat_Message);
+                }
+                else
+                {
+                    record = new Person_Chat(chat_Message.U.Photo, chat_Message.U.Uname, chat_Message.U.Uid);
+                    record.Add(chat_Message);
+                    Main_Window.Message_List.Add(record);
+                }
+                message_List.ItemsSource = null;
+                message_List.ItemsSource = Message_List;
+                u.chatMessage.Add(new ChatMessage()
+                {
+                    Photo = myStruct.chat_message.U.Photo,
                     Message = myStruct.chat_message.Content,
                     MessageLocation = TypeLocalMessageLocation.chatRecv
                 }); ;
