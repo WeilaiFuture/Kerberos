@@ -91,6 +91,8 @@ namespace Kerberos_Client.UI
             order.Extend = JsonHelper.ToJson(myStruct);
             order.Extend = DESLibrary.EncryptDES(order.Extend,Main_Window.Keys["server"]);
             ConnectServer.sendMessage(order);
+            MessageBox.Show("已发送邀请");
+            this.Close();
         }
     }
 }

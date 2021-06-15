@@ -107,7 +107,7 @@
                                 <DataTemplate>
                                     <Image x:Name="head_Image" Source="{Binding Photo}"  Width="20" Height="20" RenderTransformOrigin="1,1" >
                                         <Image.Clip>
-                                            <EllipseGeometry RadiusX="20" RadiusY="20" Center="20,20"/>
+                                            <EllipseGeometry RadiusX="10" RadiusY="10" Center="10,10"/>
                                         </Image.Clip>
                                     </Image>
                                 </DataTemplate>

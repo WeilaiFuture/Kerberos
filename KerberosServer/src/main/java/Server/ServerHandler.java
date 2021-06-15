@@ -507,6 +507,26 @@ public class ServerHandler {
         String sstruct="";
         String sorder="";
         switch (order.getContentType()){
+            case "101":
+                for(int i=0;i<mystruct.group.getList().size();i++){
+                    MyStruct.User user1=mystruct.group.getList().get(i);
+                    if(user1.getUid().equals(mystruct.user.getUid()))
+                        continue;
+                    order.setDst(user1.getUid());
+                    //发送
+                    sstruct= StructToString(mystruct);
+                    //加密操作
+                    kcv=rKcv(order.getDst());
+                    sstruct=DESHandler.EncryptDES(sstruct,kcv);
+                    order.setExtend(sstruct);
+                    //添加签名
+                    order.setSign(generateSign(sk,order.getExtend()));
+                    sorder=MyJson.OrderToString(order);
+                    send(order.getDst(),sorder);
+                    System.out.println("发送:"+sorder);
+                }
+
+                break;
             case "9002":
                 //加入群聊
                 //转发给群主
@@ -523,8 +543,11 @@ public class ServerHandler {
                 System.out.println("发送:"+sorder);
                 break;
             case "9003":
+                if(mystruct.group.getGid()==null)
+                    mystruct.group.setGid(worker.StrnextId());
                 //组建群聊
                 wCreateG(mystruct.group);
+                wAddG(user,mystruct.group.getGid());
                 //转发邀请
                 for(int i=0;i<mystruct.group.getList().size();i++){
                     MyStruct.User user1=mystruct.group.getList().get(i);

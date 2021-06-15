@@ -5,29 +5,47 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Kerberos_Client"
         mc:Ignorable="d"
-          Title="UserUI" Height="450" Width="800">
+          Title="UserUI" Height="280" Width="500" ResizeMode="NoResize">
     <Grid>
         <Border Opacity="0.6" Grid.ColumnSpan="2" Margin="0,0,0.2,0" >
-            <Image  Source="../Image_Source/back.jpg" Stretch="Fill" Margin="0,-16,0.6,0" HorizontalAlignment="Right" Width="793"/>
+            <Image  Source="../Image_Source/back.jpg" Stretch="Fill"  />
         </Border>
-        <Image Name="head_Image"  Margin="0,28,436.6,84" >
-            <Image.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform AngleX="-0.239"/>
-                    <RotateTransform/>
-                    <TranslateTransform X="-0.396"/>
-                </TransformGroup>
-            </Image.RenderTransform>
-            <Image.Clip>
-                <EllipseGeometry RadiusX="150" RadiusY="150" Center="150,150"/>
-            </Image.Clip>
-        </Image>
-        <TextBlock x:Name="Uname_TextBlock" Height="41" FontSize="30" Opacity="0.6"  Text="昵称:" Margin="394,81,330.6,298" ></TextBlock>
-        <TextBox x:Name="Uname_TextBox" Height="41" FontSize="30" Opacity="0.6"  Margin="478,81,9.6,298" ></TextBox>
-        <TextBlock x:Name="Uid_TextBlock" Height="41" FontSize="30" Opacity="0.6"  Text="账号:" Margin="394,147,-0.4,232" ></TextBlock>
-        <TextBlock x:Name="Email_TextBlock"  Height="41" FontSize="30" Opacity="0.6"  Text="邮箱:" Margin="394,214,0.6,165" ></TextBlock>
-        <Button Content="更换头像" FontSize="30" Opacity="0.7" Margin="86,352,539.6,10" Click="Button_Click"></Button>
-        <Button Content="保存" FontSize="30" Opacity="0.7" Margin="541,352,125.6,10" Click="Button_Click_1"></Button>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60"/>
+                <RowDefinition Height="60"/>
+                <RowDefinition Height="60"/>
+                <RowDefinition Height="60"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="180"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            
+            
+            <Image Grid.RowSpan="3" Name="head_Image" Width="150" Height="150" >
+                <Image.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform AngleX="-0.239"/>
+                        <RotateTransform/>
+                        <TranslateTransform X="-0.396"/>
+                    </TransformGroup>
+                </Image.RenderTransform>
+                <Image.Clip>
+                    <EllipseGeometry RadiusX="75" RadiusY="75" Center="75,75"/>
+                </Image.Clip>
+            </Image>
+            <StackPanel Grid.Column="1" Orientation="Horizontal" >
+                <TextBlock x:Name="Uname_TextBlock" Height="41"  FontSize="24" Opacity="0.6"  Text="昵称:"  ></TextBlock>
+                <TextBox x:Name="Uname_TextBox" Height="41"  FontSize="24" Opacity="0.6"  />
+            </StackPanel>
+            
+            <TextBlock Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left"  x:Name="Uid_TextBlock" Height="41"  FontSize="24" Opacity="0.6"  Text="账号:" ></TextBlock>
+            <TextBlock Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left"  x:Name="Email_TextBlock"  Height="41"  FontSize="24" Opacity="0.6"  Text="邮箱:"  ></TextBlock>
+
+            <Button Grid.Row="3" Grid.Column="0" Content="更换头像" FontSize="30" Width="160" Height="40" Opacity="0.7"  Click="Button_Click" ></Button>
+            <Button Grid.Row="3" Grid.Column="1" Content="保存" FontSize="30" Width="80" Height="40" Opacity="0.7"  Click="Button_Click_1" ></Button>
+        </Grid>
     </Grid>
 </Window>

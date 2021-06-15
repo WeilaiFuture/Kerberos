@@ -64,6 +64,7 @@ namespace Kerberos_Client
         {
             InitializeComponent();
             init(true);
+
         }
         public MainWindow(bool login)
         {
@@ -225,8 +226,8 @@ namespace Kerberos_Client
                 GC.Collect();
             }));
         }
-        #endregion
-        #region Kerberos
+#endregion
+#region Kerberos
         private void certificateInit(string name, string ip, int port)
         {
             //生成证书

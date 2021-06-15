@@ -363,7 +363,7 @@ public class ServerDataBase {
         try {
             String sql="insert into `belong` (`gid` ,`uid` ,`nickname` ) values(\""
                     +IDG+"\",\""
-                    +user.getUid()+"\","
+                    +user.getUid()+"\",\""
                     +user.getUname()+"\")";
             Statement statement = con.createStatement();
             int result = statement.executeUpdate(sql);
@@ -424,14 +424,15 @@ public class ServerDataBase {
          */
         try {
             String sql="insert into `groups` (`gid` ,`gname` ,`photo` ,`leader` ,`sign`,`startTime`,`sum`) values(\""
-                    +worker.StrnextId()+"\",\""
+                    +group.getGid()+"\",\""
                     +group.getGname()+"\",\""
                     +group.getPhoto()+"\",\""
                     +group.getLeader()+"\",\""
                     +group.getSign()+"\","
                     +group.getStartTime()+",\""
-                    +group.getList().size()+ "\")";
+                    +group.getList().size()+ "\")" ;
             Statement statement = con.createStatement();
+
             int result = statement.executeUpdate(sql);
             System.out.println("创建群聊成功");
             return true;

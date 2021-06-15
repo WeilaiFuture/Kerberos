@@ -63,11 +63,13 @@ namespace Kerberos_Client.UI
             chat.Time = DateTime.Now.Ticks;
             MyStruct myStruct = new MyStruct();
             myStruct.chat_message = chat;
+            myStruct.user = My_user;
+            myStruct.group = Chat_user;
             Order order = new Order();
             order.Dst = Chat_user.Gid;
             order.Src = My_user.Uid;
             order.MsgType = "2002";
-            order.ContentType = "101";
+            order.ContentType = "101"; 
             order.Extend = JsonHelper.ToJson(myStruct);
             order.Extend = DESLibrary.EncryptDES(JsonHelper.ToJson(myStruct), Main_Window.Keys["server"]);
             ConnectServer.sendMessage(order);
@@ -90,6 +92,8 @@ namespace Kerberos_Client.UI
             window.message_List.ItemsSource = Main_Window.Message_List;
             chatMessage.Add(new ChatMessage()
             {
+                Name = My_user.Uname,
+                Time = DateTime.Now.ToString(),
                 Photo = My_user.Photo,
                 Message = send_text.Text,
                 MessageLocation = TypeLocalMessageLocation.chatSend

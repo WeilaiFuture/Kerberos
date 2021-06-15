@@ -211,7 +211,8 @@
                 </TabItem>
                 <!--好友列表-->
                 <TabItem Name="Friend_Tab" Header="好友列表" Height="0"   Visibility="Hidden" Focusable="True" HorizontalContentAlignment="Stretch">
-                    <ListView x:Name="Group_View" HorizontalAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                    <ListView x:Name="Group_View" HorizontalAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Hidden" 
+                              ScrollViewer.VerticalScrollBarVisibility="Auto">
                     </ListView>
 
                 </TabItem>

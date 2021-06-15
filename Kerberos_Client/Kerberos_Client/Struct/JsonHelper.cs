@@ -19,7 +19,7 @@ namespace Kerberos_Client
             MyJsonSerializerSettings = new JsonSerializerSettings();
             MyJsonSerializerSettings1 = new JsonSerializerSettings
             {
-                TypeNameHandling = TypeNameHandling.Auto
+                TypeNameHandling = TypeNameHandling.All
             };
             IsoDateTimeConverter dateTimeConverter = new IsoDateTimeConverter();
             dateTimeConverter.DateTimeFormat = "yyyy-MM-dd HH:mm:ss";

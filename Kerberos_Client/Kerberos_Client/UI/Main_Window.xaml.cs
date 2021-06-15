@@ -37,6 +37,8 @@ namespace Kerberos_Client.UI
         public static List<Expander> ExpList = new List<Expander>();
         public static List<Friend> static_friends;
         public static List<Group> static_groups;
+        public static Friend static_friend;
+        public static Group static_group;
         public Main_Window(User u)
         {
             InitializeComponent();
@@ -423,6 +425,8 @@ namespace Kerberos_Client.UI
                         listView.Style = FindResource("FriendListView") as Style;
                         listView.Width = 280;
                         listView.ContextMenu = GetContext();
+
+                        listView.SelectionChanged += friend_select_change;
                         listView.MouseDoubleClick += friend_List_MouseDoubleClick;
                         Expander my_Exp1 = new Expander();
                         my_Exp1.HorizontalAlignment= HorizontalAlignment.Stretch;
@@ -439,6 +443,7 @@ namespace Kerberos_Client.UI
                 View.Width = 280;
                 View.ContextMenu = GetgroupContext();
                 View.MouseDoubleClick += group_MouseDoubleClick;
+                View.SelectionChanged += group_select_change;
                 View.ItemsSource = null;
                 View.ItemsSource = static_groups;
                 Expander my_Exp = new Expander();
@@ -536,6 +541,9 @@ namespace Kerberos_Client.UI
                 message_List.ItemsSource = Message_List;
                 u.chatMessage.Add(new ChatMessage()
                 {
+                    Name = user.U.Uname,
+
+                    Time =new DateTime(chat_Message.Time).ToString(),
                     Photo =user.U.Photo ,
                     Message = myStruct.chat_message.Content,
                     MessageLocation = TypeLocalMessageLocation.chatRecv
@@ -548,11 +556,13 @@ namespace Kerberos_Client.UI
 
             Dispatcher.Invoke(new Action(delegate
             {
-                Group group = static_groups.Find(delegate (Group g) { return g.Gid.Equals(o.Src); });
+                o.Extend = DESLibrary.DecryptDES(o.Extend, Main_Window.Keys["server"]);
+                MyStruct myStruct = JsonHelper.FromJson<MyStruct>(o.Extend);
+                Group group = static_groups.Find(delegate (Group g) { return g.Gid.Equals(myStruct.group.Gid); });
 
                 group_Chat u;
-                if (Chat_Dic.ContainsKey(o.Src))
-                    u =(group_Chat) Chat_Dic[o.Src];
+                if (Chat_Dic.ContainsKey(myStruct.group.Gid))
+                    u =(group_Chat) Chat_Dic[myStruct.group.Gid];
                 else
                 {
                     u = new group_Chat(group,My_user,this);
@@ -562,8 +572,6 @@ namespace Kerberos_Client.UI
                     newWindowThread.IsBackground = true;
                     newWindowThread.Start();
                 }
-                o.Extend = DESLibrary.DecryptDES(o.Extend, Main_Window.Keys["server"]);
-                MyStruct myStruct = JsonHelper.FromJson<MyStruct>(o.Extend);
                 Chat_Message chat_Message = myStruct.chat_message;
                 Chat_information record = Message_List.Find(delegate (Chat_information record_) { return record_.Id.Equals(chat_Message.U.Uid); });
                 if (record != null)
@@ -580,6 +588,8 @@ namespace Kerberos_Client.UI
                 message_List.ItemsSource = Message_List;
                 u.chatMessage.Add(new ChatMessage()
                 {
+                    Name =myStruct.user.Uname,
+                    Time = new DateTime(chat_Message.Time).ToString(),
                     Photo = myStruct.chat_message.U.Photo,
                     Message = myStruct.chat_message.Content,
                     MessageLocation = TypeLocalMessageLocation.chatRecv
@@ -713,10 +723,8 @@ namespace Kerberos_Client.UI
             order.Src = MainWindow.localName;
             order.Dst = o.Src;
             MyStruct myStruct_ = new MyStruct();
-            myStruct_.friend = new Friend();
-            myStruct_.friend.Tid = "1";
             myStruct_.user = My_user;
-            myStruct_.friend.U = myStruct.user;
+            myStruct_.group = myStruct.group;
             order.Extend = JsonHelper.ToJson(myStruct_);
 
 #if des
@@ -735,7 +743,7 @@ namespace Kerberos_Client.UI
             order.Dst = "Server";
             MyStruct myStruct = new MyStruct();
             myStruct.user = My_user;
-            order.Extend = JsonHelper.ToJson1(myStruct);
+            order.Extend = JsonHelper.ToJson(myStruct);
 
 #if des
             order.Extend = DESLibrary.EncryptDES(order.Extend, Keys["server"]);
@@ -749,7 +757,7 @@ namespace Kerberos_Client.UI
             foreach (object i in Message_List)
             {
                 Chat_information m = i as Chat_information;
-                json = JsonHelper.ToJson(m);
+                json = JsonHelper.ToJson1(m);
                 sw.WriteLine(json);
             }
             sw.Close();
@@ -768,9 +776,8 @@ namespace Kerberos_Client.UI
             MyStruct myStruct = new MyStruct();
 
 
-            Expander expander = FindExpander();
-            ListView listView = expander.Content as ListView;
-            Friend friend = listView.SelectedItem as Friend;
+
+            Friend friend = static_friend;
             myStruct.friend = friend;
             order.Extend = JsonHelper.ToJson(myStruct);
 #if des
@@ -793,9 +800,7 @@ namespace Kerberos_Client.UI
             order.ContentType = "9010";
             MyStruct myStruct = new MyStruct();
 
-            Expander expander = FindExpander();
-            ListView listView = expander.Content as ListView;
-            Friend friend = listView.SelectedItem as Friend;
+            Friend friend = static_friend;
             friend.Tid = (sender as MenuItem).Header.ToString();
 
             myStruct.friend = friend;
@@ -814,9 +819,7 @@ namespace Kerberos_Client.UI
             order.Dst = "Server";
             order.ContentType = "9010";
             MyStruct myStruct = new MyStruct();
-            Expander expander = FindExpander();
-            ListView listView1 = expander.Content as ListView;
-            Friend friend = listView1.SelectedItem as Friend;
+            Friend friend = static_friend;
             friend.Tid =(((sender as Button).Parent as Grid).Children[0] as TextBox).Text;
 
             myStruct.friend = friend;
@@ -827,21 +830,8 @@ namespace Kerberos_Client.UI
 #endif
             ConnectServer.sendMessage(order);
         }
-        private Expander FindExpander()
-        {
-            foreach (var o in ExpList)
-            {
-                ListView listView1 = o.Content as ListView;
-                if (listView1.SelectedIndex >= 0)
-                {
-                    return o;
-                }
-            }
-            return null;
-        }
         private ContextMenu GetContext()
         {
-
             ContextMenu cm = new ContextMenu();
             MenuItem menu = new MenuItem();
             menu.Header = "删除好友";
@@ -861,9 +851,9 @@ namespace Kerberos_Client.UI
             cm.Items.Add(menu2);
             return cm;
         }
+
         private ContextMenu GetgroupContext()
         {
-
             ContextMenu cm = new ContextMenu();
             MenuItem menu = new MenuItem();
             menu.Header = "退出群聊";
@@ -886,10 +876,7 @@ namespace Kerberos_Client.UI
             order.Dst = "Server";
             order.ContentType = "9005";
             MyStruct myStruct = new MyStruct();
-
-            Expander expander = FindExpander();
-            ListView listView = expander.Content as ListView;
-            Group group = listView.SelectedItem as Group;
+            Group group = static_group;
             myStruct.group = group;
             order.Extend = JsonHelper.ToJson(myStruct);
 #if des
@@ -932,5 +919,30 @@ namespace Kerberos_Client.UI
                 //menuItem.Items.Add(new Separator());
             }
         }
+        private void friend_select_change(object sender, RoutedEventArgs e)
+        {       
+            static_friend =(sender as ListView).SelectedItem as Friend;
+            foreach (var v in ExpList)
+            {
+                if ((sender as ListView)!= v.Content as ListView)
+                {
+                    ListView listView = v.Content as ListView;
+                    listView.SelectedItem = null;
+                }
+            }
+        }
+        private void group_select_change(object sender, RoutedEventArgs e)
+        {
+            static_group = (sender as ListView).SelectedItem as Group;
+            foreach (var v in ExpList)
+            {
+                if ((sender as ListView) != v.Content as ListView)
+                {
+                    ListView listView = v.Content as ListView;
+                    listView.SelectedItem = null;
+                }
+            }
+        }
+
     }
 }

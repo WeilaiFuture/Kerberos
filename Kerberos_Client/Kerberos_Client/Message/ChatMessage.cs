@@ -36,6 +36,32 @@ namespace Kerberos_Client.UI
                 }
             }
         }
+        public string name;
+        public string Name
+        {
+            get { return name; }
+            set
+            {
+                if (name != value)
+                {
+                    name = value;
+                    Notify();
+                }
+            }
+        }
+        public string time;
+        public string Time
+        {
+            get { return time; }
+            set
+            {
+                if (time != value)
+                {
+                    time = value;
+                    Notify();
+                }
+            }
+        }
         private TypeLocalMessageLocation messageLocation;
         public TypeLocalMessageLocation MessageLocation
         {

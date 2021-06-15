@@ -14,12 +14,6 @@
                             <ColumnDefinition></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <TextBox Grid.Column="0" x:Name="TB" Text="新建分组" MinWidth="80" Margin="5,5,5,5">
-                            <!--<i:Interaction.Triggers>
-                                <ei:DataTrigger Binding="{Binding Text, ElementName=TB}">
-                                    <ei:ChangePropertyAction TargetName="MyHeader" PropertyName="Header" Value="{Binding ElementName=TB, Path=Text}">
-                                    </ei:ChangePropertyAction>
-                                </ei:DataTrigger>
-                            </i:Interaction.Triggers>-->
                         </TextBox>
                         <Button Grid.Column="1" x:Name="button" Content="确认"></Button>
                     </Grid>

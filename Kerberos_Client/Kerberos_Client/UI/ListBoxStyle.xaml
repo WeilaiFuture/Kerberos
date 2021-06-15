@@ -76,8 +76,18 @@
                             <RowDefinition/>
                             <RowDefinition/>
                         </Grid.RowDefinitions>
-                        <Label Grid.Row="0" Style="{Binding MessageLocation,Converter={StaticResource MLC}, ConverterParameter=MessageLocation}" Margin="0,0,-0.4,-0.2" >
-                            <TextBlock TextWrapping="Wrap" MinWidth="0" MaxWidth="300" Text="{Binding Message}"></TextBlock>
+                        <Grid Grid.Row="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0" Content="{Binding Name}" HorizontalAlignment="Left"></Label>
+                            <Label Grid.Column="1" Content="{Binding Time}" HorizontalAlignment="Left" Margin="2,0,0,0"></Label>
+                        </Grid>
+                        <Label Grid.Row="1" Style="{Binding MessageLocation,Converter={StaticResource MLC}, ConverterParameter=MessageLocation}" Margin="0,0,-0.4,-0.2" >
+                            <Grid>
+                                <TextBlock TextWrapping="Wrap" MinWidth="0" MaxWidth="300" Text="{Binding Message}"></TextBlock>
+                            </Grid>
                         </Label>
                     </Grid>
                     <ControlTemplate.Triggers>

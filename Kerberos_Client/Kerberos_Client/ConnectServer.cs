@@ -255,7 +255,7 @@ namespace Kerberos_Client
                             switch (order.ContentType)
                             {
                                 case "101":
-                                    w.main_Window.Call_Message(order);
+                                    w.main_Window.Call_groupMessage(order);
                                     break;
                                 case "9002":
                                     w.main_Window.ReCall_Add_Group(order);

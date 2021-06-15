@@ -91,10 +91,12 @@ namespace Kerberos_Client.UI
             window.message_List.ItemsSource = Main_Window.Message_List;
             chatMessage.Add(new ChatMessage()
             {
+                Name = My_user.Uname,
+                Time = DateTime.Now.ToString(),
                 Photo = My_user.Photo,
                 Message = send_text.Text,
                 MessageLocation = TypeLocalMessageLocation.chatSend
-            }); ;
+            });  ;
             send_text.Text = "";
             ListBoxChat.ScrollIntoView(ListBoxChat.Items[ListBoxChat.Items.Count - 1]);
         }

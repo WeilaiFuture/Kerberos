@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Kerberos_Client" xmlns:local1="clr-namespace:Kerberos_Client.UI"
         mc:Ignorable="d"
-        Title="Chat" Height="500" Width="600">
+        Title="Chat" Height="500" Width="600" MinHeight="450" MinWidth="550">
     <Window.Resources>
 
         <Color x:Key="green_normal">#07C160</Color>
@@ -14,37 +14,17 @@
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="2*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*" MinWidth="200"></ColumnDefinition>
+            <ColumnDefinition Width="4"/>
+            <ColumnDefinition Width="150" MinWidth="150" MaxWidth="300"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <Border Opacity="0.6" Grid.ColumnSpan="2" Margin="0,0,0.2,0" >
+        <!--背景
+        <Border Opacity="0.6" Grid.ColumnSpan="3" Margin="0,0,0.2,0" >
             <Image  Source="../Image_Source/back.jpg" Stretch="Fill" Margin="0,-16,0.6,0.4" HorizontalAlignment="Right" Width="593"/>
         </Border>
-        <Grid Grid.Column="0"  Margin="0,0,0.2,0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="4*"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <ListBox  Name="ListBoxChat" ItemContainerStyle="{StaticResource ListBoxItemChatStyle }" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Margin="0,0,-0.2,0">
-                <ListBox.Style>
-                    <Style TargetType="ListBox">
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="ListBox">
-                                    <Border x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="0">
-                                        <ScrollViewer Focusable="False">
-                                            <ItemsPresenter />
-                                        </ScrollViewer>
-                                    </Border>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                    </Style>
-                </ListBox.Style>
-            </ListBox>
-
-            <TextBox x:Name="send_text" Grid.Row="1" Opacity="0.7" Grid.ColumnSpan="2" Margin="0,0,-0.8,0" TextWrapping="Wrap"></TextBox>
-            <Button Grid.Row="1" Click="Button_Click"  Content="发送"  RenderTransformOrigin="1.166,0.926"  Margin="325,64,-0.2,0.4">
+        -->
+        <DockPanel Grid.Column="0">
+            <Button DockPanel.Dock="Bottom" Height="30" Click="Button_Click"  Content="发送"  Width="80" HorizontalAlignment="Right" >
                 <Button.Style>
                     <Style TargetType="Button">
                         <Setter Property="Background" Value="Green" />
@@ -73,9 +53,56 @@
                     </Style>
                 </Button.Style>
             </Button>
-        </Grid>
-        <Grid  Grid.Column="1" RenderTransformOrigin="0.5,0.5" Margin="10,0,-0.4,0.4">
-            <Image Name="head_Image" Source="../Image_Source/test.jpg" Margin="-37,20,-46.4,244.4" >
+            <Grid >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" MinHeight="100"/>
+                    <RowDefinition Height="4"/>
+                    <RowDefinition Height="100" MinHeight="100"/>
+
+                </Grid.RowDefinitions>
+
+                <ListBox  Name="ListBoxChat" ItemContainerStyle="{StaticResource ListBoxItemChatStyle }" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Disabled" >
+                    <ListBox.Style>
+                        <Style TargetType="ListBox">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="ListBox">
+                                        <Border x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="0">
+                                            <ScrollViewer Focusable="False">
+                                                <ItemsPresenter />
+                                            </ScrollViewer>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ListBox.Style>
+                </ListBox>
+
+                <GridSplitter Grid.Row="1" Height="5" VerticalAlignment="Center" HorizontalAlignment="Stretch"></GridSplitter>
+
+                <TextBox x:Name="send_text" Grid.Row="2" Opacity="0.7"  TextWrapping="Wrap"></TextBox>
+
+
+            </Grid>
+
+        </DockPanel>
+        
+        <!--分割线-->
+        <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Center" VerticalAlignment="Stretch"></GridSplitter>
+        
+        <Grid  Grid.Column="2"  Margin="0,30,0,0" MinWidth="150">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="70"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="6*"/>
+            </Grid.ColumnDefinitions>
+            <Image Grid.Row="0" Grid.ColumnSpan="2" Name="head_Image" Source="../Image_Source/test.jpg" Height="50" Width="50"  >
                 <Image.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -85,12 +112,18 @@
                     </TransformGroup>
                 </Image.RenderTransform>
                 <Image.Clip>
-                    <EllipseGeometry RadiusX="100" RadiusY="100" Center="100,100"/>
+                    <EllipseGeometry RadiusX="25" RadiusY="25" Center="25,25"/>
                 </Image.Clip>
             </Image>
-            <TextBlock x:Name="Uname_TextBlock" Height="41"  Opacity="0.6"  Margin="10,244,87.6,185.4" ></TextBlock>
-            <TextBlock x:Name="Uid_TX" Height="41"  Opacity="0.6"   Margin="10,312,9.6,117.4" ></TextBlock>
-            <TextBlock x:Name="Email_TX" Height="41"  Opacity="0.6"   Margin="10,379,9.6,50.4" ></TextBlock>
+
+            <Label Grid.Column="0" Grid.Row="1" HorizontalAlignment="Right">昵称:</Label>
+            <TextBlock Grid.Row="1" Grid.Column="1" x:Name="Uname_TextBlock" Height="41"  Opacity="0.6">asdsad</TextBlock>
+
+            <Label Grid.Column="0" Grid.Row="2" HorizontalAlignment="Right">账号:</Label>
+            <TextBlock Grid.Row="2" Grid.Column="1" x:Name="Uid_TX" Height="41"  Opacity="0.6">34252223</TextBlock>
+
+            <Label Grid.Column="0" Grid.Row="3" HorizontalAlignment="Right">邮箱:</Label>
+            <TextBlock Grid.Row="3" Grid.Column="1"  x:Name="Email_TX" Height="41"  Opacity="0.6">娃尔可4很快课(♥∀♥)</TextBlock>
         </Grid>
     </Grid>
 </Window>
