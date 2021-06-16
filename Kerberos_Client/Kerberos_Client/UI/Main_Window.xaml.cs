@@ -143,10 +143,10 @@ namespace Kerberos_Client.UI
             if ((sender as DataGrid).SelectedItem == null)
                 return;
             Chat_information chat = (sender as DataGrid).SelectedItem as Chat_information;
-            Friend u = static_friends.Find(delegate (Friend friend) { return friend.U.Uid.Equals(chat.Id); });
-            if (u != null)
+            Friend f = static_friends.Find(delegate (Friend friend) { return friend.U.Uid.Equals(chat.Id); });
+            if (f != null)
             {
-                User temp = u.U;
+                User temp = f.U;
                 Dispatcher.Invoke(new Action(delegate
                 {
 
@@ -411,7 +411,6 @@ namespace Kerberos_Client.UI
             static_groups = myStruct.groups;
             ExpList.Clear();
             Group_Dic.Clear();
-
             Dispatcher.Invoke(new Action(delegate
             {
                 foreach (object i in static_friends)
@@ -425,7 +424,7 @@ namespace Kerberos_Client.UI
                         listView.Style = FindResource("FriendListView") as Style;
                         listView.Width = 280;
                         listView.ContextMenu = GetContext();
-
+                        listView.SelectionMode = SelectionMode.Single;
                         listView.SelectionChanged += friend_select_change;
                         listView.MouseDoubleClick += friend_List_MouseDoubleClick;
                         Expander my_Exp1 = new Expander();
@@ -434,8 +433,10 @@ namespace Kerberos_Client.UI
                         my_Exp1.Content = listView;
                         ExpList.Add(my_Exp1);
                     }
-                    if(!Group_Dic[friend.Tid].Exists(delegate (Friend fri) { return fri.U.Uid.Equals(friend.U.Uid); }))
+                    if (!Group_Dic[friend.Tid].Exists(delegate (Friend fri) { return fri.U.Uid.Equals(friend.U.Uid); }))
+                    {
                         Group_Dic[friend.Tid].Add(friend);
+                    }
                 }
                 ListView View = new ListView();
                 View.HorizontalAlignment = HorizontalAlignment.Stretch;
@@ -444,6 +445,7 @@ namespace Kerberos_Client.UI
                 View.ContextMenu = GetgroupContext();
                 View.MouseDoubleClick += group_MouseDoubleClick;
                 View.SelectionChanged += group_select_change;
+                View.SelectionMode = SelectionMode.Single;
                 View.ItemsSource = null;
                 View.ItemsSource = static_groups;
                 Expander my_Exp = new Expander();
@@ -639,7 +641,7 @@ namespace Kerberos_Client.UI
             order.Dst = o.Src;
             MyStruct myStruct_ = new MyStruct();
             myStruct_.friend = new Friend();
-            myStruct_.friend.Tid = "1";
+            myStruct_.friend.Tid = "我的好友";
             myStruct_.user = My_user;
             myStruct_.friend.U = myStruct.user;
             order.Extend = JsonHelper.ToJson(myStruct_);

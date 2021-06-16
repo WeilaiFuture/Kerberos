@@ -2,8 +2,8 @@
 #define des
 #define rsa
 #define kbtest
-#define local
-//#define lianji
+//#define local
+#define lianji
 using Kerberos_Client.UI;
 using System;
 using System.Collections.Generic;
@@ -46,7 +46,7 @@ namespace Kerberos_Client
 #endif
 
 #if lianji
-        string SERVERIP  = "192.168.43.21";
+        string SERVERIP  = "192.168.43.63";
         string ASIP = "192.168.43.130";
         string TGSIP = "192.168.43.21";
         int ASPort = 10087;
@@ -179,7 +179,6 @@ namespace Kerberos_Client
             }
             if (key_Check.IsChecked == true)
                 password.Password = u.Psswd;
-
             string path = string.Empty;
             if (ID.SelectedItem == null)
             {
@@ -187,6 +186,7 @@ namespace Kerberos_Client
             }
             else
             {
+                u.Photo = @"../../Image_Source\" + u.Uid + ".jpg";
                 path = (ID.SelectedItem as Login_User).Photo;
                 if (!File.Exists(path))
                     path = @"../../Image_Source\未登录头象.png";
@@ -473,7 +473,10 @@ delegate
             if (temp == null)
                 u = new Login_User(ID.Text, password.Password, @"../../Image_Source\未登录头象.png", key_Check.IsChecked, login_Check.IsChecked);
             else
+            {
+                temp.Photo = @"../../Image_Source\" + temp.Uid + ".jpg";
                 u = new Login_User(ID.Text, password.Password, temp.Photo, key_Check.IsChecked, login_Check.IsChecked);
+            }
             if (key_Check.IsChecked == false)
                 u.Psswd = string.Empty;
             User_Item.Remove(User_Item.Find(delegate (Login_User user) { return user.Uid.Equals(ID.Text); }));

@@ -110,6 +110,7 @@
     </Compile>
     <Compile Include="Message\MessageLocationConverter.cs" />
     <Compile Include="Message\TypeLocalMessageLocation.cs" />
+    <Compile Include="Struct\StringToImageSourceConverter.cs" />
     <Compile Include="UI\User_Window.xaml.cs">
       <DependentUpon>User_Window.xaml</DependentUpon>
     </Compile>

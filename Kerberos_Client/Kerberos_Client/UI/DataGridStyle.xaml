@@ -1,9 +1,12 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:local="clr-namespace:Kerberos_Client">
+                    xmlns:local="clr-namespace:Kerberos_Client"
+                    xmlns:local1="clr-namespace:Kerberos_Client.Struct">
+    
     <Style TargetType="ListViewItem" x:Key="FriendGrid" >
         <Style.Resources>
             <local:MyStruct x:Key="Friend"></local:MyStruct>
+            <local1:StringToImageSourceConverter x:Key="MyImageConverter"></local1:StringToImageSourceConverter>
         </Style.Resources>
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="Template">
@@ -16,9 +19,9 @@
                                 <ColumnDefinition ></ColumnDefinition>
                             </Grid.ColumnDefinitions>
                             <Grid Grid.Column="0">
-                                <Image x:Name="head_Image" Source="{Binding U.Photo}"  Width="40" Height="40" RenderTransformOrigin="1,1" >
+                                <Image x:Name="head_Image" Source="{Binding Path=U.Photo,Converter={StaticResource MyImageConverter}}"  Width="40" Height="40" >
                                     <Image.Clip>
-                                        <EllipseGeometry RadiusX="60" RadiusY="60" Center="30,30"/>
+                                        <EllipseGeometry RadiusX="20" RadiusY="20" Center="20,20"/>
                                     </Image.Clip>
                                 </Image>
                             </Grid>
@@ -46,6 +49,7 @@
     <Style TargetType="ListViewItem" x:Key="AddGroupGrid" >
         <Style.Resources>
             <local:MyStruct x:Key="Friend"></local:MyStruct>
+            <local1:StringToImageSourceConverter x:Key="MyImageConverter"></local1:StringToImageSourceConverter>
         </Style.Resources>
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="Template">
@@ -59,9 +63,9 @@
                                 <ColumnDefinition ></ColumnDefinition>
                             </Grid.ColumnDefinitions>
                             <Grid Grid.Column="0">
-                                <Image x:Name="head_Image" Source="{Binding U.Photo}"  Width="40" Height="40" RenderTransformOrigin="1,1" >
+                                <Image x:Name="head_Image" Source="{Binding Path=U.Photo,Converter={StaticResource MyImageConverter}}"  Width="40" Height="40" >
                                     <Image.Clip>
-                                        <EllipseGeometry RadiusX="60" RadiusY="60" Center="30,30"/>
+                                        <EllipseGeometry RadiusX="20" RadiusY="20" Center="20,20"/>
                                     </Image.Clip>
                                 </Image>
                             </Grid>
@@ -95,6 +99,7 @@
     <Style TargetType="ListViewItem" x:Key="GroupGrid" >
         <Style.Resources>
             <local:MyStruct x:Key="Friend"></local:MyStruct>
+            <local1:StringToImageSourceConverter x:Key="MyImageConverter"></local1:StringToImageSourceConverter>
         </Style.Resources>
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="Template">
@@ -107,9 +112,9 @@
                                 <ColumnDefinition ></ColumnDefinition>
                             </Grid.ColumnDefinitions>
                             <Grid Grid.Column="0">
-                                <Image x:Name="head_Image" Source="{Binding Photo}"  Width="40" Height="40" RenderTransformOrigin="1,1" >
+                                <Image x:Name="head_Image" Source="{Binding Path=Photo,Converter={StaticResource MyImageConverter}}"  Width="40" Height="40" >
                                     <Image.Clip>
-                                        <EllipseGeometry RadiusX="60" RadiusY="60" Center="30,30"/>
+                                        <EllipseGeometry RadiusX="20" RadiusY="20" Center="20,20"/>
                                     </Image.Clip>
                                 </Image>
                             </Grid>

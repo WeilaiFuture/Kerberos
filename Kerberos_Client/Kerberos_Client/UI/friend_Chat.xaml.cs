@@ -35,9 +35,9 @@ namespace Kerberos_Client.UI
             Chat_user = u;
             My_user = user;
             head_Image.Source = img.GetBitmap(u.Photo);
-            Uname_TextBlock.Text = "昵称:" + Chat_user.Uname;
-            Uid_TX.Text = "账号:" + Chat_user.Uid;
-            Email_TX.Text = "邮箱:" + Chat_user.Email;
+            Uname_TextBlock.Text = Chat_user.Uname;
+            Uid_TX.Text = Chat_user.Uid;
+            Email_TX.Text = Chat_user.Email;
             ListBoxChat.ItemsSource = chatMessage;
             init();
         }
