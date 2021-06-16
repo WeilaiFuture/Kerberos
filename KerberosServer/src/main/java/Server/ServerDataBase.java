@@ -293,7 +293,7 @@ public class ServerDataBase {
                 user.setGender(result.getInt("gender"));
                 user.setName(result.getString("name"));
                 user.setPhoto(result.getString("photo"));
-                user.setPsswd(result.getString("psswd"));
+                //user.setPsswd(result.getString("psswd"));
                 user.setSign(result.getString("sign"));
                 user.setStartTime(result.getLong("startTime"));
                 user.setStatus(result.getInt("status"));
@@ -344,8 +344,8 @@ public class ServerDataBase {
                     +ID+"\",\""
                     +friend.getU().getUid()+"\","
                     +friend.getStartTime()+",\""
-                    +friend.getRemark()+"\","
-                    +friend.getTid()+ ")";
+                    +friend.getRemark()+"\",\""
+                    +friend.getTid()+ "\")";
             Statement statement = con.createStatement();
             int result = statement.executeUpdate(sql);
             System.out.println("添加好友成功");
