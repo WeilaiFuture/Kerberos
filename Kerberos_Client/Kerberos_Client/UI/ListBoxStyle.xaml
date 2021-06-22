@@ -14,7 +14,7 @@
                             <ColumnDefinition Width="40" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <Image VerticalAlignment="Top" Grid.Column="1" Width="40" Height="40" Source="{Binding Path=Photo,Converter={StaticResource MyImageConverter}}">
+                        <Image VerticalAlignment="Top" Grid.Column="0" Width="40" Height="40" Source="{Binding Path=Photo,Converter={StaticResource MyImageConverter}}">
                             <Image.Clip>
                                 <EllipseGeometry RadiusX="20" RadiusY="20" Center="20,20"/>
                             </Image.Clip>

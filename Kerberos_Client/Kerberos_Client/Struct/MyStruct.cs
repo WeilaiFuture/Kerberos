@@ -445,7 +445,7 @@ namespace Kerberos_Client
             public override void Add(Chat_Message chat_Message)
             {
                 Messages_list.Add(chat_Message);
-                Last_Message = chat_Message.U.Name + ":" + chat_Message.Content;
+                Last_Message = chat_Message.U.Uname + ":" + chat_Message.Content;
                 DateTime d = new DateTime(chat_Message.Time);
                 Last_Time = d.ToString();
             }

@@ -4,10 +4,11 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Kerberos_Client"
+        xmlns:local1="clr-namespace:Kerberos_Client.Struct"
         mc:Ignorable="d"
          Title="Chat" Height="500" Width="600">
     <Window.Resources>
-
+        <local1:StringToImageSourceConverter x:Key="MyImageConverter"></local1:StringToImageSourceConverter>
         <Color x:Key="green_normal">#07C160</Color>
         <SolidColorBrush x:Key="green_normal_brush" Color="{StaticResource green_normal}" />
         <local:MyStruct x:Key="User"></local:MyStruct>
@@ -105,7 +106,7 @@
                         <DataGridTemplateColumn >
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Image x:Name="head_Image" Source="{Binding Photo}"  Width="20" Height="20" RenderTransformOrigin="1,1" >
+                                    <Image x:Name="head_Image" Source="{Binding Path=Photo,Converter={StaticResource MyImageConverter}}"  Width="20" Height="20" >
                                         <Image.Clip>
                                             <EllipseGeometry RadiusX="10" RadiusY="10" Center="10,10"/>
                                         </Image.Clip>

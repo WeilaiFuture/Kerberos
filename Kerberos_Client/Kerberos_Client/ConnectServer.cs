@@ -156,11 +156,15 @@ namespace Kerberos_Client
                 else
                     recv += strMsg;
                 strMsg = recv;
-                string pattern = "\"{*}\"";
-                string[] ans = Regex.Split(strMsg,pattern);
+                string pattern = "}{";
+                string[] ans = Regex.Split(strMsg, pattern);
                 foreach (object o in ans)
                 {
                     strMsg = o as string;
+                    if (strMsg[strMsg.Length - 1] != '}')
+                        strMsg += "}";
+                    if (strMsg[0] != '{')
+                        strMsg = "{" + strMsg;
                     Logger.Instance.WriteLog(strMsg, LogType.Recv);
                     Order order = JsonHelper.FromJson<Order>(strMsg);
                     recv = string.Empty;

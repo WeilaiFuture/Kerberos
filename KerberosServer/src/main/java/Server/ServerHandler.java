@@ -434,6 +434,7 @@ public class ServerHandler {
                 break;
             case "9005":
                 //删除好友，双向删除
+
                 wDeleteF(order.getSrc(),mystruct.friend.getU().getUid());
                 wDeleteF(mystruct.friend.getU().getUid(),order.getSrc());
                 break;

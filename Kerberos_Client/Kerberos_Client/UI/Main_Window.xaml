@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Kerberos_Client"
+        xmlns:local1="clr-namespace:Kerberos_Client.Struct"
         mc:Ignorable="d"
         Title="User" Height="600" Width="300"
         WindowStyle="None"  ResizeMode="NoResize"
@@ -15,6 +16,7 @@
         <local:MyStruct x:Key="Friend"></local:MyStruct>
         <local:MyStruct x:Key="Chat_information"></local:MyStruct>
         <local:App x:Key="ExpList"></local:App>
+        <local1:StringToImageSourceConverter x:Key="MyImageConverter"></local1:StringToImageSourceConverter>
         <ContextMenu x:Key="ContextMenu">
             <MenuItem Name="delete" Header="删除好友" Click="Delete_Click"/>
             <Separator></Separator>
@@ -176,7 +178,7 @@
                             <DataGridTemplateColumn >
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Image x:Name="head_Image" Source="{Binding Photo}"  Width="40" Height="40" RenderTransformOrigin="1,1" >
+                                        <Image x:Name="head_Image" Source="{Binding Path=Photo,Converter={StaticResource MyImageConverter}}" Width="40" Height="40" RenderTransformOrigin="1,1" >
                                             <Image.Clip>
                                                 <EllipseGeometry RadiusX="60" RadiusY="60" Center="30,30"/>
                                             </Image.Clip>

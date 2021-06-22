@@ -47,3 +47,4 @@ E:\Kerberos\Kerberos_Client\Kerberos_Client\obj\Debug\Kerberos_Client.csproj.Cor
 E:\Kerberos\Kerberos_Client\Kerberos_Client\obj\Debug\Kerberos_Client.csproj.CopyComplete
 E:\Kerberos\Kerberos_Client\Kerberos_Client\obj\Debug\Kerberos_Client.exe
 E:\Kerberos\Kerberos_Client\Kerberos_Client\obj\Debug\Kerberos_Client.pdb
+E:\Kerberos\Kerberos_Client\Kerberos_Client\obj\Debug\Kerberos_Client.csprojAssemblyReference.cache

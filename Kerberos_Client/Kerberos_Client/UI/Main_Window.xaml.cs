@@ -167,6 +167,13 @@ namespace Kerberos_Client.UI
             else
             {
                 Group group=static_groups.Find(delegate (Group g) { return g.Gid.Equals(chat.Id); });
+                if(group==null)
+                {
+                    Message_List.Remove(chat);
+                    message_List.ItemsSource = null;
+                    message_List.ItemsSource = Message_List;
+                    return;
+                }
                 Dispatcher.Invoke(new Action(delegate
                 {
 
@@ -568,21 +575,21 @@ namespace Kerberos_Client.UI
                 else
                 {
                     u = new group_Chat(group,My_user,this);
-                    Chat_Dic[o.Src] = u;
+                    Chat_Dic[myStruct.group.Gid] = u;
                     Thread newWindowThread = new Thread(() => ThreadStartingPoint(u));
                     newWindowThread.SetApartmentState(ApartmentState.STA);
                     newWindowThread.IsBackground = true;
                     newWindowThread.Start();
                 }
                 Chat_Message chat_Message = myStruct.chat_message;
-                Chat_information record = Message_List.Find(delegate (Chat_information record_) { return record_.Id.Equals(chat_Message.U.Uid); });
+                Chat_information record = Message_List.Find(delegate (Chat_information record_) { return record_.Id.Equals(myStruct.group.Gid); });
                 if (record != null)
                 {
                     record.Add(chat_Message);
                 }
                 else
                 {
-                    record = new Person_Chat(chat_Message.U.Photo, chat_Message.U.Uname, chat_Message.U.Uid);
+                    record = new Group_Chat(myStruct.group.Photo, myStruct.group.Gid, myStruct.group.Gid);
                     record.Add(chat_Message);
                     Main_Window.Message_List.Add(record);
                 }
