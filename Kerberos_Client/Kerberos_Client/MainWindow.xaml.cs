@@ -2,8 +2,8 @@
 #define des
 #define rsa
 #define kbtest
-//#define local
-#define lianji
+#define local
+//#define lianji
 using Kerberos_Client.UI;
 using System;
 using System.Collections.Generic;

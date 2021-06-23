@@ -26,19 +26,19 @@ namespace Kerberos_Client.UI
     /// </summary>
     public partial class Main_Window : Window
     {
-        public User My_user;
-        public static List<Chat_information> Message_List = new List<Chat_information>();
-        public Add_Window Add_;
-        public static Dictionary<string, string> Keys = new Dictionary<string, string>();
-        private static List<Friend> Search_List = new List<Friend>();
-        public static Dictionary<string, Window> Chat_Dic = new Dictionary<string, Window>();
-        public static Dictionary<string, List<Friend>> Group_Dic = new Dictionary<string, List<Friend>>();
-        public static bool live = false;
-        public static List<Expander> ExpList = new List<Expander>();
-        public static List<Friend> static_friends;
-        public static List<Group> static_groups;
-        public static Friend static_friend;
-        public static Group static_group;
+        public User My_user;//当前用户
+        public static List<Chat_information> Message_List = new List<Chat_information>();//聊天信息列表
+        public Add_Window Add_;//添加好友界面
+        public static Dictionary<string, string> Keys = new Dictionary<string, string>();//密钥词典
+        private static List<Friend> Search_List = new List<Friend>();//模糊匹配列表
+        public static Dictionary<string, Window> Chat_Dic = new Dictionary<string, Window>();//聊天字典
+        public static Dictionary<string, List<Friend>> Group_Dic = new Dictionary<string, List<Friend>>();//群聊字典
+        public static bool live = false;//心跳
+        public static List<Expander> ExpList = new List<Expander>();//好友分组列表
+        public static List<Friend> static_friends;//所有好友列表
+        public static List<Group> static_groups;//所有群聊列表
+        public static Friend static_friend;//选中好友
+        public static Group static_group;//选择群聊
         public Main_Window(User u)
         {
             InitializeComponent();

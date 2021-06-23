@@ -5,10 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Kerberos_Client.UI"
         xmlns:local1="clr-namespace:Kerberos_Client"
+        xmlns:local2="clr-namespace:Kerberos_Client.Struct"
         mc:Ignorable="d"
         Title="WndSrch" Height="450" Width="800">
     <Window.Resources>
         <local1:MyStruct x:Key="Friend"></local1:MyStruct>
+        <local2:StringToImageSourceConverter x:Key="MyImageConverter"></local2:StringToImageSourceConverter>
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -33,7 +35,7 @@
                 <DataGridTemplateColumn >
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Image x:Name="head_Image" Source="{Binding U.Photo}"  Width="40" Height="40" RenderTransformOrigin="1,1" >
+                            <Image x:Name="head_Image" Source="{Binding U.Photo ,Converter={StaticResource MyImageConverter}}"  Width="40" Height="40" RenderTransformOrigin="1,1" >
                                 <Image.Clip>
                                     <EllipseGeometry RadiusX="60" RadiusY="60" Center="30,30"/>
                                 </Image.Clip>

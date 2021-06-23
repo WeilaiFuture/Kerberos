@@ -17,7 +17,7 @@ import static SecurityUtils.RSAUtils.*;
  */
 public class Test {
     public static void main(String[] args) throws Exception {
-       //DES_Test();
+       DES_Test();
        RSA_Test();
     }
     public static void DES_Test()
